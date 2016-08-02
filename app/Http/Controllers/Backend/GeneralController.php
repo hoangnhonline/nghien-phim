@@ -42,7 +42,7 @@ class GeneralController extends Controller
     	return response()->json( ['str' => $strReturn] );
     }
 
-    public function getMoviesExternal(Request $request){
+    public function getFilmExternal(Request $request){
         $arrReturn = [];
         if( $request->ajax() ){
             $url = $request->url;

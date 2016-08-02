@@ -8,7 +8,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'movies.index' ) }}">Phim</a></li>
+    <li><a href="{{ route( 'film.index' ) }}">Phim</a></li>
     <li class="active">Danh sách</li>
   </ol>
 </section>
@@ -20,13 +20,13 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('movies.create') }}" class="btn btn-info" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('film.create') }}" class="btn btn-info" style="margin-bottom:5px">Tạo mới</a>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
         </div>
         <div class="panel-body">
-          <form class="form-inline" role="form" method="GET" action="{{ route('movies.index') }}">
+          <form class="form-inline" role="form" method="GET" action="{{ route('film.index') }}">
             <div class="form-group">
               <label for="email">Danh mục cha:</label>
               <select class="form-control select2" name="parent_id" id="parent_id">
@@ -97,7 +97,7 @@
                   <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_url)}}" width="145">
                 </td>        
                 <td>                  
-                  <a href="{{ route( 'movies.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a>
+                  <a href="{{ route( 'film.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a>
                   
                   @if( $item->is_hot == 1 )
                   <img class="img-thumbnail" src="{{ URL::asset('backend/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
@@ -106,9 +106,9 @@
                   <p>{{ $item->description }}</p>
                 </td>
                 <td style="white-space:nowrap">                  
-                  <a href="{{ route( 'movies.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                 
+                  <a href="{{ route( 'film.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                 
                   
-                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'movies.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>
+                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'film.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>
                   
                 </td>
               </tr> 

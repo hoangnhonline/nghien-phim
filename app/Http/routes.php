@@ -28,7 +28,7 @@ Route::get('backend/logout', ['as' => 'backend.logout', 'uses' => 'Backend\UserC
 Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => 'isAdmin'], function()
 {
     // Controllers Within The "App\Http\Controllers\Backend" Namespace
-
+    Route::get('/', ['as' => 'phim.index', 'uses' => 'FilmController@index']);
     Route::group(['prefix' => 'parent-cate'], function () {
         Route::get('/', ['as' => 'parent-cate.index', 'uses' => 'ParentCateController@index']);
         Route::get('/create', ['as' => 'parent-cate.create', 'uses' => 'ParentCateController@create']);
@@ -53,13 +53,13 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'tag.update', 'uses' => 'TagController@update']);
         Route::get('{id}/destroy', ['as' => 'tag.destroy', 'uses' => 'TagController@destroy']);
     });
-    Route::group(['prefix' => 'movies'], function () {
-        Route::get('/', ['as' => 'movies.index', 'uses' => 'MoviesController@index']);
-        Route::get('/create', ['as' => 'movies.create', 'uses' => 'MoviesController@create']);
-        Route::post('/store', ['as' => 'movies.store', 'uses' => 'MoviesController@store']);
-        Route::get('{id}/edit',   ['as' => 'movies.edit', 'uses' => 'MoviesController@edit']);
-        Route::post('/update', ['as' => 'movies.update', 'uses' => 'MoviesController@update']);
-        Route::get('{id}/destroy', ['as' => 'movies.destroy', 'uses' => 'MoviesController@destroy']);
+    Route::group(['prefix' => 'film'], function () {
+        Route::get('/', ['as' => 'film.index', 'uses' => 'FilmController@index']);
+        Route::get('/create', ['as' => 'film.create', 'uses' => 'FilmController@create']);
+        Route::post('/store', ['as' => 'film.store', 'uses' => 'FilmController@store']);
+        Route::get('{id}/edit',   ['as' => 'film.edit', 'uses' => 'FilmController@edit']);
+        Route::post('/update', ['as' => 'film.update', 'uses' => 'FilmController@update']);
+        Route::get('{id}/destroy', ['as' => 'film.destroy', 'uses' => 'FilmController@destroy']);
     });  
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/', ['as' => 'articles.index', 'uses' => 'ArticlesController@index']);
@@ -94,5 +94,5 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
  	Route::post('/tmp-upload', ['as' => 'image.tmp-upload', 'uses' => 'UploadController@tmpUpload']);
     Route::post('/update-order', ['as' => 'update-order', 'uses' => 'GeneralController@updateOrder']);
     Route::post('/get-slug', ['as' => 'get-slug', 'uses' => 'GeneralController@getSlug']);
-    Route::post('/get-movies-external', ['as' => 'general.get-movies-external', 'uses' => 'GeneralController@getMoviesExternal']);
+    Route::post('/get-film-external', ['as' => 'general.get-film-external', 'uses' => 'GeneralController@getFilmExternal']);
 });

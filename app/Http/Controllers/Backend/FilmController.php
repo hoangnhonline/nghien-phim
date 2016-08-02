@@ -6,14 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Backend\Cate;
-use App\Models\Backend\ParentCate;
-use App\Models\Backend\Tag;
-use App\Models\Backend\TagObjects;
-use App\Models\Backend\Movies;
+use App\Models\Category;
+//use App\Models\Backend\Tag;
+//use App\Models\Backend\TagObjects;
+use App\Models\Film;
 use Helper, File, Session;
 
-class MoviesController extends Controller
+class FilmController extends Controller
 {
     /**
     * Display a listing of the resource.
@@ -23,7 +22,7 @@ class MoviesController extends Controller
     public function index(Request $request)
     {
 
-        $parentCate = ParentCate::orderBy('display_order')->first();
+        $parentCate = Category::orderBy('display_order')->first();
         
         $parent_id = isset($request->parent_id) ? $request->parent_id : $parentCate->id;
 
@@ -31,11 +30,11 @@ class MoviesController extends Controller
 
         $site_id = isset($request->site_id) ? $request->site_id : 0;
         
-        $cateArr = Cate::where('parent_id', $parent_id)->get();
+        $cateArr = Category::where('parent_id', $parent_id)->get();
 
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
         
-        $query = Movies::where('parent_id', $parent_id);
+        $query = Film::where('parent_id', $parent_id);
 
         if( $cate_id > 0){
             $query->where('cate_id', $cate_id);
@@ -48,7 +47,7 @@ class MoviesController extends Controller
         }
         $items = $query->orderBy('id', 'desc')->paginate(20);
         
-        $parentCateArr = ParentCate::all();
+        $parentCateArr = Category::all();
         
         return view('backend.movies.index', compact( 'items', 'parentCate' , 'parent_id', 'parentCateArr', 'title', 'cateArr', 'cate_id', 'site_id'));
     }
@@ -61,13 +60,13 @@ class MoviesController extends Controller
     public function create(Request $request)
     {
 
-        $parentCate = ParentCate::orderBy('display_order')->first();
+        $parentCate = Category::orderBy('display_order')->first();
         
         $parent_id = isset($request->parent_id) ? $request->parent_id : $parentCate->id;
 
-        $cateArr = Cate::where('parent_id', $parent_id)->get();
+        $cateArr = Category::where('parent_id', $parent_id)->get();
         
-        $parentCateArr = ParentCate::all()->sortBy('display_order');
+        $parentCateArr = Category::all()->sortBy('display_order');
 
         $tagArr = Tag::where('type', 1)->orderBy('id', 'desc')->get();
 
@@ -118,7 +117,7 @@ class MoviesController extends Controller
 
         $dataArr['site_id'] = Helper::getSiteOriginal($dataArr['url']);
 
-        $rs = Movies::create($dataArr);
+        $rs = Film::create($dataArr);
 
         $object_id = $rs->id;
 
@@ -154,13 +153,13 @@ class MoviesController extends Controller
     public function edit($id)
     {
         $tagSelected = [];
-        $detail = Movies::find($id);
+        $detail = Film::find($id);
         
-        $parentCate = ParentCate::find( $detail->parent_id );
+        $parentCate = Category::find( $detail->parent_id );
         
-        $cateArr = Cate::where('parent_id', $detail->parent_id)->get();
+        $cateArr = Category::where('parent_id', $detail->parent_id)->get();
 
-        $parentCateArr = ParentCate::all();
+        $parentCateArr = Category::all();
 
         $tmpArr = TagObjects::where(['object_type' => 1, 'object_id' => $id])->get();
         
@@ -220,7 +219,7 @@ class MoviesController extends Controller
 
         $dataArr['site_id'] = Helper::getSiteOriginal($dataArr['url']);
 
-        $model = Movies::find($dataArr['id']);
+        $model = Film::find($dataArr['id']);
 
         $model->update($dataArr);
 
@@ -247,7 +246,7 @@ class MoviesController extends Controller
         // delete
         TagObjects::where(['object_id' => $dataArr['id'], 'object_type' => 1])->delete();
 
-        $model = Movies::find($id);
+        $model = Film::find($id);
         $model->delete();
 
 

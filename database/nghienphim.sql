@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2016 at 06:43 PM
+-- Generation Time: Aug 02, 2016 at 04:53 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -34,6 +34,7 @@ CREATE TABLE `category` (
   `name` varchar(32) NOT NULL,
   `description` varchar(32) DEFAULT NULL,
   `priority` int(8) DEFAULT '0',
+  `display_order` int(11) NOT NULL DEFAULT '1',
   `slug` varchar(32) NOT NULL,
   `thumb` text,
   `created_user` tinyint(4) NOT NULL,
@@ -46,22 +47,22 @@ CREATE TABLE `category` (
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`sys_id`, `id`, `parent`, `taxonomy`, `name`, `description`, `priority`, `slug`, `thumb`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
-(137, 1, 0, 'film', 'Hành động', '', 0, 'phim-hanh-dong', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(128, 2, 0, 'film', 'Phiêu lưu', '', 0, 'phim-phieu-luu', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(127, 5, 0, 'film', 'Tình cảm', '', 0, 'phim-tinh-cam', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(126, 6, 0, 'film', 'Hoạt hình', '', 0, 'phim-hoat-hinh', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(125, 7, 0, 'film', 'Hình sự', '', 0, 'phim-hinh-su', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(124, 8, 0, 'film', 'Tâm lý', '', 0, 'phim-tam-ly', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(122, 9, 0, 'film', 'Viễn tưởng', '', 0, 'phim-vien-tuong', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(121, 10, 0, 'film', 'Cổ trang', '', 0, 'phim-co-trang', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(120, 11, 0, 'film', 'Hài hước', '', 0, 'phim-hai-huoc', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(119, 12, 0, 'film', 'Chiến tranh', '', 0, 'phim-chien-tranh', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(118, 13, 0, 'film', 'Ma Kinh Dị', 'Phim kinh dị', 0, 'phim-ma-kinh-di', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(85, 14, 0, 'posts', 'Phim', '', 0, 'phim', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(86, 15, 0, 'posts', 'Diễn viên', '', 0, 'dien-vien', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(87, 16, 0, 'posts', 'Tin tức khác', '', 0, 'tin-tuc-khac', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(117, 17, 0, 'film', 'Gia đình', '', 0, 'phim-gia-dinh', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00');
+INSERT INTO `category` (`sys_id`, `id`, `parent`, `taxonomy`, `name`, `description`, `priority`, `display_order`, `slug`, `thumb`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
+(137, 1, 0, 'film', 'Hành động', '', 0, 1, 'phim-hanh-dong', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(128, 2, 0, 'film', 'Phiêu lưu', '', 0, 1, 'phim-phieu-luu', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(127, 5, 0, 'film', 'Tình cảm', '', 0, 1, 'phim-tinh-cam', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(126, 6, 0, 'film', 'Hoạt hình', '', 0, 1, 'phim-hoat-hinh', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(125, 7, 0, 'film', 'Hình sự', '', 0, 1, 'phim-hinh-su', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(124, 8, 0, 'film', 'Tâm lý', '', 0, 1, 'phim-tam-ly', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(122, 9, 0, 'film', 'Viễn tưởng', '', 0, 1, 'phim-vien-tuong', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(121, 10, 0, 'film', 'Cổ trang', '', 0, 1, 'phim-co-trang', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(120, 11, 0, 'film', 'Hài hước', '', 0, 1, 'phim-hai-huoc', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(119, 12, 0, 'film', 'Chiến tranh', '', 0, 1, 'phim-chien-tranh', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(118, 13, 0, 'film', 'Ma Kinh Dị', 'Phim kinh dị', 0, 1, 'phim-ma-kinh-di', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(85, 14, 0, 'posts', 'Phim', '', 0, 1, 'phim', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(86, 15, 0, 'posts', 'Diễn viên', '', 0, 1, 'dien-vien', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(87, 16, 0, 'posts', 'Tin tức khác', '', 0, 1, 'tin-tuc-khac', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(117, 17, 0, 'film', 'Gia đình', '', 0, 1, 'phim-gia-dinh', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -75,6 +76,7 @@ CREATE TABLE `country` (
   `name` varchar(32) NOT NULL,
   `description` varchar(32) DEFAULT NULL,
   `priority` int(8) DEFAULT '0',
+  `display_order` int(11) NOT NULL DEFAULT '1',
   `slug` varchar(32) NOT NULL,
   `keywords` text,
   `created_user` tinyint(4) NOT NULL,
@@ -87,16 +89,16 @@ CREATE TABLE `country` (
 -- Dumping data for table `country`
 --
 
-INSERT INTO `country` (`sys_id`, `id`, `name`, `description`, `priority`, `slug`, `keywords`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Vietnam', '', 0, 'vietnam', 'vietnam vietnam', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(2, 2, 'America', '', 0, 'america', 'america america', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(3, 3, 'Korea', '', 0, 'korea', 'korea korea', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(4, 4, 'China', '', 0, 'china', 'china china', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(5, 5, 'United Kingdom', '', 0, 'united-kingdom', 'united kingdom united-kingdom', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(6, 6, 'Africa', '', 0, 'africa', 'africa africa', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(32, 7, 'Hongkong', '', 0, 'hongkong', 'hongkong hongkong', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(33, 8, 'Japan', '', 0, 'japan', 'japan japan', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(46, 9, 'India', '', 0, 'india', 'india india', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00');
+INSERT INTO `country` (`sys_id`, `id`, `name`, `description`, `priority`, `display_order`, `slug`, `keywords`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Vietnam', '', 0, 1, 'vietnam', 'vietnam vietnam', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(2, 2, 'America', '', 0, 1, 'america', 'america america', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(3, 3, 'Korea', '', 0, 1, 'korea', 'korea korea', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(4, 4, 'China', '', 0, 1, 'china', 'china china', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(5, 5, 'United Kingdom', '', 0, 1, 'united-kingdom', 'united kingdom united-kingdom', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(6, 6, 'Africa', '', 0, 1, 'africa', 'africa africa', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(32, 7, 'Hongkong', '', 0, 1, 'hongkong', 'hongkong hongkong', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(33, 8, 'Japan', '', 0, 1, 'japan', 'japan japan', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(46, 9, 'India', '', 0, 1, 'india', 'india india', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00');
 
 -- --------------------------------------------------------
 
