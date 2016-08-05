@@ -28,7 +28,7 @@ Route::get('backend/logout', ['as' => 'backend.logout', 'uses' => 'Backend\UserC
 Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => 'isAdmin'], function()
 {
     // Controllers Within The "App\Http\Controllers\Backend" Namespace
-    Route::get('/', ['as' => 'phim.index', 'uses' => 'FilmController@index']);
+    Route::get('/', ['as' => 'film.index', 'uses' => 'FilmController@index']);
    
     Route::group(['prefix' => 'articles-cate'], function () {
         Route::get('/', ['as' => 'articles-cate.index', 'uses' => 'ArticlesCategoryController@index']);
@@ -72,14 +72,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'category.update', 'uses' => 'CategoryController@update']);
         Route::get('{id}/destroy', ['as' => 'category.destroy', 'uses' => 'CategoryController@destroy']);
     }); 
-    Route::group(['prefix' => 'banner'], function () {
-        Route::get('/{object_type}/{object_id}', ['as' => 'banner.index', 'uses' => 'BannerController@index']);
-        Route::get('/create/', ['as' => 'banner.create', 'uses' => 'CategoryController@create']);
-        Route::post('/store', ['as' => 'banner.store', 'uses' => 'CategoryController@store']);
-        Route::get('{id}/edit',   ['as' => 'banner.edit', 'uses' => 'CategoryController@edit']);
-        Route::post('/update', ['as' => 'banner.update', 'uses' => 'CategoryController@update']);
-        Route::get('{id}/destroy', ['as' => 'banner.destroy', 'uses' => 'CategoryController@destroy']);
-    }); 
+    
     Route::group(['prefix' => 'settings'], function () {
         Route::get('/', ['as' => 'settings.index', 'uses' => 'SettingsController@index']);
         Route::post('/update', ['as' => 'settings.update', 'uses' => 'SettingsController@update']);     

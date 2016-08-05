@@ -43,7 +43,7 @@ class CategoryController extends Controller
     * @return Response
     */
     public function create(Request $request)
-    {   
+    {   die('123');
         $parentCateArr = Category::all()->sortBy('display_order');
 
         return view('backend.category.create', compact( 'parent_id', 'parentCateArr'));
