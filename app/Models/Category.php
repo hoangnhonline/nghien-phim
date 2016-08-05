@@ -23,6 +23,6 @@ class Category extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['sys_id', 'parent_id', 'taxonomy', 'name', 'description', 'priority', 'slug', 'keywords', 'thumb', 'created_user', 'updated_user'];
+    protected $fillable = ['parent_id', 'type', 'name', 'description', 'priority', 'slug', 'keywords', 'thumb', 'created_user', 'updated_user', 'status', 'is_hot'];
     
 }

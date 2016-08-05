@@ -27,6 +27,7 @@ Route::get('backend/logout', ['as' => 'backend.logout', 'uses' => 'Backend\UserC
 
 Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => 'isAdmin'], function()
 {
+    
     // Controllers Within The "App\Http\Controllers\Backend" Namespace
     Route::get('/', ['as' => 'film.index', 'uses' => 'FilmController@index']);
    
@@ -63,7 +64,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::get('{id}/destroy', ['as' => 'articles.destroy', 'uses' => 'ArticlesController@destroy']);
     });  
     Route::group(['prefix' => 'category'], function () {
-        Route::get('/{parent_id?}', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
+        Route::get('/{parent_id?}', ['as' => 'category.index', 'uses' => 'CategoryController@index'])->where('parent_id', '[0-9]+');;
         Route::get('/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
         Route::post('/store', ['as' => 'category.store', 'uses' => 'CategoryController@store']);
         Route::post('/ajax-list-by-parent', ['as' => 'category.ajax-list-by-parent', 'uses' => 'CategoryController@ajaxListByParent']);
@@ -81,4 +82,5 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
     Route::post('/update-order', ['as' => 'update-order', 'uses' => 'GeneralController@updateOrder']);
     Route::post('/get-slug', ['as' => 'get-slug', 'uses' => 'GeneralController@getSlug']);
     Route::post('/get-film-external', ['as' => 'general.get-film-external', 'uses' => 'GeneralController@getFilmExternal']);
+    
 });

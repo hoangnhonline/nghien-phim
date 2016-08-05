@@ -43,8 +43,8 @@
                   <label>Danh mục cha</label>
                   <select class="form-control" name="parent_id" id="parent_id">                  
                     <option value="0" {{ old('parent_id') == 0 ? "selected" : "" }}>--chọn--</option>
-                    @foreach( $parentCateArr as $value )
-                    <option value="{{ $value->id }}" {{ ( old('parent_id') == $value->id || $parent_id == $value->id ) ? "selected" : "" }}>{{ $value->name }}</option>
+                    @foreach( $parentCate as $value )
+                    <option value="{{ $value->id }}" {{ ( old('parent_id') == $value->id ) ? "selected" : "" }}>{{ $value->name }}</option>
                     @endforeach
                   </select>
                 </div> 
