@@ -65,7 +65,7 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <input type="hidden" id="upload_url" value="{{ config('icho.upload_url') }}">
-<input type="hidden" id="route_get_cate_by_parent" value="{{ route('cate.ajax-list-by-parent') }}">
+
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->

@@ -36,7 +36,7 @@
       <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.lazyload.js') }}"></script>
       <!--<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.qtip.min.js') }}"></script>-->
       <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.cookie.js') }}"></script>
-      <script type="text/javascript" src="{{ URL::asset('assets/js/123movies.min.js?v=2') }}"></script>
+      <script type="text/javascript" src="{{ URL::asset('assets/js/123film.min.js?v=2') }}"></script>
       <!--<script type="text/javascript" src="{{ URL::asset('assets/js/user.min.js?v=1.1') }}"></script>-->
       <script src="https://apis.google.com/js/platform.js" async defer></script>
       <script src="{{ URL::asset('assets/js/detectmobilebrowser.js') }}"></script> 
@@ -149,7 +149,7 @@
             <!--social home-->
             <div class="social-home">
                <div class="sh-like">
-                  <div class="fb-like" data-href="http://facebook.com/123movies.to" data-layout="button_count"
+                  <div class="fb-like" data-href="http://facebook.com/123film.to" data-layout="button_count"
                      data-action="like" data-show-faces="true" data-share="false"></div>
                </div>
                <div class="addthis_native_toolbox"></div>
@@ -207,7 +207,7 @@
                   <h4 class="modal-title" id="myModalLabel">MEMBER LOGIN AREA</h4>
                </div>
                <div class="modal-body">
-                  <p class="desc">Watch HD Movies Online For Free and Download the latest movies. For everybody,
+                  <p class="desc">Watch HD Movies Online For Free and Download the latest film. For everybody,
                      everywhere, everydevice, and everything ;)
                   </p>
                   <form id="login-form" method="POST" action="ajax/user_login">

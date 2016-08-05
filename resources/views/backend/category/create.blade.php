@@ -4,19 +4,19 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Danh mục con      
+      Danh mục
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="{{ route('cate.index') }}">Danh mục con</a></li>
+      <li><a href="{{ route('category.index') }}">Danh mục</a></li>
       <li class="active">Tạo mới</li>
     </ol>
   </section>
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default" href="{{ route('cate.index') }}" style="margin-bottom:5px">Quay lại</a>
-    <form role="form" method="POST" action="{{ route('cate.store') }}">
+    <a class="btn btn-default" href="{{ route('category.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <form role="form" method="POST" action="{{ route('category.store') }}">
     <div class="row">
       <!-- left column -->
 
@@ -83,7 +83,7 @@
         
             <div class="box-footer">
               <button type="submit" class="btn btn-primary">Lưu</button>
-              <a class="btn btn-default" class="btn btn-primary" href="{{ route('cate.index')}}">Hủy</a>
+              <a class="btn btn-default" class="btn btn-primary" href="{{ route('category.index')}}">Hủy</a>
             </div>
             
         </div>

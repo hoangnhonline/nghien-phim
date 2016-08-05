@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Danh mục con của : <span class="cate-name">{{ $parentCate->name }}</span>
+    Danh mục
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'cate.index' ) }}">Danh mục cha</a></li>
+    <li><a href="{{ route( 'category.index' ) }}">Danh mục</a></li>
     <li class="active">Danh sách</li>
   </ol>
 </section>
@@ -20,24 +20,11 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('cate.create', [$parent_id]) }}" class="btn btn-info" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('category.create') }}" class="btn btn-info" style="margin-bottom:5px">Tạo mới</a>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
-        </div>
-        <div class="panel-body">
-          <form class="form-inline" role="form" method="GET" action="{{ route('cate.index') }}">
-            <div class="form-group">
-              <label for="email">Danh mục :</label>
-              <select class="form-control" name="parent_id">
-                @foreach( $parentCateArr as $value )
-                <option value="{{ $value->id }}" {{ $value->id == $parent_id ? "selected" : "" }}>{{ $value->name }}</option>
-                @endforeach
-              </select>
-            </div>            
-            <button type="submit" class="btn btn-default">Lọc</button>
-          </form>         
-        </div>
+        </div>        
       </div>
       <div class="box">
 
@@ -65,7 +52,7 @@
                   <img src="{{ URL::asset('backend/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                 </td>
                 <td>                  
-                  <a href="{{ route( 'cate.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
+                  <a href="{{ route( 'category.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
                   
                   @if( $item->is_hot == 1 )
                   <img class="img-thumbnail" src="{{ URL::asset('backend/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
@@ -74,9 +61,9 @@
                   <p>{{ $item->description }}</p>
                 </td>
                 <td style="white-space:nowrap">                  
-                  <a href="{{ route( 'cate.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                 
+                  <a href="{{ route( 'category.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                 
                   
-                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'cate.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>
+                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'category.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>
                   
                 </td>
               </tr> 

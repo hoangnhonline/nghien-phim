@@ -52,12 +52,12 @@
 </div>
 <div class="news-sidebar">
    <!--<div class="box fanpage">
-      <div class="fb-page" data-href="https://www.facebook.com/123movies.to/" data-tabs="timeline"
+      <div class="fb-page" data-href="https://www.facebook.com/123film.to/" data-tabs="timeline"
          data-height="500px" data-small-header="false" data-adapt-container-width="true"
          data-hide-cover="false" data-show-facepile="true">
          <div class="fb-xfbml-parse-ignore">
-            <blockquote cite="https://www.facebook.com/123movies.to/"><a
-               href="https://www.facebook.com/123movies.to/">123Movies</a></blockquote>
+            <blockquote cite="https://www.facebook.com/123film.to/"><a
+               href="https://www.facebook.com/123film.to/">123Movies</a></blockquote>
          </div>
       </div>
    </div>-->

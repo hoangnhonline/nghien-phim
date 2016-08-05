@@ -29,21 +29,14 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
 {
     // Controllers Within The "App\Http\Controllers\Backend" Namespace
     Route::get('/', ['as' => 'phim.index', 'uses' => 'FilmController@index']);
-    Route::group(['prefix' => 'parent-cate'], function () {
-        Route::get('/', ['as' => 'parent-cate.index', 'uses' => 'ParentCateController@index']);
-        Route::get('/create', ['as' => 'parent-cate.create', 'uses' => 'ParentCateController@create']);
-        Route::post('/store', ['as' => 'parent-cate.store', 'uses' => 'ParentCateController@store']);
-        Route::get('{id}/edit',   ['as' => 'parent-cate.edit', 'uses' => 'ParentCateController@edit']);
-        Route::post('/update', ['as' => 'parent-cate.update', 'uses' => 'ParentCateController@update']);
-        Route::get('{id}/destroy', ['as' => 'parent-cate.destroy', 'uses' => 'ParentCateController@destroy']);
-    });
+   
     Route::group(['prefix' => 'articles-cate'], function () {
-        Route::get('/', ['as' => 'articles-cate.index', 'uses' => 'ArticlesCateController@index']);
-        Route::get('/create', ['as' => 'articles-cate.create', 'uses' => 'ArticlesCateController@create']);
-        Route::post('/store', ['as' => 'articles-cate.store', 'uses' => 'ArticlesCateController@store']);
-        Route::get('{id}/edit',   ['as' => 'articles-cate.edit', 'uses' => 'ArticlesCateController@edit']);
-        Route::post('/update', ['as' => 'articles-cate.update', 'uses' => 'ArticlesCateController@update']);
-        Route::get('{id}/destroy', ['as' => 'articles-cate.destroy', 'uses' => 'ArticlesCateController@destroy']);
+        Route::get('/', ['as' => 'articles-cate.index', 'uses' => 'ArticlesCategoryController@index']);
+        Route::get('/create', ['as' => 'articles-cate.create', 'uses' => 'ArticlesCategoryController@create']);
+        Route::post('/store', ['as' => 'articles-cate.store', 'uses' => 'ArticlesCategoryController@store']);
+        Route::get('{id}/edit',   ['as' => 'articles-cate.edit', 'uses' => 'ArticlesCategoryController@edit']);
+        Route::post('/update', ['as' => 'articles-cate.update', 'uses' => 'ArticlesCategoryController@update']);
+        Route::get('{id}/destroy', ['as' => 'articles-cate.destroy', 'uses' => 'ArticlesCategoryController@destroy']);
     }); 
     Route::group(['prefix' => 'tag'], function () {
         Route::get('/', ['as' => 'tag.index', 'uses' => 'TagController@index']);
@@ -69,23 +62,23 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'articles.update', 'uses' => 'ArticlesController@update']);
         Route::get('{id}/destroy', ['as' => 'articles.destroy', 'uses' => 'ArticlesController@destroy']);
     });  
-    Route::group(['prefix' => 'cate'], function () {
-        Route::get('/{parent_id?}', ['as' => 'cate.index', 'uses' => 'CateController@index']);
-        Route::get('/create/{parent_id?}', ['as' => 'cate.create', 'uses' => 'CateController@create']);
-        Route::post('/store', ['as' => 'cate.store', 'uses' => 'CateController@store']);
-        Route::post('/ajax-list-by-parent', ['as' => 'cate.ajax-list-by-parent', 'uses' => 'CateController@ajaxListByParent']);
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('/{parent_id?}', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
+        Route::get('/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
+        Route::post('/store', ['as' => 'category.store', 'uses' => 'CategoryController@store']);
+        Route::post('/ajax-list-by-parent', ['as' => 'category.ajax-list-by-parent', 'uses' => 'CategoryController@ajaxListByParent']);
         
-        Route::get('{id}/edit',   ['as' => 'cate.edit', 'uses' => 'CateController@edit']);
-        Route::post('/update', ['as' => 'cate.update', 'uses' => 'CateController@update']);
-        Route::get('{id}/destroy', ['as' => 'cate.destroy', 'uses' => 'CateController@destroy']);
+        Route::get('{id}/edit',   ['as' => 'category.edit', 'uses' => 'CategoryController@edit']);
+        Route::post('/update', ['as' => 'category.update', 'uses' => 'CategoryController@update']);
+        Route::get('{id}/destroy', ['as' => 'category.destroy', 'uses' => 'CategoryController@destroy']);
     }); 
     Route::group(['prefix' => 'banner'], function () {
         Route::get('/{object_type}/{object_id}', ['as' => 'banner.index', 'uses' => 'BannerController@index']);
-        Route::get('/create/', ['as' => 'banner.create', 'uses' => 'CateController@create']);
-        Route::post('/store', ['as' => 'banner.store', 'uses' => 'CateController@store']);
-        Route::get('{id}/edit',   ['as' => 'banner.edit', 'uses' => 'CateController@edit']);
-        Route::post('/update', ['as' => 'banner.update', 'uses' => 'CateController@update']);
-        Route::get('{id}/destroy', ['as' => 'banner.destroy', 'uses' => 'CateController@destroy']);
+        Route::get('/create/', ['as' => 'banner.create', 'uses' => 'CategoryController@create']);
+        Route::post('/store', ['as' => 'banner.store', 'uses' => 'CategoryController@store']);
+        Route::get('{id}/edit',   ['as' => 'banner.edit', 'uses' => 'CategoryController@edit']);
+        Route::post('/update', ['as' => 'banner.update', 'uses' => 'CategoryController@update']);
+        Route::get('{id}/destroy', ['as' => 'banner.destroy', 'uses' => 'CategoryController@destroy']);
     }); 
     Route::group(['prefix' => 'settings'], function () {
         Route::get('/', ['as' => 'settings.index', 'uses' => 'SettingsController@index']);

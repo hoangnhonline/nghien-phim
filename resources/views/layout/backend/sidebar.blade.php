@@ -25,8 +25,8 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li class="active"><a href="{{ route('movies.index') }}"><i class="fa fa-circle-o"></i> Phim</a></li>
-          <li><a href="{{ route('parent-cate.index') }}"><i class="fa fa-circle-o"></i> Danh mục</a></li>          
+          <li class="active"><a href="{{ route('film.index') }}"><i class="fa fa-circle-o"></i> Phim</a></li>
+          <li><a href="{{ route('category.index') }}"><i class="fa fa-circle-o"></i> Danh mục</a></li>          
         </ul>
       </li>
       <li class="treeview">

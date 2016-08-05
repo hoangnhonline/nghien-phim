@@ -66,7 +66,7 @@ class UserController extends Controller
 
             if (Auth::attempt($dataArr)) {
 
-              return redirect()->route('movies.index');
+              return redirect()->route('film.index');
 
             }
 

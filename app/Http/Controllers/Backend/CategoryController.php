@@ -6,11 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Backend\Cate;
-use App\Models\Backend\ParentCate;
+use App\Models\Category;
 use Helper, File, Session;
 
-class CateController extends Controller
+class CategoryController extends Controller
 {
     /**
     * Display a listing of the resource.
@@ -18,17 +17,13 @@ class CateController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {
+    {  
         
-        $parentCate = ParentCate::orderBy('display_order')->first();
+        $items = Category::orderBy('display_order')->get();        
         
-        $parent_id = isset($request->parent_id) ? $request->parent_id : $parentCate->id;        
+        $parentCate = Category::where('parent_id', 0)->orderBy('display_order')->get();
         
-        $items = Cate::where('parent_id', $parent_id)->orderBy('display_order')->get();
-        
-        $parentCateArr = ParentCate::all();
-        
-        return view('backend.cate.index', compact( 'items', 'parentCate' , 'parent_id', 'parentCateArr'));
+        return view('backend.category.index', compact( 'items', 'parentCate'));
     }
 
     public function ajaxListByParent(Request $request)
@@ -37,9 +32,9 @@ class CateController extends Controller
 
         $type = isset($request->type) ? $request->type : 'form';        
         
-        $items = Cate::where('parent_id', $parent_id)->orderBy('display_order')->get();        
+        $items = Category::where('parent_id', $parent_id)->orderBy('display_order')->get();        
         
-        return view('backend.cate.ajax-list-by-parent', compact( 'items', 'type' ));
+        return view('backend.category.ajax-list-by-parent', compact( 'items', 'type' ));
     }
 
     /**
@@ -48,12 +43,10 @@ class CateController extends Controller
     * @return Response
     */
     public function create(Request $request)
-    {
-        $parent_id = isset($request->parent_id) ? $request->parent_id : 0;
-        
-        $parentCateArr = ParentCate::all()->sortBy('display_order');
+    {   
+        $parentCateArr = Category::all()->sortBy('display_order');
 
-        return view('backend.cate.create', compact( 'parent_id', 'parentCateArr'));
+        return view('backend.category.create', compact( 'parent_id', 'parentCateArr'));
     }
 
     /**
@@ -68,7 +61,7 @@ class CateController extends Controller
         
         $this->validate($request,[
             'name' => 'required',
-            'slug' => 'required|unique:parent_cate,slug|unique:cate,slug',
+            'slug' => 'required|unique:parent,slug|unique:cate,slug',
         ],
         [
             'name.required' => 'Bạn chưa nhập tên danh mục',
@@ -78,7 +71,7 @@ class CateController extends Controller
         
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
-        Cate::create($dataArr);
+        Category::create($dataArr);
 
         Session::flash('message', 'Tạo mới danh mục thành công');
 
@@ -104,9 +97,9 @@ class CateController extends Controller
     */
     public function edit($id)
     {
-        $detail = Cate::find($id);
-        $parentCateArr = ParentCate::all();
-        return view('backend.cate.edit', compact( 'detail', 'parentCateArr' ));
+        $detail = Category::find($id);
+        $parentCateArr = Category::all();
+        return view('backend.category.edit', compact( 'detail', 'parentCateArr' ));
     }
 
     /**
@@ -122,7 +115,7 @@ class CateController extends Controller
         
         $this->validate($request,[
             'name' => 'required',
-            'slug' => 'required|unique:parent_cate,slug|unique:cate,slug,'.$dataArr['id'],
+            'slug' => 'required|unique:parent,slug|unique:cate,slug,'.$dataArr['id'],
         ],
         [
             'name.required' => 'Bạn chưa nhập tên danh mục',
@@ -132,7 +125,7 @@ class CateController extends Controller
 
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
 
-        $model = Cate::find($dataArr['id']);
+        $model = Category::find($dataArr['id']);
 
         $model->update($dataArr);
 
@@ -150,7 +143,7 @@ class CateController extends Controller
     public function destroy($id)
     {
         // delete
-        $model = Cate::find($id);
+        $model = Category::find($id);
         $model->delete();
 
         // redirect

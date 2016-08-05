@@ -1,0 +1,3 @@
+05-08-2016
+----------
+ALTER TABLE `category` CHANGE `parent` `parent_id` BIGINT(20) NULL DEFAULT '0';

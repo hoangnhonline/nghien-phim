@@ -39,7 +39,7 @@
     <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.lazyload.js') }}"></script>
     <!--<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.qtip.min.js') }}"></script>-->
     <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.cookie.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('assets/js/123movies.min.js?v=2') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('assets/js/123film.min.js?v=2') }}"></script>
     <!--<script type="text/javascript" src="{{ URL::asset('assets/js/user.min.js?v=1.1') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('assets/js/md5.min.js') }}"></script>
     <!--<script type="text/javascript" src="{{ URL::asset('assets/js/jwplayer-7.3.6/jwplayer.js') }}"></script>-->
@@ -320,7 +320,7 @@
     <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js?v=0.1') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap-select.js?v=0.1') }}"></script>
     <!--<script type="text/javascript" src="{{ URL::asset('assets/js/auth.min.js?v=0.4') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('assets/js/player.123movies.v4.3.min.js?v=578b6e6e6d0f6') }}"></script>-->
+    <script type="text/javascript" src="{{ URL::asset('assets/js/player.123film.v4.3.min.js?v=578b6e6e6d0f6') }}"></script>-->
     @yield('javascript_page')
 
     <script type="text/javascript">
