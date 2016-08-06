@@ -23,6 +23,6 @@ class Country extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['sys_id', 'parent', 'taxonomy', 'name', 'description', 'priority', 'slug', 'keywords', 'thumb', 'created_user', 'updated_user'];
+    protected $fillable = ['parent', 'taxonomy', 'name', 'description', 'priority', 'slug', 'keywords', 'thumb', 'created_user', 'updated_user'];
     
 }
