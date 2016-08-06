@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Country;
+use App\Models\Category;
 use Helper, File, Session;
 
-class CountryController extends Controller
+class CategoryController extends Controller
 {
     /**
     * Display a listing of the resource.
@@ -17,11 +17,10 @@ class CountryController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {  
+    {       
+        $items = Category::orderBy('display_order')->get();        
         
-        $items = Country::orderBy('display_order')->get();        
-        
-        $parentCate = Country::where('parent_id', 0)->where('type', 1)->orderBy('display_order')->get();
+        $parentCate = Category::where('parent_id', 0)->where('type', 1)->orderBy('display_order')->get();
         
         return view('backend.category.index', compact( 'items', 'parentCate'));
     }
@@ -32,7 +31,7 @@ class CountryController extends Controller
 
         $type = isset($request->type) ? $request->type : 'form';        
         
-        $items = Country::where('parent_id', $parent_id)->orderBy('display_order')->get();        
+        $items = Category::where('parent_id', $parent_id)->orderBy('display_order')->get();        
         
         return view('backend.category.ajax-list-by-parent', compact( 'items', 'type' ));
     }
@@ -44,7 +43,7 @@ class CountryController extends Controller
     */
     public function create()
     {         
-        $parentCate = Country::where('parent_id', 0)->where('type', 1)->orderBy('display_order')->get();
+        $parentCate = Category::where('parent_id', 0)->where('type', 1)->orderBy('display_order')->get();
 
         return view('backend.category.create', compact('parentCate'));
     }
@@ -72,7 +71,7 @@ class CountryController extends Controller
        
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);  
  
-        Country::create($dataArr);
+        Category::create($dataArr);
 
         Session::flash('message', 'Tạo mới danh mục thành công');
 
@@ -98,9 +97,9 @@ class CountryController extends Controller
     */
     public function edit($id)
     {
-        $detail = Country::find($id);
+        $detail = Category::find($id);
 
-        $parentCateArr = Country::all();
+        $parentCateArr = Category::all();
         
         return view('backend.category.edit', compact( 'detail', 'parentCateArr' ));
     }
@@ -128,7 +127,7 @@ class CountryController extends Controller
 
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
 
-        $model = Country::find($dataArr['id']);
+        $model = Category::find($dataArr['id']);
 
         $model->update($dataArr);
 
@@ -146,7 +145,7 @@ class CountryController extends Controller
     public function destroy($id)
     {
         // delete
-        $model = Country::find($id);
+        $model = Category::find($id);
         $model->delete();
 
         // redirect
