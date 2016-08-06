@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2016 at 03:45 PM
+-- Generation Time: Aug 06, 2016 at 06:32 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -38,6 +38,10 @@ CREATE TABLE `category` (
   `slug` varchar(32) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `is_hot` tinyint(1) NOT NULL DEFAULT '0',
+  `meta_title` varchar(355) NOT NULL,
+  `meta_description` varchar(355) NOT NULL,
+  `meta_keywords` varchar(355) NOT NULL,
+  `custom_text` varchar(355) NOT NULL,
   `thumb` text,
   `created_user` tinyint(4) NOT NULL,
   `updated_user` tinyint(4) NOT NULL,
@@ -49,23 +53,23 @@ CREATE TABLE `category` (
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `parent_id`, `type`, `name`, `alias`, `description`, `priority`, `display_order`, `slug`, `status`, `is_hot`, `thumb`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
-(1, 0, 1, 'Hành động', '', '', 0, 1, 'phim-hanh-dong', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(2, 0, 1, 'Phiêu lưu', '', '', 0, 1, 'phim-phieu-luu', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(5, 0, 1, 'Tình cảm', '', '', 0, 1, 'phim-tinh-cam', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(6, 0, 1, 'Hoạt hình', '', '', 0, 1, 'phim-hoat-hinh', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(7, 0, 1, 'Hình sự', '', '', 0, 1, 'phim-hinh-su', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(8, 0, 1, 'Tâm lý', '', '', 0, 1, 'phim-tam-ly', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(9, 0, 1, 'Viễn tưởng', '', '', 0, 1, 'phim-vien-tuong', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(10, 0, 1, 'Cổ trang', '', '', 0, 1, 'phim-co-trang', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(11, 0, 1, 'Hài hước', '', '', 0, 1, 'phim-hai-huoc', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(12, 0, 1, 'Chiến tranh', '', '', 0, 1, 'phim-chien-tranh', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(13, 0, 1, 'Ma Kinh Dị', '', 'Phim kinh dị', 0, 1, 'phim-ma-kinh-di', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(14, 0, 2, 'Phim', '', '', 0, 1, 'phim', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(15, 0, 2, 'Diễn viên', '', '', 0, 1, 'dien-vien', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(16, 0, 2, 'Tin tức khác', '', '', 0, 1, 'tin-tuc-khac', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(17, 0, 1, 'Gia đình', '', '', 0, 1, 'phim-gia-dinh', 1, 0, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(18, 2, 1, 'ben', '', 'adasd', 0, 1, 'ben', 1, 1, NULL, 0, 0, '2016-08-05 13:35:54', '2016-08-05 13:35:54');
+INSERT INTO `category` (`id`, `parent_id`, `type`, `name`, `alias`, `description`, `priority`, `display_order`, `slug`, `status`, `is_hot`, `meta_title`, `meta_description`, `meta_keywords`, `custom_text`, `thumb`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
+(1, 0, 1, 'Hành động', '', '', 0, 1, 'phim-hanh-dong', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(2, 0, 1, 'Phiêu lưu', '', '', 0, 1, 'phim-phieu-luu', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(5, 0, 1, 'Tình cảm', '', '', 0, 1, 'phim-tinh-cam', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(6, 0, 1, 'Hoạt hình', '', '', 0, 1, 'phim-hoat-hinh', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(7, 0, 1, 'Hình sự', '', '', 0, 1, 'phim-hinh-su', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(8, 0, 1, 'Tâm lý', '', '', 0, 1, 'phim-tam-ly', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(9, 0, 1, 'Viễn tưởng', '', '', 0, 1, 'phim-vien-tuong', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(10, 0, 1, 'Cổ trang', '', '', 0, 1, 'phim-co-trang', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(11, 0, 1, 'Hài hước', '', '', 0, 1, 'phim-hai-huoc', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(12, 0, 1, 'Chiến tranh', '', '', 0, 1, 'phim-chien-tranh', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(13, 0, 1, 'Ma Kinh Dị', '', 'Phim kinh dị', 0, 1, 'phim-ma-kinh-di', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(14, 0, 2, 'Phim', '', '', 0, 1, 'phim', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(15, 0, 2, 'Diễn viên', '', '', 0, 1, 'dien-vien', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(16, 0, 2, 'Tin tức khác', '', '', 0, 1, 'tin-tuc-khac', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(17, 0, 1, 'Gia đình', '', '', 0, 1, 'phim-gia-dinh', 1, 0, '', '', '', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(19, 1, 1, 'abc', 'abc', 'asdasd', 0, 1, 'abc', 1, 1, 'abc', 'abc', 'abc', 'abc', NULL, 0, 0, '2016-08-06 04:27:33', '2016-08-06 04:27:33');
 
 --
 -- Indexes for dumped tables
@@ -85,7 +89,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

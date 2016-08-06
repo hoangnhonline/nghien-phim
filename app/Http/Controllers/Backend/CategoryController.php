@@ -17,7 +17,8 @@ class CategoryController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {       
+    {  
+        
         $items = Category::orderBy('display_order')->get();        
         
         $parentCate = Category::where('parent_id', 0)->where('type', 1)->orderBy('display_order')->get();
