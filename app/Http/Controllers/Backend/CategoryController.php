@@ -71,7 +71,7 @@ class CountryController extends Controller
         ]);       
        
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);  
-
+ 
         Country::create($dataArr);
 
         Session::flash('message', 'Tạo mới danh mục thành công');
