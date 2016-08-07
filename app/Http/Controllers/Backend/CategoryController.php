@@ -118,12 +118,11 @@ class CategoryController extends Controller
         
         $this->validate($request,[
             'name' => 'required',
-            'slug' => 'required|unique:parent,slug|unique:cate,slug,'.$dataArr['id'],
+            'slug' => 'required',
         ],
         [
             'name.required' => 'Bạn chưa nhập tên danh mục',
             'slug.required' => 'Bạn chưa nhập slug',
-            'slug.unique' => 'Slug đã được sử dụng.'
         ]);       
 
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
@@ -134,7 +133,7 @@ class CategoryController extends Controller
 
         Session::flash('message', 'Cập nhật danh mục thành công');
 
-        return redirect()->route('cate.index', [$dataArr['parent_id']]);
+        return redirect()->route('category.index');
     }
 
     /**
@@ -151,6 +150,6 @@ class CategoryController extends Controller
 
         // redirect
         Session::flash('message', 'Xóa danh mục thành công');
-        return redirect()->route('cate.index');
+        return redirect()->route('category.index');
     }
 }
