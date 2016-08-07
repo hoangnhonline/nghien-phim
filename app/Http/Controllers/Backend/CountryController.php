@@ -41,7 +41,7 @@ class CountryController extends Controller
             'slug' => 'required|unique:country,slug',
         ],
         [
-            'name.required' => 'Bạn chưa nhập tên danh mục',
+            'name.required' => 'Bạn chưa nhập tên quốc gia',
             'slug.required' => 'Bạn chưa nhập slug',
             'slug.unique' => 'Slug đã được sử dụng.'
         ]);       
@@ -79,7 +79,7 @@ class CountryController extends Controller
             'slug' => 'required',
         ],
         [
-            'name.required' => 'Bạn chưa nhập tên danh mục',
+            'name.required' => 'Bạn chưa nhập tên quốc gia',
             'slug.required' => 'Bạn chưa nhập slug',
         ]);       
 
