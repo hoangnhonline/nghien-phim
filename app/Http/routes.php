@@ -108,7 +108,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::get('{id}/destroy', ['as' => 'film-episode.destroy', 'uses' => 'FilmEpisodeController@destroy']);
     });
     Route::group(['prefix' => 'tag'], function () {
-        Route::get('/{film_id}', ['as' => 'tag.index', 'uses' => 'TagController@index']);
+        Route::get('/', ['as' => 'tag.index', 'uses' => 'TagController@index']);
         Route::get('/create', ['as' => 'tag.create', 'uses' => 'TagController@create']);
         Route::post('/store', ['as' => 'tag.store', 'uses' => 'TagController@store']);
         Route::post('/ajax-list-by-parent', ['as' => 'film-episode.ajax-list-by-parent', 'uses' => 'TagController@ajaxListByParent']);
