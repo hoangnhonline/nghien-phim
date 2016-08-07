@@ -78,8 +78,8 @@
                 <div class="form-group">
                   <label>Excerpt</label>
                   <textarea class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
-                </div>                            
-                <div class="form-group">
+                </div>
+                <div class="input-group">                 
                   <label>Directors</label>
                   <select class="form-control select2" name="director[]" id="director" multiple="multiple">                  
                     @if( !empty( $crewArr[2] ) )
@@ -88,8 +88,13 @@
                       @endforeach
                     @endif
                   </select>
-                </div>
-                <div class="form-group">
+                  <span class="input-group-btn">
+                    <button style="margin-top:24px" class="btn btn-primary btnNewCrew" type="button" data-value="2">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                  </span>
+                </div>               
+                <div class="input-group"> 
                   <label>Actors</label>
                   <select class="form-control select2" name="actor[]" id="actor" multiple="multiple">                  
                     @if( !empty( $crewArr[1] ) )
@@ -98,8 +103,13 @@
                       @endforeach
                     @endif
                   </select>
+                  <span class="input-group-btn">
+                    <button style="margin-top:24px" class="btn btn-primary btnNewCrew" type="button" data-value="1">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                  </span>
                 </div>
-                <div class="form-group">
+                <div class="input-group"> 
                   <label>Producers</label>
                   <select class="form-control select2" name="producer[]" id="producer" multiple="multiple">                  
                     @if( !empty( $crewArr[3] ) )
@@ -108,6 +118,11 @@
                       @endforeach
                     @endif
                   </select>
+                  <span class="input-group-btn">
+                    <button style="margin-top:24px" class="btn btn-primary btnNewCrew" type="button" data-value="3">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                  </span>
                 </div>
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Thumbnail </label>    
@@ -132,7 +147,7 @@
                   <div style="clear:both"></div>
                 </div>
                
-                <div class="form-group">
+                <div class="input-group"> 
                   <label>Tags</label>
                   <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
                     @if( $tagArr->count() > 0)
@@ -141,6 +156,11 @@
                       @endforeach
                     @endif
                   </select>
+                  <span class="input-group-btn">
+                    <button style="margin-top:24px" class="btn btn-primary" id="btnAddTag" type="button" data-value="3">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                  </span>
                 </div>
                 <div class="form-group">
                   <label>Chi tiết</label>
@@ -259,6 +279,9 @@
 <script src="{{ URL::asset('backend/dist/js/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+      $('.btnNewCrew').click(function(){
+        alert('123');
+      });
       $(".select2").select2();
       $('#dataForm').submit(function(){
         $('#btnSave').hide();
