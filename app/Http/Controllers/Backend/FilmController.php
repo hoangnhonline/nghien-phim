@@ -109,6 +109,10 @@ class FilmController extends Controller
             'original_slug.unique' => 'Slug gốc đã tồn tại',
         ]);
 
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
         $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
         
         if($dataArr['image_url'] && $dataArr['image_name']){
@@ -279,6 +283,8 @@ class FilmController extends Controller
         
         $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
         
+        $dataArr['updated_user'] = Auth::user()->id;
+
         if($dataArr['image_url'] && $dataArr['image_name']){
             
             $tmp = explode('/', $dataArr['image_url']);

@@ -31,15 +31,15 @@
               <label for="email">Loại :</label>
               <select class="form-control" name="type">                                
                 <option value="1" {{ 1 == $type ? "selected" : "" }}>Phim</option>
-                <option value="2" {{ 2 == $type ? "selected" : "" }}>Truyện</option>
-                <option value="3" {{ 3 == $type ? "selected" : "" }}>Ảnh</option>                
+                <option value="2" {{ 2 == $type ? "selected" : "" }}>Bài viết</option>
+                <!--<option value="3" {{ 3 == $type ? "selected" : "" }}>Ảnh</option>-->
               </select>
             </div>
             <div class="form-group">
               <label for="email">Từ khóa :</label>
               <input type="text" class="form-control" name="tag" value="{{ $tag }}">
             </div>       
-            <button type="submit" class="btn btn-default">Lọc</button>
+            <button type="submit" class="btn btn-primary" style="margin-top:-10px">Lọc</button>
           </form>         
         </div>
       </div>
@@ -69,7 +69,7 @@
               <tr id="row-{{ $item->id }}">
                 <td><span class="order">{{ $i }}</span></td>                
                 <td>                  
-                  <a href="{{ route( 'tag.edit', [ 'id' => $item->id ]) }}">{{ $item->tag }}</a>
+                  <a href="{{ route( 'tag.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
                   
                 </td>                
                 <td>{{ $item->slug }}</td>
@@ -77,7 +77,7 @@
                 <td style="white-space:nowrap">                  
                   <a href="{{ route( 'tag.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                  
                   @if( $item->objects->count() == 0)
-                  <a onclick="return callDelete('{{ $item->tag }}','{{ route( 'tag.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>                  
+                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'tag.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>                  
                   @endif
                 </td>
               </tr> 

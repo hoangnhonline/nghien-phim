@@ -2,9 +2,9 @@
   <!-- Logo -->
   <a href="{{ URL::to('backend/movies') }}" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>Site</b></span>
+    <span class="logo-mini"><b>phim1p.com</b></span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Site</b></span>
+    <span class="logo-lg"><b>phim1p.com</b></span>
   </a>
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
