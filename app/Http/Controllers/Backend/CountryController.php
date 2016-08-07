@@ -49,7 +49,7 @@ class CountryController extends Controller
  
         Country::create($dataArr);
 
-        Session::flash('message', 'Tạo mới danh mục thành công');
+        Session::flash('message', 'Tạo mới quốc gia thành công');
 
         return redirect()->route('country.index');
     }
@@ -60,7 +60,7 @@ class CountryController extends Controller
         $model->delete();
 
         // redirect
-        Session::flash('message', 'Xóa danh mục thành công');
+        Session::flash('message', 'Xóa quốc gia thành công');
         return redirect()->route('country.index');
     }
     public function edit($id)
@@ -87,7 +87,7 @@ class CountryController extends Controller
 
         $model->update($dataArr);
 
-        Session::flash('message', 'Cập nhật danh mục thành công');
+        Session::flash('message', 'Cập nhật quốc gia thành công');
 
         return redirect()->route('country.index');
     }
