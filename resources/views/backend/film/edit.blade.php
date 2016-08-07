@@ -15,7 +15,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default btn-sm " href="{{ route('film.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <a class="btn btn-default btn-sm" href="{{ route('film.index') }}" style="margin-bottom:5px">Quay lại</a>
     <form role="form" method="POST" action="{{ route('film.update') }}" id="dataForm">
     <div class="row">
       <!-- left column -->
@@ -126,7 +126,7 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Poster </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_image" src="{{ $detail->poster_url ? Helper::showImage($detail->poster_url) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="200">
+                    <img id="thumbnail_poster" src="{{ $detail->poster_url ? Helper::showImage($detail->poster_url) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="200">
                     
                     <input type="file" id="file-poster" style="display:none" />
                  
@@ -263,6 +263,17 @@
     $(document).ready(function(){
       $(".select2").select2();
       $('#dataForm').submit(function(){
+        var no_cate = $('input[name="category_id[]"]:checked').length;
+        if( no_cate == 0){
+          swal("Lỗi!", "Chọn ít nhất 1 danh mục!", "error");
+          return false;
+        }
+        var no_country = $('input[name="country_id[]"]:checked').length;
+        if( no_country == 0){
+          swal("Lỗi!", "Chọn ít nhất 1 quốc gia!", "error");
+          return false;
+        }        
+        
         $('#btnSave').hide();
         $('#btnLoading').show();
       });
@@ -278,6 +289,9 @@
       $('#btnUploadImage').click(function(){        
         $('#file-image').click();
       });      
+      $('#btnUploadPoster').click(function(){        
+        $('#file-poster').click();
+      });  
       var files = "";
       $('#file-image').change(function(e){
          files = e.target.files;
@@ -318,7 +332,47 @@
           });
         }
       });
-      
+       var files = "";
+      $('#file-poster').change(function(e){
+         files = e.target.files;
+         
+         if(files != ''){
+           var dataForm = new FormData();        
+          $.each(files, function(key, value) {
+             dataForm.append('file', value);
+          });   
+          
+          dataForm.append('date_dir', 0);
+          dataForm.append('folder', 'tmp');
+
+          $.ajax({
+            url: $('#route_upload_tmp_image').val(),
+            type: "POST",
+            async: false,      
+            data: dataForm,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              if(response.image_path){
+                $('#thumbnail_poster').attr('src',$('#upload_url').val() + response.image_path);
+                $( '#poster_url' ).val( response.image_path );
+                $( '#poster_name' ).val( response.image_name );
+              }
+              console.log(response.image_path);
+                //window.location.reload();
+            },
+            error: function(response){                             
+                var errors = response.responseJSON;
+                for (var key in errors) {
+                  
+                }
+                //$('#btnLoading').hide();
+                //$('#btnSave').show();
+            }
+          });
+        }
+      });
+
       
       $('#title').change(function(){
          var name = $.trim( $(this).val() );
@@ -346,41 +400,33 @@
             });
          }
       });
-      $('#parent_id').change(function(){
-        $.ajax({
-            url: $('#route_get_cate_by_parent').val(),
-            type: "POST",
-            async: false,
-            data: {          
-                parent_id : $(this).val(),
-                type : 'list'
-            },
-            success: function(data){
-                $('#cate_id').html(data).select2('refresh');                      
-            }
-        });
-      });
-      $('#btnLoadFilm').click(function(){
-        if( $('#url').val() != '' ){
-          $('#spanLoad').removeClass('glyphicon glyphicon-download-alt').addClass('fa fa-spin fa-spinner');
-          $.ajax({
-              url: $('#route_get_film_external').val(),
+      $('#original_title').change(function(){
+         var name = $.trim( $(this).val() );
+         if( name != '' && $('#original_slug').val() == ''){
+            $.ajax({
+              url: $('#route_get_slug').val(),
               type: "POST",
-              async: true,
-              data: {          
-                  url : $('#url').val()                
+              async: false,      
+              data: {
+                str : name
               },              
-              success: function(response){      
-                  $('#title').val(response.title);
-                  $('#slug').val(response.slug);
-                  $('#thumbnail_image').attr('src', response.image_url);
-                  $('#image_url').val(response.image_url);                
-                  $('#spanLoad').removeClass('fa fa-spinner fa-spin').addClass('glyphicon glyphicon-download-alt');              
-                                      
+              success: function (response) {
+                if( response.str ){                  
+                  $('#original_slug').val( response.str );
+                }                
+              },
+              error: function(response){                             
+                  var errors = response.responseJSON;
+                  for (var key in errors) {
+                    
+                  }
+                  //$('#btnLoading').hide();
+                  //$('#btnSave').show();
               }
-          });
-        }
+            });
+         }
       });
+      
     });
     
 </script>

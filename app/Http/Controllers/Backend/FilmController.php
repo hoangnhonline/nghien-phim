@@ -17,7 +17,7 @@ use App\Models\TagObjects;
 use App\Models\Film;
 use App\Models\FilmCrew;
 use App\Models\SystemMetadata;
-use Helper, File, Session, DB;
+use Helper, File, Session, DB, Auth;
 
 class FilmController extends Controller
 {
@@ -30,7 +30,7 @@ class FilmController extends Controller
     public static $countryArr = array();
 
     public function __construct(){
-
+        
         self::$parentCate = Category::getParentCateList( 1 );    
 
         self::$countryArr = Country::orderBy('display_order')->get();

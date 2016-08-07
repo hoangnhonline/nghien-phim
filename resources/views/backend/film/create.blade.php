@@ -24,7 +24,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">Chỉnh sửa</h3>
+            <h3 class="box-title">Thêm mới</h3>
           </div>
           <!-- /.box-header -->               
             {!! csrf_field() !!}          
@@ -79,7 +79,7 @@
                   <label>Excerpt</label>
                   <textarea class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
                 </div>
-                <div class="input-group">                 
+                <div class="form-group">                 
                   <label>Directors</label>
                   <select class="form-control select2" name="director[]" id="director" multiple="multiple">                  
                     @if( !empty( $crewArr[2] ) )
@@ -88,13 +88,13 @@
                       @endforeach
                     @endif
                   </select>
-                  <span class="input-group-btn">
+                  <!--<span class="input-group-btn">
                     <button style="margin-top:24px" class="btn btn-primary btnNewCrew" type="button" data-value="2">
                       <span class="glyphicon glyphicon-plus"></span>
                     </button>
-                  </span>
+                  </span>-->
                 </div>               
-                <div class="input-group"> 
+                <div class="form-group"> 
                   <label>Actors</label>
                   <select class="form-control select2" name="actor[]" id="actor" multiple="multiple">                  
                     @if( !empty( $crewArr[1] ) )
@@ -103,13 +103,13 @@
                       @endforeach
                     @endif
                   </select>
-                  <span class="input-group-btn">
+                  <!--<span class="input-group-btn">
                     <button style="margin-top:24px" class="btn btn-primary btnNewCrew" type="button" data-value="1">
                       <span class="glyphicon glyphicon-plus"></span>
                     </button>
-                  </span>
+                  </span>-->
                 </div>
-                <div class="input-group"> 
+                <div class="form-group"> 
                   <label>Producers</label>
                   <select class="form-control select2" name="producer[]" id="producer" multiple="multiple">                  
                     @if( !empty( $crewArr[3] ) )
@@ -118,11 +118,11 @@
                       @endforeach
                     @endif
                   </select>
-                  <span class="input-group-btn">
+                  <!--<span class="input-group-btn">
                     <button style="margin-top:24px" class="btn btn-primary btnNewCrew" type="button" data-value="3">
                       <span class="glyphicon glyphicon-plus"></span>
                     </button>
-                  </span>
+                  </span>-->
                 </div>
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Thumbnail </label>    
@@ -147,7 +147,7 @@
                   <div style="clear:both"></div>
                 </div>
                
-                <div class="input-group"> 
+                <div class="form-group"> 
                   <label>Tags</label>
                   <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
                     @if( $tagArr->count() > 0)
@@ -156,11 +156,11 @@
                       @endforeach
                     @endif
                   </select>
-                  <span class="input-group-btn">
+                  <!--<span class="input-group-btn">
                     <button style="margin-top:24px" class="btn btn-primary" id="btnAddTag" type="button" data-value="3">
                       <span class="glyphicon glyphicon-plus"></span>
                     </button>
-                  </span>
+                  </span>-->
                 </div>
                 <div class="form-group">
                   <label>Chi tiết</label>
@@ -199,7 +199,7 @@
                 <label class="radio-inline"><input type="radio" {{ old('top') || !old('top')== 1 ? "checked" : "" }} name="top" value="1">New</label>
                 <label class="radio-inline"><input type="radio" {{ old('top') == 2 ? "checked" : "" }} name="top" value="2">Hot</label>
                 <label class="radio-inline"><input type="radio" {{ old('top') == 4 ? "checked" : "" }} name="top" value="4">Comming soon</label>
-                <label class="radio-inline"><input type="radio" {{ old('top') == 3 ? "checked" : "" }} name="top" value="3">Completed</label>
+                <label class="radio-inline" style="margin-left:84px"><input type="radio" {{ old('top') == 3 ? "checked" : "" }} name="top" value="3">Completed</label>
               </div>
               <div class="form-group">
                 <label for="email" class="ltitle">Type </label>
@@ -271,6 +271,7 @@
   </section>
   <!-- /.content -->
 </div>
+@include('backend.film.modal')
 <input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
 <input type="hidden" id="route_get_film_external" value="{{ route('general.get-film-external') }}">
 
@@ -280,10 +281,25 @@
 <script type="text/javascript">
     $(document).ready(function(){
       $('.btnNewCrew').click(function(){
-        alert('123');
+          $('#crewModal').modal('show');
       });
+      $('#btnAddTag').click(function(){
+          $('#tagModal').modal('show');
+      });
+      
       $(".select2").select2();
       $('#dataForm').submit(function(){
+        var no_cate = $('input[name="category_id[]"]:checked').length;
+        if( no_cate == 0){
+          swal("Lỗi!", "Chọn ít nhất 1 danh mục!", "error");
+          return false;
+        }
+        var no_country = $('input[name="country_id[]"]:checked').length;
+        if( no_country == 0){
+          swal("Lỗi!", "Chọn ít nhất 1 quốc gia!", "error");
+          return false;
+        }        
+        
         $('#btnSave').hide();
         $('#btnLoading').show();
       });
@@ -436,41 +452,8 @@
             });
          }
       });
-      $('#parent_id').change(function(){
-        $.ajax({
-            url: $('#route_get_cate_by_parent').val(),
-            type: "POST",
-            async: false,
-            data: {          
-                parent_id : $(this).val(),
-                type : 'list'
-            },
-            success: function(data){
-                $('#cate_id').html(data).select2('refresh');                      
-            }
-        });
-      });
-      $('#btnLoadFilm').click(function(){
-        if( $('#url').val() != '' ){
-          $('#spanLoad').removeClass('glyphicon glyphicon-download-alt').addClass('fa fa-spin fa-spinner');
-          $.ajax({
-              url: $('#route_get_film_external').val(),
-              type: "POST",
-              async: true,
-              data: {          
-                  url : $('#url').val()                
-              },              
-              success: function(response){      
-                  $('#title').val(response.title);
-                  $('#slug').val(response.slug);
-                  $('#thumbnail_image').attr('src', response.image_url);
-                  $('#image_url').val(response.image_url);                
-                  $('#spanLoad').removeClass('fa fa-spinner fa-spin').addClass('glyphicon glyphicon-download-alt');              
-                                      
-              }
-          });
-        }
-      });
+     
+      
     });
     
 </script>

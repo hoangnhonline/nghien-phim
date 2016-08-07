@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2016 at 11:31 AM
+-- Generation Time: Aug 07, 2016 at 04:46 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -429,7 +429,6 @@ INSERT INTO `film` (`id`, `meta_id`, `title`, `slug`, `alias`, `description`, `o
 (25, 60, 'Survivor 2015', 'survivor-2015', 'Survivor 2015', 'A Foreign Service Officer in London tries to prevent a terrorist attack set to hit New York, but is forced to go on the run when she is framed for crimes she did not commit.', 'Survivor 2015', 'survivor-2015', 'image/film/survivor.jpg', 'image/film/survivor_poster.jpg', '96 phút', 2015, 1, 1, '&lt;p&gt;A State Department employee newly posted to the American embassy in London is charged with stopping terrorists from getting into the U.S. That puts her right in the line of fire and she is targeted for death and framed for crimes. Discredited, she is forced to go on the run while she tries to clear her name and stop a large-scale terrorist attack set for New Year''s Eve in Times Square.&lt;/p&gt;', NULL, 0, 0, '2015-06-17 08:43:20', '2016-08-07 02:25:00', NULL, 1, '5.5', 1, NULL, NULL, 1, NULL, 1, 1),
 (26, 62, 'Jurassic Park 3', 'jurassic-park-3', 'Jurassic Park 3', 'During a preview tour, a theme park suffers a major power breakdown that allows its cloned dinosaur exhibits to run amok.', 'Jurassic Park 3', 'jurassic-park-3', 'image/film/jurassic-park-3.jpg', 'image/film/jurassic-park-3-poster.jpg', '92', 2015, 2, 1, '<p>A decidedly odd couple with ulterior motives convince Dr. Alan Grant to go to Isla Sorna (the second InGen dinosaur lab.), resulting in an unexpected landing...and unexpected new inhabitants on the island.</p>\r\n', NULL, 0, 0, '2015-06-29 15:42:41', '2016-08-07 08:40:17', NULL, 1, '5.9', 1, NULL, NULL, 1, '', 1, 1),
 (27, 66, 'Tân Tam Quốc Diễn Nghĩa 2010', 'tan-tam-quoc-dien-nghia-2010', 'Tan Tam Quoc Dien Nghia 2010', 'Bắt đầu viết kịch bản từ năm 2004, qua 5 lần chỉnh sửa, chính thức bấm máy vào tháng 9/2008. Bộ phim quy tụ lực lượng diễn viên hùng hậu với dàn sao đến từ cả Trung Quốc đại lục, Hongkong và Đài Loan với kinh phí đầu tư khổng lồ. Bộ phim nói về triều đại Đông Hán Võ Đế tới Tây Tấn Võ Đế, lịch sử kéo dài gần 100 năm. ', 'Three Kingdoms', 'three-kingdoms', 'image/film/tam-quoc-dien-nghia-three-kingdoms-2010.png', 'image/film/maxresdefault.jpg', '85 tập', 2015, 2, 0, '<p>Bắt đầu viết kịch bản từ năm 2004, qua 5 lần chỉnh sửa, ch&iacute;nh thức bấm m&aacute;y v&agrave;o th&aacute;ng 9/2008. Bộ phim quy tụ lực lượng diễn vi&ecirc;n h&ugrave;ng hậu với d&agrave;n sao đến từ cả Trung Quốc đại lục, Hongkong v&agrave; Đ&agrave;i Loan với kinh ph&iacute; đầu tư khổng lồ. Bộ phim n&oacute;i về triều đại Đ&ocirc;ng H&aacute;n V&otilde; Đế tới T&acirc;y Tấn V&otilde; Đế, lịch sử k&eacute;o d&agrave;i gần 100 năm. Bộ phim n&agrave;y căn cứ v&agrave;o 1 trong tứ đại danh t&aacute;c của Trung Quốc - &quot;Tam Quốc Diễn Nghĩa&quot;, cải bi&ecirc;n th&agrave;nh phim. Tam Quốc l&agrave; thời đại chiến loạn chiến sự li&ecirc;n mi&ecirc;n, kh&oacute;i lửa chiến tranh tr&agrave;n lan khắp nơi. Đồng thời cũng l&agrave; thời kỳ c&oacute; nhiều nh&acirc;n t&agrave;i xuất hiện. Những vị mưu sĩ t&agrave;i ba, những nh&agrave; qu&acirc;n sự lỗi lạc đ&atilde; c&oacute; dịp ph&ocirc; triển h&ugrave;ng t&agrave;i đại lược, tr&iacute; tuệ dăm thước của m&igrave;nh trong thời đại chiến loạn. Đ&uacute;ng như c&acirc;u &quot;Loạn thế xuất anh t&agrave;i&quot;.Ch&uacute; trọng tới việc tranh h&ugrave;ng của Ngụy - Thục - Ng&ocirc; tam h&ugrave;ng. Mi&ecirc;u tả r&otilde; t&iacute;nh c&aacute;ch của từng nh&acirc;n vật theo đ&uacute;ng nguy&ecirc;n t&aacute;c :</p>\r\n\r\n<p>* Lưu Bị - Ch&iacute;nh thống hiền qu&acirc;n.<br />\r\n* T&agrave;o Th&aacute;o - Gi&aacute;p thi&ecirc;n tứ linh chư hầu.<br />\r\n* Gia C&aacute;t Lượng - Tầm nh&igrave;n cao xa, đo&aacute;n việc như thần.<br />\r\n* Quan Vũ - Ph&aacute; ngũ quan, tr&atilde;m lục tướng, đơn đao ph&oacute; hội, thuỷ yểm, nghĩa th&iacute;ch T&agrave;o Th&aacute;o...<br />\r\n* Ngo&agrave;i ra : Triệu V&acirc;n trung th&agrave;nh; Trương Phi lỗ m&atilde;ng; Chu Du ganh tị; Lỗ T&uacute;c trung hậu; Tư M&atilde; &Yacute; th&acirc;m trầm... đều được mi&ecirc;u tả th&agrave;nh c&ocirc;ng.</p>\r\n\r\n<p>Những cảnh chiến tranh được ph&aacute;c hoạ lại 1 c&aacute;ch quy m&ocirc; với trận chiến Dục Thủy, X&iacute;ch B&iacute;ch...Tiết tấu dồn dập, n&aacute;o nhiệt, tạo cảm gi&aacute;c cho người xem tựa hồ như đang trực tiếp tham gia với chiến sự của Tam Quốc.</p>\r\n\r\n<p>Bộ phim n&agrave;y từ Bi&ecirc;n đạo, thu h&igrave;nh, mỹ thuật đều được thực hiện bởi tổ quay phim v&agrave; đội ngũ diễn vi&ecirc;n nổi tiếng ở Trung Quốc.</p>\r\n\r\n<p>&nbsp;</p>\r\n', NULL, 0, 0, '2016-05-07 05:27:27', '2016-08-07 08:39:37', NULL, 2, '12.89', 4, NULL, NULL, 0, '', 1, 1),
-(41, 145, 'adsfdsgs', 'adsfdsgs', 'adsfdsgs', '', 'dsgsadg', 'dsgsadg', '2016/08/07/hydrangeas-1470562009.jpg', '2016/08/07/lighthouse-1470561940.jpg', '11', 11, 2, 0, '<p>dfasgsdfgadsg</p>\r\n', NULL, 0, 0, '2016-08-07 09:25:52', '2016-08-07 09:27:56', NULL, 1, '11', 1, NULL, NULL, 0, '11', 1, 1),
 (28, 71, 'Cuộc Đua Tuyệt Chủng', 'cuoc-dua-tuyet-chung', 'Cuoc Dua Tuyet Chung', 'Phim nói về hàng loạt các nghiên cứu bí mật nhằm ngăn chặn sự tuyệt chủng của các loài động vật quý hiếm. Phim có sự tham gia của các diễn viên như Elon Musk, Joel Sartore, Louie Psihoyos...', 'Racing Extinction', 'racing-extinction', 'image/film/re_festival_poster.jpg', 'image/film/racing-extinction-poster.jpg', '90 phút', 2015, 1, 1, '', NULL, 0, 0, '2016-05-22 05:43:30', '2016-08-07 02:25:00', NULL, 2, '', 1, NULL, NULL, 1, NULL, 1, 1),
 (29, 73, 'CHIẾN TRANH GIỮA CÁC VÌ SAO 7: THẦN LỰC THỨC TỈNH', 'chien-tranh-giua-cac-vi-sao-7-than-luc-thuc-tinh', 'CHIEN TRANH GIUA CAC VI SAO 7: THAN LUC THUC TINH', 'Phim lấy bối cảnh 30 năm sau sự kiện của Star Wars phần IV – Return of the Jedi (Sự trở lại của Jedi). Bộ phim sẽ theo chân các nhân vật quen thuộc như Luke, Han Solo, Công chúa Leia… đến một hành tinh lạ với mục đích thu thập mẫu vật. ', 'Star Wars: Episode VII - The Force Awakens (2015)', 'star-wars-episode-vii-the-force-awakens-2015', 'image/film/startwars.jpg', 'image/film/star-wars1.jpg', '136 phút', 2015, 1, 1, '&lt;p&gt;Phim lấy bối cảnh 30 năm sau sự kiện của Star Wars phần IV &amp;ndash; Return of the Jedi (Sự trở lại của Jedi). Bộ phim sẽ theo ch&amp;acirc;n c&amp;aacute;c nh&amp;acirc;n vật quen thuộc như Luke, Han Solo, C&amp;ocirc;ng ch&amp;uacute;a Leia&amp;hellip; đến một h&amp;agrave;nh tinh lạ với mục đ&amp;iacute;ch thu thập mẫu vật. Nhưng họ kh&amp;ocirc;ng ngờ m&amp;igrave;nh sắp đ&amp;aacute;nh thức một kẻ th&amp;ugrave; nguy hiểm bậc nhất vũ trụ hiện đang ngủ y&amp;ecirc;n nơi đ&amp;acirc;y. Star Wars: The Force Awakens sẽ được chỉ đạo bởi một người mới, đạo diễn J.J. Abrams, thay cho người s&amp;aacute;ng tạo George Lucas, v&amp;agrave; sẽ mở đầu cho bộ 3 phần phim tiếp theo của loạt phim n&amp;agrave;y.&lt;/p&gt;', NULL, 0, 0, '2016-05-22 06:54:57', '2016-08-07 02:25:00', NULL, 2, '', 3, NULL, NULL, 1, '', 1, 1),
 (30, 74, 'Người về từ cõi chết', 'nguoi-ve-tu-coi-chet', 'Nguoi ve tu coi chet', 'The Revenant dựa trên câu chuyện có thật, phim kể về người thợ săn Hugh Glass (Leonardo Dicaprio thủ vai). Sau một trận chiến đẫm máu với những người Mỹ bản địa, Hugh bị thương và bị đồng đội tàn nhẫn bỏ lại trong khu núi tuyết giá rét. Từ đó, Hugh Glass phải làm tất cả mọi thứ để có thể tồn tại giữa cái lạnh tàn bạo, những động vật ăn thịt và chiến tranh với những bộ lạc nơi vùng núi hoang vu. ', 'The Revenant (2015)', 'the-revenant-2015', 'image/film/poster.medium.jpg', 'image/film/the-revenant-nguoi-ve-tu-coi-chet-54483.jpg', '151 phút', 2015, 1, 1, '&lt;p&gt;&lt;strong&gt;The Revenant&lt;/strong&gt; dựa tr&amp;ecirc;n c&amp;acirc;u chuyện c&amp;oacute; thật, phim kể về người thợ săn &lt;strong&gt;Hugh Glass&lt;/strong&gt; (Leonardo Dicaprio thủ vai). Sau một trận chiến đẫm m&amp;aacute;u với những người Mỹ bản địa, Hugh bị thương v&amp;agrave; bị đồng đội t&amp;agrave;n nhẫn bỏ lại trong khu n&amp;uacute;i tuyết gi&amp;aacute; r&amp;eacute;t. Từ đ&amp;oacute;, Hugh Glass phải l&amp;agrave;m tất cả mọi thứ để c&amp;oacute; thể tồn tại giữa c&amp;aacute;i lạnh t&amp;agrave;n bạo, những động vật ăn thịt v&amp;agrave; chiến tranh với những bộ lạc nơi v&amp;ugrave;ng n&amp;uacute;i hoang vu. &lt;br /&gt;&lt;br /&gt;Nhờ &amp;yacute; ch&amp;iacute; ki&amp;ecirc;n cường, người thợ săn đ&amp;atilde; sống s&amp;oacute;t một c&amp;aacute;ch kỳ diệu, một m&amp;igrave;nh băng qua qu&amp;atilde;ng đường d&amp;agrave;i hơn &lt;strong&gt;3.000 dặm&lt;/strong&gt; (4.828 km) để trở về v&amp;agrave; trả th&amp;ugrave; được &lt;strong&gt;John Fitzgerald&lt;/strong&gt; (Tom Hardy thủ vai) &amp;ndash; kẻ từng l&amp;agrave; bạn của m&amp;igrave;nh năm xưa.&lt;br /&gt;&lt;br /&gt;Điều đặc biệt l&amp;agrave; bộ phim n&amp;agrave;y quay tại một địa điểm ngo&amp;agrave;i trời v&amp;ocirc; c&amp;ugrave;ng hoang vu hẻo l&amp;aacute;nh, chưa ai đặt ch&amp;acirc;n tới, v&amp;agrave; chỉ sử dụng &amp;aacute;nh s&amp;aacute;ng tự nhi&amp;ecirc;n.&lt;/p&gt;', NULL, 0, 0, '2016-05-22 08:58:23', '2016-08-07 02:25:00', NULL, 2, '', 3, NULL, NULL, 0, '', 1, 1),
@@ -438,8 +437,7 @@ INSERT INTO `film` (`id`, `meta_id`, `title`, `slug`, `alias`, `description`, `o
 INSERT INTO `film` (`id`, `meta_id`, `title`, `slug`, `alias`, `description`, `original_title`, `original_slug`, `image_url`, `poster_url`, `duration`, `release_year`, `type`, `cinema`, `content`, `note`, `likes`, `views`, `created_at`, `updated_at`, `updated_episode_date`, `status`, `imdb`, `top`, `order`, `expired`, `push_top`, `trailer`, `created_user`, `updated_user`) VALUES
 (33, 99, 'Naruto Shippuuden', 'naruto-shippuuden', 'Naruto Shippuuden', 'Sau khi huấn luyện 2 năm rưỡi với Jiraiya, Naruto trở về làng Lá, đoàn tụ với những người bạn cậu đã chia tay, và lập lại Nhóm 7, giờ được gọi là Nhóm Kakashi, với Sai thế chỗ Sasuke. Tất cả những người bạn của Naruto đều đã trưởng thành và thăng cấp.', 'Naruto Shippuuden', 'naruto-shippuuden', 'image/film/4984b3f77c488fd8f81009b51687c392_1364544877.jpg', 'image/film/cf5b1c35b7629f8a8ce618a2a18e586e_1396405819.jpg', '461 tập', 2015, 1, 1, '&lt;p&gt;Naruto (&amp;mdash;ナルト&amp;mdash; NARUTO?) l&amp;agrave; loạt manga Nhật Bản bằng văn bản v&amp;agrave; minh họa bởi t&amp;aacute;c giả Kishimoto Masashi, đ&amp;atilde; được dựng th&amp;agrave;nh anime (phim hoạt h&amp;igrave;nh Nhật). Nh&amp;acirc;n vật ch&amp;iacute;nh l&amp;agrave; Uzumaki Naruto, một thiếu ni&amp;ecirc;n ồn &amp;agrave;o, hiếu động, một ninja lu&amp;ocirc;n muốn t&amp;igrave;m c&amp;aacute;ch khẳng định m&amp;igrave;nh để được mọi người c&amp;ocirc;ng nhận, rất muốn trở th&amp;agrave;nh Hokage (Hỏa Ảnh) - người l&amp;atilde;nh đạo ninja cả l&amp;agrave;ng, được tất cả mọi người k&amp;iacute;nh trọng. Kishimoto ban đầu đ&amp;atilde; ph&amp;aacute;c hoạ Naruto trong một ấn bản Akamaru Jump v&amp;agrave;o th&amp;aacute;ng 8 năm 1997.[2] Sự kh&amp;aacute;c biệt ở chỗ Naruto l&amp;agrave; con trai của Hồ Li Ch&amp;iacute;n Đu&amp;ocirc;i thay v&amp;igrave; l&amp;agrave; người chứa đựng, v&amp;agrave; c&amp;acirc;u chuyện được đặt trong bối cảnh hiện đại hơn.[3] Phi&amp;ecirc;n bản ban đầu của Naruto n&amp;agrave;y đ&amp;atilde; c&amp;oacute; khả năng biến th&amp;agrave;nh một phụ nữ quyến rũ &amp;ndash; nhưng khi cậu ta l&amp;agrave;m vậy, một c&amp;aacute;i đu&amp;ocirc;i c&amp;aacute;o xuất hiện. Kishimoto sau đ&amp;oacute; mới s&amp;aacute;ng t&amp;aacute;c lại c&amp;acirc;u chuyện th&amp;agrave;nh hiện trạng, v&amp;agrave; được ph&amp;aacute;t h&amp;agrave;nh lần đầu bởi Shueisha v&amp;agrave;o năm 1999 trong ấn bản thứ 43 của tạp ch&amp;iacute; Shonen Jump H&amp;agrave;ng tuần tại Nhật. Đến tập 36, bộ manga đ&amp;atilde; b&amp;aacute;n được hơn 71 triệu bản tại Nhật.[4] Tập truyện được cấp giấy ph&amp;eacute;p cho việc ph&amp;aacute;t h&amp;agrave;nh bản dịch sang tiếng Anh bởi Viz Media. Được đăng nhiều kỳ tr&amp;ecirc;n tạp ch&amp;iacute; Shonen Jump, Naruto đ&amp;atilde; trở th&amp;agrave;nh loạt manga b&amp;aacute;n chạy nhất của c&amp;ocirc;ng ty.[5] Cho đến 2 th&amp;aacute;ng 4 năm 2008, 28 tập đầu ti&amp;ecirc;n của bộ truyện đ&amp;atilde; c&amp;oacute; mặt trong tiếng Anh.&lt;/p&gt;', NULL, 0, 0, '2016-05-24 15:22:21', '2016-08-07 02:25:00', NULL, 2, '', 3, NULL, NULL, 1, NULL, 1, 1),
 (34, 103, 'Cậu bé rừng xanh', 'cau-be-rung-xanh', 'Cau be rung xanh', 'Phim THE JUNGLE BOOK 2016 nói về chuyến phiêu lưu của Mowgli – một cậu bé mồ côi được đàn chó sói nuôi dưỡng trong rừng già Ấn Độ. Ngày qua ngày, Mowgli cảm thấy mình không còn được chào đón ở mái nhà tự nhiên này nữa,', 'The Jungle Book (2016)', 'the-jungle-book-2016', 'image/film/cau-be-rung-xanh-the-jungle-book-201603165.jpg', 'image/film/cau-be-rung-xanh-the-jungle-book-2016-201603726.jpg', '100 phút', 2016, 1, 1, '&lt;p&gt;Phim THE JUNGLE BOOK 2016 n&amp;oacute;i về chuyến phi&amp;ecirc;u lưu của Mowgli &amp;ndash; một cậu b&amp;eacute; mồ c&amp;ocirc;i được đ&amp;agrave;n ch&amp;oacute; s&amp;oacute;i nu&amp;ocirc;i dưỡng trong rừng gi&amp;agrave; Ấn Độ. Ng&amp;agrave;y qua ng&amp;agrave;y, Mowgli cảm thấy m&amp;igrave;nh kh&amp;ocirc;ng c&amp;ograve;n được ch&amp;agrave;o đ&amp;oacute;n ở m&amp;aacute;i nh&amp;agrave; tự nhi&amp;ecirc;n n&amp;agrave;y nữa, bởi một con hổ hung dữ t&amp;ecirc;n Shere Khan tuy&amp;ecirc;n bố sẽ ti&amp;ecirc;u diệt những sinh vật c&amp;oacute; khả năng g&amp;acirc;y n&amp;ecirc;n hiểm họa, sau khi hắn bị lo&amp;agrave;i người tấn c&amp;ocirc;ng. Buộc phải rời khỏi chốn dung th&amp;acirc;n duy nhất, Mogwli dấn bước v&amp;agrave;o một h&amp;agrave;nh tr&amp;igrave;nh kh&amp;aacute;m ph&amp;aacute;, với sự dẫn dắt của b&amp;aacute;o đen Bagheera v&amp;agrave; gấu Baloo. Tr&amp;ecirc;n đường đi, Mowgli đ&amp;atilde; gặp những sinh vật xấu xa: một con trăn t&amp;ecirc;n Kaa c&amp;oacute; &amp;aacute;nh mắt th&amp;ocirc;imi&amp;ecirc;n, con khỉ đột King Louie với khả năng n&amp;oacute;i tiếng người lưu lo&amp;aacute;t. Ch&amp;uacute;ng cố &amp;eacute;p buộc Mowgli h&amp;eacute; lộ c&amp;ocirc;ng thức tạo ra &amp;ldquo;b&amp;ocirc;ng hoa đỏ&amp;rdquo; lập l&amp;ograve;e, được gọi l&amp;agrave; Lửa.&lt;/p&gt;', NULL, 0, 0, '2016-05-26 04:20:03', '2016-08-07 02:25:00', NULL, 2, '8.1', 2, NULL, NULL, 1, 'https://youtu.be/ZrO2JGtEjo4', 1, 1),
-(35, 142, 'Người hùng tia chớp (PHẦN 2)', 'nguoi-hung-tia-chop-phan-2', 'Nguoi hung tia chop (PHAN 2)', 'Phim tập trung vào khoa học Barry Allen, người trở thành siêu anh hùng với sức mạnh và tốc độ đáng kinh ngạc sau khi bị sét đánh do vụ nổ máy gia tốc Harrison Wells.', 'The Flash (Season 2) (2015)', 'the-flash-season-2-2015', 'image/film/poster.medium.flash2015.jpg', 'image/film/nguoi-hung-tia-chop.jpg', '23 tập', 2015, 1, 1, '&lt;p&gt;Phim Người H&amp;ugrave;ng Tia Chớp Phần 2 VietSub.&lt;strong&gt;&amp;nbsp;Người H&amp;ugrave;ng Tia Chớp&lt;/strong&gt; l&amp;agrave; một series phim truyền h&amp;igrave;nh Mỹ, được ph&amp;aacute;t triển bởi nh&amp;agrave; văn/nh&amp;agrave; sản xuất Greg Berlanti, Andrew Kreisberg v&amp;agrave; Geoff Johns, được ph&amp;aacute;t s&amp;oacute;ng tr&amp;ecirc;n The CW. Bộ phim dựa tr&amp;ecirc;n nh&amp;acirc;n vật Barry Allen / Flash, được xuất bản bởi DC Comics, một si&amp;ecirc;u anh h&amp;ugrave;ng trong trang phục chiến đấu với tốc độ di chuyển si&amp;ecirc;u ph&amp;agrave;m. Bộ phim kể về Allen, do Grant Gustin thủ vai, một cảnh s&amp;aacute;t điều tra hiện trường, người đạt được tốc độ si&amp;ecirc;u ph&amp;agrave;m. Anh sử dụng tốc độ si&amp;ecirc;u ph&amp;agrave;m của m&amp;igrave;nh để chống lại bọn tội phạm, ngay cả những người c&amp;oacute; si&amp;ecirc;u năng lực kh&amp;aacute;c.The Flash được c&amp;ocirc;ng chiếu tại Bắc Mỹ v&amp;agrave;o ng&amp;agrave;y 7 th&amp;aacute;ng 10 năm 2014. Bộ phim nhận được sự đ&amp;oacute;n nhận của c&amp;aacute;c nh&amp;agrave; ph&amp;ecirc; b&amp;igrave;nh v&amp;agrave; kh&amp;aacute;n giả. N&amp;oacute; đ&amp;atilde; gi&amp;agrave;nh được giải People''s Choice Award cho &quot;Favorite New TV Drama&quot; trong năm 2014. Ng&amp;agrave;y 11 th&amp;aacute;ng 1 năm 2015, The CW đ&amp;atilde; giới thiệu The Flash m&amp;ugrave;a thứ 2, dự kiến ra mắt v&amp;agrave;o ng&amp;agrave;y 6 th&amp;aacute;ng 10 năm 2015.&lt;/p&gt;\r\n&lt;p&gt;&lt;img title=&quot;Người H&amp;ugrave;ng Tia Chớp Phần 2&quot; src=&quot;http://media.bilutv.com/uploads/2015/11/640/nguoi-hung-tia-chop-phan-2-2015-201511151.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;\r\n&lt;p&gt;Phim The Flash (Season 2) n&amp;oacute;i về tiến sĩ Stein (Victor Garber) v&amp;agrave; Cisco (Carlos Valdez) đang chuẩn bị &amp;ldquo;đ&amp;oacute;n tiếp&amp;rdquo; một vị kh&amp;aacute;ch kh&amp;ocirc;ng mời n&amp;agrave;o đ&amp;oacute; tại S.T.A.R. Labs. Đ&amp;oacute; ch&amp;iacute;nh l&amp;agrave; Jay l&amp;agrave; một nh&amp;acirc;n vật b&amp;iacute; ẩn đ&amp;atilde; đến Central city để cảnh b&amp;aacute;o cho Bary Allen v&amp;agrave; đội của anh về mối nguy hiểm sẽ xảy ra trong tương lai gần. B&amp;ecirc;n cạnh đ&amp;oacute;, một c&amp;acirc;u chuyện t&amp;igrave;nh y&amp;ecirc;u mới sẽ được viết l&amp;ecirc;n bởi Barry Allen v&amp;agrave; Patty Spivot , cộng sự của thanh tra Joe West thay cho Eddie đ&amp;atilde; chết.Trong phần 2 n&amp;agrave;y, kh&amp;aacute;n giả cũng sẽ được chi&amp;ecirc;m ngưỡng chiếc huy hiệu trắng huyền thoại thay v&amp;igrave; chiếc huy hiệu đỏ ch&amp;oacute;t tr&amp;ecirc;n ngực &amp;aacute;o của The Flash season 1. H&amp;atilde;y c&amp;ugrave;ng đ&amp;oacute;n xem bạn nh&amp;eacute;!&lt;/p&gt;\r\n&lt;p&gt;&lt;img title=&quot;Người H&amp;ugrave;ng Tia Chớp Phần 2 2015&quot; src=&quot;http://media.bilutv.com/uploads/2015/11/640/5466f58addd0e-201511347.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;', NULL, 0, 0, '2016-06-03 13:13:12', '2016-08-07 02:25:00', NULL, 2, '8.3', 1, NULL, NULL, 1, '', 1, 1),
-(36, 135, 'Người hùng tia chớp test', 'nguoi-hung-tia-chop-test', 'Nguoi hung tia chop test', 'Nội dugn về người hùng tia', 'Người hùng tia chớp test', 'nguoi-hung-tia-chop-test', 'image/no-image.png', 'mage/no-image.png', '', 2015, 1, 0, '&lt;p&gt;Nội dugn về người h&amp;ugrave;ng tia chớp&lt;/p&gt;', NULL, 0, 0, '2016-07-15 04:07:08', '2016-08-07 02:25:00', NULL, 2, '8', 3, NULL, NULL, 1, '', 1, 1);
+(35, 142, 'Người hùng tia chớp (PHẦN 2)', 'nguoi-hung-tia-chop-phan-2', 'Nguoi hung tia chop (PHAN 2)', 'Phim tập trung vào khoa học Barry Allen, người trở thành siêu anh hùng với sức mạnh và tốc độ đáng kinh ngạc sau khi bị sét đánh do vụ nổ máy gia tốc Harrison Wells.', 'The Flash (Season 2) (2015)', 'the-flash-season-2-2015', 'image/film/poster.medium.flash2015.jpg', 'image/film/nguoi-hung-tia-chop.jpg', '23 tập', 2015, 1, 1, '&lt;p&gt;Phim Người H&amp;ugrave;ng Tia Chớp Phần 2 VietSub.&lt;strong&gt;&amp;nbsp;Người H&amp;ugrave;ng Tia Chớp&lt;/strong&gt; l&amp;agrave; một series phim truyền h&amp;igrave;nh Mỹ, được ph&amp;aacute;t triển bởi nh&amp;agrave; văn/nh&amp;agrave; sản xuất Greg Berlanti, Andrew Kreisberg v&amp;agrave; Geoff Johns, được ph&amp;aacute;t s&amp;oacute;ng tr&amp;ecirc;n The CW. Bộ phim dựa tr&amp;ecirc;n nh&amp;acirc;n vật Barry Allen / Flash, được xuất bản bởi DC Comics, một si&amp;ecirc;u anh h&amp;ugrave;ng trong trang phục chiến đấu với tốc độ di chuyển si&amp;ecirc;u ph&amp;agrave;m. Bộ phim kể về Allen, do Grant Gustin thủ vai, một cảnh s&amp;aacute;t điều tra hiện trường, người đạt được tốc độ si&amp;ecirc;u ph&amp;agrave;m. Anh sử dụng tốc độ si&amp;ecirc;u ph&amp;agrave;m của m&amp;igrave;nh để chống lại bọn tội phạm, ngay cả những người c&amp;oacute; si&amp;ecirc;u năng lực kh&amp;aacute;c.The Flash được c&amp;ocirc;ng chiếu tại Bắc Mỹ v&amp;agrave;o ng&amp;agrave;y 7 th&amp;aacute;ng 10 năm 2014. Bộ phim nhận được sự đ&amp;oacute;n nhận của c&amp;aacute;c nh&amp;agrave; ph&amp;ecirc; b&amp;igrave;nh v&amp;agrave; kh&amp;aacute;n giả. N&amp;oacute; đ&amp;atilde; gi&amp;agrave;nh được giải People''s Choice Award cho &quot;Favorite New TV Drama&quot; trong năm 2014. Ng&amp;agrave;y 11 th&amp;aacute;ng 1 năm 2015, The CW đ&amp;atilde; giới thiệu The Flash m&amp;ugrave;a thứ 2, dự kiến ra mắt v&amp;agrave;o ng&amp;agrave;y 6 th&amp;aacute;ng 10 năm 2015.&lt;/p&gt;\r\n&lt;p&gt;&lt;img title=&quot;Người H&amp;ugrave;ng Tia Chớp Phần 2&quot; src=&quot;http://media.bilutv.com/uploads/2015/11/640/nguoi-hung-tia-chop-phan-2-2015-201511151.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;\r\n&lt;p&gt;Phim The Flash (Season 2) n&amp;oacute;i về tiến sĩ Stein (Victor Garber) v&amp;agrave; Cisco (Carlos Valdez) đang chuẩn bị &amp;ldquo;đ&amp;oacute;n tiếp&amp;rdquo; một vị kh&amp;aacute;ch kh&amp;ocirc;ng mời n&amp;agrave;o đ&amp;oacute; tại S.T.A.R. Labs. Đ&amp;oacute; ch&amp;iacute;nh l&amp;agrave; Jay l&amp;agrave; một nh&amp;acirc;n vật b&amp;iacute; ẩn đ&amp;atilde; đến Central city để cảnh b&amp;aacute;o cho Bary Allen v&amp;agrave; đội của anh về mối nguy hiểm sẽ xảy ra trong tương lai gần. B&amp;ecirc;n cạnh đ&amp;oacute;, một c&amp;acirc;u chuyện t&amp;igrave;nh y&amp;ecirc;u mới sẽ được viết l&amp;ecirc;n bởi Barry Allen v&amp;agrave; Patty Spivot , cộng sự của thanh tra Joe West thay cho Eddie đ&amp;atilde; chết.Trong phần 2 n&amp;agrave;y, kh&amp;aacute;n giả cũng sẽ được chi&amp;ecirc;m ngưỡng chiếc huy hiệu trắng huyền thoại thay v&amp;igrave; chiếc huy hiệu đỏ ch&amp;oacute;t tr&amp;ecirc;n ngực &amp;aacute;o của The Flash season 1. H&amp;atilde;y c&amp;ugrave;ng đ&amp;oacute;n xem bạn nh&amp;eacute;!&lt;/p&gt;\r\n&lt;p&gt;&lt;img title=&quot;Người H&amp;ugrave;ng Tia Chớp Phần 2 2015&quot; src=&quot;http://media.bilutv.com/uploads/2015/11/640/5466f58addd0e-201511347.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;', NULL, 0, 0, '2016-06-03 13:13:12', '2016-08-07 02:25:00', NULL, 2, '8.3', 1, NULL, NULL, 1, '', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -531,17 +529,13 @@ INSERT INTO `film_category` (`film_id`, `category_id`) VALUES
 (35, 1),
 (35, 6),
 (35, 10),
-(36, 1),
-(36, 9),
 (37, 1),
 (37, 6),
 (38, 2),
 (39, 9),
 (39, 12),
 (40, 9),
-(40, 12),
-(41, 1),
-(41, 6);
+(40, 12);
 
 -- --------------------------------------------------------
 
@@ -604,15 +598,12 @@ INSERT INTO `film_country` (`film_id`, `country_id`) VALUES
 (33, 8),
 (34, 2),
 (35, 2),
-(36, 2),
 (37, 1),
 (37, 4),
 (39, 4),
 (39, 7),
 (40, 4),
-(40, 7),
-(41, 7),
-(41, 8);
+(40, 7);
 
 -- --------------------------------------------------------
 
@@ -861,16 +852,7 @@ INSERT INTO `film_crew` (`film_id`, `crew_id`, `type`) VALUES
 (39, 17, 2),
 (40, 11, 1),
 (40, 16, 3),
-(40, 17, 2),
-(41, 6, 1),
-(41, 7, 1),
-(41, 8, 2),
-(41, 9, 2),
-(41, 10, 1),
-(41, 15, 3),
-(41, 16, 3),
-(41, 17, 2),
-(41, 23, 2);
+(40, 17, 2);
 
 -- --------------------------------------------------------
 
@@ -1979,57 +1961,6 @@ INSERT INTO `page` (`id`, `sys_id`, `slug`, `title`, `excerpt`, `image`, `conten
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts_category`
---
-
-CREATE TABLE `posts_category` (
-  `posts_id` int(20) NOT NULL,
-  `category_id` int(20) NOT NULL,
-  `order` int(8) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `posts_category`
---
-
-INSERT INTO `posts_category` (`posts_id`, `category_id`, `order`) VALUES
-(135, 15, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `posts_metadata`
---
-
-CREATE TABLE `posts_metadata` (
-  `posts_id` bigint(20) NOT NULL,
-  `key` varchar(20) NOT NULL DEFAULT '',
-  `value` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `posts_tag`
---
-
-CREATE TABLE `posts_tag` (
-  `tag_id` int(20) NOT NULL,
-  `posts_id` int(20) NOT NULL,
-  `order` int(8) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
---
--- Dumping data for table `posts_tag`
---
-
-INSERT INTO `posts_tag` (`tag_id`, `posts_id`, `order`) VALUES
-(37, 135, 0),
-(38, 135, 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `settings`
 --
 
@@ -2064,153 +1995,6 @@ INSERT INTO `settings` (`id`, `name`, `value`, `created_at`, `updated_at`) VALUE
 (131, 'favicon', '2016/07/27/favicon-1469631470.png', '2016-07-27 14:37:52', '2016-07-27 15:16:22'),
 (141, 'banner', '2016/07/27/banner-1469632581.png', '2016-07-27 14:37:52', '2016-07-27 15:16:22'),
 (142, 'custom_text', '', '2016-07-27 14:37:52', '2016-07-27 15:16:22');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `system_id`
---
-
-CREATE TABLE `system_id` (
-  `id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `system_id`
---
-
-INSERT INTO `system_id` (`id`) VALUES
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9),
-(10),
-(11),
-(12),
-(13),
-(14),
-(15),
-(19),
-(20),
-(21),
-(22),
-(23),
-(24),
-(25),
-(26),
-(27),
-(28),
-(29),
-(30),
-(31),
-(32),
-(33),
-(34),
-(35),
-(36),
-(37),
-(38),
-(39),
-(40),
-(41),
-(42),
-(43),
-(44),
-(45),
-(46),
-(47),
-(48),
-(49),
-(50),
-(51),
-(52),
-(53),
-(54),
-(55),
-(56),
-(57),
-(58),
-(59),
-(60),
-(61),
-(62),
-(63),
-(64),
-(65),
-(66),
-(67),
-(68),
-(69),
-(70),
-(71),
-(73),
-(74),
-(75),
-(76),
-(77),
-(78),
-(79),
-(80),
-(81),
-(82),
-(85),
-(86),
-(87),
-(88),
-(89),
-(90),
-(91),
-(92),
-(93),
-(94),
-(95),
-(96),
-(97),
-(98),
-(99),
-(100),
-(101),
-(102),
-(103),
-(104),
-(105),
-(106),
-(107),
-(108),
-(109),
-(110),
-(111),
-(112),
-(113),
-(114),
-(115),
-(116),
-(117),
-(118),
-(119),
-(120),
-(121),
-(122),
-(123),
-(124),
-(125),
-(126),
-(127),
-(128),
-(129),
-(130),
-(131),
-(132),
-(133),
-(134),
-(135),
-(136),
-(137);
 
 -- --------------------------------------------------------
 
@@ -2363,7 +2147,9 @@ INSERT INTO `system_metadata` (`id`, `meta_title`, `meta_description`, `meta_key
 (136, 'Phim hành động hay, phim hành động mỹ mới hot và hấp dẫn nhất hiện nay', 'Phim hanh dong - xem những tuyển tập phim hành động hay và mới hấp dẫn nhất năm 2016  với chất lượng HD được cập nhật liên tục', 'phim hanh dong, phim hành động, phim hanh dong my', ''),
 (137, 'Phim hành động hay, phim hành động mỹ mới hot và hấp dẫn nhất hiện nay', 'Phim hanh dong - xem những tuyển tập phim hành động hay và mới hấp dẫn nhất năm 2016  với chất lượng HD được cập nhật liên tục', 'phim hanh dong, phim hành động, phim hanh dong my', ''),
 (142, 'Người hùng tia chớp (PHẦN 2)', 'Phim tập trung vào khoa học Barry Allen, người trở thành siêu anh hùng với sức mạnh và tốc độ đáng kinh ngạc sau khi bị sét đánh do vụ nổ máy gia tốc Harrison Wells.', 'Nguoi hung tia chop (PHAN 2)', ''),
-(145, 'fdhfdsh', 'dasgdg', 'safA', 'ASFaf');
+(145, 'fdhfdsh', 'dasgdg', 'safA', 'ASFaf'),
+(146, 'test', 'test', 'test', 'name'),
+(147, 'dsg', 'sdgasd', 'sdgasdg', 'sdgasdg');
 
 -- --------------------------------------------------------
 
@@ -2373,14 +2159,12 @@ INSERT INTO `system_metadata` (`id`, `meta_title`, `meta_description`, `meta_key
 
 CREATE TABLE `tag` (
   `id` bigint(20) NOT NULL,
-  `sys_id` bigint(20) DEFAULT NULL,
+  `meta_id` bigint(20) DEFAULT NULL,
   `slug` varchar(32) NOT NULL,
   `type` varchar(32) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `alias` varchar(255) DEFAULT NULL,
   `description` varchar(32) DEFAULT NULL,
-  `priority` int(8) DEFAULT '0',
-  `keywords` text,
-  `count` int(11) DEFAULT NULL,
   `created_user` tinyint(4) NOT NULL,
   `updated_user` tinyint(4) NOT NULL,
   `created_at` datetime NOT NULL,
@@ -2391,44 +2175,45 @@ CREATE TABLE `tag` (
 -- Dumping data for table `tag`
 --
 
-INSERT INTO `tag` (`id`, `sys_id`, `slug`, `type`, `name`, `description`, `priority`, `keywords`, `count`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
-(1, 2, 'action-movies', '1', 'action movies', '', 0, 'action movies action-movies', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(5, 19, 'the-flash', '1', 'The Flash', NULL, 0, 'the flash the-flash', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(6, 20, 'the-flash-season-1', '1', 'The Flash Season 1', NULL, 0, 'the flash season 1 the-flash-season-1', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(7, 21, 'tv-series', '1', 'TV Series', NULL, 0, 'tv series tv-series', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(8, 24, 'marvel', '1', 'Marvel', NULL, 0, 'marvel marvel', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(9, 25, 'age-of-ultron', '1', 'Age Of Ultron', NULL, 0, 'age of ultron age-of-ultron', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(10, 26, 'avengers', '1', 'Avengers', NULL, 0, 'avengers avengers', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(11, 27, 'avengers-2015', '1', 'Avengers 2015', NULL, 0, 'avengers 2015 avengers-2015', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(12, 28, 'ciname-movies', '1', 'ciname movies', NULL, 0, 'ciname movies ciname-movies', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(13, 29, 'thriller', '1', 'thriller', NULL, 0, 'thriller thriller', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(14, 30, 'fast-and-furious-7', '1', 'Fast and Furious 7', NULL, 0, 'fast and furious 7 fast-and-furious-7', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(15, 31, 'fast-7', '1', 'Fast 7', NULL, 0, 'fast 7 fast-7', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(16, 34, 'kyoto-kenshin', '1', 'Kyoto Kenshin', NULL, 0, 'kyoto kenshin kyoto-kenshin', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(17, 35, 'flying-swords-of-dragon-gate', '1', 'Flying Swords Of Dragon Gate', NULL, 0, 'flying swords of dragon gate flying-swords-of-dragon-gate', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(18, 42, 'cinema-movie', '1', 'cinema movie', NULL, 0, 'cinema movie cinema-movie', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(19, 52, 'one-piece', '1', 'One Piece', NULL, 0, 'one piece one-piece', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(20, 57, 'fantasy', '1', 'fantasy', NULL, 0, 'fantasy fantasy', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(21, 58, 'drama', '1', 'drama', NULL, 0, 'drama drama', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(22, 61, 'survivor-2015', '1', 'Survivor 2015', NULL, 0, 'survivor 2015 survivor-2015', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(23, 63, 'jurassic', '1', 'Jurassic', NULL, 0, 'jurassic jurassic', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(24, 64, 'jurassic-park-3', '1', 'Jurassic Park 3', NULL, 0, 'jurassic park 3 jurassic-park-3', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(25, 65, 'jurassic-2001', '1', 'Jurassic 2001', NULL, 0, 'jurassic 2001 jurassic-2001', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(26, 67, 'sifu-vs-vampire', '1', 'sifu vs vampire', NULL, 0, 'sifu vs vampire sifu-vs-vampire', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(27, 68, 'phim-ma', '1', 'phim ma', NULL, 0, 'phim ma phim-ma', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(28, 69, 'ong-toi-la-cuong-thi', '1', 'ông tôi là cương thi', NULL, 0, 'ong toi la cuong thi ong-toi-la-cuong-thi', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(29, 70, 'cuong-thi', '1', 'cương thi', NULL, 0, 'cuong thi cuong-thi', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(35, 80, 'the-revenant-tron-bo', '1', 'The Revenant trọn bộ', NULL, 0, 'the revenant tron bo the-revenant-tron-bo', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(37, 89, 'lam-tam-nhu', '2', 'lâm tâm như', NULL, 0, 'lam tam nhu lam-tam-nhu', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(38, 90, 'hoac-kien-hoa', '2', 'hoắc kiến hoa', NULL, 0, 'hoac kien hoa hoac-kien-hoa', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(41, 94, 'apocalypse', '1', 'Apocalypse', NULL, 0, 'apocalypse apocalypse', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(42, 95, 'days-of-future-past', '1', 'Days of Future Past', NULL, 0, 'days of future past days-of-future-past', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(43, 96, 'ky-an-nha-thanh', '1', 'kỳ án nhà thanh', NULL, 0, 'ky an nha thanh ky-an-nha-thanh', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(44, 97, 'ky-an-nha-thanh-tap-1', '1', 'ky an nha thanh tap 1', NULL, 0, 'ky an nha thanh tap 1 ky-an-nha-thanh-tap-1', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(45, 98, 'ky-an-nha-thanh-2', '1', 'ky an nha thanh 2', NULL, 0, 'ky an nha thanh 2 ky-an-nha-thanh-2', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(46, 100, 'naruto', '1', 'naruto', NULL, 0, 'naruto naruto', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(47, 101, 'naruto-shippuuden', '1', 'Naruto Shippuuden', NULL, 0, 'naruto shippuuden naruto-shippuuden', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
-(48, 102, 'uzumaki-naruto', '1', 'Uzumaki Naruto', NULL, 0, 'uzumaki naruto uzumaki-naruto', 0, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00');
+INSERT INTO `tag` (`id`, `meta_id`, `slug`, `type`, `name`, `alias`, `description`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
+(1, 2, 'action-movies', '1', 'action movies', NULL, '', 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(5, 19, 'the-flash', '1', 'The Flash', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(6, 20, 'the-flash-season-1', '1', 'The Flash Season 1', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(7, 21, 'tv-series', '1', 'TV Series', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(8, 24, 'marvel', '1', 'Marvel', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(9, 25, 'age-of-ultron', '1', 'Age Of Ultron', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(10, 26, 'avengers', '1', 'Avengers', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(11, 27, 'avengers-2015', '1', 'Avengers 2015', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(12, 28, 'ciname-movies', '1', 'ciname movies', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(13, 29, 'thriller', '1', 'thriller', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(14, 30, 'fast-and-furious-7', '1', 'Fast and Furious 7', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(15, 31, 'fast-7', '1', 'Fast 7', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(16, 34, 'kyoto-kenshin', '1', 'Kyoto Kenshin', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(17, 35, 'flying-swords-of-dragon-gate', '1', 'Flying Swords Of Dragon Gate', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(18, 42, 'cinema-movie', '1', 'cinema movie', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(19, 52, 'one-piece', '1', 'One Piece', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(20, 57, 'fantasy', '1', 'fantasy', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(21, 58, 'drama', '1', 'drama', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(22, 61, 'survivor-2015', '1', 'Survivor 2015', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(23, 63, 'jurassic', '1', 'Jurassic', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(24, 64, 'jurassic-park-3', '1', 'Jurassic Park 3', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(25, 65, 'jurassic-2001', '1', 'Jurassic 2001', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(26, 67, 'sifu-vs-vampire', '1', 'sifu vs vampire', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(27, 68, 'phim-ma', '1', 'phim ma', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(28, 69, 'ong-toi-la-cuong-thi', '1', 'ông tôi là cương thi', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(29, 70, 'cuong-thi', '1', 'cương thi', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(35, 80, 'the-revenant-tron-bo', '1', 'The Revenant trọn bộ', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(37, 89, 'lam-tam-nhu', '2', 'lâm tâm như', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(38, 90, 'hoac-kien-hoa', '2', 'hoắc kiến hoa', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(41, 94, 'apocalypse', '1', 'Apocalypse', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(42, 95, 'days-of-future-past', '1', 'Days of Future Past', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(43, 96, 'ky-an-nha-thanh', '1', 'kỳ án nhà thanh', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(44, 97, 'ky-an-nha-thanh-tap-1', '1', 'ky an nha thanh tap 1', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(45, 98, 'ky-an-nha-thanh-2', '1', 'ky an nha thanh 2', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(46, 100, 'naruto', '1', 'naruto', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(47, 101, 'naruto-shippuuden', '1', 'Naruto Shippuuden', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(48, 102, 'uzumaki-naruto', '1', 'Uzumaki Naruto', NULL, NULL, 1, 1, '2016-01-01 00:00:00', '2016-01-01 00:00:00'),
+(49, NULL, 'test', '1', 'test', 'test', '', 0, 0, '2016-08-07 14:03:15', '2016-08-07 14:03:15');
 
 -- --------------------------------------------------------
 
@@ -2489,8 +2274,7 @@ INSERT INTO `tag_objects` (`object_id`, `tag_id`, `type`) VALUES
 (33, 48, 1),
 (37, 6, 1),
 (39, 7, 1),
-(40, 7, 1),
-(41, 6, 1);
+(40, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -2646,35 +2430,11 @@ ALTER TABLE `page`
   ADD KEY `post_author` (`author`) USING BTREE;
 
 --
--- Indexes for table `posts_category`
---
-ALTER TABLE `posts_category`
-  ADD PRIMARY KEY (`posts_id`,`category_id`);
-
---
--- Indexes for table `posts_metadata`
---
-ALTER TABLE `posts_metadata`
-  ADD PRIMARY KEY (`posts_id`,`key`);
-
---
--- Indexes for table `posts_tag`
---
-ALTER TABLE `posts_tag`
-  ADD PRIMARY KEY (`tag_id`,`posts_id`);
-
---
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `option_name` (`name`) USING BTREE;
-
---
--- Indexes for table `system_id`
---
-ALTER TABLE `system_id`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `system_metadata`
@@ -2722,7 +2482,7 @@ ALTER TABLE `user_roles`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `country`
 --
@@ -2737,7 +2497,7 @@ ALTER TABLE `crew`
 -- AUTO_INCREMENT for table `film`
 --
 ALTER TABLE `film`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `film_episode`
 --
@@ -2754,30 +2514,20 @@ ALTER TABLE `options`
 ALTER TABLE `page`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 --
--- AUTO_INCREMENT for table `posts_metadata`
---
-ALTER TABLE `posts_metadata`
-  MODIFY `posts_id` bigint(20) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 --
--- AUTO_INCREMENT for table `system_id`
---
-ALTER TABLE `system_id`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
---
 -- AUTO_INCREMENT for table `system_metadata`
 --
 ALTER TABLE `system_metadata`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT for table `user`
 --
