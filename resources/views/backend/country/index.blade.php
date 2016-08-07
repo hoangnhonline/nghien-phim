@@ -56,9 +56,9 @@
                   <p>{{ $item->description }}</p>
                 </td>
                 <td style="white-space:nowrap">                  
-                  <a href="{{ route( 'country.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                 
+                  <a href="{{ route( 'country.edit', [ 'id' => $item->id ]) }}" class="btn-sm btn btn-warning">Chỉnh sửa</a>                 
                   
-                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'country.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>
+                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'country.destroy', [ 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger">Xóa</a>
                   
                 </td>
               </tr> 

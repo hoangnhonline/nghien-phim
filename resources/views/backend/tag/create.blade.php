@@ -15,7 +15,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default" href="{{ route('tag.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <a class="btn btn-default btn-sm " href="{{ route('tag.index') }}" style="margin-bottom:5px">Quay lại</a>
     <form role="form" method="POST" action="{{ route('tag.store') }}">
     <div class="row">
       <!-- left column -->
@@ -43,14 +43,14 @@
                   <label for="email">Loại </label>
                   <select class="form-control" name="type">                                
                     <option value="1" {{ 1 ==  old('type') ? "selected" : "" }}>Phim</option>
-                    <option value="2" {{ 2 ==  old('type') ? "selected" : "" }}>Truyện</option>
-                    <option value="3" {{ 3 ==  old('type') ? "selected" : "" }}>Ảnh</option>                
+                    <option value="2" {{ 2 ==  old('type') ? "selected" : "" }}>Bài viết</option>
+                    <!--<option value="3" {{ 3 ==  old('type') ? "selected" : "" }}>Ảnh</option>-->
                   </select>
                 </div>
                  <!-- text input -->
                 <div class="form-group">
                   <label>Tag<span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="tag" id="tag" value="{{ old('tag') }}">
+                  <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
                 </div>
                 <div class="form-group">
                   <label>Slug <span class="red-star">*</span></label>
@@ -114,7 +114,7 @@
 @section('javascript_page')
 <script type="text/javascript">
 $(document).ready(function(){
-  $('#tag').change(function(){
+  $('#name').change(function(){
          var name = $.trim( $(this).val() );
          if( name != '' && $('#slug').val() == ''){
             $.ajax({

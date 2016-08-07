@@ -13,7 +13,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default" href="{{ route('tag.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <a class="btn btn-default btn-sm " href="{{ route('tag.index') }}" style="margin-bottom:5px">Quay lại</a>
     <div class="row">
       <!-- left column -->
 
@@ -42,14 +42,14 @@
                 <label for="email">Loại </label>
                 <select class="form-control" name="type">                                
                   <option value="1" {{ 1 ==  $detail->type ? "selected" : "" }}>Phim</option>
-                  <option value="2" {{ 2 ==  $detail->type ? "selected" : "" }}>Truyện</option>
-                  <option value="3" {{ 3 ==  $detail->type ? "selected" : "" }}>Ảnh</option>                
+                  <option value="2" {{ 2 ==  $detail->type ? "selected" : "" }}>Bài viết</option>
+                  <!--<option value="3" {{ 3 ==  $detail->type ? "selected" : "" }}>Ảnh</option>-->
                 </select>
               </div>
                <!-- text input -->
               <div class="form-group">
                 <label>Tag <span class="red-star">*</span></label>
-                <input type="text" class="form-control" name="tag" id="tag" value="{{ $detail->tag }}">
+                <input type="text" class="form-control" name="name" id="name" value="{{ $detail->name }}">
               </div>
               <div class="form-group">
                 <label>Slug <span class="red-star">*</span></label>
@@ -76,28 +76,27 @@
           <div class="box-header with-border">
             <h3 class="box-title">Thông tin SEO</h3>
           </div>
-          <!-- /.box-header -->     
+          <!-- /.box-header -->   
+            <input type="hidden" name="meta_id" value="{{ $metadata->id }}">  
             <div class="box-body">
               <div class="form-group">
                 <label>Meta title</label>
-                <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ $detail->meta_title }}">
+                <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ $metadata->meta_title }}">
               </div>
               <!-- textarea -->
               <div class="form-group">
                 <label>Meta desciption</label>
-                <textarea class="form-control" rows="4" name="meta_description" id="meta_description">{{ $detail->meta_description }}</textarea>
+                <textarea class="form-control" rows="4" name="meta_description" id="meta_description">{{ $metadata->meta_description }}</textarea>
               </div>  
 
               <div class="form-group">
                 <label>Meta keywords</label>
-                <textarea class="form-control" rows="4" name="meta_keywords" id="meta_keywords">{{ $detail->meta_keywords }}</textarea>
+                <textarea class="form-control" rows="4" name="meta_keywords" id="meta_keywords">{{ $metadata->meta_keywords }}</textarea>
               </div>  
               <div class="form-group">
                 <label>Custom text</label>
-                <textarea class="form-control" rows="4" name="custom_text" id="custom_text">{{ $detail->custom_text }}</textarea>
+                <textarea class="form-control" rows="4" name="custom_text" id="custom_text">{{ $metadata->custom_text }}</textarea>
               </div>
-             
-            
         </div>
         <!-- /.box -->     
 

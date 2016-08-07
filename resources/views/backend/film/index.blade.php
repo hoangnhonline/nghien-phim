@@ -20,7 +20,7 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('film.create') }}" class="btn btn-info" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('film.create') }}" class="btn-sm btn btn-info" style="margin-bottom:5px">Tạo mới</a>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
@@ -96,9 +96,9 @@
                 <td>{{ $item->full_name }}</td>
                 <td style="white-space:nowrap">{{ date('d-m-Y H:i', strtotime($item->time_created)) }}</td>       
                 <td style="white-space:nowrap">                  
-                  <a href="{{ route( 'film.edit', [ 'id' => $item->film_id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                 
+                  <a href="{{ route( 'film.edit', [ 'id' => $item->film_id ]) }}" class="btn-sm  btn btn-warning">Chỉnh sửa</a>                 
                   
-                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'film.destroy', [ 'id' => $item->film_id ]) }}');" class="btn btn-danger">Xóa</a>
+                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'film.destroy', [ 'id' => $item->film_id ]) }}');" class="btn-sm btn btn-danger">Xóa</a>
                   
                 </td>
               </tr> 

@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Backend\Tag;
+use App\Models\Tag;
+use App\Models\SystemMetadata;
 use Helper, File, Session;
 
 class TagController extends Controller
@@ -17,20 +18,19 @@ class TagController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {
-        //Helper::getDetailVideoFromExternalSite('');
+    {     
         
         $type = isset($request->type) ? $request->type : 1;
 
-        $tag = isset($request->tag) && $request->tag != '' ? $request->tag : '';
+        $name = isset($request->name) && $request->name != '' ? $request->name : '';
 
         $query = Tag::where('type', $type);
-        if( $tag !='' ){
-            $query->where('tag', 'LIKE', '%'.$tag.'%');
+        if( $name !='' ){
+            $query->where('name', 'LIKE', '%'.$name.'%');
         }
         $items = $query->orderBy('id', 'desc')->paginate(50);
 
-        return view('backend.tag.index', compact( 'items', 'type', 'tag'));
+        return view('backend.tag.index', compact( 'items', 'type', 'name'));
     }
 
     /**
@@ -54,19 +54,32 @@ class TagController extends Controller
         $dataArr = $request->all();
         
         $this->validate($request,[
-            'tag' => 'required',
+            'name' => 'required',
             'slug' => 'required|unique:tag,slug,NULL,id,type,'.$dataArr['type'],
         ],
         [
-            'tag.required' => 'Bạn chưa nhập tag',
+            'name.required' => 'Bạn chưa nhập tag',
             'slug.required' => 'Bạn chưa nhập slug',
             'slug.unique' => 'Slug đã được sử dụng.',
         ]);
 
-        $dataArr['alias'] = Helper::stripUnicode($dataArr['tag']);
+        $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
-        Tag::create($dataArr);
+        $rs = Tag::create($dataArr);
+        
+        $object_id = $rs->id;
 
+        $metaArr['meta_title'] = $dataArr['meta_title'];
+        $metaArr['meta_description'] = $dataArr['meta_description'];
+        $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
+        $metaArr['custom_text'] = $dataArr['custom_text'];
+        
+        $rsMeta = SystemMetadata::create( $metaArr );
+
+        if( $rsMeta->id ){
+            $modelTag = Tag::find($object_id);
+            $modelTag->update(['meta_id' => $rsMeta->id]);
+        }
         Session::flash('message', 'Tạo mới tag thành công');
 
         return redirect()->route('tag.index', [ 'type' => $dataArr['type'] ]);
@@ -92,8 +105,10 @@ class TagController extends Controller
     public function edit($id)
     {
         $detail = Tag::find($id);
+        
+        $metadata = SystemMetadata::find( $detail->meta_id );
 
-        return view('backend.tag.edit', compact( 'detail' ));
+        return view('backend.tag.edit', compact( 'detail', 'metadata'));
     }
 
     /**
@@ -108,19 +123,30 @@ class TagController extends Controller
         $dataArr = $request->all();
         
          $this->validate($request,[
-            'tag' => 'required',
+            'name' => 'required',
             'slug' => 'required|unique:tag,slug,'.$dataArr['id'].',id,type,'.$dataArr['type'],
         ],
         [
-            'tag.required' => 'Bạn chưa nhập tag',
+            'name.required' => 'Bạn chưa nhập tag',
             'slug.required' => 'Bạn chưa nhập slug',
             'slug.unique' => 'Slug đã được sử dụng.',
         ]);
-        $dataArr['alias'] = Helper::stripUnicode($dataArr['tag']);
+        $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
         $model = Tag::find($dataArr['id']);
 
         $model->update($dataArr);
+
+        if( $dataArr['meta_id'] ){
+
+            $metaArr['meta_title'] = $dataArr['meta_title'];
+            $metaArr['meta_description'] = $dataArr['meta_description'];
+            $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
+            $metaArr['custom_text'] = $dataArr['custom_text'];
+            $metaArr['id'] = $dataArr['meta_id'];
+            $modelMetadata = SystemMetadata::find( $dataArr['meta_id'] );
+            $modelMetadata->update( $metaArr );
+        }
 
         Session::flash('message', 'Cập nhật tag thành công');
 

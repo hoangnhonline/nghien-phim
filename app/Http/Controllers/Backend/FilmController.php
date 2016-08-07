@@ -343,14 +343,15 @@ class FilmController extends Controller
     * @param  int  $id
     * @return Response
     */
-    public function destroy($id)
+    public function destroy( $id )
     {
-        // delete
-        TagObjects::where(['object_id' => $dataArr['id'], 'type' => 1])->delete();
+        FilmCrew::deleteFilmCrew( $id );
+        FilmCountry::deleteCountry( $id );
+        FilmCategory::deleteCategory( $id );
+        TagObjects::deleteTags( $id, 1);
 
         $model = Film::find($id);
         $model->delete();
-
 
         // redirect
         Session::flash('message', 'Xóa phim thành công');

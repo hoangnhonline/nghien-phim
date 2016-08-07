@@ -20,7 +20,7 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('tag.create') }}" class="btn btn-info" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('tag.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
@@ -29,7 +29,7 @@
           <form class="form-inline" role="form" method="GET" action="{{ route('tag.index') }}">
             <div class="form-group">
               <label for="email">Loại :</label>
-              <select class="form-control" name="type">                                
+              <select class="form-control" name="type" id="type">                                
                 <option value="1" {{ 1 == $type ? "selected" : "" }}>Phim</option>
                 <option value="2" {{ 2 == $type ? "selected" : "" }}>Bài viết</option>
                 <!--<option value="3" {{ 3 == $type ? "selected" : "" }}>Ảnh</option>-->
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
               <label for="email">Từ khóa :</label>
-              <input type="text" class="form-control" name="tag" value="{{ $tag }}">
+              <input type="text" class="form-control" id="name" name="name" value="{{ $name }}">
             </div>       
             <button type="submit" class="btn btn-primary" style="margin-top:-10px">Lọc</button>
           </form>         
@@ -51,7 +51,7 @@
         <!-- /.box-header -->
         <div class="box-body">
           <div style="text-align:right">
-            {{ $items->appends( ['tag' => $tag, 'type' => $type] )->links() }}
+            {{ $items->appends( ['name' => $name, 'type' => $type] )->links() }}
           </div>
           <table class="table table-bordered" id="table-list-data">
             <tr>
@@ -75,9 +75,9 @@
                 <td>{{ $item->slug }}</td>
                 <td>{{ $item->description }}</td>
                 <td style="white-space:nowrap">                  
-                  <a href="{{ route( 'tag.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                  
+                  <a href="{{ route( 'tag.edit', [ 'id' => $item->id ]) }}" class="btn-sm btn btn-warning">Chỉnh sửa</a>                  
                   @if( $item->objects->count() == 0)
-                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'tag.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>                  
+                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'tag.destroy', [ 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger">Xóa</a>                  
                   @endif
                 </td>
               </tr> 
@@ -91,7 +91,7 @@
           </tbody>
           </table>          
           <div style="text-align:right">          
-            {{ $items->appends( ['tag' => $tag, 'type' => $type] )->links() }}
+            {{ $items->appends( ['name' => $name, 'type' => $type] )->links() }}
           </div>
         </div>        
       </div>
@@ -102,6 +102,7 @@
 </section>
 <!-- /.content -->
 </div>
+<input type="hidden" id="route_tag_index" value="{{ route('tag.index') }}">
 @stop
 @section('javascript_page')
 <script type="text/javascript">
@@ -120,6 +121,14 @@ function callDelete(name, url){
   return flag;
 }
 $(document).ready(function(){
+  $('#type').change(function(){
+    var name = $.trim($('#name').val());
+    var url = $('#route_tag_index').val() + "?type=" + $('#type').val();
+    if( name != ''){
+      url += '&name=' + name;
+    }
+    location.href = url;
+  });
   $('#table-list-data tbody').sortable({
         placeholder: 'placeholder',
         handle: ".move",

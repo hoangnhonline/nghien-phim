@@ -23,6 +23,11 @@ class Tag extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['sys_id', 'title', 'slug', 'excerpt', 'original_name', 'original_slug', 'image_url', 'poster_url', 'duration', 'release_year', 'type', 'cinema', 'content', 'note', 'likes', 'views','author', 'updated_episode_date', 'status', 'imdb', 'top', 'order', 'expired', 'push_top', 'trailer', 'created_user', 'updated_user', 'alias'];
+    protected $fillable = ['meta_id', 'name', 'slug', 'type', 'description', 'alias', 'created_user', 'updated_user'];
+
+    public function objects()
+    {
+        return $this->hasMany('App\Models\TagObjects', 'tag_id');
+    }
     
 }

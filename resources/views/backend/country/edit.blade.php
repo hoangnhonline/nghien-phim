@@ -15,7 +15,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default" href="{{ route('country.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <a class="btn btn-default btn-sm" href="{{ route('country.index') }}" style="margin-bottom:5px">Quay lại</a>
     <div class="row">
       <!-- left column -->
 
