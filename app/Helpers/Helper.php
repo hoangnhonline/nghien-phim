@@ -13,7 +13,7 @@ class Helper
 
     public static function showImage($image_url){
 
-        return strpos($image_url, 'http') === false ? config('icho.upload_url').$image_url : $image_url;
+        return strpos($image_url, 'http') === false ? config('nghien.upload_url').$image_url : $image_url;        
 
     }
 
@@ -128,7 +128,7 @@ class Helper
 
         $basePath = $date_dir == true ? $basePath .= date('Y/m/d'). '/'  : $basePath = $basePath;        
         
-        $desPath = config('icho.upload_path'). $basePath;
+        $desPath = config('nghien.upload_path'). $basePath;
 
         //set name for file
         $fileName = $file->getClientOriginalName();

@@ -7,10 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-//use App\Models\Backend\Tag;
-//use App\Models\Backend\TagObjects;
+use App\Models\Country;
+use App\Models\Crew;
+use App\Models\FilmCountry;
+use App\Models\FilmCategory;
+use App\Models\FilmEpisode;
+use App\Models\Tag;
+use App\Models\TagObjects;
 use App\Models\Film;
-use Helper, File, Session;
+use App\Models\FilmCrew;
+use App\Models\SystemMetadata;
+use Helper, File, Session, DB;
 
 class FilmController extends Controller
 {
@@ -19,37 +26,47 @@ class FilmController extends Controller
     *
     * @return Response
     */
+    public static $parentCate = array();
+    public static $countryArr = array();
+
+    public function __construct(){
+
+        self::$parentCate = Category::getParentCateList( 1 );    
+
+        self::$countryArr = Country::orderBy('display_order')->get();
+
+        view()->share(['parentCate' => self::$parentCate, 'countryArr' => self::$countryArr ]);
+
+    }
     public function index(Request $request)
-    {
-
-        $parentCate = Category::orderBy('display_order')->first();
-        
-        $parent_id = isset($request->parent_id) ? $request->parent_id : $parentCate->id;
-
-        $cate_id = isset($request->cate_id) ? $request->cate_id : 0;
-
-        $site_id = isset($request->site_id) ? $request->site_id : 0;
-        
-        $cateArr = Category::where('parent_id', $parent_id)->get();
-
+    {       
+        /*
+        $film = Film::all();
+        foreach($film as $a){
+            $id = $a->id;
+            $created_at = $a->title;
+            $alias = Helper::stripUnicode($title);
+            $arr['alias'] = $alias;
+            $model = Film::find($a->id);
+            var_dump($model->update($arr));
+        }
+        die('123');
+        */
+       
+        $status = isset($request->status) ? $request->status : 1;
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
         
-        $query = Film::where('parent_id', $parent_id);
-
-        if( $cate_id > 0){
-            $query->where('cate_id', $cate_id);
-        }
-        if( $site_id > 0){
-            $query->where('site_id', $site_id);
-        }
+        $query = DB::table('film')->where('film.status', $status);
+        
         if( $title != ''){
             $query->where('alias', 'LIKE', '%'.$title.'%');
         }
-        $items = $query->orderBy('id', 'desc')->paginate(20);
+        $query->join('users', 'users.id', '=', 'film.created_user');
+        $items = $query->orderBy('film.id', 'desc')
+        ->select(['film.id as film_id', 'title', 'original_title', 'image_url', 'film.created_at as time_created', 'description', 'users.full_name'])
+        ->paginate(20);
         
-        $parentCateArr = Category::all();
-        
-        return view('backend.movies.index', compact( 'items', 'parentCate' , 'parent_id', 'parentCateArr', 'title', 'cateArr', 'cate_id', 'site_id'));
+        return view('backend.film.index', compact('items', 'title', 'status'));
     }
 
     /**
@@ -60,17 +77,11 @@ class FilmController extends Controller
     public function create(Request $request)
     {
 
-        $parentCate = Category::orderBy('display_order')->first();
+        $crewArr = Film::filmCrew();
         
-        $parent_id = isset($request->parent_id) ? $request->parent_id : $parentCate->id;
+        $tagArr = Tag::where('type', 1)->get();
 
-        $cateArr = Category::where('parent_id', $parent_id)->get();
-        
-        $parentCateArr = Category::all()->sortBy('display_order');
-
-        $tagArr = Tag::where('type', 1)->orderBy('id', 'desc')->get();
-
-        return view('backend.movies.create', compact( 'tagArr', 'parent_id', 'parentCateArr', 'parentCate', 'parent_id', 'cateArr'));
+        return view('backend.film.create', compact( 'tagArr', 'crewArr'));
     }
 
     /**
@@ -84,20 +95,20 @@ class FilmController extends Controller
         $dataArr = $request->all();
         
         $this->validate($request,[
-            'parent_id' => 'required',
-            'cate_id' => 'required',
-            'url' => 'required',
-            'title' => 'required',            
-            'slug' => 'required|unique:movies,slug',
+            'title' => 'required',
+            'slug' => 'required|unique:film,slug',
+            'original_title' => 'required',
+            'original_slug' => 'required|unique:film,original_slug',            
         ],
-        [
-            'url.required' => 'Bạn chưa nhập URL phim',
-            'cate_id.required' => 'Bạn chưa chọn danh mục con.',            
+        [                      
             'title.required' => 'Bạn chưa nhập tiêu đề',
             'slug.required' => 'Bạn chưa nhập slug',
-            'slug.unique' => 'Slug đã được sử dụng.'
-        ]);       
-        
+            'original_title.required' => 'Bạn chưa nhập tiêu đề gốc',
+            'original_slug.required' => 'Bạn chưa nhập slug gốc',            
+            'slug.unique' => 'Slug đã tồn tại',
+            'original_slug.unique' => 'Slug gốc đã tồn tại',
+        ]);
+
         $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
         
         if($dataArr['image_url'] && $dataArr['image_name']){
@@ -110,27 +121,47 @@ class FilmController extends Controller
 
             $destionation = date('Y/m/d'). '/'. end($tmp);
             
-            File::move(config('icho.upload_path').$dataArr['image_url'], config('icho.upload_path').$destionation);
+            File::move(config('nghien.upload_path').$dataArr['image_url'], config('nghien.upload_path').$destionation);
             
             $dataArr['image_url'] = $destionation;
         }
 
-        $dataArr['site_id'] = Helper::getSiteOriginal($dataArr['url']);
+        if($dataArr['poster_url'] && $dataArr['poster_name']){
+            
+            $tmp = explode('/', $dataArr['poster_url']);
+
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('nghien.upload_path').$dataArr['poster_url'], config('nghien.upload_path').$destionation);
+            
+            $dataArr['poster_url'] = $destionation;
+        }     
 
         $rs = Film::create($dataArr);
 
         $object_id = $rs->id;
 
-        // xu ly tags
-        if( !empty( $dataArr['tags'] ) && $object_id ){
-            foreach ($dataArr['tags'] as $tag_id) {
-                TagObjects::create(['object_id' => $object_id, 'tag_id' => $tag_id, 'object_type' => 1]);
-            }
+        $this->processRelation($dataArr, $object_id, 'add');
+
+        $metaArr['meta_title'] = $dataArr['meta_title'];
+        $metaArr['meta_description'] = $dataArr['meta_description'];
+        $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
+        $metaArr['custom_text'] = $dataArr['custom_text'];
+        
+        $rsMeta = SystemMetadata::create( $metaArr );
+
+        if( $rsMeta->id ){
+            $modelFilm = Film::find($object_id);
+            $modelFilm->update(['meta_id' => $rsMeta->id]);
         }
 
         Session::flash('message', 'Tạo mới phim thành công');
 
-        return redirect()->route('movies.index',['parent_id' => $dataArr['parent_id'], 'cate_id' => $dataArr['cate_id']]);
+        return redirect()->route('film.index');
     }
 
     /**
@@ -152,28 +183,73 @@ class FilmController extends Controller
     */
     public function edit($id)
     {
-        $tagSelected = [];
+        $tagSelected = $crewArr = $filmCategory = $filmCountry = [];
+        $crewSelected = FilmCrew::getFilmCrew($id);
+
         $detail = Film::find($id);
-        
-        $parentCate = Category::find( $detail->parent_id );
-        
-        $cateArr = Category::where('parent_id', $detail->parent_id)->get();
 
-        $parentCateArr = Category::all();
-
-        $tmpArr = TagObjects::where(['object_type' => 1, 'object_id' => $id])->get();
-        
-        if( $tmpArr->count() > 0 ){
-            foreach ($tmpArr as $value) {
-                $tagSelected[] = $value->tag_id;
-            }
-        }
+        $crewArr = Film::filmCrew();
         
         $tagArr = Tag::where('type', 1)->get();
 
-        return view('backend.movies.edit', compact('tagArr', 'tagSelected', 'detail', 'parentCateArr', 'parentCate', 'cateArr' ));
+        $filmCategory = Film::filmCategory( $id );         
+
+        $filmCountry = Film::filmCountry( $id );
+
+        $metadata = SystemMetadata::find( $detail->meta_id );      
+        
+        $tagSelected = Film::filmTag( $id );
+
+        return view('backend.film.edit', compact('crewArr', 'tagArr', 'tagSelected', 'detail', 'filmCategory', 'filmCountry', 'metadata', 'crewSelected'));
     }
 
+    private function processRelation($dataArr, $object_id, $type = 'add'){
+
+        if( $type == 'edit'){
+
+            FilmCrew::deleteFilmCrew( $object_id );
+            FilmCountry::deleteCountry( $object_id );
+            FilmCategory::deleteCategory( $object_id );
+            TagObjects::deleteTags( $object_id, 1);
+
+        }
+        // xu ly tags
+        if( !empty( $dataArr['tags'] ) && $object_id ){
+            foreach ($dataArr['tags'] as $tag_id) {
+                TagObjects::create(['object_id' => $object_id, 'tag_id' => $tag_id, 'type' => 1]);
+            }
+        }
+        // xu ly category
+        if( !empty( $dataArr['category_id'] ) && $object_id ){
+            foreach ($dataArr['category_id'] as $category_id) {
+                FilmCategory::create(['film_id' => $object_id, 'category_id' => $category_id]);
+            }
+        }
+        // xu ly country
+        if( !empty( $dataArr['country_id'] ) && $object_id ){
+            foreach ($dataArr['country_id'] as $country_id) {
+                FilmCountry::create(['film_id' => $object_id, 'country_id' => $country_id]);
+            }
+        }
+        // xu ly directors
+        if( !empty( $dataArr['director'] ) && $object_id ){
+            foreach ($dataArr['director'] as $crew_id) {
+                FilmCrew::create(['film_id' => $object_id, 'crew_id' => $crew_id, 'type' => 2]);
+            }
+        }
+        // xu ly actors
+        if( !empty( $dataArr['actor'] ) && $object_id ){
+            foreach ($dataArr['actor'] as $crew_id) {
+                FilmCrew::create(['film_id' => $object_id, 'crew_id' => $crew_id, 'type' => 1]);
+            }
+        }
+        // xu ly producers
+        if( !empty( $dataArr['producer'] ) && $object_id ){
+            foreach ($dataArr['producer'] as $tag_id) {
+                FilmCrew::create(['film_id' => $object_id, 'crew_id' => $tag_id, 'type' => 3]);
+            }
+        }
+    }
     /**
     * Update the specified resource in storage.
     *
@@ -184,20 +260,21 @@ class FilmController extends Controller
     public function update(Request $request)
     {
         $dataArr = $request->all();
-        
+        $id = $dataArr['id'];
+    
         $this->validate($request,[
-            'parent_id' => 'required',
-            'cate_id' => 'required',
-            'url' => 'required',
-            'title' => 'required',            
-            'slug' => 'required|unique:movies,slug,'.$dataArr['id'],
+            'title' => 'required',
+            'slug' => 'required|unique:film,slug,'.$dataArr['id'],
+            'original_title' => 'required',
+            'original_slug' => 'required|unique:film,original_slug,'.$dataArr['id'],            
         ],
-        [
-            'url.required' => 'Bạn chưa nhập URL phim',
-            'cate_id.required' => 'Bạn chưa chọn danh mục con.',            
+        [                      
             'title.required' => 'Bạn chưa nhập tiêu đề',
             'slug.required' => 'Bạn chưa nhập slug',
-            'slug.unique' => 'Slug đã được sử dụng.'
+            'original_title.required' => 'Bạn chưa nhập tiêu đề gốc',
+            'original_slug.required' => 'Bạn chưa nhập slug gốc',            
+            'slug.unique' => 'Slug đã tồn tại',
+            'original_slug.unique' => 'Slug gốc đã tồn tại',
         ]);       
         
         $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
@@ -212,27 +289,46 @@ class FilmController extends Controller
 
             $destionation = date('Y/m/d'). '/'. end($tmp);
             
-            File::move(config('icho.upload_path').$dataArr['image_url'], config('icho.upload_path').$destionation);
+            File::move(config('nghien.upload_path').$dataArr['image_url'], config('nghien.upload_path').$destionation);
             
             $dataArr['image_url'] = $destionation;
         }
 
-        $dataArr['site_id'] = Helper::getSiteOriginal($dataArr['url']);
+        if($dataArr['poster_url'] && $dataArr['poster_name']){
+            
+            $tmp = explode('/', $dataArr['poster_url']);
 
-        $model = Film::find($dataArr['id']);
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('nghien.upload_path').$dataArr['poster_url'], config('nghien.upload_path').$destionation);
+            
+            $dataArr['poster_url'] = $destionation;
+        }
+
+        $model = Film::find( $id );
 
         $model->update($dataArr);
 
-        TagObjects::where(['object_id' => $dataArr['id'], 'object_type' => 1])->delete();
-        // xu ly tags
-        if( !empty( $dataArr['tags'] ) ){
-            foreach ($dataArr['tags'] as $tag_id) {
-                TagObjects::create(['object_id' => $dataArr['id'], 'tag_id' => $tag_id, 'object_type' => 1]);
-            }
+        $this->processRelation($dataArr, $dataArr['id'], 'edit');
+        
+        if( $dataArr['meta_id'] ){
+
+            $metaArr['meta_title'] = $dataArr['meta_title'];
+            $metaArr['meta_description'] = $dataArr['meta_description'];
+            $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
+            $metaArr['custom_text'] = $dataArr['custom_text'];
+            $metaArr['id'] = $dataArr['meta_id'];
+            $modelMetadata = SystemMetadata::find( $dataArr['meta_id'] );
+            $modelMetadata->update( $metaArr );
         }
+
         Session::flash('message', 'Cập nhật phim thành công');        
 
-        return redirect()->route('movies.index', ['parent_id' => $dataArr['parent_id'], 'cate_id' => $dataArr['cate_id']]);
+        return redirect()->route('film.index');
     }
 
     /**
@@ -244,7 +340,7 @@ class FilmController extends Controller
     public function destroy($id)
     {
         // delete
-        TagObjects::where(['object_id' => $dataArr['id'], 'object_type' => 1])->delete();
+        TagObjects::where(['object_id' => $dataArr['id'], 'type' => 1])->delete();
 
         $model = Film::find($id);
         $model->delete();
@@ -252,6 +348,6 @@ class FilmController extends Controller
 
         // redirect
         Session::flash('message', 'Xóa phim thành công');
-        return redirect()->route('movies.index');
+        return redirect()->route('film.index');
     }
 }

@@ -25,6 +25,14 @@ class Category extends Model  {
      */
     protected $fillable = ['parent_id', 'type', 'name', 'description', 'priority', 'slug', 'keywords', 'thumb', 'created_user', 'updated_user', 'status', 'is_hot', 'alias', 'meta_title', 'meta_description', 'meta_keywords', 'custom_text'];
 
-    
+    public static function getParentCateList( $type ){
+        
+        $parentCate = Category::where('parent_id', 0)
+                    ->where('type', $type)
+                    ->orderBy('display_order')
+                    ->get();
+                    
+        return $parentCate;
+    }
     
 }

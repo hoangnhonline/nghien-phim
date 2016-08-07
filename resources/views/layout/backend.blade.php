@@ -64,7 +64,7 @@
 <input type="hidden" id="route_get_slug" value="{{ route('get-slug') }}">
   <div class="control-sidebar-bg"></div>
 </div>
-<input type="hidden" id="upload_url" value="{{ config('icho.upload_url') }}">
+<input type="hidden" id="upload_url" value="{{ config('nghien.upload_url') }}">
 
 <!-- ./wrapper -->
 

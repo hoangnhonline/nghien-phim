@@ -57,12 +57,12 @@ class BannerController extends Controller
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
         if($dataArr['image_url'] && $dataArr['image_name']){
-            File::move(config('icho.upload_path').$dataArr['image_url'], config('icho.upload_path').$dataArr['image_name']);
+            File::move(config('nghien.upload_path').$dataArr['image_url'], config('nghien.upload_path').$dataArr['image_name']);
             $dataArr['image_url'] = $dataArr['image_name'];
         }
             
         if($dataArr['icon_url'] && $dataArr['icon_name']){
-            File::move(config('icho.upload_path').$dataArr['icon_url'], config('icho.upload_path').$dataArr['icon_name']);
+            File::move(config('nghien.upload_path').$dataArr['icon_url'], config('nghien.upload_path').$dataArr['icon_name']);
             $dataArr['icon_url'] = $dataArr['icon_name'];
         }
 
@@ -122,12 +122,12 @@ class BannerController extends Controller
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
         if($dataArr['image_url'] && $dataArr['image_name'] && $dataArr['image_url'] != $dataArr['old_image_url']){
-            File::move(config('icho.upload_path').$dataArr['image_url'], config('icho.upload_path').$dataArr['image_name']);
+            File::move(config('nghien.upload_path').$dataArr['image_url'], config('nghien.upload_path').$dataArr['image_name']);
             $dataArr['image_url'] = $dataArr['image_name'];
         }
             
         if($dataArr['icon_url'] && $dataArr['icon_name']  && $dataArr['icon_url'] != $dataArr['old_icon_url']){
-            File::move(config('icho.upload_path').$dataArr['icon_url'], config('icho.upload_path').$dataArr['icon_name']);
+            File::move(config('nghien.upload_path').$dataArr['icon_url'], config('nghien.upload_path').$dataArr['icon_name']);
             $dataArr['icon_url'] = $dataArr['icon_name'];
         }
         $model = Banner::find($dataArr['id']);

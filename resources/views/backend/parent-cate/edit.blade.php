@@ -114,7 +114,7 @@
               <div class="form-group">  
                 <label class="col-md-3">Banner </label>    
                 <div class="col-md-9">
-                  <img id="thumbnail_image" src="{{ $detail->image_url ? config('icho.upload_url').$detail->image_url : 'http://placehold.it/150x150' }}" class="img-thumbnail" width="150" height="150">
+                  <img id="thumbnail_image" src="{{ $detail->image_url ? config('nghien.upload_url').$detail->image_url : 'http://placehold.it/150x150' }}" class="img-thumbnail" width="150" height="150">
                   
                   <input type="file" id="file-image" style="display:none" />
                 </div>                

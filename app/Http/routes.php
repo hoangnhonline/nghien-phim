@@ -87,6 +87,36 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'country.update', 'uses' => 'CountryController@update']);
         Route::get('{id}/destroy', ['as' => 'country.destroy', 'uses' => 'CountryController@destroy']);
     });  
+    Route::group(['prefix' => 'crew'], function () {
+        Route::get('/', ['as' => 'crew.index', 'uses' => 'CrewController@index']);
+        Route::get('/create', ['as' => 'crew.create', 'uses' => 'CrewController@create']);
+        Route::post('/store', ['as' => 'crew.store', 'uses' => 'CrewController@store']);
+        Route::post('/ajax-list-by-parent', ['as' => 'crew.ajax-list-by-parent', 'uses' => 'CategoryController@ajaxListByParent']);
+        
+        Route::get('{id}/edit',   ['as' => 'crew.edit', 'uses' => 'CrewController@edit']);
+        Route::post('/update', ['as' => 'crew.update', 'uses' => 'CrewController@update']);
+        Route::get('{id}/destroy', ['as' => 'crew.destroy', 'uses' => 'CrewController@destroy']);
+    });
+    Route::group(['prefix' => 'film-episode'], function () {
+        Route::get('/{film_id}', ['as' => 'film-episode.index', 'uses' => 'FilmEpisodeController@index']);
+        Route::get('/create', ['as' => 'film-episode.create', 'uses' => 'FilmEpisodeController@create']);
+        Route::post('/store', ['as' => 'film-episode.store', 'uses' => 'FilmEpisodeController@store']);
+        Route::post('/ajax-list-by-parent', ['as' => 'film-episode.ajax-list-by-parent', 'uses' => 'FilmEpisodeController@ajaxListByParent']);
+        
+        Route::get('{id}/edit',   ['as' => 'film-episode.edit', 'uses' => 'FilmEpisodeController@edit']);
+        Route::post('/update', ['as' => 'film-episode.update', 'uses' => 'FilmEpisodeController@update']);
+        Route::get('{id}/destroy', ['as' => 'film-episode.destroy', 'uses' => 'FilmEpisodeController@destroy']);
+    });
+    Route::group(['prefix' => 'tag'], function () {
+        Route::get('/{film_id}', ['as' => 'tag.index', 'uses' => 'TagController@index']);
+        Route::get('/create', ['as' => 'tag.create', 'uses' => 'TagController@create']);
+        Route::post('/store', ['as' => 'tag.store', 'uses' => 'TagController@store']);
+        Route::post('/ajax-list-by-parent', ['as' => 'film-episode.ajax-list-by-parent', 'uses' => 'TagController@ajaxListByParent']);
+        
+        Route::get('{id}/edit',   ['as' => 'tag.edit', 'uses' => 'TagController@edit']);
+        Route::post('/update', ['as' => 'tag.update', 'uses' => 'TagController@update']);
+        Route::get('{id}/destroy', ['as' => 'tag.destroy', 'uses' => 'TagController@destroy']);
+    });
  	Route::post('/tmp-upload', ['as' => 'image.tmp-upload', 'uses' => 'UploadController@tmpUpload']);
     Route::post('/update-order', ['as' => 'update-order', 'uses' => 'GeneralController@updateOrder']);
     Route::post('/get-slug', ['as' => 'get-slug', 'uses' => 'GeneralController@getSlug']);
