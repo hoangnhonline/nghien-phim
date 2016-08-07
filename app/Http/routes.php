@@ -73,11 +73,20 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'category.update', 'uses' => 'CategoryController@update']);
         Route::get('{id}/destroy', ['as' => 'category.destroy', 'uses' => 'CategoryController@destroy']);
     }); 
-    
     Route::group(['prefix' => 'settings'], function () {
         Route::get('/', ['as' => 'settings.index', 'uses' => 'SettingsController@index']);
         Route::post('/update', ['as' => 'settings.update', 'uses' => 'SettingsController@update']);     
-    }); 
+    });
+    Route::group(['prefix' => 'country'], function () {
+        Route::get('/', ['as' => 'country.index', 'uses' => 'CountryController@index']);
+        Route::get('/create', ['as' => 'country.create', 'uses' => 'CountryController@create']);
+        Route::post('/store', ['as' => 'country.store', 'uses' => 'CountryController@store']);
+        Route::post('/ajax-list-by-parent', ['as' => 'category.ajax-list-by-parent', 'uses' => 'CategoryController@ajaxListByParent']);
+        
+        Route::get('{id}/edit',   ['as' => 'country.edit', 'uses' => 'CountryController@edit']);
+        Route::post('/update', ['as' => 'country.update', 'uses' => 'CountryController@update']);
+        Route::get('{id}/destroy', ['as' => 'country.destroy', 'uses' => 'CountryController@destroy']);
+    });  
  	Route::post('/tmp-upload', ['as' => 'image.tmp-upload', 'uses' => 'UploadController@tmpUpload']);
     Route::post('/update-order', ['as' => 'update-order', 'uses' => 'GeneralController@updateOrder']);
     Route::post('/get-slug', ['as' => 'get-slug', 'uses' => 'GeneralController@getSlug']);
