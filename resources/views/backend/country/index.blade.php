@@ -53,6 +53,9 @@
                 </td>
                 <td>                  
                   <a href="{{ route( 'country.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
+                  @if( $item->is_hot == 1 )
+                  <img class="img-thumbnail" src="{{ URL::asset('backend/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
+                  @endif
                   <p>{{ $item->description }}</p>
                 </td>
                 <td style="white-space:nowrap">                  
