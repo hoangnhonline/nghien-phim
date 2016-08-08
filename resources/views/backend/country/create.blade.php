@@ -54,7 +54,21 @@
                   <label>Mô tả</label>
                   <textarea class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
                 </div>            
-                
+                <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="is_hot" value="1" {{ old('is_hot') == 1 ? "checked" : "" }}>
+                      Danh mục nổi bật
+                    </label>
+                  </div>               
+                </div>
+                <div class="form-group">
+                  <label>Ẩn/hiện</label>
+                  <select class="form-control" name="status" id="status">                  
+                    <option value="0" {{ old('status') == 0 ? "selected" : "" }}>Ẩn</option>
+                    <option value="1" {{ old('status') == 1 || old('status') == NULL ? "selected" : "" }}>Hiện</option>                  
+                  </select>
+                </div>
             </div>          
         
             <div class="box-footer">
