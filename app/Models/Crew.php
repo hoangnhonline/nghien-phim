@@ -23,6 +23,6 @@ class Crew extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['meta_id', 'name', 'slug', 'image_url', 'description', 'count', 'created_user', 'updated_user', 'type'];
+    protected $fillable = ['meta_id', 'name', 'slug', 'image_url', 'description', 'created_user', 'updated_user', 'type', 'alias'];
     
 }
