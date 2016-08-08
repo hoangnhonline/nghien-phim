@@ -15,7 +15,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default btn-sm" href="{{ route('country.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <a class="btn btn-default" href="{{ route('country.index') }}" style="margin-bottom:5px">Quay lại</a>
     <div class="row">
       <!-- left column -->
 
@@ -55,7 +55,21 @@
                 <label>Mô tả</label>
                 <textarea class="form-control" rows="4" name="description" id="description">{{ $detail->description }}</textarea>
               </div>            
-
+              <div class="form-group">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="is_hot" value="1" {{ $detail->is_hot == 1 ? "checked" : "" }}>
+                    Danh mục nổi bật
+                  </label>
+                </div>               
+              </div>
+              <div class="form-group">
+                <label>Ẩn/hiện</label>
+                <select class="form-control" name="status" id="status">                  
+                  <option value="0" {{ $detail->status == 0 ? "selected" : "" }}>Ẩn</option>
+                  <option value="1" {{ $detail->status == 1 ? "selected" : "" }}>Hiện</option>
+                </select>
+              </div>
               
                            
             </div>         
