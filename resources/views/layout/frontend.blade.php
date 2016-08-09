@@ -25,21 +25,23 @@
       <script>
          var base_url = 'http://' + document.domain + '/';
       </script>
-      <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css') }}" type="text/css" />
-      <link rel="stylesheet" href="{{ URL::asset('assets/css/main.css?v=5') }}" type="text/css" />
-      <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.cluetip.css') }}" type="text/css" />
-      <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.qtip.min.css') }}" type="text/css" />
-      <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css?v=1.1') }}" type="text/css" />
-      <link rel="stylesheet" href="{{ URL::asset('assets/css/slide.css') }}" type="text/css" />
-      <link rel="stylesheet" href="{{ URL::asset('assets/css/psbar.css') }}" type="text/css" />
-      <script type="text/javascript" src="{{ URL::asset('assets/js/jquery-1.9.1.min.js') }}"></script>
-      <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.lazyload.js') }}"></script>
-      <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.qtip.min.js') }}"></script>
-      <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.cookie.js') }}"></script>
-      <!--<script type="text/javascript" src="{{ URL::asset('assets/js/123film.min.js?v=2') }}"></script>-->
-      <!--<script type="text/javascript" src="{{ URL::asset('assets/js/user.min.js?v=1.1') }}"></script>-->
-      <script src="https://apis.google.com/js/platform.js" async defer></script>
-      <script src="{{ URL::asset('assets/js/detectmobilebrowser.js') }}"></script> 
+       <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="assets/css/main.css?v=5" type="text/css" />
+<link rel="stylesheet" href="assets/css/jquery.cluetip.css" type="text/css" />
+<link rel="stylesheet" href="assets/css/jquery.qtip.min.css" type="text/css" />
+<link rel="stylesheet" href="assets/css/custom.css?v=1.1" type="text/css" />
+<link rel="stylesheet" href="assets/css/slide.css" type="text/css" />
+<link rel="stylesheet" href="assets/css/psbar.css" type="text/css" />
+<script type="text/javascript" src="assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="assets/js/jquery.qtip.min.js"></script>
+<script type="text/javascript" src="assets/js/md5.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="assets/js/123movies.min.js?v=2.2"></script>
+   <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+    <script src="assets/js/detectmobilebrowser.js"></script>
    </head>
    <body>
       <script>
@@ -149,7 +151,7 @@
             <!--social home-->
             <div class="social-home">
                <div class="sh-like">
-                  <div class="fb-like" data-href="http://facebook.com/123film.to" data-layout="button_count"
+                  <div class="fb-like" data-href="http://facebook.com/123movies.to" data-layout="button_count"
                      data-action="like" data-show-faces="true" data-share="false"></div>
                </div>
                <div class="addthis_native_toolbox"></div>
@@ -207,7 +209,7 @@
                   <h4 class="modal-title" id="myModalLabel">MEMBER LOGIN AREA</h4>
                </div>
                <div class="modal-body">
-                  <p class="desc">Watch HD Movies Online For Free and Download the latest film. For everybody,
+                  <p class="desc">Watch HD Movies Online For Free and Download the latest movies. For everybody,
                      everywhere, everydevice, and everything ;)
                   </p>
                   <form id="login-form" method="POST" action="ajax/user_login">
@@ -355,32 +357,43 @@
      
       <script type="text/javascript" src="assets/js/bootstrap.min.js?v=0.1"></script>
       <script type="text/javascript" src="assets/js/bootstrap-select.js?v=0.1"></script>
-      <script type="text/javascript" src="assets/js/auth.min.js?v=0.4"></script>      
+      <script type="text/javascript" src="assets/js/slide.min.js"></script>
       <script type="text/javascript" src="assets/js/psbar.jquery.min.js"></script>
-      <script type="text/javascript" src="assets/js/jquery.lazyload.js"></script>
-      
-      @yield('javascript_page')
+    
+    <script>
+      $("img.lazy").lazyload({
+          effect: "fadeIn"
+      });
+        var swiper = new Swiper('#slider', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            loop: true,
+            autoplay: 4000
+        });
 
-      <script type="text/javascript">
-         $(document).ready(function () {
-         	$("img.lazy").lazyload({
-                effect: "fadeIn"
-            });
-             if (window.top !== window.self) {
-                 document.head.innerHTML = '';
-                 document.body.innerHTML = '';
-             }
-             if (!$.cookie('domain-alert')) {
-                 $.cookie('domain-alert', 1, {expires: 1, path: '/'});
-                 $('.alert-bottom').css('display', 'block');
-                 setInterval(function () {
-                     $(".alert-bottom").remove();
-                 }, 15000);
-             }
-             $('#alert-bottom-close').click(function () {
-                 $(".alert-bottom").remove();
-             });
-         });
-      </script>
+        $(function () {
+            $('.tn-news, .tn-notice').perfectScrollbar();
+        });
+    </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (window.top !== window.self) {
+            document.head.innerHTML = '';
+            document.body.innerHTML = '';
+        }
+        if (!$.cookie('domain-alert')) {
+            $.cookie('domain-alert', 1, {expires: 1, path: '/'});
+            $('.alert-bottom').css('display', 'block');
+            setInterval(function () {
+                $(".alert-bottom").remove();
+            }, 15000);
+        }
+        $('#alert-bottom-close').click(function () {
+            $(".alert-bottom").remove();
+        });
+    });
+</script>
+
    </body>
 </html>

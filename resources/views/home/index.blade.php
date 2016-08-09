@@ -13,17 +13,9 @@
 @endsection
 
 @section('javascript_page')
-<script type="text/javascript" src="{{ URL::asset('assets/js/slide.min.js') }}"></script>
-<script type="text/javascript">
-var swiper = new Swiper('#slider', {
-     pagination: '.swiper-pagination',
-     paginationClickable: true,
-     loop: true,
-     autoplay: 4000
- });
- 
- $(function () {
-     $('.tn-news, .tn-notice').perfectScrollbar();
- });
-</script>
+	<script type="text/javascript">
+	$("img.lazy").lazyload({
+        effect: "fadeIn"
+    });
+	</script>
 @endsection

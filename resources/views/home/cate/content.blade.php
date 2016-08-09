@@ -51,9 +51,9 @@
          </div>
          <div class="col-sm-10">
             <div class="cs10-top">
-               <div class="fc-filmtype">
+               <div class="fc-moviestype">
                   <span class="fc-title">Film Type</span>
-                  <ul class="fc-filmtype-list">
+                  <ul class="fc-moviestype-list">
                      <li><label><input name="type" checked value="all" type="radio">
                         All</label>
                      </li>

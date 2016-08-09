@@ -41,7 +41,7 @@ header .header-logo:after{background: #eee none repeat scroll 0 0;content: ""; d
 header .header-logo h1{ font-size: 0; margin: 0;}
 /*.header-pad{ height: 70px; width: 100%;}*/
 #logo{ background-image: url(../images/logo-light.png); background-position: 50% 25%; background-size: cover; height: 49px; width: 187px; display: inline-block;}
-#menu{ float: left; text-transform: uppercase;}
+#menu{ float: left;}
 #menu ul.top-menu{ list-style: none; padding: 0}
 #menu ul.top-menu li{ display: inline-block; float: left; margin:0 5px; position: relative}
 #menu ul.top-menu li a{ height: 70px; line-height: 70px; margin: 0;  padding: 0 5px; font-family: 'Oswald'; font-size: 16px; color: #333; display: inline-block;}
@@ -74,7 +74,7 @@ header .header-logo h1{ font-size: 0; margin: 0;}
 #top-news{ background: #222; width: 380px; height: 100%; overflow: hidden; color: #ccc; padding: 0px; position: absolute; top: 0; right: 0; z-index: 3;}
 #top-news .nav{ height: 40px; border-bottom: none; background: #111; box-shadow: 0 0 3px rgba(0,0,0,0.2); z-index: 2;}
 #top-news .nav li{ border: none; height: 40px; line-height: 40px; border-radius: 0 !important;}
-#top-news .nav li a{ line-height: 40px !important; padding: 0 18px !important; border: none; border-radius: 0 !important; color: #fff; margin-right: 0; font-family: "Montserrat"; text-transform: uppercase;}
+#top-news .nav li a{ line-height: 40px !important; padding: 0 18px !important; border: none; border-radius: 0 !important; color: #fff; margin-right: 0; font-family: "Montserrat";}
 #top-news .nav li.active a{ background: none; border-bottom: 2px solid #88C64C; height: 40px}
 #top-news .nav li:hover a{ background: #333;}
 #top-news .top-news{ position: relative;}
@@ -1075,7 +1075,4 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     #install-app .ia-info p{ font-size: 12px;}
     #filter ul.fc-main-list li{ width: 100% !important; margin-right: 0;}
     .modal-subc .modal-body{ padding: 20px 15px 30px !important;}
-}
-.content-kus{
-	text-align: center; margin: 20px 0; padding: 15px;
 }

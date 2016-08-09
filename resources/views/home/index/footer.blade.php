@@ -41,7 +41,7 @@
             </div>-->
             <div class="col-lg-4 footer-copyright">
                <p><img border="0" src="@yield('logo')" class="mv-ft-logo"></p>
-               <p>Copyright &copy; 123film.to. All Rights Reserved</p>
+               <p>Copyright &copy; 123movies.to. All Rights Reserved</p>
                <p style="font-size: 11px; line-height: 14px; color: rgba(255,255,255,0.4)">Disclaimer: This site
                   does not store any files on its server. All contents are provided by non-affiliated third
                   parties.

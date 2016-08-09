@@ -16,8 +16,10 @@
             <?php $i = 0; ?>
             @foreach( $parentCate as $cate )
                <?php $i++; ?>
+               @if($i <= 10)
             <li class="{{ $i == 1 ? "active" : "" }}"><a data-toggle="tab" role="tab" href="#{{ $cate->slug }}"
                aria-expanded="false">{{ $cate->name }}</a></li>
+               @endif
             @endforeach
          </ul>
          @endif
@@ -27,7 +29,7 @@
     @foreach( $parentCate as $cate )
     <?php $i ++; ?>
     <div class="tab-content">
-        <div id="{ $cate->slug }}" class="movies-list movies-list-full tab-pane in fade {{ $i == 1 ? "active" : "" }}">
+        <div id="{{ $cate->slug }}" class="movies-list movies-list-full tab-pane in fade {{ $i == 1 ? "active" : "" }}">
             @if( $moviesActiveArr[$cate->id]->count() > 0)
                @foreach( $moviesActiveArr[$cate->id] as $movies)
                <div data-movie-id="14201" class="ml-item">
@@ -73,7 +75,7 @@
     @foreach( $countryArr as $country )
     <?php $i ++; ?>
     <div class="tab-content">
-        <div id="{ $country->slug }}" class="movies-list movies-list-full tab-pane in fade {{ $i == 1 ? "active" : "" }}">
+        <div id="{{ $country->slug }}" class="movies-list movies-list-full tab-pane in fade {{ $i == 1 ? "active" : "" }}">
             @if( $moviesActiveCountryArr[$country->id]->count() > 0)
                @foreach( $moviesActiveCountryArr[$country->id] as $movies)
                <div data-movie-id="14201" class="ml-item">
