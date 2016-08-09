@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
    <head>
       <title>@yield('title')</title>
@@ -28,15 +28,15 @@
       <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css') }}" type="text/css" />
       <link rel="stylesheet" href="{{ URL::asset('assets/css/main.css?v=5') }}" type="text/css" />
       <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.cluetip.css') }}" type="text/css" />
-      <!--<link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.qtip.min.css') }}" type="text/css" />-->
+      <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.qtip.min.css') }}" type="text/css" />
       <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css?v=1.1') }}" type="text/css" />
       <link rel="stylesheet" href="{{ URL::asset('assets/css/slide.css') }}" type="text/css" />
       <link rel="stylesheet" href="{{ URL::asset('assets/css/psbar.css') }}" type="text/css" />
       <script type="text/javascript" src="{{ URL::asset('assets/js/jquery-1.9.1.min.js') }}"></script>
       <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.lazyload.js') }}"></script>
-      <!--<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.qtip.min.js') }}"></script>-->
+      <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.qtip.min.js') }}"></script>
       <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.cookie.js') }}"></script>
-      <script type="text/javascript" src="{{ URL::asset('assets/js/123film.min.js?v=2') }}"></script>
+      <!--<script type="text/javascript" src="{{ URL::asset('assets/js/123film.min.js?v=2') }}"></script>-->
       <!--<script type="text/javascript" src="{{ URL::asset('assets/js/user.min.js?v=1.1') }}"></script>-->
       <script src="https://apis.google.com/js/platform.js" async defer></script>
       <script src="{{ URL::asset('assets/js/detectmobilebrowser.js') }}"></script> 
@@ -193,8 +193,8 @@
             </div><!--end main-content-->            
          </div>
       </div>
-      <!--/main -->
-      @include('home.index.footer')
+      <!--/main -->      
+      <?php //include('home.index.footer'); ?>
       <!-- Modal -->
       <div class="modal fade modal-cuz" id="pop-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
@@ -352,16 +352,10 @@
          <i class="fa fa-warning mr5" style="color:#C30;"></i> You need to enable browser's cookie to stream. <a
             href="how-to-enable-browser-cookie" title="">Click here for instruction.</a>
       </div>
-      <script>
-         if (!isCookieEnabled()) {
-             $('#alert-cookie').css('display', 'block');
-             $('body').addClass('off-cookie');
-         }
-      </script>
+     
       <script type="text/javascript" src="assets/js/bootstrap.min.js?v=0.1"></script>
       <script type="text/javascript" src="assets/js/bootstrap-select.js?v=0.1"></script>
-      <script type="text/javascript" src="assets/js/auth.min.js?v=0.4"></script>
-      
+      <script type="text/javascript" src="assets/js/auth.min.js?v=0.4"></script>      
       <script type="text/javascript" src="assets/js/psbar.jquery.min.js"></script>
       <script type="text/javascript" src="assets/js/jquery.lazyload.js"></script>
       

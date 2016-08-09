@@ -1,23 +1,34 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Backend\Cate;
-use App\Models\Backend\ParentCate;
-use App\Models\Backend\Tag;
-use App\Models\Backend\TagObjects;
-use App\Models\Backend\Movies;
-use App\Models\Backend\Articles;
-use App\Models\Backend\ArticlesCate;
-use App\Models\Backend\Settings;
+use App\Models\Category;
+use App\Models\Country;
+use App\Models\Film;
+use App\Models\Tag;
+use App\Models\TagObjects;
+use App\Models\Settings;
+use App\Models\Articles;
 use Helper, File, Session;
 
 class HomeController extends Controller
 {
+    
+    public static $parentCate = array();
+    public static $countryArr = array();
+
+    public function __construct(){
+        
+        self::$parentCate = Category::getParentCateList( 1 );    
+
+        self::$countryArr = Country::orderBy('display_order')->get();
+
+        view()->share(['parentCate' => self::$parentCate, 'countryArr' => self::$countryArr ]);
+
+    }
     /**
     * Display a listing of the resource.
     *
@@ -29,29 +40,54 @@ class HomeController extends Controller
 
         $layout_name = $page_name = "";
 
-        $cateArr = $moviesActiveArr = [];
+        $moviesActiveArr = $moviesActiveCountryArr = [];
+
+        /*
+        
+
+        
+
+        
 
         $parentArr = ParentCate::orderBy('display_order')->get();
-
+        
         $tmpCateArr = Cate::orderBy('display_order')->get();
-        if( $tmpCateArr->count() > 0){            
-            foreach ($tmpCateArr as $value) {               
+    */
+        if( self::$parentCate->count() > 0){            
+            foreach (self::$parentCate as $value) {               
+            
 
-                $cateArr[$value->parent_id][] = $value;
-                if( count( $cateArr[$value->parent_id]) == 1){                    
 
-                    $moviesActiveArr[$value->parent_id] = Movies::where('cate_id', $value->id)->orderBy('id', 'desc')->limit(16)->get();
+                    $moviesActiveArr[$value->id] = Film::where('status', 1)
+                                                    ->join('film_category', 'id', '=', 'film_category.film_id')
+                                                    ->groupBy('film_id')
+                                                    ->orderBy('id', 'desc')->limit(16)->get();
 
-                }
+
+            }
+        }  
+        if( self::$countryArr->count() > 0){            
+            foreach (self::$countryArr as $value) {               
+
+                               
+
+                    $moviesActiveCountryArr[$value->id] = Film::where('status', 1)
+                                                    ->join('film_country', 'id', '=', 'film_country.film_id')
+                                                    ->groupBy('film_id')
+                                                    ->orderBy('id', 'desc')->limit(16)->get();
+
+                
             }
         }   
-
+      
         //artcles
         $articlesArr = Articles::where([ 'status' => 1, 'is_hot' => 1 ])->orderBy('id', 'desc')->select('id', 'slug', 'title', 'image_url')->limit(10)->get();
 
-        $hotArr = Movies::where([ 'status' => 1, 'is_hot' => 1 ])->orderBy('id', 'desc')->select('id', 'slug', 'title', 'image_url', 'description', 'duration', 'quality')->limit(10)->get();
+        $hotArr = Film::where([ 'status' => 1, 'top' => 1 ])->orderBy('id', 'desc')->select('id', 'slug', 'title', 'image_url', 'description', 'top', 'views', 'likes', 'imdb', 'order', 'push_top', 'poster_url', 'quality')->limit(10)->get();
+        //var_dump("<pre>", $hotArr);die;
+        //return view('home.index', compact('settingArr', 'page_name', 'layout_name', 'parentArr' , 'cateArr', 'moviesActiveArr', 'articlesArr', 'hotArr'));
         
-        return view('home.index', compact('settingArr', 'page_name', 'layout_name', 'parentArr' , 'cateArr', 'moviesActiveArr', 'articlesArr', 'hotArr'));
+        return view('home.index', compact( 'settingArr', 'page_name', 'layout_name', 'hotArr', 'articlesArr', 'settingArr', 'moviesActiveArr', 'moviesActiveCountryArr'));
     }
 
     /**

@@ -8,14 +8,13 @@
       <li class="">
          <a href="{{ URL::to('/') }}" title="Trang chủ">Trang chủ</a>
       </li>
-      @if( $parentArr->count() > 0)
-         @foreach( $parentArr as $parent )
+     
          <li class="">
-            <a href="/{{ $parent->slug }}" title="{{ $parent->name }}">{{ $parent->name }}</a>
-            @if( !empty($cateArr[$parent->id]) )
+            <a href="#" title="GENRES">GENRES</a>
+            @if( !empty($parentCate) )
             <div class="sub-container" style="display: none">
                <ul class="sub-menu">
-                  @foreach( $cateArr[$parent->id] as $cate )
+                  @foreach( $parentCate as $cate )
                   <li>                    
                      <a href="/{{ $cate->slug }}" title="{{ $cate->name }}">{{ $cate->name }}</a>
                   </li>                  
@@ -24,9 +23,23 @@
                <div class="clearfix"></div>
             </div>
             @endif
+         </li>
+         <li class="">
+            <a href="#" title="COUNTRY">COUNTRY</a>
+            @if( !empty($countryArr) )
+            <div class="sub-container" style="display: none">
+               <ul class="sub-menu">
+                  @foreach( $countryArr as $country )
+                  <li>                    
+                     <a href="/{{ $country->slug }}" title="{{ $country->name }}">{{ $country->name }}</a>
+                  </li>                  
+                  @endforeach
+               </ul>
+               <div class="clearfix"></div>
+            </div>
+            @endif
          </li> 
-         @endforeach      
-      @endif
+     
       <li class="">
          <a href="{{ route('news-list') }}" title="Tin tức">Tin tức</a>
       </li>      

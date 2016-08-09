@@ -2,7 +2,7 @@
   <div class="swiper-wrapper">
     @if( $hotArr->count() > 0)
       @foreach( $hotArr as $movies)
-       <div class="swiper-slide" style="background-image: url({{ Helper::showImage( $movies->image_url ) }});">
+       <div class="swiper-slide" style="background-image: url({{ Helper::showImage( $movies->poster_url ) }});">
           <a href="/{{ $movies->slug }}-{{ $movies->id }}.html"
              class="slide-link"
              title="{{ $movies->title }}"></a>
@@ -10,13 +10,15 @@
              <h2>{{ $movies->title }}</h2>
              <p class="sc-desc">{{ $movies->description }}</p>
              <div class="slide-caption-info">
-                <!--<div class="block"><strong>Genre:</strong>
+                <div class="block"><strong>Genre:</strong>
                    <a href="genre/action/" title="Action">Action</a>, <a href="genre/sci-fi/" title="Sci-Fi">Sci-Fi</a>, <a href="genre/horror/" title="Horror">Horror</a>                                
-                </div>-->
+                </div>
                 @if( $movies->duration )
                 <div class="block"><strong>Thời lượng:</strong> {{ $movies->duration }}</div>
                 @endif
-                <div class="block"><strong>Chất lượng phim:</strong> {{ $movies->quality == 1 ? "HD" : ( $movies->quality == 2 ? "SD" : "CAM" ) }}</div>                
+                <div class="block"><strong>Chất lượng:</strong> {{ $movies->quality == 1 ? "HD" : ( $movies->quality == 2 ? "SD" : "CAM" ) }}</div>
+                <div class="block"><strong>Release:</strong> {{ $movies->release_year }}</div>
+                <div class="block"><strong>IMDB:</strong> {{ $movies->imdb }}</div>                
              </div>
            
                 <a onclick="location.href='/{{ $movies->slug }}-{{ $movies->id }}.html'" title=""class="btn btn-success mt20">Xem phim</a>
