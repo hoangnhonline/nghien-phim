@@ -56,7 +56,7 @@ class FilmController extends Controller
         $status = isset($request->status) ? $request->status : 1;
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
         
-        $query = DB::table('film')->where('film.status', $status);
+        $query = Film::where('film.status', $status);
         
         if( $title != ''){
             $query->where('alias', 'LIKE', '%'.$title.'%');

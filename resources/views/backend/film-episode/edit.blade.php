@@ -8,14 +8,14 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="{{ route('film-eposide.index') }}">Quốc Gia</a></li>
+      <li><a href="{{ route('film-episode.index') }}">Quốc Gia</a></li>
       <li class="active">Chỉnh sửa</li>
     </ol>
   </section>
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default" href="{{ route('film-eposide.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <a class="btn btn-default" href="{{ route('film-episode.index') }}" style="margin-bottom:5px">Quay lại</a>
     <div class="row">
       <!-- left column -->
 
@@ -27,7 +27,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form role="form" method="POST" action="{{ route('film-eposide.update') }}">
+          <form role="form" method="POST" action="{{ route('film-episode.update') }}">
             {!! csrf_field() !!}
             <input type="hidden" name="id" value="{{ $detail->id }}">
             <div class="box-body">
@@ -76,7 +76,7 @@
             <!-- /.box-body -->
             <div class="box-footer">
               <button type="submit" class="btn btn-primary">Lưu</button>
-              <a class="btn btn-default" class="btn btn-primary" href="{{ route('film-eposide.index')}}">Hủy</a>
+              <a class="btn btn-default" class="btn btn-primary" href="{{ route('film-episode.index')}}">Hủy</a>
             </div>
             
         </div>

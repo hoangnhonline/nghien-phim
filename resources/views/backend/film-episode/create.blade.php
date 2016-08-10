@@ -8,15 +8,15 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="{{ route('film-eposide.index') }}">Tập phim</a></li>
+      <li><a href="{{ route('film-episode.index') }}">Tập phim</a></li>
       <li class="active">Thêm mới</li>
     </ol>
   </section>
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default btn-sm" href="{{ route('film-eposide.index') }}" style="margin-bottom:5px">Quay lại</a>
-    <form role="form" method="POST" action="{{ route('film-eposide.store') }}">
+    <a class="btn btn-default btn-sm" href="{{ route('film-episode.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <form role="form" method="POST" action="{{ route('film-episode.store') }}">
     <div class="row">
       <!-- left column -->
 
@@ -73,7 +73,7 @@
         
             <div class="box-footer">
               <button type="submit" class="btn btn-primary">Lưu</button>
-              <a class="btn btn-default" class="btn btn-primary" href="{{ route('film-eposide.index')}}">Hủy</a>
+              <a class="btn btn-default" class="btn btn-primary" href="{{ route('film-episode.index')}}">Hủy</a>
             </div>
             
         </div>

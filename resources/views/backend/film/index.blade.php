@@ -70,6 +70,7 @@
               <th style="width: 1%">#</th>              
               <th>Thumbnail</th>
               <th width="50%">Tiêu đề</th>
+              <th>Episode</th>
               <th style="white-space:nowrap">Người tạo</th>
               <th style="white-space:nowrap">Ngày tạo</th>
               <th width="1%;white-space:nowrap">Thao tác</th>
@@ -93,9 +94,15 @@
 
                   <p class="desc">{{ $item->original_title }}</p>
                 </td>
+                <td>
+                  <a href="{{ route('film-episode.index', ['film_id' => $item->film_id])}}" class="btn btn-info btn-sm">
+                   <span class="badge">{{ $item->episodes->count() }}</span> Episode
+                  </a>     
+                </td>
                 <td>{{ $item->full_name }}</td>
                 <td style="white-space:nowrap">{{ date('d-m-Y H:i', strtotime($item->time_created)) }}</td>       
-                <td style="white-space:nowrap">                  
+                <td style="white-space:nowrap">
+
                   <a href="{{ route( 'film.edit', [ 'id' => $item->film_id ]) }}" class="btn-sm  btn btn-warning">Chỉnh sửa</a>                 
                   
                   <a onclick="return callDelete('{{ $item->title }}','{{ route( 'film.destroy', [ 'id' => $item->film_id ]) }}');" class="btn-sm btn btn-danger">Xóa</a>

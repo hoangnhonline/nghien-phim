@@ -28,6 +28,8 @@ class Film extends Model  {
      */
     protected $fillable = ['meta_id', 'title', 'slug', 'alias', 'description', 'original_title', 'original_slug', 'image_url', 'poster_url', 'duration', 'release_year', 'type', 'cinema', 'content', 'note', 'likes', 'views', 'updated_episode_date', 'status', 'imdb', 'top', 'order', 'expired', 'push_top', 'trailer', 'created_user', 'updated_user'];
     
+    
+
     public static function filmCategory( $id )
     {
         $arr = [];
@@ -67,5 +69,9 @@ class Film extends Model  {
             $crewArr[$crew->type][] = $crew;
         }
         return $crewArr;
+    }
+    public function episodes()
+    {
+        return $this->hasMany('App\Models\FilmEpisode', 'film_id');
     }
 }
