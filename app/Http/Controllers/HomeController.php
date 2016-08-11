@@ -172,7 +172,7 @@ class HomeController extends Controller
 
         $cateArr = $cateActiveArr = $moviesActiveArr = [];
        
-        $cateDetail = ArticlesCategory::where('slug' , 'tin-tuc')->first();
+        $cateDetail = ArticlesCate::where('slug' , 'tin-tuc')->first();
         $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
 
         $articlesArr = Articles::where('cate_id', 1)->orderBy('id', 'desc')->paginate(10);
