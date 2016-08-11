@@ -28,17 +28,8 @@ class DetailController extends Controller
 
         $tagSelected = [];
 
-        $cateArr = $cateActiveArr = $moviesActiveArr = [];
+        $cateArr = $cateActiveArr = $moviesActiveArr = [];       
         
-        $parentArr = ParentCate::orderBy('display_order')->get();
-        
-        $tmpCateArr = Cate::orderBy('display_order')->get();
-        
-        if( $tmpCateArr->count() > 0){            
-            foreach ($tmpCateArr as $value) {              
-                $cateArr[$value->parent_id][] = $value;               
-            }
-        }
 
         $id = $request->id;
         $detail = Movies::where( 'id', $id )
@@ -54,8 +45,7 @@ class DetailController extends Controller
                         ->limit(16)
                         ->get();
             
-            $cateDetail = Cate::find( $detail->cate_id )->select('id', 'name', 'slug')->first();
-            $parentDetail = ParentCate::find( $detail->parent_id )->select('id', 'name', 'slug')->first();
+            $cateDetail = Cate::find( $detail->cate_id )->select('id', 'name', 'slug')->first();           
             //tags
             $tmpArr = TagObjects::where( ['object_type' => 1, 'object_id' => $id] )
                         ->join('tag', 'tag.id', '=', 'tag_objects.tag_id')
@@ -73,11 +63,8 @@ class DetailController extends Controller
                 'title',
                 'tagSelected', 
                 'relatedArr', 
-                'detail', 
-                'parentArr', 
-                'cateArr', 
-                'cateDetail',
-                'parentDetail'
+                'detail',               
+                'cateDetail'                
                 ));    
         }else{
             return view('errors.404');

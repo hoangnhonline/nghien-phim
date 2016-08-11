@@ -1,6 +1,6 @@
 <header class="main-header">
   <!-- Logo -->
-  <a href="{{ URL::to('backend/movies') }}" class="logo">
+  <a href="{{ URL::to('backend/film') }}" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>phim1p.com</b></span>
     <!-- logo for regular state and mobile devices -->

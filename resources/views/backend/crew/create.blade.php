@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Phim
+    Bài viết
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'film.index' ) }}">Phim</a></li>
+    <li><a href="{{ route( 'articles.index' ) }}">Bài viết</a></li>
     <li class="active">Danh sách</li>
   </ol>
 </section>
@@ -20,89 +20,73 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('film.create') }}" class="btn-sm btn btn-info" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('articles.create') }}" class="btn btn-info" style="margin-bottom:5px">Tạo mới</a>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
         </div>
         <div class="panel-body">
-          <form class="form-inline" id="searchForm" role="form" method="GET" action="{{ route('film.index') }}">
-           
-            <!--<div class="form-group">
+          <form class="form-inline" role="form" method="GET" action="{{ route('articles.index') }}">            
+            <div class="form-group">
               <label for="email">Danh mục </label>
-              @foreach( $parentCate as $cate)
-              <label class="checkbox-inline"><input type="checkbox" name="category_id[]" value="{{ $cate->id }}">{{ $cate->name }}</label>
-              @endforeach
+              <select class="form-control select2" name="cate_id" id="cate_id">
+                <option value="">--Tất cả--</option>
+                @if( $cateArr->count() > 0)
+                  @foreach( $cateArr as $value )
+                  <option value="{{ $value->id }}" {{ $value->id == $cate_id ? "selected" : "" }}>{{ $value->name }}</option>
+                  @endforeach
+                @endif
+              </select>
             </div>            
             <div class="form-group">
-              <label for="email">Quốc gia </label>
-              @foreach( $countryArr as $country)
-              <label class="checkbox-inline"><input type="checkbox" name="country_id[]" value="{{ $country->id }}">{{ $country->name }}</label>
-              @endforeach
-            </div>  
-            -->
-             <div class="form-group">
-              <label for="email">Tiêu đề :</label>
+              <label for="email">Từ khóa :</label>
               <input type="text" class="form-control" name="title" value="{{ $title }}">
             </div>
-            <div class="form-group">
-              <label for="email">Status :</label>
-              <label class="radio-inline"><input type="radio" {{ $status == 1 ? "checked" : "" }} name="status" value="1">Active</label>
-              <label class="radio-inline"><input type="radio" {{ $status == 2 ? "checked" : "" }} name="status" value="2">Pending</label>              
-            </div>
-            <button type="submit" style="margin-top:-10px" class="btn btn-primary">Lọc</button>
+            <button type="submit" class="btn btn-default">Lọc</button>
           </form>         
         </div>
       </div>
       <div class="box">
 
         <div class="box-header with-border">
-          <h3 class="box-title">Danh sách ( <span class="value">{{ $items->total() }} phim )</span></h3>
+          <h3 class="box-title">Danh sách ( <span class="value">{{ $items->total() }} bài viết )</span></h3>
         </div>
         
         <!-- /.box-header -->
         <div class="box-body">
           <div style="text-align:center">
-           {{ $items->appends( ['status' => $status, 'title' => $title] )->links() }}
+            {{ $items->appends( ['cate_id' => $cate_id, 'title' => $title] )->links() }}
           </div>  
           <table class="table table-bordered" id="table-list-data">
             <tr>
               <th style="width: 1%">#</th>              
               <th>Thumbnail</th>
-              <th width="50%">Tiêu đề</th>
-              <th>Episode</th>
-              <th style="white-space:nowrap">Người tạo</th>
-              <th style="white-space:nowrap">Ngày tạo</th>
+              <th>Tiêu đề</th>
               <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
             <tbody>
             @if( $items->count() > 0 )
               <?php $i = 0; ?>
-              @foreach( $items as $item )             
+              @foreach( $items as $item )
                 <?php $i ++; ?>
-              <tr id="row-{{ $item->film_id }}">
+              <tr id="row-{{ $item->id }}">
                 <td><span class="order">{{ $i }}</span></td>       
                 <td>
-                  <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_url)}}" width="130">
+                  <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_url)}}" width="145">
                 </td>        
-                <td class="top">                  
-                  <a class="title" href="{{ route( 'film.edit', [ 'id' => $item->film_id ]) }}">{{ $item->title }}</a>
-                
-
-                  <p class="desc">{{ $item->original_title }}</p>
-                </td>
-                <td>
-                  <a href="{{ route('film-episode.index', ['film_id' => $item->film_id])}}" class="btn btn-info btn-sm">
-                    Episode
-                  </a>     
-                </td>
-                <td>{{ $item->full_name }}</td>
-                <td style="white-space:nowrap">{{ date('d-m-Y H:i', strtotime($item->time_created)) }}</td>       
-                <td style="white-space:nowrap">
-
-                  <a href="{{ route( 'film.edit', [ 'id' => $item->film_id ]) }}" class="btn-sm  btn btn-warning">Chỉnh sửa</a>                 
+                <td>                  
+                  <a href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a>
                   
-                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'film.destroy', [ 'id' => $item->film_id ]) }}');" class="btn-sm btn btn-danger">Xóa</a>
+                  @if( $item->is_hot == 1 )
+                  <img class="img-thumbnail" src="{{ URL::asset('backend/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
+                  @endif
+
+                  <p>{{ $item->description }}</p>
+                </td>
+                <td style="white-space:nowrap">                  
+                  <a href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                 
+                  
+                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'articles.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>
                   
                 </td>
               </tr> 
@@ -116,7 +100,7 @@
           </tbody>
           </table>
           <div style="text-align:center">
-            {{ $items->appends( ['status' => $status, 'title' => $title] )->links() }}
+            {{ $items->appends( ['cate_id' => $cate_id, 'title' => $title] )->links() }}
           </div>  
         </div>        
       </div>
@@ -162,9 +146,7 @@ $(document).ready(function(){
     });
   });
   $('.select2').select2();
-  $('input[name="status"]').click(function(){
-    $('#searchForm').submit();
-  });
+
   $('#table-list-data tbody').sortable({
         placeholder: 'placeholder',
         handle: ".move",

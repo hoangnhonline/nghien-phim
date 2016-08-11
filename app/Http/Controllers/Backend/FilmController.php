@@ -39,20 +39,7 @@ class FilmController extends Controller
 
     }
     public function index(Request $request)
-    {       
-        /*
-        $film = Film::all();
-        foreach($film as $a){
-            $id = $a->id;
-            $created_at = $a->title;
-            $alias = Helper::stripUnicode($title);
-            $arr['alias'] = $alias;
-            $model = Film::find($a->id);
-            var_dump($model->update($arr));
-        }
-        die('123');
-        */
-       
+    {  
         $status = isset($request->status) ? $request->status : 1;
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
         

@@ -32,12 +32,12 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
     Route::get('/', ['as' => 'film.index', 'uses' => 'FilmController@index']);
    
     Route::group(['prefix' => 'articles-cate'], function () {
-        Route::get('/', ['as' => 'articles-cate.index', 'uses' => 'ArticlesCategoryController@index']);
-        Route::get('/create', ['as' => 'articles-cate.create', 'uses' => 'ArticlesCategoryController@create']);
-        Route::post('/store', ['as' => 'articles-cate.store', 'uses' => 'ArticlesCategoryController@store']);
-        Route::get('{id}/edit',   ['as' => 'articles-cate.edit', 'uses' => 'ArticlesCategoryController@edit']);
-        Route::post('/update', ['as' => 'articles-cate.update', 'uses' => 'ArticlesCategoryController@update']);
-        Route::get('{id}/destroy', ['as' => 'articles-cate.destroy', 'uses' => 'ArticlesCategoryController@destroy']);
+        Route::get('/', ['as' => 'articles-cate.index', 'uses' => 'ArticlesCateController@index']);
+        Route::get('/create', ['as' => 'articles-cate.create', 'uses' => 'ArticlesCateController@create']);
+        Route::post('/store', ['as' => 'articles-cate.store', 'uses' => 'ArticlesCateController@store']);
+        Route::get('{id}/edit',   ['as' => 'articles-cate.edit', 'uses' => 'ArticlesCateController@edit']);
+        Route::post('/update', ['as' => 'articles-cate.update', 'uses' => 'ArticlesCateController@update']);
+        Route::get('{id}/destroy', ['as' => 'articles-cate.destroy', 'uses' => 'ArticlesCateController@destroy']);
     }); 
     Route::group(['prefix' => 'tag'], function () {
         Route::get('/', ['as' => 'tag.index', 'uses' => 'TagController@index']);

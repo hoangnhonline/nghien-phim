@@ -24,7 +24,17 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
-        </div>        
+        </div>    
+        <div class="panel-body">
+          <form class="form-inline" id="searchForm" role="form" method="GET" action="{{ route('film-episode.index', ['film_id' => $film_id ]) }}">          
+            
+             <div class="form-group">
+              <label for="email">Name :</label>
+              <input type="text" class="form-control" name="title" value="{{ $title }}">
+            </div>           
+            <button type="submit" style="margin-top:-10px" class="btn btn-primary">Lọc</button>
+          </form>         
+        </div>    
       </div>
       <div class="box">
 
@@ -36,7 +46,8 @@
         <div class="box-body">
           <table class="table table-bordered" id="table-list-data">
             <tr>
-              <th style="width: 1%">#</th>              
+              <th style="width: 1%">#</th>
+              <th style="width: 1%;white-space:nowrap">Thứ tự</th> 
               <th>Name</th>          
               <th>Source</th>          
               <th width="1%;white-space:nowrap">Thao tác</th>
@@ -48,9 +59,11 @@
                 <?php $i ++; ?>
               <tr id="row-{{ $item->id }}">
                 <td><span class="order">{{ $i }}</span></td>
-                
+                <td style="vertical-align:middle;text-align:center">
+                  <img src="{{ URL::asset('backend/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
+                </td>
                 <td>                  
-                  <a href="{{ route( 'film-episode.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>                 
+                  <a href="{{ route( 'film-episode.index', [ 'film_id' => $film_id ]) }}?id={{ $item->id }}#dataForm">{{ $item->name }}</a>                 
                 </td>
                 <td>
                   {{ $item->source }}
@@ -82,11 +95,12 @@
 
  <!-- Main content -->
   <section class="content" id="divForm">   
-    <form role="form" method="POST" action="{{ route('film-episode.store') }}" id="dataForm">
+    <form role="form" method="POST" action="{{ $id > 0 ? route('film-episode.update') : route('film-episode.store')  }}" id="dataForm">
     <div class="row">
       <!-- left column -->
       <input type="hidden" name="film_id" value="{{ $film_id }}">
       <input type="hidden" name="id" value="{{ $id }}">
+      <input type="hidden" name="meta_id" value="{{ $detail ? $detail->meta_id : '0' }}">
       <div class="col-md-8">
         <!-- general form elements -->
         <div class="box box-primary">
@@ -148,21 +162,21 @@
             <div class="box-body">
               <div class="form-group">
                 <label>Meta title </label>
-                <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ old('meta_title') }}">
+                <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ $metadata ? $metadata->meta_title : old('meta_title') }}">
               </div>
               <!-- textarea -->
               <div class="form-group">
                 <label>Meta desciption</label>
-                <textarea class="form-control" rows="3" name="meta_description" id="meta_description">{{ old('meta_description') }}</textarea>
+                <textarea class="form-control" rows="3" name="meta_description" id="meta_description">{{ $metadata ? $metadata->meta_description : old('meta_description') }}</textarea>
               </div>  
 
               <div class="form-group">
                 <label>Meta keywords</label>
-                <textarea class="form-control" rows="3" name="meta_keywords" id="meta_keywords">{{ old('meta_keywords') }}</textarea>
+                <textarea class="form-control" rows="3" name="meta_keywords" id="meta_keywords">{{ $metadata ? $metadata->meta_keywords : old('meta_keywords') }}</textarea>
               </div>  
               <div class="form-group">
                 <label>Custom text</label>
-                <textarea class="form-control" rows="3" name="custom_text" id="custom_text">{{ old('custom_text') }}</textarea>
+                <textarea class="form-control" rows="3" name="custom_text" id="custom_text">{{ $metadata ? $metadata->custom_text : old('custom_text') }}</textarea>
               </div>
             
         </div>
@@ -212,7 +226,7 @@ $(document).ready(function(){
                 strTemp = rows[i].id;
                 strOrder += strTemp.replace('row-','') + ";";
             }     
-            updateOrder("loai_sp", strOrder);
+            updateOrder("film_episode", strOrder);
         }
     });
 });

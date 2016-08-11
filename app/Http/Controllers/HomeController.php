@@ -12,6 +12,7 @@ use App\Models\Tag;
 use App\Models\TagObjects;
 use App\Models\Settings;
 use App\Models\Articles;
+use App\Models\ArticlesCate;
 use Helper, File, Session;
 
 class HomeController extends Controller
@@ -49,9 +50,9 @@ class HomeController extends Controller
 
         
 
-        $parentArr = ParentCate::orderBy('display_order')->get();
+        $parentArr = ParentCategory::orderBy('display_order')->get();
         
-        $tmpCateArr = Cate::orderBy('display_order')->get();
+        $tmpCateArr = Category::orderBy('display_order')->get();
     */
         if( self::$parentCate->count() > 0){            
             foreach (self::$parentCate as $value) {               
@@ -105,9 +106,9 @@ class HomeController extends Controller
 
         $cateArr = $cateActiveArr = $moviesActiveArr = [];
 
-        $parentArr = ParentCate::orderBy('display_order')->get();
+        $parentArr = ParentCategory::orderBy('display_order')->get();
 
-        $tmpCateArr = Cate::orderBy('display_order')->get();
+        $tmpCateArr = Category::orderBy('display_order')->get();
 
         if( $tmpCateArr->count() > 0){
             
@@ -122,7 +123,7 @@ class HomeController extends Controller
         
         $is_search = 1;
 
-        $moviesArr = Movies::where('alias', 'LIKE', '%'.$tu_khoa.'%')->orderBy('id', 'desc')->paginate(20);
+        $moviesArr = Film::where('alias', 'LIKE', '%'.$tu_khoa.'%')->orderBy('id', 'desc')->paginate(20);
 
         return view('home.cate', compact('settingArr', 'moviesArr', 'tu_khoa',  'is_search', 'layout_name', 'page_name', 'parentArr' , 'cateArr' ));
     }
@@ -136,34 +137,30 @@ class HomeController extends Controller
 
         $cateArr = $cateActiveArr = $moviesActiveArr = [];
 
-        $parentArr = ParentCate::orderBy('display_order')->get();
-
-        $tmpCateArr = Cate::orderBy('display_order')->get();
-
-        if( $tmpCateArr->count() > 0){
-            
-            foreach ($tmpCateArr as $value) {               
-
-                $cateArr[$value->parent_id][] = $value;
-                
-            }
-        }
+       
         $is_search = 0;
         $slug = $request->slug;
         $title = '';
-        $cateDetail = ParentCate::where('slug', $slug)->first();
-        if( !$cateDetail ){
-            $cateDetail = Cate::where('slug', $slug)->first();
-            
-            $moviesArr = Movies::where('cate_id', $cateDetail->id)->orderBy('id', 'desc')->paginate(12);
-        }else{
-
-            $moviesArr = Movies::where('parent_id', $cateDetail->id)->orderBy('id', 'desc')->paginate(12);
-        }        
         
+        $cateDetail = Category::where('slug', $slug)->first();
+        if( !$cateDetail){
+            $cateDetail = Country::where('slug', $slug)->first();
+
+            $moviesArr = Film::where('status', 1)
+            ->join('film_country', 'id', '=', 'film_country.film_id')
+            ->where('film_country.country_id', $cateDetail->id)
+            ->groupBy('film_id')
+            ->orderBy('id', 'desc')->paginate(12);        
+        }else{
+             $moviesArr = Film::where('status', 1)
+            ->join('film_category', 'id', '=', 'film_category.film_id')
+            ->where('film_category.category_id', $cateDetail->id)
+            ->groupBy('film_id')
+            ->orderBy('id', 'desc')->paginate(12);        
+        }
         $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
 
-        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'parentArr' , 'cateArr', 'cateActiveArr', 'moviesActiveArr'));
+        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr'));
     }
 
     public function newsList(Request $request)
@@ -174,25 +171,13 @@ class HomeController extends Controller
         $page_name = "page-news";
 
         $cateArr = $cateActiveArr = $moviesActiveArr = [];
-
-        $parentArr = ParentCate::orderBy('display_order')->get();
-
-        $tmpCateArr = Cate::orderBy('display_order')->get();
-
-        if( $tmpCateArr->count() > 0){
-            
-            foreach ($tmpCateArr as $value) {               
-
-                $cateArr[$value->parent_id][] = $value;
-                
-            }
-        }
-        $cateDetail = ArticlesCate::where('slug' , 'tin-tuc')->first();
+       
+        $cateDetail = ArticlesCategory::where('slug' , 'tin-tuc')->first();
         $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
 
         $articlesArr = Articles::where('cate_id', 1)->orderBy('id', 'desc')->paginate(10);
         $hotArr = Articles::where( ['cate_id' => 1, 'is_hot' => 1] )->orderBy('id', 'desc')->limit(5)->get();
-        return view('home.news-list', compact('title','settingArr', 'hotArr', 'layout_name', 'page_name', 'articlesArr' , 'cateArr', 'parentArr'));
+        return view('home.news-list', compact('title','settingArr', 'hotArr', 'layout_name', 'page_name', 'articlesArr'));
     }
 
     public function newsDetail(Request $request)
@@ -210,25 +195,13 @@ class HomeController extends Controller
 
         if( $detail ){
             $cateArr = $cateActiveArr = $moviesActiveArr = [];
-
-            $parentArr = ParentCate::orderBy('display_order')->get();
-
-            $tmpCateArr = Cate::orderBy('display_order')->get();
-
-            if( $tmpCateArr->count() > 0){
-                
-                foreach ($tmpCateArr as $value) {               
-
-                    $cateArr[$value->parent_id][] = $value;
-                    
-                }
-            }            
+        
             
             $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
 
             $hotArr = Articles::where( ['cate_id' => 1, 'is_hot' => 1] )->where('id', '<>', $id)->orderBy('id', 'desc')->limit(5)->get();
 
-            return view('home.news-detail', compact('title', 'settingArr', 'hotArr', 'layout_name', 'page_name', 'detail' , 'cateArr', 'parentArr'));
+            return view('home.news-detail', compact('title', 'settingArr', 'hotArr', 'layout_name', 'page_name', 'detail'));
         }else{
             return view('erros.404');
         }     

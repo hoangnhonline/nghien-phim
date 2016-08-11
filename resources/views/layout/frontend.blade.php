@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
    <head>
       <title>@yield('title')</title>
@@ -25,23 +25,23 @@
       <script>
          var base_url = 'http://' + document.domain + '/';
       </script>
-       <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css" />
-<link rel="stylesheet" href="assets/css/main.css?v=5" type="text/css" />
-<link rel="stylesheet" href="assets/css/jquery.cluetip.css" type="text/css" />
-<link rel="stylesheet" href="assets/css/jquery.qtip.min.css" type="text/css" />
-<link rel="stylesheet" href="assets/css/custom.css?v=1.1" type="text/css" />
-<link rel="stylesheet" href="assets/css/slide.css" type="text/css" />
-<link rel="stylesheet" href="assets/css/psbar.css" type="text/css" />
-<script type="text/javascript" src="assets/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="assets/js/jquery.lazyload.js"></script>
-<script type="text/javascript" src="assets/js/jquery.qtip.min.js"></script>
-<script type="text/javascript" src="assets/js/md5.min.js"></script>
-<script type="text/javascript" src="assets/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="assets/js/123movies.min.js?v=2.2"></script>
+       <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ URL::asset('assets/css/main.css?v=5') }}" type="text/css" />
+<link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.cluetip.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.qtip.min.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css?v=1.1') }}" type="text/css" />
+<link rel="stylesheet" href="{{ URL::asset('assets/css/slide.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ URL::asset('assets/css/psbar.css') }}" type="text/css" />
+<script type="text/javascript" src="{{ URL::asset('assets/js/jquery-1.9.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.lazyload.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.qtip.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/js/md5.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.cookie.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/js/123movies.min.js?v=2.2') }}"></script>
    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 
-    <script src="assets/js/detectmobilebrowser.js"></script>
+    <script src="{{ URL::asset('assets/js/detectmobilebrowser.js') }}"></script>
    </head>
    <body>
       <script>
@@ -355,10 +355,10 @@
             href="how-to-enable-browser-cookie" title="">Click here for instruction.</a>
       </div>
      
-      <script type="text/javascript" src="assets/js/bootstrap.min.js?v=0.1"></script>
-      <script type="text/javascript" src="assets/js/bootstrap-select.js?v=0.1"></script>
-      <script type="text/javascript" src="assets/js/slide.min.js"></script>
-      <script type="text/javascript" src="assets/js/psbar.jquery.min.js"></script>
+      <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js?v=0.1') }}"></script>
+      <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap-select.js?v=0.1') }}"></script>
+      <script type="text/javascript" src="{{ URL::asset('assets/js/slide.min.js') }}"></script>
+      <script type="text/javascript" src="{{ URL::asset('assets/js/psbar.jquery.min.js') }}"></script>
     
     <script>
       $("img.lazy").lazyload({
