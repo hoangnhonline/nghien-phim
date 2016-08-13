@@ -45,7 +45,7 @@
       <!--<div class="movies-embed content-padding">
          <h3 class="title">Movies in this articles</h3>
          <div class="me-li">
-            <h4><a href="http://123movies.to/movies/ghostbusters-2016-14639/"
+            <h4><a href="http://phim1p.com/movies/ghostbusters-2016-14639/"
                title="Ghostbusters (2016)">Ghostbusters (2016)<span
                class="pull-right badge">Play now</span>
                </a>
@@ -55,13 +55,13 @@
       <div class="content-padding" style="border-top: 20px solid #e5e5e5;" id="comment">
          <h3 class="title">Comments</h3>
          <div class="fb-comments"
-            data-href="http://123movies.to/articles/view/five-secrets-you-need-to-know-before-watching-ghostbusters/364"
+            data-href="http://phim1p.com/articles/view/five-secrets-you-need-to-know-before-watching-ghostbusters/364"
             data-width="100%" data-numposts="3"></div>
       </div>
    </div>
    <div class="news-sidebar">
       <!--<div class="box fanpage">
-         <div class="fb-page" data-href="https://www.facebook.com/123movies.to" data-width="100%"
+         <div class="fb-page" data-href="https://www.facebook.com/phim1p.com" data-width="100%"
             data-height="400" data-small-header="false" data-adapt-container-width="true"
             data-hide-cover="false" data-show-facepile="true" data-show-posts="true"></div>
       </div>-->
@@ -76,7 +76,7 @@
             <div class="news-list-item">
                <div class="info">
                   <h2>
-                     <a href="http://123movies.to/articles/view/the-most-evil-movie-villains-of-all-times/365"
+                     <a href="http://phim1p.com/articles/view/the-most-evil-movie-villains-of-all-times/365"
                         title="The Most Evil Movie Villains of All Times">The Most Evil Movie Villains of All Times</a>
                   </h2>
                   <p class="time">

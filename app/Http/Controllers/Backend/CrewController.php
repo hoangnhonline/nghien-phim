@@ -44,7 +44,7 @@ class CrewController extends Controller
     */
     public function create(Request $request)
     {
-        return view('backend.crew.create', compact());
+        return view('backend.crew.create');
     }
 
     /**
@@ -58,12 +58,12 @@ class CrewController extends Controller
         $dataArr = $request->all();
         
         $this->validate($request,[            
-            'cate_id' => 'required',            
+           
             'name' => 'required',            
-            'slug' => 'required|unique:articles,slug',
+            'slug' => 'required|unique:crew,slug',
         ],
-        [            
-            'cate_id.required' => 'Bạn chưa chọn danh mục',            
+        [           
+           
             'name.required' => 'Bạn chưa nhập tiêu đề',
             'slug.required' => 'Bạn chưa nhập slug',
             'slug.unique' => 'Slug đã được sử dụng.'
@@ -86,20 +86,11 @@ class CrewController extends Controller
             $dataArr['image_url'] = $destionation;
         }        
 
-        $rs = Crew::create($dataArr);
-
-        $object_id = $rs->id;
-
-        // xu ly tags
-        if( !empty( $dataArr['tags'] ) && $object_id ){
-            foreach ($dataArr['tags'] as $tag_id) {
-                TagObjects::create(['object_id' => $object_id, 'tag_id' => $tag_id, 'object_type' => 2]);
-            }
-        }
+        Crew::create($dataArr);        
 
         Session::flash('message', 'Tạo mới crew thành công');
 
-        return redirect()->route('crew.index',['cate_id' => $dataArr['cate_id']]);
+        return redirect()->route('crew.index',['type' => $dataArr['type']]);
     }
 
     /**
@@ -120,24 +111,11 @@ class CrewController extends Controller
     * @return Response
     */
     public function edit($id)
-    {
-        $tagSelected = [];
+    {        
 
         $detail = Crew::find($id);
-        
-        $cateArr = ArticlesCate::all();        
 
-        $tmpArr = TagObjects::where(['object_type' => 1, 'object_id' => $id])->get();
-        
-        if( $tmpArr->count() > 0 ){
-            foreach ($tmpArr as $value) {
-                $tagSelected[] = $value->tag_id;
-            }
-        }
-        
-        $tagArr = Tag::where('type', 2)->get();
-
-        return view('backend.crew.edit', compact('tagArr', 'tagSelected', 'detail', 'cateArr' ));
+        return view('backend.crew.edit', compact('detail'));
     }
 
     /**
@@ -151,13 +129,12 @@ class CrewController extends Controller
     {
         $dataArr = $request->all();
         
-        $this->validate($request,[            
-            'cate_id' => 'required',            
+        $this->validate($request,[   
             'name' => 'required',            
-            'slug' => 'required|unique:articles,slug,'.$dataArr['id'],
+            'slug' => 'required|unique:crew,slug,'.$dataArr['id'],
         ],
-        [            
-            'cate_id.required' => 'Bạn chưa chọn danh mục',            
+        [           
+            
             'name.required' => 'Bạn chưa nhập tiêu đề',
             'slug.required' => 'Bạn chưa nhập slug',
             'slug.unique' => 'Slug đã được sử dụng.'
@@ -185,16 +162,9 @@ class CrewController extends Controller
 
         $model->update($dataArr);
 
-        TagObjects::where(['object_id' => $dataArr['id'], 'object_type' => 2])->delete();
-        // xu ly tags
-        if( !empty( $dataArr['tags'] ) ){
-            foreach ($dataArr['tags'] as $tag_id) {
-                TagObjects::create(['object_id' => $dataArr['id'], 'tag_id' => $tag_id, 'object_type' => 2]);
-            }
-        }
         Session::flash('message', 'Cập nhật crew thành công');        
 
-        return redirect()->route('crew.index', ['cate_id' => $dataArr['cate_id']]);
+        return redirect()->route('crew.index', ['type' => $dataArr['type']]);
     }
 
     /**

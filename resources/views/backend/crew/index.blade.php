@@ -31,9 +31,9 @@
               <label for="email">Type </label>
               <select class="form-control select2" name="type" id="type">
                 <option value="">--Tất cả--</option>
-                <option value="1">Actor</option>
-                <option value="2">Director</option>
-                <option value="3">Producer</option>
+                <option value="1" {{ $type == 1 ? "selected" : "" }}>Actor</option>
+                <option value="2" {{ $type == 2 ? "selected" : "" }}>Director</option>
+                <option value="3" {{ $type == 3 ? "selected" : "" }}>Producer</option>
               </select>
             </div>            
             <div class="form-group">
@@ -75,7 +75,7 @@
                 <td>                  
                   <a href="{{ route( 'crew.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
 
-                  <p>{{ $item->description }}</p>
+                  <p><?php echo $item->description; ?></p>
                 </td>
                 <td style="white-space:nowrap">                  
                   <a href="{{ route( 'crew.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                 

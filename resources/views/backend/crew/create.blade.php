@@ -1,190 +1,187 @@
 @extends('layout.backend')
 @section('content')
 <div class="content-wrapper">
-<!-- Content Header (Page header) -->
-<section class="content-header">
-  <h1>
-    Bài viết
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'articles.index' ) }}">Bài viết</a></li>
-    <li class="active">Danh sách</li>
-  </ol>
-</section>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Crew  
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li><a href="{{ route('crew.index') }}">Crew</a></li>
+      <li class="active">Tạo mới</li>
+    </ol>
+  </section>
 
-<!-- Main content -->
-<section class="content">
-  <div class="row">
-    <div class="col-md-12">
-      @if(Session::has('message'))
-      <p class="alert alert-info" >{{ Session::get('message') }}</p>
-      @endif
-      <a href="{{ route('articles.create') }}" class="btn btn-info" style="margin-bottom:5px">Tạo mới</a>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Bộ lọc</h3>
-        </div>
-        <div class="panel-body">
-          <form class="form-inline" role="form" method="GET" action="{{ route('articles.index') }}">            
-            <div class="form-group">
-              <label for="email">Danh mục </label>
-              <select class="form-control select2" name="cate_id" id="cate_id">
-                <option value="">--Tất cả--</option>
-                @if( $cateArr->count() > 0)
-                  @foreach( $cateArr as $value )
-                  <option value="{{ $value->id }}" {{ $value->id == $cate_id ? "selected" : "" }}>{{ $value->name }}</option>
-                  @endforeach
-                @endif
-              </select>
-            </div>            
-            <div class="form-group">
-              <label for="email">Từ khóa :</label>
-              <input type="text" class="form-control" name="title" value="{{ $title }}">
+  <!-- Main content -->
+  <section class="content">
+    <a class="btn btn-default btn-sm " href="{{ route('crew.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <form role="form" method="POST" action="{{ route('crew.store') }}">
+    <div class="row">
+      <!-- left column -->
+
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Tạo mới</h3>
+          </div>
+          <!-- /.box-header -->               
+            {!! csrf_field() !!}
+
+            <div class="box-body">
+              @if (count($errors) > 0)
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              @endif
+               <div class="form-group">
+                  <label for="email">Type </label>
+                  <select class="form-control select2" name="type" id="type">                    
+                    <option value="1" {{ old('type') == 1 ? "selected" : "" }}>Actor</option>
+                    <option value="2" {{ old('type') == 2 ? "selected" : "" }}>Director</option>
+                    <option value="3" {{ old('type') == 3 ? "selected" : "" }}>Producer</option>
+                  </select>
+                </div>    
+                 <!-- text input -->
+                <div class="form-group">
+                  <label>Name<span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                </div>
+                <div class="form-group">
+                  <label>Slug <span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}">
+                </div>
+                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
+                  <label class="col-md-3 row">Image </label>    
+                  <div class="col-md-9">
+                    <img id="thumbnail_image" src="{{ old('image_url') ? Helper::showImage(old('image_url')) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="145" height="85">
+                    
+                    <input type="file" id="file-image" style="display:none" />
+                 
+                    <button class="btn btn-default" id="btnUploadImage" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                  </div>
+                  <div style="clear:both"></div>
+                </div>               
+                <!-- textarea -->
+                <div class="form-group">
+                  <label>Giới thiệu</label>
+                  <textarea class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
+                </div>  
+                <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url') }}"/>          
+            <input type="hidden" name="image_name" id="image_name" value="{{ old('image_name') }}"/>
+                              
+            </div>                        
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary">Lưu</button>
+              <a class="btn btn-default" class="btn btn-primary" href="{{ route('crew.index')}}">Hủy</a>
             </div>
-            <button type="submit" class="btn btn-default">Lọc</button>
-          </form>         
+            
         </div>
+        <!-- /.box -->     
+
       </div>
-      <div class="box">
-
-        <div class="box-header with-border">
-          <h3 class="box-title">Danh sách ( <span class="value">{{ $items->total() }} bài viết )</span></h3>
-        </div>
-        
-        <!-- /.box-header -->
-        <div class="box-body">
-          <div style="text-align:center">
-            {{ $items->appends( ['cate_id' => $cate_id, 'title' => $title] )->links() }}
-          </div>  
-          <table class="table table-bordered" id="table-list-data">
-            <tr>
-              <th style="width: 1%">#</th>              
-              <th>Thumbnail</th>
-              <th>Tiêu đề</th>
-              <th width="1%;white-space:nowrap">Thao tác</th>
-            </tr>
-            <tbody>
-            @if( $items->count() > 0 )
-              <?php $i = 0; ?>
-              @foreach( $items as $item )
-                <?php $i ++; ?>
-              <tr id="row-{{ $item->id }}">
-                <td><span class="order">{{ $i }}</span></td>       
-                <td>
-                  <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_url)}}" width="145">
-                </td>        
-                <td>                  
-                  <a href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a>
-                  
-                  @if( $item->is_hot == 1 )
-                  <img class="img-thumbnail" src="{{ URL::asset('backend/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
-                  @endif
-
-                  <p>{{ $item->description }}</p>
-                </td>
-                <td style="white-space:nowrap">                  
-                  <a href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning">Chỉnh sửa</a>                 
-                  
-                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'articles.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>
-                  
-                </td>
-              </tr> 
-              @endforeach
-            @else
-            <tr>
-              <td colspan="9">Không có dữ liệu.</td>
-            </tr>
-            @endif
-
-          </tbody>
-          </table>
-          <div style="text-align:center">
-            {{ $items->appends( ['cate_id' => $cate_id, 'title' => $title] )->links() }}
-          </div>  
-        </div>        
-      </div>
-      <!-- /.box -->     
+     
+      <!--/.col (left) -->      
     </div>
-    <!-- /.col -->  
-  </div> 
-</section>
-<!-- /.content -->
+    </form>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
 </div>
+<input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
 @stop
 @section('javascript_page')
-<script src="{{ URL::asset('assets/js/lazy.js') }}"></script>
+<script src="{{ URL::asset('backend/dist/js/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript">
-function callDelete(name, url){  
-  swal({
-    title: 'Bạn muốn xóa "' + name +'"?',
-    text: "Dữ liệu sẽ không thể phục hồi.",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes'
-  }).then(function() {
-    location.href= url;
-  })
-  return flag;
-}
-$(document).ready(function(){
-  $('img.lazy').lazyload();
-  $('#parent_id').change(function(){
-    $.ajax({
-        url: $('#route_get_cate_by_parent').val(),
-        type: "POST",
-        async: false,
-        data: {          
-            parent_id : $(this).val(),
-            type : 'list'
-        },
-        success: function(data){
-            $('#cate_id').html(data).select2('refresh');                      
-        }
-    });
-  });
-  $('.select2').select2();
+    $(document).ready(function(){
+      $(".select2").select2();
+      var editor = CKEDITOR.replace( 'description',{
+          language : 'vi',
+          filebrowserBrowseUrl: '../dist/js/kcfinder/browse.php?type=files',
+          filebrowserImageBrowseUrl: '../dist/js/kcfinder/browse.php?type=images',
+          filebrowserFlashBrowseUrl: '../dist/js/kcfinder/browse.php?type=flash',
+          filebrowserUploadUrl: '../dist/js/kcfinder/upload.php?type=files',
+          filebrowserImageUploadUrl: '../dist/js/kcfinder/upload.php?type=images',
+          filebrowserFlashUploadUrl: '../dist/js/kcfinder/upload.php?type=flash'
+      });
+      $('#btnUploadImage').click(function(){        
+        $('#file-image').click();
+      });      
+      var files = "";
+      $('#file-image').change(function(e){
+         files = e.target.files;
+         
+         if(files != ''){
+           var dataForm = new FormData();        
+          $.each(files, function(key, value) {
+             dataForm.append('file', value);
+          });   
+          
+          dataForm.append('date_dir', 1);
+          dataForm.append('folder', 'tmp');
 
-  $('#table-list-data tbody').sortable({
-        placeholder: 'placeholder',
-        handle: ".move",
-        start: function (event, ui) {
-                ui.item.toggleClass("highlight");
-        },
-        stop: function (event, ui) {
-                ui.item.toggleClass("highlight");
-        },          
-        axis: "y",
-        update: function() {
-            var rows = $('#table-list-data tbody tr');
-            var strOrder = '';
-            var strTemp = '';
-            for (var i=0; i<rows.length; i++) {
-                strTemp = rows[i].id;
-                strOrder += strTemp.replace('row-','') + ";";
-            }     
-            updateOrder("loai_sp", strOrder);
+          $.ajax({
+            url: $('#route_upload_tmp_image').val(),
+            type: "POST",
+            async: false,      
+            data: dataForm,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              if(response.image_path){
+                $('#thumbnail_image').attr('src',$('#upload_url').val() + response.image_path);
+                $( '#image_url' ).val( response.image_path );
+                $( '#image_name' ).val( response.image_name );
+              }
+              console.log(response.image_path);
+                //window.location.reload();
+            },
+            error: function(response){                             
+                var errors = response.responseJSON;
+                for (var key in errors) {
+                  
+                }
+                //$('#btnLoading').hide();
+                //$('#btnSave').show();
+            }
+          });
         }
+      });
+      
+      
+      $('#name').change(function(){
+         var name = $.trim( $(this).val() );
+         if( name != '' && $('#slug').val() == ''){
+            $.ajax({
+              url: $('#route_get_slug').val(),
+              type: "POST",
+              async: false,      
+              data: {
+                str : name
+              },              
+              success: function (response) {
+                if( response.str ){                  
+                  $('#slug').val( response.str );
+                }                
+              },
+              error: function(response){                             
+                  var errors = response.responseJSON;
+                  for (var key in errors) {
+                    
+                  }
+                  //$('#btnLoading').hide();
+                  //$('#btnSave').show();
+              }
+            });
+         }
+      });
+     
     });
-});
-function updateOrder(table, strOrder){
-  $.ajax({
-      url: $('#route_update_order').val(),
-      type: "POST",
-      async: false,
-      data: {          
-          str_order : strOrder,
-          table : table
-      },
-      success: function(data){
-          var countRow = $('#table-list-data tbody tr span.order').length;
-          for(var i = 0 ; i < countRow ; i ++ ){
-              $('span.order').eq(i).html(i+1);
-          }                        
-      }
-  });
-}
+    
 </script>
 @stop

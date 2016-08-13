@@ -151,7 +151,7 @@
             <!--social home-->
             <div class="social-home">
                <div class="sh-like">
-                  <div class="fb-like" data-href="http://facebook.com/123movies.to" data-layout="button_count"
+                  <div class="fb-like" data-href="http://facebook.com/phim1p.com" data-layout="button_count"
                      data-action="like" data-show-faces="true" data-share="false"></div>
                </div>
                <div class="addthis_native_toolbox"></div>
@@ -196,7 +196,7 @@
          </div>
       </div>
       <!--/main -->      
-      <?php //include('home.index.footer'); ?>
+      @include('home.index.footer')
       <!-- Modal -->
       <div class="modal fade modal-cuz" id="pop-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
