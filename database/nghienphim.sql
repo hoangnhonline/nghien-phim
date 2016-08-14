@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2016 at 07:32 PM
+-- Generation Time: Aug 15, 2016 at 01:35 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -287,7 +287,7 @@ INSERT INTO `crew` (`id`, `meta_id`, `name`, `alias`, `slug`, `image_url`, `desc
 (87, 0, 'Joan Cusack', NULL, 'joan-cusack', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:36', 1),
 (88, 0, 'Tony Goldwyn', NULL, 'tony-goldwyn', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:36', 2),
 (89, 0, 'Hilary Swank', NULL, 'hilary-swank', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:36', 1),
-(90, 0, 'Sam Rockwell', NULL, 'sam-rockwell', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:36', 1),
+(90, 0, 'Sam Rockwell', 'Sam Rockwell', 'sam-rockwell', '', '', 1, 1, '2016-01-01 00:00:00', '2016-08-12 17:09:45', 1),
 (91, 0, 'Melissa Leo', NULL, 'melissa-leo', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:36', 1),
 (92, 0, 'Thomas D. Mahard', NULL, 'thomas-d-mahard', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:36', 1),
 (93, 0, 'Jalmari Helander', NULL, 'jalmari-helander', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:36', 2),
@@ -424,8 +424,9 @@ INSERT INTO `crew` (`id`, `meta_id`, `name`, `alias`, `slug`, `image_url`, `desc
 (239, 0, 'Bill Murray', NULL, 'bill-murray', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:40', 1),
 (240, 0, 'Ben Kingsley', NULL, 'ben-kingsley', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:40', 1),
 (241, 0, 'Scarlett Johansson', NULL, 'scarlett-johansson', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:40', 1),
-(242, 0, 'Jon Favreau', NULL, 'jon-favreau', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:40', 1),
-(243, 0, 'Neel Sethi', NULL, 'neel-sethi', '', NULL, 1, 1, '2016-01-01 00:00:00', '2016-08-11 14:43:40', 1);
+(242, 0, 'Jon Favreaudg sdfh', 'Jon Favreaudg sdfh', 'jon-favreaudg-sdfh', '', '', 1, 1, '2016-01-01 00:00:00', '2016-08-12 17:10:03', 1),
+(243, 0, 'Neel Sethi', 'Neel Sethi', 'neel-sethi', '2016/08/12/koala-1471019218.jpg', '<p>&agrave;asfasfasf bcx bdfasdg &aacute;dgs</p>\r\n', 1, 1, '2016-01-01 00:00:00', '2016-08-12 16:27:00', 1),
+(244, 0, 'dsgsdg', 'dsgsdg', 'dsgsdg', '2016/08/12/hydrangeas-1471019364.jpg', '<p>dsvadsg dsgasd</p>\r\n', 0, 0, '2016-08-12 16:29:28', '2016-08-12 16:29:28', 3);
 
 -- --------------------------------------------------------
 
@@ -2588,7 +2589,7 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT for table `crew`
 --
 ALTER TABLE `crew`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 --
 -- AUTO_INCREMENT for table `film`
 --
