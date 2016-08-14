@@ -44,13 +44,13 @@ header .header-logo h1{ font-size: 0; margin: 0;}
 #menu{ float: left;}
 #menu ul.top-menu{ list-style: none; padding: 0; text-transform: uppercase;}
 #menu ul.top-menu li{ display: inline-block; float: left; margin:0 5px; position: relative}
-#menu ul.top-menu li a{ height: 70px; line-height: 70px; margin: 0;  padding: 0 5px; font-family: 'Oswald'; font-size: 16px; color: #333; display: inline-block;}
+#menu ul.top-menu li a{ height: 70px; line-height: 70px; margin: 0;  padding: 0 5px; font-family: 'Taviraj'; font-size: 16px; color: #333; display: inline-block;}
 #menu ul.top-menu li:hover a, #menu ul.top-menu li.active a{color: #79C143;}
 #menu ul.top-menu li.active a{border-bottom: 3px solid #79C143;}
 #menu .sub-container{ position: absolute; top: 60px; left: -20px; width: 500px; background: #fff; border: 1px solid #ccc; border-top: 1px solid #79C143; z-index: 5; box-shadow: 0 0 3px rgba(0,0,0,0.1)}
 #menu .sub-container ul.sub-menu{ padding: 10px; overflow: hidden;}
 #menu .sub-container ul.sub-menu li{ width: 30%; float: left; margin: 0 1.65%;}
-#menu .sub-container ul.sub-menu li a{ height: 30px; line-height: 30px; font-family: Arial, Helvetica, sans-serif; font-size: 14px; padding: 0 10px; display: block; border-bottom: none !important;}
+#menu .sub-container ul.sub-menu li a{  height: 30px; line-height: 30px; font-family: 'Taviraj'; font-size: 14px; padding: 0 10px; display: block; border-bottom: none !important;}
 #menu .sub-container ul.sub-menu li:hover a{ background: #79C143; color: #fff !important;}
 #menu ul.top-menu li:hover .sub-container ul.sub-menu li a{ color: #333;}
 #search{ float: right; width:295px; margin-top: 17px; position: relative;}
@@ -1029,7 +1029,7 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     #footer .col-lg-4 p{ font-size: 12px;}
     #menu ul.top-menu li a{ padding: 0 8px;}
     #menu .sub-container ul.sub-menu li{ border-bottom: none; margin: 0; width: 33.33%;}
-    #menu .sub-container ul.sub-menu li a{ margin:0; padding: 0; background: none !important; padding-left: 8px;}
+    #menu .sub-container ul.sub-menu li a{ margin:0; padding: 0; background: none !important; padding-left: 8px; }
     #menu .sub-container ul.sub-menu{ padding: 5px;}
     .movies-list-wrap .ml-title .nav-tabs li a{ min-width: 50px;}
     .mlw-related .movies-list .ml-item{ width: 48%; height: 240px;}

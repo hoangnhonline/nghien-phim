@@ -25,4 +25,14 @@ class Country extends Model  {
      */
     protected $fillable = ['name', 'description', 'slug', 'keywords', 'created_user', 'updated_user', 'status', 'is_hot'];
     
+    public static function getListOrderByKey(){
+        $arr = [];
+        $tmp = Country::select('name', 'id', 'slug')->get();
+        if( $tmp ){
+            foreach ($tmp as $key => $value) {
+                $arr[$value->id] = ['name' => $value->name, 'slug' => $value->slug];
+            }
+        }
+        return $arr;
+    }
 }

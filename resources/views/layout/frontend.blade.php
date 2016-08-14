@@ -359,7 +359,7 @@
       <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap-select.js?v=0.1') }}"></script>
       <script type="text/javascript" src="{{ URL::asset('assets/js/slide.min.js') }}"></script>
       <script type="text/javascript" src="{{ URL::asset('assets/js/psbar.jquery.min.js') }}"></script>
-    
+    @yield('javascript_page')
     <script>
       $("img.lazy").lazyload({
           effect: "fadeIn"

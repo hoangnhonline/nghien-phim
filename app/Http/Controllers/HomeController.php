@@ -18,16 +18,29 @@ use Helper, File, Session;
 class HomeController extends Controller
 {
     
-    public static $parentCate = array();
-    public static $countryArr = array();
+    public static $parentCate = [];
+    public static $countryArr = [];
+    public static $countryArrKey = [];
+    public static $categoryArrKey = [];    
 
     public function __construct(){
         
-        self::$parentCate = Category::getParentCateList( 1 );    
+        self::$parentCate = Category::getParentCateList( 1 );
+
+        if( self::$parentCate ){
+            foreach (self::$parentCate as $key => $value) {
+                self::$categoryArrKey[$value->id] = ['name' => $value->name, 'slug' => $value->slug];
+            }
+        }       
 
         self::$countryArr = Country::orderBy('display_order')->get();
 
-        view()->share(['parentCate' => self::$parentCate, 'countryArr' => self::$countryArr ]);
+        if( self::$countryArr ){
+            foreach (self::$countryArr as $key => $value) {
+                self::$categoryArrKey[$value->id] = ['name' => $value->name, 'slug' => $value->slug];
+            }
+        }
+        view()->share(['parentCate' => self::$parentCate, 'countryArr' => self::$countryArr, '']);
 
     }
     /**
@@ -41,56 +54,48 @@ class HomeController extends Controller
 
         $layout_name = $page_name = "";
 
-        $moviesActiveArr = $moviesActiveCountryArr = [];
-
+        $moviesAllCategoryArr = $moviesActiveCountryArr = [];
+        $moviesAllCategoryArr = Film::where('status', 1)
+                        ->join('film_category', 'id', '=', 'film_category.film_id')                      
+                        ->groupBy('film_id')
+                        ->orderBy('id', 'desc')->limit(16)->get();
+        $moviesAllCountryArr = Film::where('status', 1)
+                        ->join('film_country', 'id', '=', 'film_country.film_id')                        
+                        ->groupBy('film_id')
+                        ->orderBy('id', 'desc')->limit(16)->get();
         /*
+        $moviesActiveArr[$value->id] = Film::where('status', 1)
+                        ->join('film_category', 'id', '=', 'film_category.film_id')
+                        ->where('film_category.category_id' , $value->id)
+                        ->groupBy('film_id')
+                        ->orderBy('id', 'desc')->limit(3)->get();
+        $moviesActiveCountryArr[$value->id] = Film::where('status', 1)
+                        ->join('film_country', 'id', '=', 'film_country.film_id')
+                        ->where('film_country.country_id' , $value->id)
+                        ->groupBy('film_id')
+                        ->orderBy('id', 'desc')->limit(3)->get();
+        */
+       
         
 
-        
-
-        
-
-        $parentArr = ParentCategory::orderBy('display_order')->get();
-        
-        $tmpCateArr = Category::orderBy('display_order')->get();
-    */
-        if( self::$parentCate->count() > 0){            
-            foreach (self::$parentCate as $value) {               
-            
-
-
-                    $moviesActiveArr[$value->id] = Film::where('status', 1)
-                                                    ->join('film_category', 'id', '=', 'film_category.film_id')
-                                                    ->groupBy('film_id')
-                                                    ->orderBy('id', 'desc')->limit(16)->get();
-
-
-            }
-        }  
-        if( self::$countryArr->count() > 0){            
-            foreach (self::$countryArr as $value) {               
-
-                               
-
-                    $moviesActiveCountryArr[$value->id] = Film::where('status', 1)
-                                                    ->join('film_country', 'id', '=', 'film_country.film_id')
-                                                    ->groupBy('film_id')
-                                                    ->orderBy('id', 'desc')->limit(16)->get();
-
-                
-            }
-        }   
       
-        //artcles
+      
+        //articles
         $articlesArr = Articles::where([ 'status' => 1, 'is_hot' => 1 ])->orderBy('id', 'desc')->select('id', 'slug', 'title', 'image_url')->limit(10)->get();
 
-        $hotArr = Film::where([ 'status' => 1, 'top' => 1 ])->orderBy('id', 'desc')->select('id', 'slug', 'title', 'image_url', 'description', 'top', 'views', 'likes', 'imdb', 'order', 'push_top', 'poster_url', 'quality')->limit(10)->get();
-        //var_dump("<pre>", $hotArr);die;
-        //return view('home.index', compact('settingArr', 'page_name', 'layout_name', 'parentArr' , 'cateArr', 'moviesActiveArr', 'articlesArr', 'hotArr'));
-        
-        return view('home.index', compact( 'settingArr', 'page_name', 'layout_name', 'hotArr', 'articlesArr', 'settingArr', 'moviesActiveArr', 'moviesActiveCountryArr'));
+        $hotArr = Film::where([ 'status' => 1, 'top' => 1 ])->orderBy('id', 'desc')->select('id', 'slug', 'title', 'image_url', 'description', 'top', 'views', 'likes', 'imdb', 'order', 'push_top', 'poster_url', 'quality')->limit(10)->get();        
+
+        return view('home.index', compact( 'settingArr', 'page_name', 'layout_name', 'hotArr', 'articlesArr', 'settingArr', 'moviesAllCategoryArr', 'moviesAllCountryArr'));
     }
 
+    public function ajaxTab(Request $request){
+        $table = $request->type ? $request->type : 'category';
+        $id = $request->id;
+
+        $arr = Film::getFilmHomeTab( $table, $id);
+
+        return view('home.index.ajax-tab', compact('arr'));
+    }
     /**
     * Show the form for creating a new resource.
     *
@@ -100,24 +105,12 @@ class HomeController extends Controller
     {
 
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+        
         $layout_name = "main-category";
         
         $page_name = "page-category";
 
         $cateArr = $cateActiveArr = $moviesActiveArr = [];
-
-        $parentArr = ParentCategory::orderBy('display_order')->get();
-
-        $tmpCateArr = Category::orderBy('display_order')->get();
-
-        if( $tmpCateArr->count() > 0){
-            
-            foreach ($tmpCateArr as $value) {               
-
-                $cateArr[$value->parent_id][] = $value;
-                
-            }
-        }
 
         $tu_khoa = $request->k;
         
@@ -125,7 +118,7 @@ class HomeController extends Controller
 
         $moviesArr = Film::where('alias', 'LIKE', '%'.$tu_khoa.'%')->orderBy('id', 'desc')->paginate(20);
 
-        return view('home.cate', compact('settingArr', 'moviesArr', 'tu_khoa',  'is_search', 'layout_name', 'page_name', 'parentArr' , 'cateArr' ));
+        return view('home.cate', compact('settingArr', 'moviesArr', 'tu_khoa',  'is_search', 'layout_name', 'page_name' ));
     }
 
     public function cate(Request $request)

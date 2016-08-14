@@ -9,8 +9,8 @@
          <a href="{{ URL::to('/') }}" title="Trang chủ">Trang chủ</a>
       </li>
      
-         <li class="">
-            <a href="#" title="GENRES">GENRES</a>
+         <li>
+            <a href="/phim-theo-the-loai" title="QUỐC GIA">THỂ LOẠI</a>
             @if( !empty($parentCate) )
             <div class="sub-container" style="display: none">
                <ul class="sub-menu">
@@ -25,7 +25,7 @@
             @endif
          </li>
          <li class="">
-            <a href="#" title="COUNTRY">COUNTRY</a>
+            <a href="/phim-theo-quoc-gia" title="QUỐC GIA">QUỐC GIA</a>
             @if( !empty($countryArr) )
             <div class="sub-container" style="display: none">
                <ul class="sub-menu">

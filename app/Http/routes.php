@@ -14,9 +14,12 @@
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('/tin-tuc', ['as' => 'news-list', 'uses' => 'HomeController@newsList']);
 Route::post('/get-link', ['as' => 'get-link', 'uses' => 'DetailController@getLink']);
+Route::get('/load-tab', ['as' => 'ajax-tab', 'uses' => 'HomeController@ajaxTab']);
 Route::get('{slug}-{id}.html', ['as' => 'detail', 'uses' => 'DetailController@index']);
 Route::get('/tin-tuc/{slug}-{id}.html', ['as' => 'news-detail', 'uses' => 'HomeController@newsDetail']);
 Route::get('{slug}', ['as' => 'cate', 'uses' => 'HomeController@cate']);
+Route::get('/movies-info/{movies_id}', ['as' => 'movies-info', 'uses' => 'DetailController@ajaxMoviesInfo']);
+
 Route::get('/download', ['as' => 'download', 'uses' => 'DetailController@download']);
 Route::get('/tim-kiem.html', ['as' => 'search', 'uses' => 'HomeController@search']);
 

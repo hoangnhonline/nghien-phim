@@ -40,10 +40,34 @@ class Film extends Model  {
         return $arr;
     }
 
+    public static function filmCategoryName( $id )
+    {
+        $arr = [];
+        $rs = FilmCategory::where( 'film_id', $id )
+                ->join('category', 'category.id', '=', 'film_category.category_id')
+                ->select('name', 'id', 'slug')->get();
+        if( $rs ){
+            $arr = $rs->toArray();
+        }
+        return $arr;
+    }
+
     public static function filmCountry( $id )
     {
         $arr = [];
         $rs = FilmCountry::where( 'film_id', $id )->lists('country_id');
+        if( $rs ){
+            $arr = $rs->toArray();
+        }
+        return $arr;
+    }
+
+    public static function filmCountryName( $id )
+    {
+        $arr = [];
+        $rs = FilmCountry::where( 'film_id', $id )
+                ->join('country', 'country.id', '=', 'film_country.country_id')
+                ->select('name', 'id', 'slug')->get();
         if( $rs ){
             $arr = $rs->toArray();
         }
@@ -73,5 +97,32 @@ class Film extends Model  {
     public function episodes()
     {
         return $this->hasMany('App\Models\FilmEpisode', 'film_id');
+    }
+
+    public static function getFilmHomeTab($table, $id){
+
+        $arr = [];
+
+        if( $table == "category"){
+            $query = Film::where('status', 1)
+                        ->join('film_category', 'id', '=', 'film_category.film_id');
+                        if( $id > 0 ){
+                            $query->where('film_category.category_id' , $id);
+                        }
+                        
+            $arr = $query->groupBy('film_id')
+                   ->orderBy('id', 'desc')->limit(16)->get();
+        }else{
+            $query = Film::where('status', 1)
+                        ->join('film_country', 'id', '=', 'film_country.film_id');
+                    if( $id > 0 ){
+                        $query->where('film_country.country_id' , $id);
+                    }    
+                        
+            $arr = $query->groupBy('film_id')
+                    ->orderBy('id', 'desc')->limit(16)->get();
+        }
+
+        return $arr;
     }
 }

@@ -167,7 +167,12 @@
       @if( $moviesArr->count() > 0)
          @foreach( $moviesArr as $movies)
          <div class="ml-item">
-            <a href="{{ $movies->slug }}-{{ $movies->id }}.html" class="ml-mask">
+            <a href="{{ $movies->slug }}-{{ $movies->id }}.html"
+
+              data-url="{{ route('movies-info', [ $movies->id ]) }}"
+                     class="ml-mask jt"
+                     title="{{ $movies->title }}"
+                     >
                <span class="mli-quality">{{ $movies->quality == 1 ? "HD" : ( $movies->quality == 2 ? "SD" : "CAM" ) }}</span>
                <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                   alt="{{ $movies->title }}">
@@ -202,3 +207,59 @@
    margin-bottom: 10px !important;
 }
 </style>
+@section('javascript_page')
+ <script type="text/javascript">
+ function isCookieEnabled() {
+       var e = navigator.cookieEnabled ? !0 : !1;
+       return "undefined" != typeof navigator.cookieEnabled || e || (document.cookie = "testcookie", e = -1 != document.cookie.indexOf("testcookie") ? !0 : !1), e
+   }
+   if (!isCookieEnabled()) {
+       $('#alert-cookie').css('display', 'block');
+       $('body').addClass('off-cookie');
+   }
+    if (!jQuery.browser.mobile) {
+        $('.jt').qtip({
+            content: {
+                text: function (event, api) {
+                    $.ajax({
+                        url: api.elements.target.attr('data-url'),
+                        type: 'GET',
+                        success: function (data, status) {
+                            // Process the data
+
+                            // Set the content manually (required!)
+                            api.set('content.text', data);
+                        }
+                    });
+                }, // The text to use whilst the AJAX request is loading
+                title: function (event, api) {
+                    return $(this).attr('title');
+                }
+            },
+            position: {
+                my: 'top left',  // Position my top left...
+                at: 'top right', // at the bottom right of...
+                viewport: $(window),
+                effect: false,
+                target: 'mouse',
+                adjust: {
+                    mouse: false  // Can be omitted (e.g. default behaviour),
+                },
+                show: {
+                    effect: false
+                }
+            },
+            hide: {
+                fixed: true
+            },
+            style: {
+                classes: 'qtip-light qtip-bootstrap',
+                width: 320
+            }
+        });
+    }
+    $("img.lazy").lazyload({
+        effect: "fadeIn"
+    });
+</script>
+@endsection
