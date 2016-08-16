@@ -7,92 +7,61 @@
 @section('favicon'){{ Helper::showImage($settingArr['favicon']) }}@endsection
 @section('logo'){{ Helper::showImage($settingArr['logo']) }}@endsection
 <div class="pad"></div>
-<div class="movies-list-wrap mlw-topview">
+<div class="movies-list-wrap mlw-latestmovie">
     <div class="ml-title">
-        <span class="pull-left">THỂ LOẠI <i class="fa fa-chevron-right ml10"></i></span>
-        <a href="/the-loai" class="pull-right cat-more">Tất cả »</a>
-         @if( !empty( $parentCate ) )
-         <ul role="tablist" class="nav nav-tabs">
-           <li class="active"><a data-toggle="tab" role="tab" href="#lastest-all"
-               aria-expanded="false"  class="load-lastest" data-parent="lastest-category" data-value="0" data-type="category">Tất cả</a></li>   
-               <?php $i = 0; ?>       
-            @foreach( $parentCate as $cate )
-               <?php $i++; ?>
-               @if($i <= 10)
-            <li><a data-toggle="tab" role="tab" href="#lastest-{{ $cate->slug }}"
-               aria-expanded="false"  class="load-lastest" data-parent="lastest-category" data-value="{{ $cate->id }}" data-type="category">{{ $cate->name }}</a></li>
-               @endif
-            @endforeach
-         </ul>
-         @endif
+        <span class="pull-left">Phim lẻ mới nhất <i class="fa fa-chevron-right ml10"></i></span>
+        <a href="http://123movies.to/movie/filter/movie" class="pull-right cat-more">View more »</a>
+
         <div class="clearfix"></div>
     </div>
-    <div class="tab-content"> 
-        <div id="lastest-category" class="movies-list movies-list-full tab-pane in fade active">
-            @if( $moviesAllCategoryArr->count() > 0)
-               @foreach( $moviesAllCategoryArr as $movies)
-               <div data-movie-id="{{ $movies->id }}" class="ml-item">
-                  <a href="/{{ $movies->slug }}-{{ $movies->id }}.html"
-                     data-url="{{ route('movies-info', [ $movies->id ]) }}"
-                     class="ml-mask jt"
-                     title="{{ $movies->title }}">
-                        <span class="mli-quality">{{ $movies->quality == 1 ? "HD" : ( $movies->quality == 2 ? "SD" : "CAM" ) }}</span>
-                        <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
-                           alt="{{ $movies->title }}">
-                        <span class="mli-info">
-                           <h2>{{ $movies->title }}</h2>
-                        </span>
-                  </a>
-              </div>
-             @endforeach
-            @endif
-            <div class="clearfix"></div>
-        </div>      
-   
+    <div class="movies-list movies-list-full tab-pane in fade active">
+         @if( $moviesAllCategoryArr->count() > 0)
+             @foreach( $moviesAllCategoryArr as $movies)
+             <div data-movie-id="{{ $movies->id }}" class="ml-item">
+                <a href="/{{ $movies->slug }}-{{ $movies->id }}.html"
+                   data-url="{{ route('movies-info', [ $movies->id ]) }}"
+                   class="ml-mask jt"
+                   title="{{ $movies->title }}">
+                      <span class="mli-quality">{{ $movies->quality == 1 ? "HD" : ( $movies->quality == 2 ? "SD" : "CAM" ) }}</span>
+                      <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
+                         alt="{{ $movies->title }}">
+                      <span class="mli-info">
+                         <h2>{{ $movies->title }}</h2>
+                      </span>
+                </a>
+            </div>
+           @endforeach
+          @endif
+        <div class="clearfix"></div>
     </div>
 </div>
-<div class="movies-list-wrap mlw-topview">
+<div class="movies-list-wrap mlw-latestmovie">
     <div class="ml-title">
-        <span class="pull-left">QUỐC GIA <i class="fa fa-chevron-right ml10"></i></span>
-        <a href="/quoc-gia" class="pull-right cat-more">Tất cả »</a>
-         @if( !empty( $countryArr ) )
-         <ul role="tablist" class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" role="tab" href="#country-all"
-               aria-expanded="false"  class="load-lastest" data-parent="country-content" data-value="0" data-type="country">Tất cả</a></li>  
-               <?php $i = 0; ?>                   
-            @foreach( $countryArr as $country )             
-            <?php $i++; ?>
-            @if( $i <= 10)
-            <li><a data-toggle="tab" role="tab" href="#country-{{ $country->slug }}"
-               aria-expanded="false" class="load-lastest" data-parent="country-content" data-value="{{ $country->id }}" data-type="country">{{ $country->name }}</a></li>
-            @endif
-            @endforeach
-         </ul>
-         @endif
+        <span class="pull-left">Phim bộ mới cập nhật <i class="fa fa-chevron-right ml10"></i></span>
+        <a href="http://123movies.to/movie/filter/movie" class="pull-right cat-more">View more »</a>
+
         <div class="clearfix"></div>
     </div>
-     <div class="tab-content">
-        <div id="country-content" class="movies-list movies-list-full active">
-            @if( $moviesAllCountryArr->count() > 0)
-               @foreach( $moviesAllCountryArr as $movies)
-               <div data-movie-id="{{ $movies->id }}" class="ml-item">
-                  <a href="/{{ $movies->slug }}-{{ $movies->id }}.html"
-                     data-url="{{ route('movies-info', [ $movies->id ]) }}"
-                     class="ml-mask jt"
-                     title="{{ $movies->title }}">
-                        <span class="mli-quality">{{ $movies->quality == 1 ? "HD" : ( $movies->quality == 2 ? "SD" : "CAM" ) }}</span>
-                        <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
-                           alt="{{ $movies->title }}">
-                        <span class="mli-info">
-                           <h2>{{ $movies->title }}</h2>
-                        </span>
-                  </a>
-              </div>
-             @endforeach
-            @endif
-            <div class="clearfix"></div>
-        </div> 
-      </div>
+    <div class="movies-list movies-list-full tab-pane in fade active">
+         @if( $moviesAllCountryArr->count() > 0)
+             @foreach( $moviesAllCountryArr as $movies)
+             <div data-movie-id="{{ $movies->id }}" class="ml-item">
+                <a href="/{{ $movies->slug }}-{{ $movies->id }}.html"
+                   data-url="{{ route('movies-info', [ $movies->id ]) }}"
+                   class="ml-mask jt"
+                   title="{{ $movies->title }}">
+                      <span class="mli-eps">Eps<i>52</i></span>
+                      <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
+                         alt="{{ $movies->title }}">
+                      <span class="mli-info">
+                         <h2>{{ $movies->title }}</h2>
+                      </span>
+                </a>
+            </div>
+           @endforeach
+          @endif
+        <div class="clearfix"></div>
+    </div>
 </div>
 <div class="content-kus" style="text-align: center; margin: 20px 0; padding: 15px;">
 </div>

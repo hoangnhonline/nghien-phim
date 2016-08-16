@@ -39,7 +39,7 @@
                   </div>
                 @endif
                 <div class="form-group">
-                  <label>Danh mục <span class="red-star">*</span></label>
+                  <label>Thể loại <span class="red-star">*</span></label>
                   <div class="col-md-12">
                      @foreach( $parentCate as $cate)
                       <label class="col-md-4"><input type="checkbox" name="category_id[]" class="cb" value="{{ $cate->id }}"
@@ -59,7 +59,7 @@
                   </div>
                 </div>  
                 <div class="form-group" >                  
-                  <label>Name <span class="red-star">*</span></label>
+                  <label>Tên phim <span class="red-star">*</span></label>
                   <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
                 </div>
                 <div class="form-group">                  
@@ -67,20 +67,20 @@
                   <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}">
                 </div>
                 <div class="form-group" >                  
-                  <label>Original name<span class="red-star">*</span></label>
+                  <label>Tên gốc<span class="red-star">*</span></label>
                   <input type="text" class="form-control" name="original_title" id="original_title" value="{{ old('original_title') }}">
                 </div>
                 <div class="form-group" >                  
-                  <label>Original slug<span class="red-star">*</span></label>
+                  <label>Slug gốc<span class="red-star">*</span></label>
                   <input type="text" class="form-control" name="original_slug" id="original_slug" value="{{ old('original_slug') }}">
                 </div>    
                 <!-- textarea -->
                 <div class="form-group">
-                  <label>Excerpt</label>
+                  <label>Tóm tắt ngắn</label>
                   <textarea class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
                 </div>
                 <div class="form-group">                 
-                  <label>Directors</label>
+                  <label>Đạo diễn</label>
                   <select class="form-control select2" name="director[]" id="director" multiple="multiple">                  
                     @if( !empty( $crewArr[2] ) )
                       @foreach( $crewArr[2] as $value )
@@ -95,7 +95,7 @@
                   </span>-->
                 </div>               
                 <div class="form-group"> 
-                  <label>Actors</label>
+                  <label>Diễn viên</label>
                   <select class="form-control select2" name="actor[]" id="actor" multiple="multiple">                  
                     @if( !empty( $crewArr[1] ) )
                       @foreach( $crewArr[1] as $value )
@@ -110,7 +110,7 @@
                   </span>-->
                 </div>
                 <div class="form-group"> 
-                  <label>Producers</label>
+                  <label>Nhà sản xuất</label>
                   <select class="form-control select2" name="producer[]" id="producer" multiple="multiple">                  
                     @if( !empty( $crewArr[3] ) )
                       @foreach( $crewArr[3] as $value )
@@ -125,7 +125,7 @@
                   </span>-->
                 </div>
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-3 row">Thumbnail </label>    
+                  <label class="col-md-3 row">Ảnh Thumb </label>    
                   <div class="col-md-9">
                     <img id="thumbnail_image" src="{{ old('image_url') ? Helper::showImage(old('image_url')) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="120">
                     
@@ -136,7 +136,7 @@
                   <div style="clear:both"></div>
                 </div>
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-3 row">Poster </label>    
+                  <label class="col-md-3 row">Ảnh Poster </label>    
                   <div class="col-md-9">
                     <img id="thumbnail_poster" src="{{ old('poster_url') ? Helper::showImage(old('poster_url')) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="200">
                     
@@ -163,7 +163,7 @@
                   </span>-->
                 </div>
                 <div class="form-group">
-                  <label>Chi tiết</label>
+                  <label>Nội dung phim</label>
                   <textarea class="form-control" rows="4" name="content" id="content">{{ old('content') }}</textarea>
                 </div>
                   
@@ -189,8 +189,8 @@
           </div>
           <!-- /.box-header -->
             <div class="box-body">
-              <div class="form-group">
-                <label for="email" class="ltitle">Status </label>
+              <!--<div class="form-group">
+                <label for="email" class="ltitle">Trạng thái </label>
                 <label class="radio-inline"><input type="radio" {{ old('status')  == 1 || !old('status') ? "checked" : "" }} name="status" value="1">Active</label>
                 <label class="radio-inline"><input type="radio" {{ old('status') == 2 ? "checked" : "" }} name="status" value="2">Pending</label>              
               </div>
@@ -200,13 +200,23 @@
                 <label class="radio-inline"><input type="radio" {{ old('top') == 2 ? "checked" : "" }} name="top" value="2">Hot</label>
                 <label class="radio-inline"><input type="radio" {{ old('top') == 4 ? "checked" : "" }} name="top" value="4">Comming soon</label>
                 <label class="radio-inline" style="margin-left:84px"><input type="radio" {{ old('top') == 3 ? "checked" : "" }} name="top" value="3">Completed</label>
-              </div>
+              </div>-->
               <div class="form-group">
-                <label for="email" class="ltitle">Type </label>
-                <label class="radio-inline"><input type="radio" {{ old('type') || !old('type') == 1 ? "checked" : "" }} name="type" value="1">Movies</label>
-                <label class="radio-inline"><input type="radio" {{ old('type') == 2 ? "checked" : "" }} name="type" value="2">Series</label>
+                <label for="email" class="ltitle">Kiểu phim </label>
+                <label class="radio-inline"><input type="radio" {{ !old('type') || old('type') == 1 ? "checked" : "" }} name="type" value="1">Phim lẻ</label>
+                <label class="radio-inline"><input type="radio" {{ old('type') == 2 ? "checked" : "" }} name="type" value="2">Phim bộ</label>
+                <label class="radio-inline"><input type="radio" {{ old('type') == 3 ? "checked" : "" }} name="type" value="3">Phim chiếu rạp</label>
+                <label class="radio-inline"><input type="radio" {{ old('type') == 4 ? "checked" : "" }} name="type" value="4">Games show</label>
+                <label class="radio-inline"><input type="radio" {{ old('type') == 5 ? "checked" : "" }} name="type" value="5">Trailer</label>
               </div>
-              <div class="form-group">
+               <div class="form-group">
+                <label for="email" class="ltitle">Chất lượng </label>
+                <label class="radio-inline"><input type="radio" {{ !old('quality') || old('quality') == 1 ? "checked" : "" }} name="quality" value="1">Full HD</label>
+                <label class="radio-inline"><input type="radio" {{ old('quality') == 2 ? "checked" : "" }} name="quality" value="2">HD</label>
+                <label class="radio-inline"><input type="radio" {{ old('quality') == 3 ? "checked" : "" }} name="quality" value="3">SD</label>
+                <label class="radio-inline"><input type="radio" {{ old('quality') == 4 ? "checked" : "" }} name="quality" value="4">CAM</label>                
+              </div>
+              <!--<div class="form-group">
                 <label for="email" class="ltitle">Cinema </label>
                 <label class="radio-inline"><input type="radio" {{ old('cinema') || !old('cinema') == 1 ? "checked" : "" }} name="cinema" value="1">Yes</label>
                 <label class="radio-inline"><input type="radio" {{ old('cinema') == 0 ? "checked" : "" }} name="cinema" value="0">No</label>
@@ -215,22 +225,28 @@
                 <label for="email" class="ltitle">Push top </label>
                 <label class="radio-inline"><input type="radio" {{ old('push_top') == 1 ? "checked" : "" }} name="push_top" value="1">Yes</label>
                 <label class="radio-inline"><input type="radio" {{ old('push_top') == 0 ? "checked" : "" }} name="push_top" value="0">No</label>
-              </div>
+              </div>-->
+
               <div class="form-group" >                  
-                <label>IMDB</label>
+                <label>Điểm IMDB</label>
                 <input type="text" class="form-control" name="imdb" id="imdb" value="{{ old('imdb') }}">
               </div>
               <div class="form-group" >                  
-                <label>Release Year</label>
+                <label>Năm sản xuất</label>
                 <input type="text" class="form-control" name="release_year" id="release_year" value="{{ old('release_year') }}">
               </div>
               <div class="form-group" >                  
-                <label>Duration</label>
+                <label>Thời lượng / Số tập</label>
                 <input type="text" class="form-control" name="duration" id="duration" value="{{ old('duration') }}">
               </div>
               <div class="form-group" >                  
                 <label>Trailer</label>
                 <input type="text" class="form-control" name="trailer" id="trailer" value="{{ old('trailer') }}">
+              </div>
+               <div class="form-group">
+                <label for="email" class="ltitle">Slide </label>
+                <label class="radio-inline"><input type="radio" {{  old('slide') == 1 ? "checked" : "" }} name="slide" value="1">Yes</label>
+                <label class="radio-inline"><input type="radio" {{ !old('slide') || old('slide') == 0 ? "checked" : "" }} name="slide" value="0">No</label>                
               </div>
         </div>
         <div style="margin-bottom:10px; clear:both"></div>

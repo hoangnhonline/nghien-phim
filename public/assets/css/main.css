@@ -130,7 +130,7 @@ header .header-logo h1{ font-size: 0; margin: 0;}
 /* movies list*/
 .movies-list-wrap{ display: block; overflow:hidden; margin: 0 0 40px;}
 .movies-list-wrap .ml-title{ display: block; margin-bottom: 10px;}
-.movies-list-wrap .ml-title span{font-size: 18px; font-family: 'Montserrat'; font-weight: 400; display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; background: #79C142; color: #fff; border-radius: 3px 3px 0 0;}
+.movies-list-wrap .ml-title span{font-size: 18px; font-family: 'Montserrat'; font-weight: 400; display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; background: #79C142; color: #fff; border-radius: 3px 3px 0 0; text-transform: uppercase;}
 .movies-list-wrap .ml-title span i{ font-size: 14px;}
 .movies-list-wrap .ml-title .nav-tabs{ display: inline-block; margin-left: 15px; border-bottom: none;}
 .movies-list-wrap .ml-title .nav-tabs li.active a{ border-radius: 3px;}
