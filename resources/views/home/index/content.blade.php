@@ -15,8 +15,8 @@
         <div class="clearfix"></div>
     </div>
     <div class="movies-list movies-list-full tab-pane in fade active">
-         @if( $moviesAllCategoryArr->count() > 0)
-             @foreach( $moviesAllCategoryArr as $movies)
+         @if( $phimLeArr->count() > 0)
+             @foreach( $phimLeArr as $movies)
              <div data-movie-id="{{ $movies->id }}" class="ml-item">
                 <a href="/{{ $movies->slug }}-{{ $movies->id }}.html"
                    data-url="{{ route('movies-info', [ $movies->id ]) }}"
@@ -43,14 +43,21 @@
         <div class="clearfix"></div>
     </div>
     <div class="movies-list movies-list-full tab-pane in fade active">
-         @if( $moviesAllCountryArr->count() > 0)
-             @foreach( $moviesAllCountryArr as $movies)
+         @if( $phimBoArr->count() > 0)
+             @foreach( $phimBoArr as $movies)
              <div data-movie-id="{{ $movies->id }}" class="ml-item">
                 <a href="/{{ $movies->slug }}-{{ $movies->id }}.html"
                    data-url="{{ route('movies-info', [ $movies->id ]) }}"
                    class="ml-mask jt"
                    title="{{ $movies->title }}">
-                      <span class="mli-eps">Eps<i>52</i></span>
+                      @if(isset($arrEpisode[$movies->id]))
+                      <?php 
+                      $tmp = explode(" ", $arrEpisode[$movies->id]);
+                      ?>
+                      <span class="mli-eps">
+                      {{ $tmp[0] }} <i>{{ isset($tmp[1]) ? $tmp[1] : "" }}</i>
+                      </span>
+                      @endif
                       <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                          alt="{{ $movies->title }}">
                       <span class="mli-info">

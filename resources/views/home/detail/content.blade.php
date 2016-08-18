@@ -59,7 +59,7 @@
             <div class="clearfix"></div>
           
         </div>
-        <div class="thumb mvic-thumb" style="background-image: url({{ Helper::showImage($detail->image_url) }});"></div>
+        <div class="thumb mvic-thumb" style="background-image: url({{ Helper::showImage($detail->poster_url) }});"></div>
         <div class="mvic-desc">
             <h3>{{ $detail->title }}</h3>
             <!--hoangcmt<div class="block-trailer">

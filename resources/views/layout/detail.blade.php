@@ -172,7 +172,7 @@
                 @if( $detail->content )
 
                 <div class="content-kus" style="background: #fff;">
-                    {!! $detail->content !!}
+                    <?php echo $detail->content; ?>
                 </div>
                 @endif
                 <!--<div id="commentfb">

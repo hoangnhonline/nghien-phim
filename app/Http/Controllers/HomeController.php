@@ -13,6 +13,7 @@ use App\Models\TagObjects;
 use App\Models\Settings;
 use App\Models\Articles;
 use App\Models\ArticlesCate;
+use App\Models\FilmEpisode;
 use Helper, File, Session;
 
 class HomeController extends Controller
@@ -54,36 +55,30 @@ class HomeController extends Controller
 
         $layout_name = $page_name = "";
 
-        $moviesAllCategoryArr = $moviesActiveCountryArr = [];
-        $moviesAllCategoryArr = Film::where('status', 1)->where('type', 1)                        
+        $phimLeArr = $phimBoArr = $arrEpisode = [];
+        $phimLeArr = Film::where('status', 1)->where('type', 1)                        
                                 ->orderBy('id', 'desc')->limit(16)->get();
-        $moviesAllCountryArr = Film::where('status', 1)->where('type', 2)    
-                       // ->join('film_country', 'id', '=', 'film_country.film_id')                       
-                        //->groupBy('film_id')
-                        ->orderBy('id', 'desc')->limit(16)->get();
-        /*
-        $moviesActiveArr[$value->id] = Film::where('status', 1)
-                        ->join('film_category', 'id', '=', 'film_category.film_id')
-                        ->where('film_category.category_id' , $value->id)
-                        ->groupBy('film_id')
-                        ->orderBy('id', 'desc')->limit(3)->get();
-        $moviesActiveCountryArr[$value->id] = Film::where('status', 1)
-                        ->join('film_country', 'id', '=', 'film_country.film_id')
-                        ->where('film_country.country_id' , $value->id)
-                        ->groupBy('film_id')
-                        ->orderBy('id', 'desc')->limit(3)->get();
-        */
-       
-        
+        $phimBoArr = Film::where('status', 1)->where('type', 2)                            
+                        //->groupBy('film_id')                                                                     
+                        ->orderBy('updated_episode_date', 'desc')->limit(16)->get();      
 
-      
-      
+        if( $phimBoArr->count() > 0) {
+            foreach( $phimBoArr as $phim)
+            {
+               // var_dump($phim->id);die;
+                $tmp = FilmEpisode::where('film_id', $phim->id)->orderBy('id', 'desc')->select('name')->first();
+                if($tmp){
+                    $arrEpisode[$phim->id] = $tmp->name;
+                }
+            }
+        }
+      //  var_dump("<pre>", $arrEpisode);die;
         //articles
         $articlesArr = Articles::where([ 'status' => 1, 'is_hot' => 1 ])->orderBy('id', 'desc')->select('id', 'slug', 'title', 'image_url')->limit(10)->get();
 
         $hotArr = Film::where([ 'status' => 1, 'slide' => 1 ])->orderBy('id', 'desc')->select('id', 'slug', 'title', 'image_url', 'description', 'slide', 'views', 'likes', 'imdb', 'order', 'push_top', 'poster_url', 'quality')->limit(10)->get();        
 
-        return view('home.index', compact( 'settingArr', 'page_name', 'layout_name', 'hotArr', 'articlesArr', 'settingArr', 'moviesAllCategoryArr', 'moviesAllCountryArr'));
+        return view('home.index', compact( 'settingArr', 'page_name', 'layout_name', 'hotArr', 'articlesArr', 'settingArr', 'phimLeArr', 'phimBoArr', 'arrEpisode'));
     }
 
     public function ajaxTab(Request $request){

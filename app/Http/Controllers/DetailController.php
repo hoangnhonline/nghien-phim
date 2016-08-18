@@ -33,23 +33,26 @@ class DetailController extends Controller
 
         $id = $request->id;
         $detail = Film::where( 'id', $id )
-                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'cate_id', 'parent_id', 'image_url', 'url', 'content', 'meta_title', 'meta_description', 'meta_keywords', 'custom_text')
+                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content')                
                 ->first();
-
-        if( $detail ){
-
-            $relatedArr = Film::where('cate_id', $detail->cate_id)
-                        ->where('id', '<>', $id)
+        $cate = $detail->filmCategory($id);
+        $category_id = $cate[0];        
+        if( $detail ){  
+            $relatedArr = Film::where('id', '<>', $id)
+                        ->join('film_category', 'film_category.film_id', '=', 'film.id')
+                        ->where('category_id', $category_id)
                         ->select('id', 'title', 'slug', 'image_url', 'quality')
                         ->orderBy('id', 'desc')
-                        ->limit(16)
+                        ->limit(12)
                         ->get();
             
-            $cateDetail = Cate::find( $detail->cate_id )->select('id', 'name', 'slug')->first();           
+            $cateDetail = Category::find( $category_id )->select('id', 'name', 'slug')->first();           
+            
             //tags
-            $tmpArr = TagObjects::where( ['object_type' => 1, 'object_id' => $id] )
+
+            $tmpArr = TagObjects::where( ['tag_objects.type' => 1, 'object_id' => $id] )
                         ->join('tag', 'tag.id', '=', 'tag_objects.tag_id')
-                        ->select('tag', 'slug')
+                        ->select('name', 'slug')
                         ->get();
             
             if( $tmpArr->count() > 0 ){
