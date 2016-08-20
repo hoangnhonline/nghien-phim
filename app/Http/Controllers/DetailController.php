@@ -11,7 +11,9 @@ use App\Models\Country;
 use App\Models\Tag;
 use App\Models\TagObjects;
 use App\Models\Film;
+use App\Models\FilmEpisode;
 use App\Models\Settings;
+
 use Helper, File, Session, DB;
 
 
@@ -35,6 +37,7 @@ class DetailController extends Controller
         $detail = Film::where( 'id', $id )
                 ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content')                
                 ->first();
+        $episode = FilmEpisode::where('film_id', $id)->orderBy('id', 'desc')->first();
         $cate = $detail->filmCategory($id);
         $category_id = $cate[0];        
         if( $detail ){  
@@ -67,7 +70,8 @@ class DetailController extends Controller
                 'tagSelected', 
                 'relatedArr', 
                 'detail',               
-                'cateDetail'                
+                'cateDetail',
+                'episode'            
                 ));    
         }else{
             return view('errors.404');

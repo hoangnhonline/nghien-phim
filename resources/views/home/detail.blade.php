@@ -3,18 +3,7 @@
 @section('content')
 	@include('home.detail.content')
 @endsection
-<style type="text/css">
-@media only screen and (min-width: 1280px) {
-    #media-player {
-        height: 500px !important;
-    }
-    #videoPlayer{
-    	height: 500px !important;
-    	width: auto !important;
-    }
 
-}
-</style>
 @section('javascript_page')
 <script type="text/javascript">
 $(document).ready(function(){
