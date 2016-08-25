@@ -26,6 +26,7 @@
           <h3 class="panel-title">Bộ lọc</h3>
         </div>    
         <div class="panel-body">
+
           <form class="form-inline" id="searchForm" role="form" method="GET" action="{{ route('film-episode.index', ['film_id' => $film_id ]) }}">          
             
              <div class="form-group">
@@ -94,7 +95,7 @@
 <!-- /.content -->
 
  <!-- Main content -->
-  <section class="content" id="divForm">   
+  <section class="content" id="divForm">       
     <form role="form" method="POST" action="{{ $id > 0 ? route('film-episode.update') : route('film-episode.store')  }}" id="dataForm">
     <div class="row">
       <!-- left column -->
@@ -139,9 +140,27 @@
                   <label>Slug <span class="red-star">*</span></label>                  
                   <input type="text" class="form-control" name="slug" id="slug" value="{{ $detail ? $detail->slug : old('slug') }}">
                 </div>
-                  
+                <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
+                  <label class="col-md-3 row">Ảnh Poster </label>    
+                  <div class="col-md-9">
+                    <?php 
+                    if( isset($detail->poster_url) ){
+                      $src = Helper::showImage( $detail->poster_url ) ;
+                    }else{
+                      $src = old('poster_url') ? Helper::showImage(old('poster_url')) : URL::asset('backend/dist/img/img.png');
+                    }
+                    ?>
+                    <img id="thumbnail_poster" src="{{ $src }}" class="img-thumbnail" width="200">
+                    
+                    <input type="file" id="file-poster" style="display:none" />
+                 
+                    <button class="btn btn-default" id="btnUploadPoster" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                  </div>
+                  <div style="clear:both"></div>
+                </div>  
             </div>          
-           
+            <input type="hidden" name="poster_url" id="poster_url" value="{{ isset($detail->poster_url) ? $detail->poster_url : old('poster_url') }}"/>            
+            <input type="hidden" name="poster_name" id="poster_name" value="{{ old('poster_name') }}"/>
             <div class="box-footer">
               <button type="button" class="btn btn-default" id="btnLoading" style="display:none"><i class="fa fa-spin fa-spinner"></i></button>
               <button type="submit" class="btn btn-primary" id="btnSave">Lưu</button>
@@ -152,6 +171,7 @@
         <!-- /.box -->     
 
       </div>
+      <input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
       <div class="col-md-4">         
         <!-- general form elements -->
         <div class="box box-primary">
@@ -229,6 +249,75 @@ $(document).ready(function(){
             updateOrder("film_episode", strOrder);
         }
     });
+  $('#btnUploadPoster').click(function(){        
+    $('#file-poster').click();
+  });    
+  var files = "";
+  $('#file-poster').change(function(e){
+     files = e.target.files;
+     
+     if(files != ''){
+       var dataForm = new FormData();        
+      $.each(files, function(key, value) {
+         dataForm.append('file', value);
+      });   
+      
+      dataForm.append('date_dir', 0);
+      dataForm.append('folder', 'tmp');
+
+      $.ajax({
+        url: $('#route_upload_tmp_image').val(),
+        type: "POST",
+        async: false,      
+        data: dataForm,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+          if(response.image_path){
+            $('#thumbnail_poster').attr('src',$('#upload_url').val() + response.image_path);
+            $( '#poster_url' ).val( response.image_path );
+            $( '#poster_name' ).val( response.image_name );
+          }
+          console.log(response.image_path);
+            //window.location.reload();
+        },
+        error: function(response){                             
+            var errors = response.responseJSON;
+            for (var key in errors) {
+              
+            }
+            //$('#btnLoading').hide();
+            //$('#btnSave').show();
+        }
+      });
+    }
+  });
+  $('#name').change(function(){
+         var name = $.trim( $(this).val() );
+         if( name != '' && $('#slug').val() == ''){
+            $.ajax({
+              url: $('#route_get_slug').val(),
+              type: "POST",
+              async: false,      
+              data: {
+                str : name
+              },              
+              success: function (response) {
+                if( response.str ){                  
+                  $('#slug').val( response.str );
+                }                
+              },
+              error: function(response){                             
+                  var errors = response.responseJSON;
+                  for (var key in errors) {
+                    
+                  }
+                  //$('#btnLoading').hide();
+                  //$('#btnSave').show();
+              }
+            });
+         }
+      });
 });
 function updateOrder(table, strOrder){
   $.ajax({
@@ -247,5 +336,6 @@ function updateOrder(table, strOrder){
       }
   });
 }
+
 </script>
 @stop

@@ -9,14 +9,14 @@
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
       <li><a href="{{ route('film.index') }}">Phim</a></li>
-      <li class="active">Thêm mới</li>
+      <li class="active">Chỉnh sửa</li>
     </ol>
   </section>
 
   <!-- Main content -->
   <section class="content">
     <a class="btn btn-default btn-sm" href="{{ route('film.index') }}" style="margin-bottom:5px">Quay lại</a>
-    <form role="form" method="POST" action="{{ route('film.store') }}" id="dataForm">
+    <form role="form" method="POST" action="{{ route('film.update') }}" id="dataForm">
     <div class="row">
       <!-- left column -->
 
@@ -24,10 +24,12 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">Thêm mới</h3>
+            <h3 class="box-title">Chỉnh sửa</h3>
           </div>
           <!-- /.box-header -->               
-            {!! csrf_field() !!}          
+            {!! csrf_field() !!}
+            <input type="hidden" name="id" value="{{ $detail->id }}">
+            <input type="hidden" name="meta_id" value="{{ $detail->meta_id }}">
             <div class="box-body">
                 @if (count($errors) > 0)
                   <div class="alert alert-danger">
@@ -39,11 +41,11 @@
                   </div>
                 @endif
                 <div class="form-group">
-                  <label>Thể loại <span class="red-star">*</span></label>
+                  <label>Danh mục <span class="red-star">*</span></label>
                   <div class="col-md-12">
                      @foreach( $parentCate as $cate)
                       <label class="col-md-4"><input type="checkbox" name="category_id[]" class="cb" value="{{ $cate->id }}"
-                        {{ ( (old('category_id') && in_array( $cate->id, old('category_id') ))) ? "checked" : "" }}
+                        {{ ( in_array( $cate->id, $filmCategory) || (old('category_id') && in_array( $cate->id, old('category_id') ))) ? "checked" : "" }}
                         >{{ $cate->name }}</label>
                      @endforeach
                   </div>
@@ -53,81 +55,67 @@
                   <div class="col-md-12">
                      @foreach( $countryArr as $country)
                       <label class="col-md-4"><input type="checkbox" class="cb" name="country_id[]" value="{{ $country->id }}"
-                        {{ ( ( old('country_id') && in_array( $country->id, old('country_id') )))? "checked" : "" }}
+                        {{ ( 
+                        in_array( $country->id, $filmCountry) || ( old('country_id') && in_array( $country->id, old('country_id') )))? "checked" : "" }}
                         >{{ $country->name }}</label>
                      @endforeach
                   </div>
                 </div>  
                 <div class="form-group" >                  
-                  <label>Tên phim <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
+                  <label>Name <span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="title" id="title" value="{{ $detail->title }}">
                 </div>
                 <div class="form-group">                  
                   <label>Slug <span class="red-star">*</span></label>                  
-                  <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}">
+                  <input type="text" class="form-control" name="slug" id="slug" value="{{ $detail->slug }}">
                 </div>
                 <div class="form-group" >                  
-                  <label>Tên gốc<span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="original_title" id="original_title" value="{{ old('original_title') }}">
+                  <label>Original name<span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="original_title" id="original_title" value="{{ $detail->original_title }}">
                 </div>
                 <div class="form-group" >                  
-                  <label>Slug gốc<span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="original_slug" id="original_slug" value="{{ old('original_slug') }}">
+                  <label>Original slug<span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="original_slug" id="original_slug" value="{{ $detail->original_slug }}">
                 </div>    
                 <!-- textarea -->
                 <div class="form-group">
-                  <label>Tóm tắt ngắn</label>
-                  <textarea class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
-                </div>
-                <div class="form-group">                 
-                  <label>Đạo diễn</label>
+                  <label>Excerpt</label>
+                  <textarea class="form-control" rows="4" name="description" id="description">{{ $detail->description }}</textarea>
+                </div>                            
+                <div class="form-group">
+                  <label>Directors</label>
                   <select class="form-control select2" name="director[]" id="director" multiple="multiple">                  
                     @if( !empty( $crewArr[2] ) )
                       @foreach( $crewArr[2] as $value )
-                      <option value="{{ $value->id }}" {{ (old('director') && in_array($value->id, old('director'))) ? "selected" : "" }}>{{ $value->name }}</option>
+                      <option value="{{ $value->id }}" {{ ( !empty($crewSelected[2]) && in_array($value->id, $crewSelected[2])) || (old('director') && in_array($value->id, old('director'))) ? "selected" : "" }}>{{ $value->name }}</option>
                       @endforeach
                     @endif
                   </select>
-                  <!--<span class="input-group-btn">
-                    <button style="margin-top:24px" class="btn btn-primary btnNewCrew" type="button" data-value="2">
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                  </span>-->
-                </div>               
-                <div class="form-group"> 
-                  <label>Diễn viên</label>
+                </div>
+                <div class="form-group">
+                  <label>Actors</label>
                   <select class="form-control select2" name="actor[]" id="actor" multiple="multiple">                  
                     @if( !empty( $crewArr[1] ) )
                       @foreach( $crewArr[1] as $value )
-                      <option value="{{ $value->id }}" {{ (old('actor') && in_array($value->id, old('actor'))) ? "selected" : "" }}>{{ $value->name }}</option>
+                      <option value="{{ $value->id }}" {{ ( !empty($crewSelected[1]) && in_array($value->id, $crewSelected[1])) || (old('actor') && in_array($value->id, old('actor'))) ? "selected" : "" }}>{{ $value->name }}</option>
                       @endforeach
                     @endif
                   </select>
-                  <!--<span class="input-group-btn">
-                    <button style="margin-top:24px" class="btn btn-primary btnNewCrew" type="button" data-value="1">
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                  </span>-->
                 </div>
-                <div class="form-group"> 
-                  <label>Nhà sản xuất</label>
+                <div class="form-group">
+                  <label>Producers</label>
                   <select class="form-control select2" name="producer[]" id="producer" multiple="multiple">                  
                     @if( !empty( $crewArr[3] ) )
                       @foreach( $crewArr[3] as $value )
-                      <option value="{{ $value->id }}" {{ (old('producer') && in_array($value->id, old('producer'))) ? "selected" : "" }}>{{ $value->name }}</option>
+                      <option value="{{ $value->id }}" {{ ( !empty($crewSelected[3]) && in_array($value->id, $crewSelected[3])) || (old('producer') && in_array($value->id, old('producer'))) ? "selected" : "" }}>{{ $value->name }}</option>
                       @endforeach
                     @endif
                   </select>
-                  <!--<span class="input-group-btn">
-                    <button style="margin-top:24px" class="btn btn-primary btnNewCrew" type="button" data-value="3">
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                  </span>-->
                 </div>
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-3 row">Ảnh Thumb </label>    
+                  <label class="col-md-3 row">Thumbnail </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_image" src="{{ old('image_url') ? Helper::showImage(old('image_url')) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="120">
+                    <img id="thumbnail_image" src="{{ $detail->image_url ? Helper::showImage($detail->image_url) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="120">
                     
                     <input type="file" id="file-image" style="display:none" />
                  
@@ -136,40 +124,34 @@
                   <div style="clear:both"></div>
                 </div>
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-3 row">Ảnh Poster </label>    
+                  <label class="col-md-3 row">Poster </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_poster" src="{{ old('poster_url') ? Helper::showImage(old('poster_url')) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="200">
+                    <img id="thumbnail_poster" src="{{ $detail->poster_url ? Helper::showImage($detail->poster_url) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="200">
                     
                     <input type="file" id="file-poster" style="display:none" />
                  
                     <button class="btn btn-default" id="btnUploadPoster" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
-                </div>
-               
-                <div class="form-group"> 
+                </div>             
+                <div class="form-group">
                   <label>Tags</label>
                   <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
                     @if( $tagArr->count() > 0)
                       @foreach( $tagArr as $value )
-                      <option value="{{ $value->id }}" {{ (old('tags') && in_array($value->id, old('tags'))) ? "selected" : "" }}>{{ $value->name }}</option>
+                      <option value="{{ $value->id }}" {{ in_array($value->id, $tagSelected) || (old('tags') && in_array($value->id, old('tags'))) ? "selected" : "" }}>{{ $value->name }}</option>
                       @endforeach
                     @endif
                   </select>
-                  <!--<span class="input-group-btn">
-                    <button style="margin-top:24px" class="btn btn-primary" id="btnAddTag" type="button" data-value="3">
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                  </span>-->
                 </div>
                 <div class="form-group">
-                  <label>Nội dung phim</label>
-                  <textarea class="form-control" rows="4" name="content" id="content">{{ old('content') }}</textarea>
+                  <label>Chi tiết</label>
+                  <textarea class="form-control" rows="4" name="content" id="content">{{ $detail->content }}</textarea>
                 </div>
                   
             </div>          
-            <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url') }}"/>           
-            <input type="hidden" name="poster_url" id="poster_url" value="{{ old('poster_url') }}"/>          
+            <input type="hidden" name="image_url" id="image_url" value="{{ $detail->image_url }}"/>           
+            <input type="hidden" name="poster_url" id="poster_url" value="{{ $detail->poster_url }}"/>          
             <input type="hidden" name="image_name" id="image_name" value="{{ old('image_name') }}"/>
             <input type="hidden" name="poster_name" id="poster_name" value="{{ old('poster_name') }}"/>
             <div class="box-footer">
@@ -189,64 +171,48 @@
           </div>
           <!-- /.box-header -->
             <div class="box-body">
-              <!--<div class="form-group">
-                <label for="email" class="ltitle">Trạng thái </label>
-                <label class="radio-inline"><input type="radio" {{ old('status')  == 1 || !old('status') ? "checked" : "" }} name="status" value="1">Active</label>
-                <label class="radio-inline"><input type="radio" {{ old('status') == 2 ? "checked" : "" }} name="status" value="2">Pending</label>              
+              <div class="form-group">
+                <label for="email" class="ltitle">Status </label>
+                <label class="radio-inline"><input type="radio" {{ $detail->status == 1 ? "checked" : "" }} name="status" value="1">Active</label>
+                <label class="radio-inline"><input type="radio" {{ $detail->status == 2 ? "checked" : "" }} name="status" value="2">Pending</label>              
               </div>
               <div class="form-group">
                 <label for="email" class="ltitle">Control </label>
-                <label class="radio-inline"><input type="radio" {{ old('top') || !old('top')== 1 ? "checked" : "" }} name="top" value="1">New</label>
-                <label class="radio-inline"><input type="radio" {{ old('top') == 2 ? "checked" : "" }} name="top" value="2">Hot</label>
-                <label class="radio-inline"><input type="radio" {{ old('top') == 4 ? "checked" : "" }} name="top" value="4">Comming soon</label>
-                <label class="radio-inline" style="margin-left:84px"><input type="radio" {{ old('top') == 3 ? "checked" : "" }} name="top" value="3">Completed</label>
-              </div>-->
+                <label class="radio-inline"><input type="radio" {{ $detail->status == 1 ? "checked" : "" }} name="top" value="1">New</label>
+                <label class="radio-inline"><input type="radio" {{ $detail->status == 2 ? "checked" : "" }} name="top" value="2">Hot</label>
+                <label class="radio-inline"><input type="radio" {{ $detail->status == 4 ? "checked" : "" }} name="top" value="4">Comming soon</label>
+                <label class="radio-inline"><input type="radio" {{ $detail->status == 3 ? "checked" : "" }} name="top" value="3">Completed</label>
+              </div>
               <div class="form-group">
-                <label for="email" class="ltitle">Kiểu phim </label>
-                <label class="radio-inline"><input type="radio" {{ !old('type') || old('type') == 1 ? "checked" : "" }} name="type" value="1">Phim lẻ</label>
-                <label class="radio-inline"><input type="radio" {{ old('type') == 2 ? "checked" : "" }} name="type" value="2">Phim bộ</label>
-                <label class="radio-inline"><input type="radio" {{ old('type') == 3 ? "checked" : "" }} name="type" value="3">Phim chiếu rạp</label>
-                <label class="radio-inline"><input type="radio" {{ old('type') == 4 ? "checked" : "" }} name="type" value="4">Games show</label>
-                <label class="radio-inline"><input type="radio" {{ old('type') == 5 ? "checked" : "" }} name="type" value="5">Trailer</label>
+                <label for="email" class="ltitle">Type </label>
+                <label class="radio-inline"><input type="radio" {{ $detail->type == 1 ? "checked" : "" }} name="type" value="1">Movies</label>
+                <label class="radio-inline"><input type="radio" {{ $detail->type == 2 ? "checked" : "" }} name="type" value="2">Series</label>
               </div>
-               <div class="form-group">
-                <label for="email" class="ltitle">Chất lượng </label>
-                <label class="radio-inline"><input type="radio" {{ !old('quality') || old('quality') == 1 ? "checked" : "" }} name="quality" value="1">Full HD</label>
-                <label class="radio-inline"><input type="radio" {{ old('quality') == 2 ? "checked" : "" }} name="quality" value="2">HD</label>
-                <label class="radio-inline"><input type="radio" {{ old('quality') == 3 ? "checked" : "" }} name="quality" value="3">SD</label>
-                <label class="radio-inline"><input type="radio" {{ old('quality') == 4 ? "checked" : "" }} name="quality" value="4">CAM</label>                
-              </div>
-              <!--<div class="form-group">
+              <div class="form-group">
                 <label for="email" class="ltitle">Cinema </label>
-                <label class="radio-inline"><input type="radio" {{ old('cinema') || !old('cinema') == 1 ? "checked" : "" }} name="cinema" value="1">Yes</label>
-                <label class="radio-inline"><input type="radio" {{ old('cinema') == 0 ? "checked" : "" }} name="cinema" value="0">No</label>
+                <label class="radio-inline"><input type="radio" {{ $detail->cinema == 1 ? "checked" : "" }} name="cinema" value="1">Yes</label>
+                <label class="radio-inline"><input type="radio" {{ $detail->cinema == 0 ? "checked" : "" }} name="cinema" value="0">No</label>
               </div>
               <div class="form-group">
                 <label for="email" class="ltitle">Push top </label>
-                <label class="radio-inline"><input type="radio" {{ old('push_top') == 1 ? "checked" : "" }} name="push_top" value="1">Yes</label>
-                <label class="radio-inline"><input type="radio" {{ old('push_top') == 0 ? "checked" : "" }} name="push_top" value="0">No</label>
-              </div>-->
-
-              <div class="form-group" >                  
-                <label>Điểm IMDB</label>
-                <input type="text" class="form-control" name="imdb" id="imdb" value="{{ old('imdb') }}">
+                <label class="radio-inline"><input type="radio" {{ $detail->push_top == 1 ? "checked" : "" }} name="push_top" value="1">Yes</label>
+                <label class="radio-inline"><input type="radio" {{ $detail->push_top == 0 ? "checked" : "" }} name="push_top" value="0">No</label>
               </div>
               <div class="form-group" >                  
-                <label>Năm sản xuất</label>
-                <input type="text" class="form-control" name="release_year" id="release_year" value="{{ old('release_year') }}">
+                <label>IMDB</label>
+                <input type="text" class="form-control" name="imdb" id="imdb" value="{{ $detail->imdb }}">
               </div>
               <div class="form-group" >                  
-                <label>Thời lượng / Số tập</label>
-                <input type="text" class="form-control" name="duration" id="duration" value="{{ old('duration') }}">
+                <label>Release Year</label>
+                <input type="text" class="form-control" name="release_year" id="release_year" value="{{ $detail->release_year }}">
+              </div>
+              <div class="form-group" >                  
+                <label>Duration</label>
+                <input type="text" class="form-control" name="duration" id="duration" value="{{ $detail->duration }}">
               </div>
               <div class="form-group" >                  
                 <label>Trailer</label>
-                <input type="text" class="form-control" name="trailer" id="trailer" value="{{ old('trailer') }}">
-              </div>
-               <div class="form-group">
-                <label for="email" class="ltitle">Slide </label>
-                <label class="radio-inline"><input type="radio" {{  old('slide') == 1 ? "checked" : "" }} name="slide" value="1">Yes</label>
-                <label class="radio-inline"><input type="radio" {{ !old('slide') || old('slide') == 0 ? "checked" : "" }} name="slide" value="0">No</label>                
+                <input type="text" class="form-control" name="trailer" id="trailer" value="{{ $detail->trailer }}">
               </div>
         </div>
         <div style="margin-bottom:10px; clear:both"></div>
@@ -259,21 +225,21 @@
             <div class="box-body">
               <div class="form-group">
                 <label>Meta title </label>
-                <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ old('meta_title') }}">
+                <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ $metadata->meta_title }}">
               </div>
               <!-- textarea -->
               <div class="form-group">
                 <label>Meta desciption</label>
-                <textarea class="form-control" rows="6" name="meta_description" id="meta_description">{{ old('meta_description') }}</textarea>
+                <textarea class="form-control" rows="6" name="meta_description" id="meta_description">{{ $metadata->meta_description }}</textarea>
               </div>  
 
               <div class="form-group">
                 <label>Meta keywords</label>
-                <textarea class="form-control" rows="4" name="meta_keywords" id="meta_keywords">{{ old('meta_keywords') }}</textarea>
+                <textarea class="form-control" rows="4" name="meta_keywords" id="meta_keywords">{{ $metadata->meta_keywords }}</textarea>
               </div>  
               <div class="form-group">
                 <label>Custom text</label>
-                <textarea class="form-control" rows="6" name="custom_text" id="custom_text">{{ old('custom_text') }}</textarea>
+                <textarea class="form-control" rows="6" name="custom_text" id="custom_text">{{ $metadata->custom_text }}</textarea>
               </div>
             
         </div>
@@ -287,7 +253,6 @@
   </section>
   <!-- /.content -->
 </div>
-@include('backend.film.modal')
 <input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
 <input type="hidden" id="route_get_film_external" value="{{ route('general.get-film-external') }}">
 
@@ -296,18 +261,11 @@
 <script src="{{ URL::asset('backend/dist/js/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-      $('.btnNewCrew').click(function(){
-          $('#crewModal').modal('show');
-      });
-      $('#btnAddTag').click(function(){
-          $('#tagModal').modal('show');
-      });
-      
       $(".select2").select2();
       $('#dataForm').submit(function(){
         var no_cate = $('input[name="category_id[]"]:checked').length;
         if( no_cate == 0){
-          swal("Lỗi!", "Chọn ít nhất 1 thể loại!", "error");
+          swal("Lỗi!", "Chọn ít nhất 1 danh mục!", "error");
           return false;
         }
         var no_country = $('input[name="country_id[]"]:checked').length;
@@ -330,10 +288,10 @@
       });
       $('#btnUploadImage').click(function(){        
         $('#file-image').click();
-      }); 
+      });      
       $('#btnUploadPoster').click(function(){        
         $('#file-poster').click();
-      });     
+      });  
       var files = "";
       $('#file-image').change(function(e){
          files = e.target.files;
@@ -344,7 +302,7 @@
              dataForm.append('file', value);
           });   
           
-          dataForm.append('date_dir', 0);
+          dataForm.append('date_dir', 1);
           dataForm.append('folder', 'tmp');
 
           $.ajax({
@@ -374,8 +332,7 @@
           });
         }
       });
-      
-      var files = "";
+       var files = "";
       $('#file-poster').change(function(e){
          files = e.target.files;
          
@@ -416,6 +373,7 @@
         }
       });
 
+      
       $('#title').change(function(){
          var name = $.trim( $(this).val() );
          if( name != '' && $('#slug').val() == ''){
@@ -468,7 +426,6 @@
             });
          }
       });
-     
       
     });
     

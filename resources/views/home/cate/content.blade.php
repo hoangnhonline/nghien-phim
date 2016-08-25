@@ -167,14 +167,14 @@
       @if( $moviesArr->count() > 0)
          @foreach( $moviesArr as $movies)
          <div class="ml-item">
-            <a href="{{ $movies->slug }}-{{ $movies->id }}.html"
+            <a href="{{ $movies->slug }}.html"
 
               data-url="{{ route('movies-info', [ $movies->id ]) }}"
                      class="ml-mask jt"
                      title="{{ $movies->title }}"
                      >
                <span class="mli-quality">{{ $movies->quality == 1 ? "HD" : ( $movies->quality == 2 ? "SD" : "CAM" ) }}</span>
-               <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
+               <img data-original="{{ Helper::showImage( $movies->image_url ) }}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                   alt="{{ $movies->title }}">
                <span class="mli-info">
                   <h2>{{ $movies->title }}</h2>

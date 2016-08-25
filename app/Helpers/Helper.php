@@ -6,6 +6,8 @@ namespace App\Helpers;
 
 class Helper
 {
+    public static $privateKey = 'enilnohngnaoh';
+
     public static function shout(string $string)
     {
         return strtoupper($string);
@@ -41,81 +43,123 @@ class Helper
 
         } 
     }
-
-    public static function getDetailVideoFromExternalSite($url){
+    public static function encodeLink($string){
+        $returnString = "";
+        $charsArray = str_split("e7NjchMCEGgTpsx3mKXbVPiAqn8DLzWo_6.tvwJQ-R0OUrSak954fd2FYyuH~1lIBZ");
+        $charsLength = count($charsArray);
+        $stringArray = str_split($string);
+        $keyArray = str_split(hash('sha256',self::$privateKey));
+        $randomKeyArray = array();
+        while(count($randomKeyArray) < $charsLength){
+            $randomKeyArray[] = $charsArray[rand(0, $charsLength-1)];
+        }
+        for ($a = 0; $a < count($stringArray); $a++){
+            $numeric = ord($stringArray[$a]) + ord($randomKeyArray[$a%$charsLength]);
+            $returnString .= $charsArray[floor($numeric/$charsLength)];
+            $returnString .= $charsArray[$numeric%$charsLength];
+        }
+        $randomKeyEnc = '';
+        for ($a = 0; $a < $charsLength; $a++){
+            $numeric = ord($randomKeyArray[$a]) + ord($keyArray[$a%count($keyArray)]);
+            $randomKeyEnc .= $charsArray[floor($numeric/$charsLength)];
+            $randomKeyEnc .= $charsArray[$numeric%$charsLength];
+        }
+        return $randomKeyEnc.hash('sha256',$string).$returnString;
+    }
+    public static function decodeLink($string){
+        $returnString = "";
+        $charsArray = str_split("e7NjchMCEGgTpsx3mKXbVPiAqn8DLzWo_6.tvwJQ-R0OUrSak954fd2FYyuH~1lIBZ");
+        $charsLength = count($charsArray);
+        $keyArray = str_split( hash( 'sha256', self::$privateKey ));
+        $stringArray = str_split(substr($string, ( $charsLength * 2 ) + 64));
+        $sha256 = substr( $string, ( $charsLength * 2 ), 64);
+        $randomKeyArray = str_split( substr( $string, 0, $charsLength*2 ));
+        $randomKeyDec = array();
+        if(count($randomKeyArray) < 132) return false;
+        for ($a = 0; $a < $charsLength*2; $a+=2){
+            $numeric = array_search($randomKeyArray[$a],$charsArray) * $charsLength;
+            $numeric += array_search($randomKeyArray[$a+1],$charsArray);
+            $numeric -= ord($keyArray[floor($a/2)%count($keyArray)]);
+            $randomKeyDec[] = chr($numeric);
+        }
+        for ($a = 0; $a < count($stringArray); $a+=2){
+            $numeric = array_search($stringArray[$a],$charsArray) * $charsLength;
+            $numeric += array_search($stringArray[$a+1],$charsArray);
+            $numeric -= ord($randomKeyDec[floor($a/2)%$charsLength]);
+            $returnString .= chr($numeric);
+        }
+        if(hash('sha256',$returnString) != $sha256){
+            return false;
+        }else{
+            return $returnString;
+        }
+    }
+    public static function getVideoZing($url){
         $arrReturn = [];
-        $isXvideo = 0;
-        $img_url = '';
-        //$url = 'https://www.tnaflix.com/hardcore-porn/Anal-Beautiful-Teen-tight-ass/video1986389';
-        //$url = 'http://javhihi.com/movie/cock-sucking-asian-girls-in-naughty-action.2504.html';
-        //$url = 'http://www.redtube.com/1569950';
-        //$url = 'http://www.youporn.com/watch/12902219/exibitionist-dude-pinoy-astig/';
-        //$url = 'http://www.xvideos.com/video20196023/posh_british_webcam_chick_more_on_youcamgirl.net_webcamgirls_';        
-            
         $ch = curl_init($url);    
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-        if(strpos($url, 'xvideos') > 0){
-            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3B48b Safari/419.3');    
-        }
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);        
         curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
         $result = curl_exec($ch);    
 
-        curl_close($ch);    
+        curl_close($ch);   
 
-         // Create a DOM object
-        $html = new simple_html_dom();
-        // Load HTML from a string
-        $html->load($result);
-
-        if(strpos($url, 'xvideos') > 0){
-            $tmpArr = explode("html5player.setVideoUrlHigh('", $result);
+              
+            preg_match_all('/<source src\=\"(.*?)\" type\=\"video\/mp4\" data\-res\=\"480\"\/\>/',$result,$arr_preg);            
+            $arrReturn['f480'] = isset($arr_preg[1][1]) ? $arr_preg[1][1] : ""; 
             
-            $tmpArr = explode("');", $tmpArr[1]);
-            
-            $arrReturn['video_url'] = $tmpArr[0];
+            preg_match_all('/<source src\=\"(.*?)\" type\=\"video\/mp4\" data\-res\=\"360\"\/\>/',$result,$arr_preg);            
+            $arrReturn['f360'] = isset($arr_preg[1][1]) ? $arr_preg[1][1] : "";
 
-            $arrReturn['image_url'] = $html->find('meta[property="og:image"]', 0)->content;
-            $title = $html->find('title', 0)->innerText();
-            $title = str_replace(" - XVIDEOS.COM", "", $title);
-
-        }elseif(strpos($url, 'hihi.com') > 0 ){
-            $title = $html->find('title', 0)->innerText();
-            $arrReturn['video_url'] = $html->find('source[data-res]', 0)->src;
-
-            $arrReturn['image_url'] = $html->find('meta[property="og:image"]', 0)->content; 
-
-            $title = str_replace(" - Free JAV HD", "", $title);
-
-        }elseif(strpos($url, 'redtube.com') > 0){
-            $title = $html->find('title', 0)->innerText();
-            $arrReturn['video_url'] = $html->find('source', 0)->src;
-
-            $arrReturn['image_url'] = $html->find('video', 0)->poster; 
-
-        }elseif(strpos($url, 'youporn.com') > 0){
-            $title = $html->find('title', 0)->innerText();
-            $arrReturn['video_url'] = $html->find('.downloadOption', 0)->find('a', 0)->href;
-
-            $arrReturn['image_url'] = $html->find('meta[property="og:image"]', 0)->content;
-
-            $title = str_replace(" - YouPorn", "", $title);
-
-        }else{
-            
-            $html = file_get_html($url);
-
-            $title = $html->find('title', 0)->innerText();
-
-            $arrReturn['video_url'] = $html->find('meta[itemprop="contentUrl"]', 0)->content;
-
-            $arrReturn['image_url'] = $html->find('meta[itemprop="thumbnailUrl"]', 0)->content;                
-
-            $title = str_replace(" - TNAFlix Porn Videos", "", $title);
-        }    
         
-        $arrReturn['title'] = $title;
         return $arrReturn;    
+    }
+    public static function curl($url) {
+         $ch = curl_init();
+         curl_setopt($ch, CURLOPT_URL, $url);
+         $head[] = "Connection: keep-alive";
+         $head[] = "Keep-Alive: 300";
+         $head[] = "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7";
+         $head[] = "Accept-Language: en-us,en;q=0.5";
+         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36');
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $head);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+         curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
+         $page = curl_exec($ch);
+         curl_close($ch);
+         return $page;
+    }
+    public static function getPhotoGoogle($link){
+        $get = self::curl($link);
+        $data = explode('url\u003d', $get);
+        $url = explode('%3Dm', $data[1]);
+        $decode = urldecode($url[0]);
+        $count = count($data);
+        $linkDownload = array();
+        if($count > 4) {
+            $v1080p = $decode.'=m37';
+            $v720p = $decode.'=m22';
+            $v360p = $decode.'=m18';
+            $linkDownload['1080p'] = $v1080p;
+            $linkDownload['720p'] = $v720p;
+            $linkDownload['360p'] = $v360p;
+        }
+        if($count > 3) {
+            $v720p = $decode.'=m22';
+            $v360p = $decode.'=m18';
+            $linkDownload['720p'] = $v720p;
+            $linkDownload['360p'] = $v360p;
+        }
+        if($count > 2) {
+            $v360p = $decode.'=m18';
+            $linkDownload['360p'] = $v360p;
+        }
+        return $linkDownload;
     }
 
     public static function uploadPhoto($file, $base_folder = '', $date_dir=false){

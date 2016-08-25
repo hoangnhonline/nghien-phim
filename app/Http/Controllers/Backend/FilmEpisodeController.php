@@ -55,17 +55,32 @@ class FilmEpisodeController extends Controller
     {
        
         $dataArr = $request->all();
-         
+        // var_dump("<pre>", $dataArr);die;
         $this->validate($request,[
             'name' => 'required',
-            'slug' => 'required|unique:film_episode,slug,'.$dataArr['film_id'].',film_id',
+            'slug' => 'required|unique:film_episode,slug,0,id,film_id,' . $dataArr['film_id']
         ],
         [
             'name.required' => 'Bạn chưa nhập tên tập phim',
             'slug.required' => 'Bạn chưa nhập slug',
             'slug.unique' => 'Slug đã được sử dụng.'
         ]);         
- 
+        
+        if($dataArr['poster_url'] && $dataArr['poster_name']){
+            
+            $tmp = explode('/', $dataArr['poster_url']);
+
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('nghien.upload_path').$dataArr['poster_url'], config('nghien.upload_path').$destionation);
+            
+            $dataArr['poster_url'] = $destionation;
+        } 
+
         $rs = FilmEpisode::create($dataArr);
 
         $object_id = $rs->id;
@@ -114,11 +129,26 @@ class FilmEpisodeController extends Controller
             'name.required' => 'Bạn chưa nhập tên tập phim',
             'slug.required' => 'Bạn chưa nhập slug',
         ]);       
+        
+        if($dataArr['poster_url'] && $dataArr['poster_name']){
+            
+            $tmp = explode('/', $dataArr['poster_url']);
+
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('nghien.upload_path').$dataArr['poster_url'], config('nghien.upload_path').$destionation);
+            
+            $dataArr['poster_url'] = $destionation;
+        } 
 
         $model = FilmEpisode::find($dataArr['id']);
 
         $model->update($dataArr);
-        //var_dump("<pre>", $dataArr);die;
+        
         if( $dataArr['meta_id'] > 0){
 
             $metaArr['meta_title'] = $dataArr['meta_title'];

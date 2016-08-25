@@ -18,7 +18,7 @@
          @if( $phimLeArr->count() > 0)
              @foreach( $phimLeArr as $movies)
              <div data-movie-id="{{ $movies->id }}" class="ml-item">
-                <a href="/{{ $movies->slug }}-{{ $movies->id }}.html"
+                <a href="/{{ $movies->slug }}.html"
                    data-url="{{ route('movies-info', [ $movies->id ]) }}"
                    class="ml-mask jt"
                    title="{{ $movies->title }}">
@@ -46,7 +46,7 @@
          @if( $phimBoArr->count() > 0)
              @foreach( $phimBoArr as $movies)
              <div data-movie-id="{{ $movies->id }}" class="ml-item">
-                <a href="/{{ $movies->slug }}-{{ $movies->id }}.html"
+                <a href="/{{ $movies->slug }}{{ $movies->last_slug_episode ? '/'.$movies->last_slug_episode : "" }}.html"
                    data-url="{{ route('movies-info', [ $movies->id ]) }}"
                    class="ml-mask jt"
                    title="{{ $movies->title }}">

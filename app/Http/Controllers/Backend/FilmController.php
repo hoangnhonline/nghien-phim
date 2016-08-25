@@ -88,9 +88,9 @@ class FilmController extends Controller
             'original_slug' => 'required|unique:film,original_slug',            
         ],
         [                      
-            'title.required' => 'Bạn chưa nhập tiêu đề',
+            'title.required' => 'Bạn chưa nhập tên phim',
             'slug.required' => 'Bạn chưa nhập slug',
-            'original_title.required' => 'Bạn chưa nhập tiêu đề gốc',
+            'original_title.required' => 'Bạn chưa nhập tên gốc',
             'original_slug.required' => 'Bạn chưa nhập slug gốc',            
             'slug.unique' => 'Slug đã tồn tại',
             'original_slug.unique' => 'Slug gốc đã tồn tại',
@@ -252,7 +252,7 @@ class FilmController extends Controller
     {
         $dataArr = $request->all();
         $id = $dataArr['id'];
-    
+        
         $this->validate($request,[
             'title' => 'required',
             'slug' => 'required|unique:film,slug,'.$dataArr['id'],
@@ -260,9 +260,9 @@ class FilmController extends Controller
             'original_slug' => 'required|unique:film,original_slug,'.$dataArr['id'],            
         ],
         [                      
-            'title.required' => 'Bạn chưa nhập tiêu đề',
+            'title.required' => 'Bạn chưa nhập tên phim',
             'slug.required' => 'Bạn chưa nhập slug',
-            'original_title.required' => 'Bạn chưa nhập tiêu đề gốc',
+            'original_title.required' => 'Bạn chưa nhập tên gốc',
             'original_slug.required' => 'Bạn chưa nhập slug gốc',            
             'slug.unique' => 'Slug đã tồn tại',
             'original_slug.unique' => 'Slug gốc đã tồn tại',

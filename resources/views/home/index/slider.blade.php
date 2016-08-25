@@ -3,7 +3,7 @@
     @if( $hotArr->count() > 0)
       @foreach( $hotArr as $movies)
        <div class="swiper-slide" style="background-image: url({{ Helper::showImage( $movies->poster_url ) }});">
-          <a href="/{{ $movies->slug }}-{{ $movies->id }}.html"
+          <a href="/{{ $movies->slug }}.html"
              class="slide-link"
              title="{{ $movies->title }}"></a>
           <span class="slide-caption">
@@ -60,7 +60,7 @@
                 @endif
              </div>
            
-                <a onclick="location.href='/{{ $movies->slug }}-{{ $movies->id }}.html'" title=""class="btn btn-success mt20">Xem phim</a>
+                <a onclick="location.href='/{{ $movies->slug }}.html'" title=""class="btn btn-success mt20">Xem phim</a>
              
           </span>
        </div>

@@ -51,6 +51,7 @@
 
     <script src="{{ URL::asset('assets/js/detectmobilebrowser.js') }}"></script>
     <script>
+    /*
         if (!jQuery.browser.mobile) {
             window.$zopim || (function (d, s) {
                 var z = $zopim = function (c) {
@@ -69,7 +70,7 @@
                 $.type = "text/javascript";
                 e.parentNode.insertBefore($, e)
             })(document, "script");
-        }
+        }*/
     </script>
 </head>
 <body>
@@ -124,8 +125,8 @@
             <div id="mv-keywords">
                 <strong class="mr10">Xem thêm:</strong>                    
                 @foreach( $tagSelected as $tag )
-                <a target="_blank" href="tags/{{ $tag->slug }}" title="{{ $tag->tag }}">
-                   <h5>{{ $tag->tag }}</h5>
+                <a target="_blank" href="tags/{{ $tag->slug }}" title="{{ $tag->name }}">
+                   <h5>{{ $tag->name }}</h5>
                 </a>                    
                 @endforeach           
             </div>
@@ -133,7 +134,7 @@
             @if( $detail->content )
 
             <div class="content-kus" style="background: #fff;">
-                <?php echo $detail->content; ?>
+                <?php echo $detail->content ?>
             </div>
             @endif
             <!--<div id="commentfb">
@@ -200,102 +201,15 @@
     $('#pop-trailer').on('hide.bs.modal', function () {
         $('#iframe-trailer').attr('src', '');
     });
+    /*
     setTimeout(function () {
         updateMovieView(15476)
     }, 5000);
+    */
 </script>
 
 
-<!--footer-->
-<footer>
-    <div id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 footer-one">
-                    <div class="footer-link">
-                        <h3 class="footer-link-head">123movies</h3>
-
-                        <p><a title="Movies" href="http://123movies.to/movie/filter">Movies</a></p>
-
-                        <p><a title="Top IMDb" href="http://123movies.to/movie/topimdb">Top IMDb</a></p>
-
-                        <p><a title="DMCA" href="http://123movies.to/site/dmca">DMCA</a></p>
-
-                        <p><a title="FAQ" href="http://123movies.to/site/faq">FAQ</a></p>
-
-                        <p><a title="Advertising" href="http://123movies.to/site/promote">Advertising</a></p>
-
-                        <p><a title="Advertising" href="http://123movies.to/site/donate">Donate</a></p>
-                    </div>
-                    <div class="footer-link">
-                        <h3 class="footer-link-head">Movies</h3>
-
-                        <p><a title="Action" href="http://123movies.to/genre/action/">Action</a></p>
-
-                        <p><a title="History" href="http://123movies.to/genre/history/">History</a></p>
-
-                        <p><a title="Thriller" href="http://123movies.to/genre/thriller/">Thriller</a></p>
-
-                        <p><a title="Sci-Fi" href="http://123movies.to/genre/sci-fi/">Sci-Fi</a></p>
-                    </div>
-                    <div class="footer-link end">
-                        <h3 class="footer-link-head">TV-Series</h3>
-
-                        <p><a title="United States" href="http://123movies.to/movie/filter/series">United States</a></p>
-
-                        <p><a title="Korea" href="http://123movies.to/movie/filter/series">Korea</a></p>
-
-                        <p><a title="China" href="http://123movies.to/movie/filter/series">China</a></p>
-
-                        <p><a title="Taiwan" href="http://123movies.to/movie/filter/series">Taiwan</a></p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="col-lg-4 footer-subs">
-                    <h3 class="footer-link-head">Subscribe</h3>
-
-                    <p class="desc">Subscribe to 123Movies mailing list to receive updates on movies, tv-series and
-                        news</p>
-
-                    <div class="form-subs mt20">
-                        <div class="subc-input pull-left" style="width:65%; margin-right: 5%;">
-                            <input type="email" placeholder="Enter your email" id="Email" name="email-footer"
-                                   class="form-control">
-                        </div>
-                        <div class="subc-submit pull-left" style="width:30%;">
-                            <button id="subscribe-submit-footer" class="btn btn-block btn-success btn-approve"
-                                    type="button" onclick="subscribe_footer()">Subscribe
-                            </button>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div id="error-email-subs-footer" class="alert alert-danger error-block"></div>
-                    <div id="success-subs-footer" class="alert alert-success error-block"></div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="col-lg-4 footer-copyright">
-                    <p><img border="0" src="http://123movies.to/assets/images/logo.png" class="mv-ft-logo"></p>
-
-                    <p>Copyright &copy; 123movies.to. All Rights Reserved</p>
-
-                    <p style="font-size: 11px; line-height: 14px; color: rgba(255,255,255,0.4)">Disclaimer: This site
-                        does not store any files on its server. All contents are provided by non-affiliated third
-                        parties.</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="footer-tags">
-                <a  title="Watch full movies online">Watch full movies online</a>
-                <a  title="Free movies online">Free movies online</a>
-                <a  title="Movietube">Movietube</a>
-                <a  title="Free online movies full">Free online movies full</a>
-                <a  title="Movie2k">Movie2k</a>
-                <a  title="Watch movies 2k">Watch movies 2k</a>
-            </div>
-        </div>
-    </div>
-</footer>
-<!--/footer-->
+@include('home.index.footer')
 
     <!-- Modal -->
     <div class="modal fade modal-cuz" id="pop-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -485,11 +399,12 @@
 
 <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js?v=0.1') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap-select.js?v=0.1') }}"></script>
-<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<!-- Go to www.addthis.com/dashboard to customize your tools 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5181dc394703fed7"
-        async="async"></script>
+        async="async"></script>-->
 
 <script type="text/javascript">
+    /*
     $(document).ready(function () {
         if (window.top !== window.self) {
             document.head.innerHTML = '';
@@ -505,7 +420,55 @@
         $('#alert-bottom-close').click(function () {
             $(".alert-bottom").remove();
         });
+
     });
+    */
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+    if (!jQuery.browser.mobile) {
+        $('.jt').qtip({
+            content: {
+                text: function (event, api) {
+                    $.ajax({
+                        url: api.elements.target.attr('data-url'),
+                        type: 'GET',
+                        success: function (data, status) {
+                            // Process the data
+
+                            // Set the content manually (required!)
+                            api.set('content.text', data);
+                        }
+                    });
+                }, // The text to use whilst the AJAX request is loading
+                title: function (event, api) {
+                    return $(this).attr('title');
+                }
+            },
+            position: {
+                my: 'top left',  // Position my top left...
+                at: 'top right', // at the bottom right of...
+                viewport: $(window),
+                effect: false,
+                target: 'mouse',
+                adjust: {
+                    mouse: false  // Can be omitted (e.g. default behaviour),
+                },
+                show: {
+                    effect: false
+                }
+            },
+            hide: {
+                fixed: true
+            },
+            style: {
+                classes: 'qtip-light qtip-bootstrap',
+                width: 320
+            }
+        });
+    }
+});
+
 </script>
 </body>
 </html>
