@@ -81,6 +81,10 @@ class FilmEpisodeController extends Controller
             $dataArr['poster_url'] = $destionation;
         } 
 
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
         $rs = FilmEpisode::create($dataArr);
 
         $object_id = $rs->id;
@@ -145,7 +149,9 @@ class FilmEpisodeController extends Controller
             $dataArr['poster_url'] = $destionation;
         } 
 
-        $model = FilmEpisode::find($dataArr['id']);
+        $model = FilmEpisode::find($dataArr['id']);       
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $model->update($dataArr);
         

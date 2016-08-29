@@ -86,6 +86,10 @@ class CrewController extends Controller
             $dataArr['image_url'] = $destionation;
         }        
 
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
         Crew::create($dataArr);        
 
         Session::flash('message', 'Tạo mới crew thành công');
@@ -158,7 +162,9 @@ class CrewController extends Controller
         }
       
 
-        $model = Crew::find($dataArr['id']);
+        $model = Crew::find($dataArr['id']);        
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $model->update($dataArr);
 

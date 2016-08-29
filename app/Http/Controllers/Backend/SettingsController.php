@@ -15,7 +15,6 @@ class SettingsController  extends Controller
     public function index(Request $request)
     {              
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
-        //var_dump("<pre>", $settingArr);die;
 
         return view('backend.settings.index', compact( 'settingArr'));
     }
@@ -80,8 +79,10 @@ class SettingsController  extends Controller
             File::move(config('nghien.upload_path').$dataArr['banner'], config('nghien.upload_path').$destionation);
             
             $dataArr['banner'] = $destionation;
-        }
-       
+        }        
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
         unset($dataArr['_token']);
         unset($dataArr['logo_name']);
         unset($dataArr['favicon_name']);

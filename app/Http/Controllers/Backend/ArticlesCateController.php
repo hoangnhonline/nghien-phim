@@ -54,6 +54,10 @@ class ArticlesCateController extends Controller
 
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
         ArticlesCate::create($dataArr);
 
         Session::flash('message', 'Tạo mới danh mục thành công');
@@ -109,6 +113,9 @@ class ArticlesCateController extends Controller
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
         $model = ArticlesCate::find($dataArr['id']);
+        
+        $dataArr['updated_user'] = Auth::user()->id;
+
         $model->update($dataArr);
 
         Session::flash('message', 'Cập nhật danh mục thành công');

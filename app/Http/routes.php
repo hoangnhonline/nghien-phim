@@ -54,6 +54,15 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'tag.update', 'uses' => 'TagController@update']);
         Route::get('{id}/destroy', ['as' => 'tag.destroy', 'uses' => 'TagController@destroy']);
     });
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('/', ['as' => 'account.index', 'uses' => 'AccountController@index']);
+        Route::get('/update-status/{status}/{id}', ['as' => 'account.update-status', 'uses' => 'AccountController@updateStatus']);
+        Route::get('/create', ['as' => 'account.create', 'uses' => 'AccountController@create']);
+        Route::post('/store', ['as' => 'account.store', 'uses' => 'AccountController@store']);
+        Route::get('{id}/edit',   ['as' => 'account.edit', 'uses' => 'AccountController@edit']);
+        Route::post('/update', ['as' => 'account.update', 'uses' => 'AccountController@update']);
+        Route::get('{id}/destroy', ['as' => 'account.destroy', 'uses' => 'AccountController@destroy']);
+    });
     Route::group(['prefix' => 'film'], function () {
         Route::get('/', ['as' => 'film.index', 'uses' => 'FilmController@index']);
         Route::get('/create', ['as' => 'film.create', 'uses' => 'FilmController@create']);

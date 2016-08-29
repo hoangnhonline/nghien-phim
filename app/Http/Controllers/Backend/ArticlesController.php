@@ -94,6 +94,10 @@ class ArticlesController extends Controller
             
             $dataArr['image_url'] = $destionation;
         }        
+        
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $rs = Articles::create($dataArr);
 
@@ -188,7 +192,8 @@ class ArticlesController extends Controller
             
             $dataArr['image_url'] = $destionation;
         }
-      
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $model = Articles::find($dataArr['id']);
 

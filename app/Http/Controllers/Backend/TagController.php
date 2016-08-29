@@ -65,6 +65,10 @@ class TagController extends Controller
 
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
         $rs = Tag::create($dataArr);
         
         $object_id = $rs->id;
@@ -133,7 +137,9 @@ class TagController extends Controller
         ]);
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
-        $model = Tag::find($dataArr['id']);
+        $model = Tag::find($dataArr['id']);        
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $model->update($dataArr);
 

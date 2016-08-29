@@ -70,7 +70,11 @@ class CategoryController extends Controller
         ]);       
        
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);  
- 
+        
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
         Category::create($dataArr);
 
         Session::flash('message', 'Tạo mới danh mục thành công');
@@ -127,6 +131,8 @@ class CategoryController extends Controller
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
 
         $model = Category::find($dataArr['id']);
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $model->update($dataArr);
 
