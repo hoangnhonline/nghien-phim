@@ -61,7 +61,7 @@
               <tr id="row-{{ $item->id }}">
                 <td><span class="order">{{ $i }}</span></td>
                 <td style="vertical-align:middle;text-align:center">
-                  <img src="{{ URL::asset('backend/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
+                  <img src="{{ URL::asset('be/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                 </td>
                 <td>                  
                   <a href="{{ route( 'film-episode.index', [ 'film_id' => $film_id ]) }}?id={{ $item->id }}#dataForm">{{ $item->name }}</a>                 
@@ -147,7 +147,7 @@
                     if( isset($detail->poster_url) ){
                       $src = Helper::showImage( $detail->poster_url ) ;
                     }else{
-                      $src = old('poster_url') ? Helper::showImage(old('poster_url')) : URL::asset('backend/dist/img/img.png');
+                      $src = old('poster_url') ? Helper::showImage(old('poster_url')) : URL::asset('be/dist/img/img.png');
                     }
                     ?>
                     <img id="thumbnail_poster" src="{{ $src }}" class="img-thumbnail" width="200">

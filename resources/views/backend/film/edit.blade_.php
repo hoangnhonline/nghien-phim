@@ -115,7 +115,7 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Thumbnail </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_image" src="{{ $detail->image_url ? Helper::showImage($detail->image_url) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="120">
+                    <img id="thumbnail_image" src="{{ $detail->image_url ? Helper::showImage($detail->image_url) : URL::asset('be/dist/img/img.png') }}" class="img-thumbnail" width="120">
                     
                     <input type="file" id="file-image" style="display:none" />
                  
@@ -126,7 +126,7 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Poster </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_poster" src="{{ $detail->poster_url ? Helper::showImage($detail->poster_url) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="200">
+                    <img id="thumbnail_poster" src="{{ $detail->poster_url ? Helper::showImage($detail->poster_url) : URL::asset('be/dist/img/img.png') }}" class="img-thumbnail" width="200">
                     
                     <input type="file" id="file-poster" style="display:none" />
                  
@@ -258,7 +258,7 @@
 
 @stop
 @section('javascript_page')
-<script src="{{ URL::asset('backend/dist/js/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ URL::asset('be/dist/js/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
       $(".select2").select2();
