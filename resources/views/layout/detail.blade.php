@@ -120,16 +120,20 @@
 
             <!-- keywords -->
             @if( !empty( $tagSelected ) )
+            <?php $countTag = count($tagSelected);            
+            ?>
             <div id="mv-keywords">
-                <strong class="mr10">Xem thêm:</strong>                    
+                <strong>Tags:</strong>
+                <?php $i = 0; ?>
                 @foreach( $tagSelected as $tag )
-                <a target="_blank" href="tags/{{ $tag->slug }}" title="{{ $tag->name }}">
+                <?php $i++; ?>
+                <a target="_blank" href="{{ route('tags', $tag->slug) }}" title="{{ $tag->name }}">
                    <h5>{{ $tag->name }}</h5>
-                </a>                    
+                </a><?php if($i < $countTag) echo ","; ?>
                 @endforeach           
             </div>
             @endif
-            @if( $detail->content )
+            @if( $detail->content && $is_landing == 1)
 
             <div class="content-kus" style="background: #fff;">
                 <?php echo $detail->content ?>

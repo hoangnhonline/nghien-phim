@@ -116,13 +116,42 @@
                 <div class="mvici-left">
                     <p>
                         <strong>Thể loại: </strong>
-                        <a href="genre/thriller/" title="Thriller">Thriller</a> </p>
+                        <?php $tmp = $detail->filmCategoryName($detail->id ); 
+                        $countTmp = count($tmp);
+                        $i = 0;
+                        ?>
+                            @foreach($detail->filmCategoryName($detail->id ) as $value)
+                            <?php $i++; ?>
+                            <a href="{{ route('cate', $value['slug']) }}" title="{{ $value['name'] }}">{{ $value['name'] }}</a><?php if($i < $countTmp) echo ", "; ?> 
+                            @endforeach
+                        </p>
                     <p>
                         <strong>Diễn viên: </strong>
-                        <a target="_blank" href="actor/-phoebe-tonkin" title=" Phoebe Tonkin"> Phoebe Tonkin</a>, <a target="_blank" href="actor/-ed-westwick" title="Ed Westwick">Ed Westwick</a>, <a target="_blank" href="actor/-dominic-sherwood-" title="Dominic Sherwood">Dominic Sherwood</a> </p>
+                         <?php $tmp = $detail->filmCrewShow($detail->id, 1); 
+                        $countTmp = count($tmp);
+                        $i = 0;
+                        ?>
+                        @if($countTmp > 0)
+                            @foreach($detail->filmCrewShow($detail->id, 1) as $value)
+                            <?php $i++; ?>
+                            <a href="{{ route('dien-vien', $value['slug']) }}" title="{{ $value['name'] }}">{{ $value['name'] }}</a><?php if($i < $countTmp && $i > 1) echo ", "; ?> 
+                            @endforeach
+                        @endif
+                       </p>
                     <p>
                         <strong>Đạo diễn: </strong>
-                        <a href="#" title=" Jim Gillespie"> Jim Gillespie</a> </p>
+                        <?php $tmp = $detail->filmCrewShow($detail->id, 2); 
+                        $countTmp = count($tmp);
+                        $i = 0;
+                        ?>
+                        @if($countTmp > 0)
+                            @foreach($detail->filmCrewShow($detail->id, 2) as $value)
+                            <?php $i++; ?>
+                            <a href="{{ route('dao-dien', $value['slug']) }}" title="{{ $value['name'] }}">{{ $value['name'] }}</a><?php if($i < $countTmp && $i > 1) echo ", "; ?> 
+                            @endforeach
+                        @endif
+
+                    </p>
                     <p>
                         <strong>Quốc gia: </strong>
                         <a href="country/uk" title="United Kingdom">United Kingdom</a>, <a href="country/us" title="United States">United States</a> </p>

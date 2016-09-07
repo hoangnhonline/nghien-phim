@@ -143,7 +143,7 @@ img.thumb.mli-thumb{ width: 100% !important; height: auto !important; min-height
 .movies-list .ml-item .mli-info{ position: absolute; bottom: 0; left: 0; width: 100%; height: auto; padding: 10px; background: url(../images/mask-title.png) top repeat-x; z-index: 5;}
 .movies-list .ml-item .mli-info h2{ font-size: 14px; margin: 0; font-weight: normal; text-align: center; color: #fff; text-shadow: 0 0 2px rgba(0,0,0,0.6);}
 .movies-list .ml-item .mli-eps{ position: absolute; top: 10px; right: 10px; width: 40px; padding-top: 8px; text-align: center; height: 40px; border-radius: 50%; background: rgba(136,198,76,0.9); color: #fff; font-size: 10px; text-transform: uppercase; line-height: 1em; text-shadow: 0 0 2px rgba(0,0,0,0.3);}
-.movies-list .ml-item .mli-eps i{ display: block; font-weight: bold; font-size: 16px; font-style: normal; margin-top: 3px;}
+.movies-list .ml-item .mli-eps i{ display: block; font-weight: bold; font-size: 13px; font-style: normal; margin-top: 3px;}
 .movies-list .ml-item .ml-mask{ display: inline-block; overflow: hidden; position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
 .movies-list .ml-item .ml-mask:before{ content: ""; background: rgba(0,0,0,0.6); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0}
 .movies-list .ml-item .ml-mask:hover:before{ opacity: 1;}
@@ -179,10 +179,10 @@ img.thumb.mli-thumb{ width: 100% !important; height: auto !important; min-height
 #mv-info .mvi-content .quality{ display: inline-block; font-size: 11px; text-transform: uppercase; background: #222; color: #fff; margin-left: 2px; padding: 2px 5px; border-radius: 3px;}
 #mv-info .mvi-content .block-social{ display: block; margin-bottom: 10px;}
 #mv-keywords{ margin-bottom: 20px; padding: 20px; display: block; clear: both; background: #f5f5f5;}
-#mv-keywords a{ margin: 5px 15px 5px 0; color: #888;}
+#mv-keywords a{ margin: 0px; color: #888;}
 #mv-keywords a:hover{ color: #79C142;}
 #mv-keywords a h5{ font-size: 14px; font-weight: normal; white-space: nowrap; display: inline-block; margin: 0;}
-#mv-keywords a h5:before{ content: '#';}
+
 .mv-rating{ text-align: left; font-size: 14px; position: relative; margin-top: 5px;}
 .mv-rating .star-rating .caption{ font-size: 12px; text-transform: uppercase;}
 .mv-rating .star-rating{ display: inline-block; height: 24px !important; font-size: 20px !important;}

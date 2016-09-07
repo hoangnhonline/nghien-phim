@@ -52,6 +52,7 @@ class DetailController extends Controller
     */
     public function index(Request $request)
     {   
+        $is_landing = 0;
         //var_dump($request->slugName, $request->slugEpisode);die;
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
 
@@ -112,6 +113,7 @@ class DetailController extends Controller
             $relatedArr = Film::where('id', '<>', $id)
                         ->join('film_category', 'film_category.film_id', '=', 'film.id')
                         ->where('category_id', $category_id)
+                        ->where('film.status', 1)
                         ->select('id', 'title', 'slug', 'image_url', 'quality')
                         ->orderBy('id', 'desc')
                         ->limit(12)
@@ -129,6 +131,10 @@ class DetailController extends Controller
                 }
             }
             $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
+            $title = $slugEpisode ? $episodeActive->name . ' - '.$title : $title;
+            if ( $detail->type == 1){
+                $title = "Xem phim ".$title;
+            }
             return view('home.detail', compact(
                 'settingArr',
                 'title',
@@ -137,7 +143,8 @@ class DetailController extends Controller
                 'detail',               
                 'cateDetail',
                 'episode',
-                'episodeActive'
+                'episodeActive',
+                'is_landing'
                 ));    
         }else{
             return view('errors.404');
@@ -146,6 +153,7 @@ class DetailController extends Controller
     }
     public function landing(Request $request)
     {   
+        $is_landing = 1;
         //var_dump($request->slugName, $request->slugEpisode);die;
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
 
@@ -231,7 +239,8 @@ class DetailController extends Controller
                 'detail',               
                 'cateDetail',
                 'episode',
-                'episodeActive'
+                'episodeActive',
+                'is_landing'
                 ));    
         }else{
             return view('errors.404');

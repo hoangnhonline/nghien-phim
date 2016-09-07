@@ -51,7 +51,19 @@ class Film extends Model  {
         }
         return $arr;
     }
-
+    public static function filmCrewShow( $id, $type)
+    {
+        $arr = [];
+        $rs = FilmCrew::where( 'film_id', $id )
+                ->join('crew', 'crew.id', '=', 'film_crew.crew_id')
+                ->where('film_crew.type', $type)
+                ->select('name', 'id', 'slug')->get();
+        if( $rs ){
+            $arr = $rs->toArray();
+        }
+        return $arr;
+    }
+    
     public static function filmCountry( $id )
     {
         $arr = [];

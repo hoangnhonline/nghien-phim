@@ -21,6 +21,9 @@ Route::group(['namespace' => 'Frontend'], function()
     Route::get('/streaming/{encodeLink}', ['as' => 'streaming', 'uses' => 'DetailController@streaming']);
     Route::get('/load-tab', ['as' => 'ajax-tab', 'uses' => 'HomeController@ajaxTab']);
     Route::get('phim/{slugName}/xem-phim.html', ['as' => 'detail', 'uses' => 'DetailController@index']);
+    Route::get('tags/{tagName}/', ['as' => 'tags', 'uses' => 'HomeController@tags']);
+    Route::get('dao-dien/{name}/', ['as' => 'dao-dien', 'uses' => 'HomeController@daoDien']);
+    Route::get('dien-vien/{name}/', ['as' => 'dien-vien', 'uses' => 'HomeController@dienVien']);
     Route::get('phim/{slugName}/', ['as' => 'landing', 'uses' => 'DetailController@landing']);
     Route::get('/tin-tuc/{slug}-{id}.html', ['as' => 'news-detail', 'uses' => 'HomeController@newsDetail']);
     Route::get('{slugName}/{slugEpisode}.html', ['as' => 'detail-tap-phim', 'uses' => 'DetailController@index']);

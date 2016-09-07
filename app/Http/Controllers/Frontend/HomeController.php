@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Film;
+use App\Models\Crew;
 use App\Models\Tag;
 use App\Models\TagObjects;
 use App\Models\Settings;
@@ -154,6 +155,105 @@ class HomeController extends Controller
             }
             $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
         }
+        
+
+        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr'));
+    }
+
+    public function tags(Request $request)
+    {
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+
+        $layout_name = "main-category";
+        
+        $page_name = "page-category";
+
+        $cateArr = $cateActiveArr = $moviesActiveArr = [];
+       
+        $is_search = 0;
+        $tagName = $request->tagName;
+
+        $title = '';
+        $cateDetail = (object) [];
+        //var_dump($slug);die;
+        
+        $cateDetail = Tag::where('slug', $tagName)->first();
+       
+         $moviesArr = Film::where('status', 1)
+        ->join('tag_objects', 'id', '=', 'tag_objects.object_id')
+        ->where('tag_objects.tag_id', $cateDetail->id)
+        ->where('tag_objects.type', 1)
+        ->groupBy('object_id')
+        ->orderBy('id', 'desc')->paginate(30);        
+       
+        $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
+        $cateDetail->name = "Phim theo tags : ".'"'.$cateDetail->name.'"';
+        
+
+        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr'));
+    }
+    
+    public function daoDien(Request $request)
+    {
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+
+        $layout_name = "main-category";
+        
+        $page_name = "page-category";
+
+        $cateArr = $cateActiveArr = $moviesActiveArr = [];
+       
+        $is_search = 0;
+        $name = $request->name;
+
+        $title = '';
+        $cateDetail = (object) [];
+        //var_dump($slug);die;
+        
+        $cateDetail = Crew::where('slug', $name)->first();
+       
+         $moviesArr = Film::where('status', 1)
+        ->join('film_crew', 'id', '=', 'film_crew.film_id')
+        ->where('film_crew.crew_id', $cateDetail->id)
+        ->where('film_crew.type', 2)
+        ->groupBy('film_id')
+        ->orderBy('id', 'desc')->paginate(30);        
+       
+        $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
+        $cateDetail->name = "Phim của : ".'"'.$cateDetail->name.'"';
+        
+
+        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr'));
+    }
+
+    public function dienVien(Request $request)
+    {
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+
+        $layout_name = "main-category";
+        
+        $page_name = "page-category";
+
+        $cateArr = $cateActiveArr = $moviesActiveArr = [];
+       
+        $is_search = 0;
+        $name = $request->name;
+
+        $title = '';
+        $cateDetail = (object) [];
+        //var_dump($slug);die;
+        
+        $cateDetail = Crew::where('slug', $name)->first();
+       
+         $moviesArr = Film::where('status', 1)
+        ->join('film_crew', 'id', '=', 'film_crew.film_id')
+        ->where('film_crew.crew_id', $cateDetail->id)
+        ->where('film_crew.type', 1)
+        ->groupBy('film_id')
+        ->orderBy('id', 'desc')->paginate(30);         
+       
+        $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
+        $cateDetail->name = "Phim của : ".'"'.$cateDetail->name.'"';
         
 
         return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr'));

@@ -55,7 +55,7 @@
                       $tmp = explode(" ", $arrEpisode[$movies->id]);
                       ?>
                       <span class="mli-eps">
-                      {{ $tmp[0] }} <i>{{ isset($tmp[1]) ? $tmp[1] : "" }}</i>
+                      {{ $tmp[0] }} <i>{{ isset($tmp[1]) ? $tmp[1] : "" }}{{ $movies->duration ? "/".$movies->duration : "" }}</i>
                       </span>
                       @endif
                       <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
