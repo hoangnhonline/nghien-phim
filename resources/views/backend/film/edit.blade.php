@@ -68,15 +68,7 @@
                 <div class="form-group">                  
                   <label>Slug <span class="red-star">*</span></label>                  
                   <input type="text" class="form-control" name="slug" id="slug" value="{{ $detail->slug }}">
-                </div>
-                <div class="form-group" >                  
-                  <label>Tên gốc<span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="original_title" id="original_title" value="{{ $detail->original_title }}">
-                </div>
-                <div class="form-group" >                  
-                  <label>Slug gốc<span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="original_slug" id="original_slug" value="{{ $detail->original_slug }}">
-                </div>    
+                </div>                 
                 <!-- textarea -->
                 <div class="form-group">
                   <label>Tóm tắt ngắn</label>
@@ -133,6 +125,17 @@
                     <button class="btn btn-default" id="btnUploadPoster" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
+                </div>
+                <div class="form-group" style="margin-top:10px;margin-bottom:10px;display:none" id="div_anh_slide">  
+                  <label class="col-md-3 row">Ảnh Slide </label>    
+                  <div class="col-md-9">
+                    <img id="thumbnail_slide" src="{{ $detail->slide_url ? Helper::showImage($detail->slide_url) : URL::asset('be/dist/img/img.png') }}" class="img-thumbnail" width="200">
+                    
+                    <input type="file" id="file-slide" style="display:none" />
+                 
+                    <button class="btn btn-default" id="btnUploadSlide" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                  </div>
+                  <div style="clear:both"></div>
                 </div>             
                 <div class="form-group">
                   <label>Tags</label>
@@ -152,8 +155,10 @@
             </div>          
             <input type="hidden" name="image_url" id="image_url" value="{{ $detail->image_url }}"/>           
             <input type="hidden" name="poster_url" id="poster_url" value="{{ $detail->poster_url }}"/>          
+            <input type="hidden" name="slide_url" id="slide_url" value="{{ $detail->slide_url }}"/>          
             <input type="hidden" name="image_name" id="image_name" value="{{ old('image_name') }}"/>
             <input type="hidden" name="poster_name" id="poster_name" value="{{ old('poster_name') }}"/>
+            <input type="hidden" name="slide_name" id="slide_name" value="{{ old('slide_name') }}"/>
             <div class="box-footer">
               <button type="button" class="btn btn-default" id="btnLoading" style="display:none"><i class="fa fa-spin fa-spinner"></i></button>
               <button type="submit" class="btn btn-primary" id="btnSave">Lưu</button>
@@ -216,8 +221,8 @@
               </div>
                <div class="form-group">
                 <label for="email" class="ltitle">Slide </label>
-                <label class="radio-inline"><input type="radio" {{ $detail->slide == 1 ? 'checked' : '' }} name="slide" value="1">Yes</label>
-                <label class="radio-inline"><input type="radio" {{ $detail->slide == 0 ? 'checked' : '' }} name="slide" value="0">No</label>                
+                <label class="radio-inline"><input id="slide_1" type="radio" {{ $detail->slide == 1 ? 'checked' : '' }} name="slide" value="1">Yes</label>
+                <label class="radio-inline"><input id="slide_2" type="radio" {{ $detail->slide == 0 ? 'checked' : '' }} name="slide" value="0">No</label>                
               </div>              
         </div>
         <div style="margin-bottom:10px; clear:both"></div>
@@ -266,6 +271,17 @@
 <script src="{{ URL::asset('be/dist/js/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+      if( $('#slide_1').prop('checked') == true ){
+        $('#div_anh_slide').show();
+      }else{
+        $('#div_anh_slide').hide();
+      }
+      $('#slide_1').click(function(){
+        $('#div_anh_slide').show();
+      });
+      $('#slide_2').click(function(){
+        $('#div_anh_slide').hide();
+      });
       $(".select2").select2();
       $('#dataForm').submit(function(){
         var no_cate = $('input[name="category_id[]"]:checked').length;
@@ -296,6 +312,9 @@
       });      
       $('#btnUploadPoster').click(function(){        
         $('#file-poster').click();
+      }); 
+      $('#btnUploadSlide').click(function(){        
+        $('#file-slide').click();
       });  
       var files = "";
       $('#file-image').change(function(e){
@@ -378,6 +397,47 @@
         }
       });
 
+       var files = "";
+      $('#file-slide').change(function(e){
+         files = e.target.files;
+         
+         if(files != ''){
+           var dataForm = new FormData();        
+          $.each(files, function(key, value) {
+             dataForm.append('file', value);
+          });   
+          
+          dataForm.append('date_dir', 0);
+          dataForm.append('folder', 'tmp');
+
+          $.ajax({
+            url: $('#route_upload_tmp_image').val(),
+            type: "POST",
+            async: false,      
+            data: dataForm,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              if(response.image_path){
+                $('#thumbnail_slide').attr('src',$('#upload_url').val() + response.image_path);
+                $( '#slide_url' ).val( response.image_path );
+                $( '#slide_name' ).val( response.image_name );
+              }
+              console.log(response.image_path);
+                //window.location.reload();
+            },
+            error: function(response){                             
+                var errors = response.responseJSON;
+                for (var key in errors) {
+                  
+                }
+                //$('#btnLoading').hide();
+                //$('#btnSave').show();
+            }
+          });
+        }
+      });
+
       
       $('#title').change(function(){
          var name = $.trim( $(this).val() );
@@ -404,33 +464,7 @@
               }
             });
          }
-      });
-      $('#original_title').change(function(){
-         var name = $.trim( $(this).val() );
-         if( name != '' && $('#original_slug').val() == ''){
-            $.ajax({
-              url: $('#route_get_slug').val(),
-              type: "POST",
-              async: false,      
-              data: {
-                str : name
-              },              
-              success: function (response) {
-                if( response.str ){                  
-                  $('#original_slug').val( response.str );
-                }                
-              },
-              error: function(response){                             
-                  var errors = response.responseJSON;
-                  for (var key in errors) {
-                    
-                  }
-                  //$('#btnLoading').hide();
-                  //$('#btnSave').show();
-              }
-            });
-         }
-      });
+      });      
       
     });
     

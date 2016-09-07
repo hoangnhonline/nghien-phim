@@ -26,7 +26,7 @@ class Film extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['slide', 'meta_id', 'title', 'slug', 'alias', 'description', 'original_title', 'original_slug', 'image_url', 'poster_url', 'duration', 'release_year', 'type', 'cinema', 'content', 'note', 'likes', 'views', 'updated_episode_date', 'status', 'imdb', 'top', 'order', 'expired', 'push_top', 'trailer', 'created_user', 'updated_user', 'quality'];
+    protected $fillable = ['slide', 'meta_id', 'title', 'slug', 'alias', 'description', 'image_url', 'poster_url', 'duration', 'release_year', 'type', 'cinema', 'content', 'note', 'likes', 'views', 'updated_episode_date', 'status', 'imdb', 'top', 'order', 'expired', 'push_top', 'trailer', 'created_user', 'updated_user', 'quality', 'slide_url'];
     
     
 

@@ -9,7 +9,7 @@
 <div id="bread">
    <ol class="breadcrumb">
       <li><a href="{{ URL::to('/') }}">Trang chủ</a></li>
-      <li><a href="{{ route('news-list')}}">Bài viết</a></li>
+      <li><a href="{{ route('news-list')}}">Tin tức</a></li>
       <li class="active">{{ $detail->title }}</li>
    </ol>
 </div>

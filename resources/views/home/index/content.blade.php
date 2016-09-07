@@ -10,7 +10,7 @@
 <div class="movies-list-wrap mlw-latestmovie">
     <div class="ml-title">
         <span class="pull-left">Phim lẻ mới nhất <i class="fa fa-chevron-right ml10"></i></span>
-        <a href="http://123movies.to/movie/filter/movie" class="pull-right cat-more">View more »</a>
+        <a href="/phim-le" class="pull-right cat-more">Xem thêm »</a>
 
         <div class="clearfix"></div>
     </div>
@@ -18,7 +18,7 @@
          @if( $phimLeArr->count() > 0)
              @foreach( $phimLeArr as $movies)
              <div data-movie-id="{{ $movies->id }}" class="ml-item">
-                <a href="/{{ $movies->slug }}.html"
+                <a href="{{ route('landing', $movies->slug) }}"
                    data-url="{{ route('movies-info', [ $movies->id ]) }}"
                    class="ml-mask jt"
                    title="{{ $movies->title }}">
@@ -38,7 +38,7 @@
 <div class="movies-list-wrap mlw-latestmovie">
     <div class="ml-title">
         <span class="pull-left">Phim bộ mới cập nhật <i class="fa fa-chevron-right ml10"></i></span>
-        <a href="http://123movies.to/movie/filter/movie" class="pull-right cat-more">View more »</a>
+        <a href="/phim-bo" class="pull-right cat-more">Xem thêm »</a>
 
         <div class="clearfix"></div>
     </div>
@@ -46,7 +46,7 @@
          @if( $phimBoArr->count() > 0)
              @foreach( $phimBoArr as $movies)
              <div data-movie-id="{{ $movies->id }}" class="ml-item">
-                <a href="/{{ $movies->slug }}{{ $movies->last_slug_episode ? '/'.$movies->last_slug_episode : "" }}.html"
+                <a href="{{ route('landing', $movies->slug) }}"
                    data-url="{{ route('movies-info', [ $movies->id ]) }}"
                    class="ml-mask jt"
                    title="{{ $movies->title }}">

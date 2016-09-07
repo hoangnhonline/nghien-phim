@@ -7,7 +7,7 @@
       @if( $relatedArr->count() > 0)
          @foreach( $relatedArr as $movies)
          <div class="ml-item">
-            <a href="{{ $movies->slug }}.html" class="ml-mask jt"
+            <a href="{{ route('landing', $movies->slug) }}" class="ml-mask jt"
                data-url="{{ route('movies-info', [ $movies->id ]) }}"
                title="{{ $movies->title }}"
                >

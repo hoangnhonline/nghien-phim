@@ -167,7 +167,7 @@
       @if( $moviesArr->count() > 0)
          @foreach( $moviesArr as $movies)
          <div class="ml-item">
-            <a href="{{ $movies->slug }}.html"
+            <a href="{{ route('landing', $movies->slug) }}"
 
               data-url="{{ route('movies-info', [ $movies->id ]) }}"
                      class="ml-mask jt"

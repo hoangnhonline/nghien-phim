@@ -12,12 +12,16 @@
 */
 Route::group(['namespace' => 'Frontend'], function()
 {
+
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+    //Route::get('/phim-le', ['as' => 'phim-le', 'uses' => 'HomeController@cate']);
+    //::get('/phim-bo', ['as' => 'phim-bo', 'uses' => 'HomeController@cate']);
     Route::get('/tin-tuc', ['as' => 'news-list', 'uses' => 'HomeController@newsList']);
     Route::post('/get-link', ['as' => 'get-link', 'uses' => 'DetailController@getLink']);
     Route::get('/streaming/{encodeLink}', ['as' => 'streaming', 'uses' => 'DetailController@streaming']);
     Route::get('/load-tab', ['as' => 'ajax-tab', 'uses' => 'HomeController@ajaxTab']);
-    Route::get('{slugName}.html', ['as' => 'detail', 'uses' => 'DetailController@index']);
+    Route::get('phim/{slugName}/xem-phim.html', ['as' => 'detail', 'uses' => 'DetailController@index']);
+    Route::get('phim/{slugName}/', ['as' => 'landing', 'uses' => 'DetailController@landing']);
     Route::get('/tin-tuc/{slug}-{id}.html', ['as' => 'news-detail', 'uses' => 'HomeController@newsDetail']);
     Route::get('{slugName}/{slugEpisode}.html', ['as' => 'detail-tap-phim', 'uses' => 'DetailController@index']);
 

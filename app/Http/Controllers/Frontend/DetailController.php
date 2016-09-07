@@ -67,7 +67,7 @@ class DetailController extends Controller
 
         $id = $tmp ? $tmp->id : -1;
         $detail = Film::where( 'id', $id )
-                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content')                
+                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type')                
                 ->first();
        
         //https://lh3.googleusercontent.com/awv1HTJFUE5N-OuanegrmSr4EtPHYt1HqyBa1abaE6hj3S7utZyTk4k_eL-CF63QTTle4q4BHXo=m22
@@ -144,7 +144,100 @@ class DetailController extends Controller
         }
         
     }
+    public function landing(Request $request)
+    {   
+        //var_dump($request->slugName, $request->slugEpisode);die;
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
 
+        $tagSelected = $episodeActive = [];
+
+        $cateArr = $cateActiveArr = $moviesActiveArr = [];       
+        
+        $slugName = $request->slugName;
+        $slugEpisode = $request->slugEpisode ? $request->slugEpisode : "";
+
+        $tmp = Film::where('slug', $slugName)->select('id')->first();
+
+
+        $id = $tmp ? $tmp->id : -1;
+        $detail = Film::where( 'id', $id )
+                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type')                
+                ->first();
+       
+        //https://lh3.googleusercontent.com/awv1HTJFUE5N-OuanegrmSr4EtPHYt1HqyBa1abaE6hj3S7utZyTk4k_eL-CF63QTTle4q4BHXo=m22
+        if( $detail ){ 
+            
+            $episode = FilmEpisode::where('film_id', $id)->orderBy('id', 'asc')->get();
+
+            if( $slugEpisode ){
+                $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->firstOrFail();                
+
+            }else{
+                $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('id', 'asc')->firstOrFail();
+            }
+            /*
+            if( $episode ){
+                $i = 0;
+                foreach ($episode as $key => $value) {
+                    $i ++;          
+                    if($i == 1){ 
+                        $episodeActive = $value;
+                        if( strpos($episodeActive->source, 'zing.vn') > 0){
+                            $tmp = Helper::getVideoZing( $episodeActive->source);
+                            $episodeActive->source = $tmp['f480'] != '' ? $tmp['f480'] : $tmp['f360'];
+                        }
+                        if( strpos($episodeActive->source, 'google') > 0){   
+
+                            $tmp = Helper::getPhotoGoogle( $episodeActive->source);
+                            //var_dump($episodeActive->source);die;
+                            $episodeActive->source = $tmp['720p'] != '' ? $tmp['720p'] : $tmp['360p'];
+                        }
+                        break;
+                    }
+
+                }              
+            }
+            */
+            $cate = $detail->filmCategory($id);
+            $category_id = $cate[0]; 
+            
+            $cateDetail = Category::find( $category_id )->select('id', 'name', 'slug')->first();
+            
+            $relatedArr = Film::where('id', '<>', $id)
+                        ->join('film_category', 'film_category.film_id', '=', 'film.id')
+                        ->where('category_id', $category_id)
+                        ->select('id', 'title', 'slug', 'image_url', 'quality')
+                        ->orderBy('id', 'desc')
+                        ->limit(12)
+                        ->get();
+
+            //tags
+            $tmpArr = TagObjects::where( ['tag_objects.type' => 1, 'object_id' => $id] )
+                        ->join('tag', 'tag.id', '=', 'tag_objects.tag_id')
+                        ->select('name', 'slug')
+                        ->get();
+            
+            if( $tmpArr->count() > 0 ){
+                foreach ($tmpArr as $value) {                
+                    $tagSelected[] = $value;
+                }
+            }
+            $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
+            return view('home.landing', compact(
+                'settingArr',
+                'title',
+                'tagSelected', 
+                'relatedArr', 
+                'detail',               
+                'cateDetail',
+                'episode',
+                'episodeActive'
+                ));    
+        }else{
+            return view('errors.404');
+        }
+        
+    }
     public function streaming(Request $request){
 
         $originalUrl = '';

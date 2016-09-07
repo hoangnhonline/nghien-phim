@@ -14,7 +14,7 @@
     </div>-->
 
     <div class="wrapper">
-        <video id="my-video" class="video-js vjs-16-9 vjs-big-play-centered" controls preload="auto" width="100%" height="100%" poster="{{ Helper::showImage( $detail->poster_url ) }}" data-setup="{'fluid': true}">
+        <video id="my-video" autoplay class="video-js vjs-16-9 vjs-big-play-centered" controls preload="auto" width="100%" height="100%" poster="{{ Helper::showImage( $detail->poster_url ) }}" data-setup="{'fluid': true, 'autoplay': true}">
         <source src="{{ $episodeActive ? route('streaming', Helper::encodeLink($episodeActive->source)) : "" }}" type='video/mp4'>                       
         <p class="vjs-no-js">
           To view this video please enable JavaScript, and consider upgrading to a web browser that
@@ -25,27 +25,27 @@
     <!-- Load player -->
 
     <div id="bar-player">
-        <a href="#mv-info" class="btn bp-btn-light"><i class="fa fa-lightbulb-o"></i> <span></span></a>
+        <a href="#mv-info" rel="nofollow" class="btn bp-btn-light"><i class="fa fa-lightbulb-o"></i> <span></span></a>
 
         <span id="button-favorite">
-                        <a onclick="favorite(15541,2)"
+                        <a rel="nofollow" onclick="favorite(15541,2)"
                            class="btn bp-btn-like"><i class="fa fa-heart"></i>
-        Favorite</a>
+        Yêu thích</a>
                         <div class="popover fade top in popover-like" style="display: none;">
         <div class="arrow" style="left: 50%;"></div>
         <div class="popover-content">
             <p id="popover-notice"></p>
             <p class="mt10">
-                <a href="javascript:void(0)" onclick="favorite(15541,2)" class="btn btn-success btn-sm"><i
-                        class="fa fa-heart"></i> Favorite</a><a href="javascript:void(0)"
-                                                                class="btn btn-sm btn-default toggle-popover-like">Dismiss</a>
+                <a href="javascript:void(0)" rel="nofollow" onclick="favorite(15541,2)" class="btn btn-success btn-sm"><i
+                        class="fa fa-heart"></i> Yêu thích</a><a href="javascript:void(0)"
+                                                                class="btn btn-sm btn-default toggle-popover-like">Bỏ yêu thích</a>
             </p>
         </div>
     </div>
                     </span>
-        <a href="#commentfb" class="btn bp-btn-review"><i class="fa fa-comments"></i>
+        <a href="#commentfb" rel="nofollow" class="btn bp-btn-review"><i class="fa fa-comments"></i>
                         <span>Comment (<span id="comment-count">0</span>)</span></a>
-        <a class="btn bp-btn-report hidden" data-target="#pop-report" data-toggle="modal" style="color: #fff000; float: right"><i class="fa fa-warning"></i> Report</a>
+        <a class="btn bp-btn-report hidden" data-target="#pop-report" data-toggle="modal" style="color: #fff000; float: right"><i class="fa fa-warning"></i> Báo cáo</a>
 
         <div class="clearfix"></div>
     </div>
@@ -58,13 +58,13 @@
         <div class="alert alert-success" role="alert">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
             <i class="fa fa-check"></i> <span id="favorite-message"></span>
-            <a target="_blank" href="http://123movies.to/user/movies/favorite" title="Your favorite" class="alert-link">your favorite.</a>
+            <a target="_blank" href="user/movies/favorite" title="Your favorite" class="alert-link">Yêu thích của bạn.</a>
         </div>
     </div>
     <div id="report-alert" style="display: none;">
         <div class="alert alert-success" role="alert">
             <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">×</a>
-            <i class="fa fa-check"></i> Thanks for your report! We will fix it asap.
+            <i class="fa fa-check"></i> Cảm ơn bạn đã gửi báo cáo. Chúng tôi sẽ cố gắng chỉnh sửa sớm nhất.
         </div>
     </div>
     @if( $episode )
@@ -72,7 +72,7 @@
         <div class="le-server">
             <div class="les-content">                
                 @foreach( $episode as $ep )
-                <a class="btn-eps {{ $ep->id == $episodeActive->id ? "active" : "" }} " id="eps-{{ $ep->id }}" href="/{{ $detail->slug }}/{{ $ep->slug }}.html">{{ $ep->name }}</a>
+                <a class="btn-eps {{ $ep->id == $episodeActive->id ? "active" : "" }} " id="eps-{{ $ep->id }}" href="<?php if($detail->type==2) { ?>/{{ $detail->slug }}/{{ $ep->slug }}.html <?php } ?>">{{ $ep->name }}</a>
                 @endforeach
             </div>
             <div class="clearfix"></div>
@@ -116,16 +116,16 @@
                 <div class="mvici-left">
                     <p>
                         <strong>Thể loại: </strong>
-                        <a href="http://123movies.to/genre/thriller/" title="Thriller">Thriller</a> </p>
+                        <a href="genre/thriller/" title="Thriller">Thriller</a> </p>
                     <p>
                         <strong>Diễn viên: </strong>
-                        <a target="_blank" href="http://123movies.to/actor/-phoebe-tonkin" title=" Phoebe Tonkin"> Phoebe Tonkin</a>, <a target="_blank" href="http://123movies.to/actor/-ed-westwick" title="Ed Westwick">Ed Westwick</a>, <a target="_blank" href="http://123movies.to/actor/-dominic-sherwood-" title="Dominic Sherwood">Dominic Sherwood</a> </p>
+                        <a target="_blank" href="actor/-phoebe-tonkin" title=" Phoebe Tonkin"> Phoebe Tonkin</a>, <a target="_blank" href="actor/-ed-westwick" title="Ed Westwick">Ed Westwick</a>, <a target="_blank" href="actor/-dominic-sherwood-" title="Dominic Sherwood">Dominic Sherwood</a> </p>
                     <p>
                         <strong>Đạo diễn: </strong>
                         <a href="#" title=" Jim Gillespie"> Jim Gillespie</a> </p>
                     <p>
                         <strong>Quốc gia: </strong>
-                        <a href="http://123movies.to/country/uk" title="United Kingdom">United Kingdom</a>, <a href="http://123movies.to/country/us" title="United States">United States</a> </p>
+                        <a href="country/uk" title="United Kingdom">United Kingdom</a>, <a href="country/us" title="United States">United States</a> </p>
                 </div>
                 <div class="mvici-right">
                     <p><strong>Thời lượng:</strong> {{ $detail->duration  ? $detail->duration : "Đang cập nhật" }}</p>

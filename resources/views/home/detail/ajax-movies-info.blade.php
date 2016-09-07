@@ -35,7 +35,7 @@
 
     </div>
 <div class="jtip-bottom">
-    <a href="/{{ $detail->slug }}-{{ $detail->id }}.html"
+    <a href="{{ route('landing', $detail->slug) }}"
        class="btn btn-block btn-success"><i
             class="fa fa-play-circle mr10"></i>Xem phim</a>
         <!--<button onclick="favorite(15217,1)"

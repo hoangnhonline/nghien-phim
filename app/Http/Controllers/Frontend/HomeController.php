@@ -117,6 +117,7 @@ class HomeController extends Controller
     public function cate(Request $request)
     {
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+
         $layout_name = "main-category";
         
         $page_name = "page-category";
@@ -127,24 +128,33 @@ class HomeController extends Controller
         $is_search = 0;
         $slug = $request->slug;
         $title = '';
-        
-        $cateDetail = Category::where('slug', $slug)->first();
-        if( !$cateDetail){
-            $cateDetail = Country::where('slug', $slug)->first();
-
-            $moviesArr = Film::where('status', 1)
-            ->join('film_country', 'id', '=', 'film_country.film_id')
-            ->where('film_country.country_id', $cateDetail->id)
-            ->groupBy('film_id')
-            ->orderBy('id', 'desc')->paginate(12);        
+        $cateDetail = (object) [];
+        //var_dump($slug);die;
+        if( $slug == 'phim-le' || $slug == 'phim-bo'){
+            $type = $slug == 'phim-le' ? 1 : 2;
+            $moviesArr = Film::where('status', 1)->where('type', $type)
+                        ->orderBy('id', 'desc')->paginate(30);       
+            $cateDetail->name = $slug == "phim-le" ? "Phim lẻ" : "Phim bộ";
         }else{
-             $moviesArr = Film::where('status', 1)
-            ->join('film_category', 'id', '=', 'film_category.film_id')
-            ->where('film_category.category_id', $cateDetail->id)
-            ->groupBy('film_id')
-            ->orderBy('id', 'desc')->paginate(12);        
+            $cateDetail = Category::where('slug', $slug)->first();
+            if( !$cateDetail){
+                $cateDetail = Country::where('slug', $slug)->first();
+
+                $moviesArr = Film::where('status', 1)
+                ->join('film_country', 'id', '=', 'film_country.film_id')
+                ->where('film_country.country_id', $cateDetail->id)
+                ->groupBy('film_id')
+                ->orderBy('id', 'desc')->paginate(30);        
+            }else{
+                 $moviesArr = Film::where('status', 1)
+                ->join('film_category', 'id', '=', 'film_category.film_id')
+                ->where('film_category.category_id', $cateDetail->id)
+                ->groupBy('film_id')
+                ->orderBy('id', 'desc')->paginate(30);        
+            }
+            $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
         }
-        $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
+        
 
         return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr'));
     }
