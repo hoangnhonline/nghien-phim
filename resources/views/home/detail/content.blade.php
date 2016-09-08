@@ -14,7 +14,7 @@
     </div>-->
 
     <div class="wrapper">
-        <video id="my-video" autoplay class="video-js vjs-16-9 vjs-big-play-centered" controls preload="auto" width="100%" height="100%" poster="{{ Helper::showImage( $detail->poster_url ) }}" data-setup="{'fluid': true, 'autoplay': true}">
+        <video id="my-video" autoplay class="video-js vjs-16-9 vjs-big-play-centered" controls preload="auto" width="100%" height="100%" poster="{{ Helper::showImage( $detail->poster_url ) }}" data-setup="{'fluid': true}">
         <source src="{{ $episodeActive ? route('streaming', Helper::encodeLink($episodeActive->source)) : "" }}" type='video/mp4'>                       
         <p class="vjs-no-js">
           To view this video please enable JavaScript, and consider upgrading to a web browser that
@@ -154,12 +154,33 @@
                     </p>
                     <p>
                         <strong>Quốc gia: </strong>
-                        <a href="country/uk" title="United Kingdom">United Kingdom</a>, <a href="country/us" title="United States">United States</a> </p>
+                        
+                        <?php $tmp = $detail->filmCountryName($detail->id ); 
+                        $countTmp = count($tmp);
+                        $i = 0;
+                        ?>
+                            @foreach($detail->filmCountryName($detail->id ) as $value)
+                            <?php $i++; ?>
+                            <a href="{{ route('cate', $value['slug']) }}" title="{{ $value['name'] }}">{{ $value['name'] }}</a><?php if($i < $countTmp) echo ", "; ?> 
+                            @endforeach
+                        </p>
                 </div>
                 <div class="mvici-right">
                     <p><strong>Thời lượng:</strong> {{ $detail->duration  ? $detail->duration : "Đang cập nhật" }}</p>
 
-                    <p><strong>Chất lượng:</strong> <span class="quality">{{ $detail->quality == 1 ? "HD" : ( $detail->quality == 2 ? "SD" : "CAM" ) }}</span></p>
+                    <p><strong>Chất lượng:</strong> <span class="quality">
+                        @if ($detail->quality == 1)
+                        Full HD
+                        @elseif ($detail->quality == 2)
+                        HD
+                        @elseif ($detail->quality == 3)
+                        SD
+                        @elseif ($detail->quality == 4)
+                        CAM
+                        @elseif ($detail->quality == 5)
+                        1080P
+                        @endif                        
+                    </span></p>
 
                     <p><strong>Năm sản xuất:</strong> {{ $detail->year_release  ? $detail->year_release : "Đang cập nhật" }}</p>
 

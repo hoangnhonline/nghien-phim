@@ -92,12 +92,32 @@
                     </p>
                     <p>
                         <strong>Quốc gia: </strong>
-                        <a href="country/uk" title="United Kingdom">United Kingdom</a>, <a href="country/us" title="United States">United States</a> </p>
+                        <?php $tmp = $detail->filmCountryName($detail->id ); 
+                        $countTmp = count($tmp);
+                        $i = 0;
+                        ?>
+                            @foreach($detail->filmCountryName($detail->id ) as $value)
+                            <?php $i++; ?>
+                            <a href="{{ route('cate', $value['slug']) }}" title="{{ $value['name'] }}">{{ $value['name'] }}</a><?php if($i < $countTmp) echo ", "; ?> 
+                            @endforeach
+                    </p>
                 </div>
                 <div class="mvici-right">
                     <p><strong>Thời lượng:</strong> {{ $detail->duration  ? $detail->duration : "Đang cập nhật" }}</p>
 
-                    <p><strong>Chất lượng:</strong> <span class="quality">{{ $detail->quality == 1 ? "HD" : ( $detail->quality == 2 ? "SD" : "CAM" ) }}</span></p>
+                    <p><strong>Chất lượng:</strong> <span class="quality">
+                        @if ($detail->quality == 1)
+                        Full HD
+                        @elseif ($detail->quality == 2)
+                        HD
+                        @elseif ($detail->quality == 3)
+                        SD
+                        @elseif ($detail->quality == 4)
+                        CAM
+                        @elseif ($detail->quality == 5)
+                        1080P
+                        @endif                        
+                    </span></p>
 
                     <p><strong>Năm sản xuất:</strong> {{ $detail->year_release  ? $detail->year_release : "Đang cập nhật" }}</p>
 

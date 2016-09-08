@@ -3,7 +3,7 @@
     @if( $hotArr->count() > 0)
       @foreach( $hotArr as $movies)
        <div class="swiper-slide" style="background-image: url({{ Helper::showImage( $movies->poster_url ) }});">
-          <a href="/{{ $movies->slug }}.html"
+          <a href="{{ route('landing', $movies->slug) }}"
              class="slide-link"
              title="{{ $movies->title }}"></a>
           <span class="slide-caption">
@@ -21,7 +21,7 @@
                         <?php $i++; 
                         ?>                
                         
-                        <a href="/{{ $category['slug'] }}" title="{{ $category['name'] }}">{{ $category['name'] }}</a>                         
+                        <a href="{{ route('cate', $category['slug']) }}" title="{{ $category['name'] }}">{{ $category['name'] }}</a>                         
                         {{ $i < $countCategory ? ", " : "" }}
                       
                       @endforeach
@@ -40,7 +40,7 @@
                         <?php $i++; 
                         ?>                
                         
-                        <a href="/{{ $country['slug'] }}" title="{{ $country['name'] }}">{{ $country['name'] }}</a>                         
+                        <a href="{{ route('cate', $country['slug']) }}" title="{{ $country['name'] }}">{{ $country['name'] }}</a>                         
                         {{ $i < $countCountry ? ", " : "" }}
                       
                       @endforeach
@@ -51,7 +51,19 @@
                 @if( $movies->duration )
                 <div class="block"><strong>Thời lượng:</strong> {{ $movies->duration }}</div>
                 @endif
-                <div class="block"><strong>Chất lượng:</strong> {{ $movies->quality == 1 ? "HD" : ( $movies->quality == 2 ? "SD" : "CAM" ) }}</div>
+                <div class="block"><strong>Chất lượng:</strong>
+                   @if ($movies->quality == 1)
+                    Full HD
+                    @elseif ($movies->quality == 2)
+                    HD
+                    @elseif ($movies->quality == 3)
+                    SD
+                    @elseif ($movies->quality == 4)
+                    CAM
+                    @elseif ($movies->quality == 5)
+                    1080P
+                    @endif
+                </div>
                 @if(  $movies->release_year )
                 <div class="block"><strong>Release:</strong> {{ $movies->release_year }}</div>
                 @endif
@@ -60,7 +72,7 @@
                 @endif
              </div>
            
-                <a onclick="location.href='/{{ $movies->slug }}.html'" title=""class="btn btn-success mt20">Xem phim</a>
+                <a onclick="location.href='{{ route("landing", $movies->slug) }}'" title=""class="btn btn-success mt20">Xem phim</a>
              
           </span>
        </div>

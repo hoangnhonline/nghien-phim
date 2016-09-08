@@ -3,7 +3,7 @@
         <li><a href="{{ URL::to('/') }}" title="Trang chủ">Trang chủ</a></li>
         
         <li>
-            <a href="{{ $cateDetail->slug }}" title="{{ $cateDetail->name }}">{{ $cateDetail->name }}</a>
+            <a href="{{ route('cate', $cateDetail->slug) }}" title="{{ $cateDetail->name }}">{{ $cateDetail->name }}</a>
         </li>
         <li class="active">{{ $detail->title }}</li>
     </ol>

@@ -192,12 +192,12 @@
           </div>
           <!-- /.box-header -->
             <div class="box-body">
-              <!--<div class="form-group">
+              <div class="form-group">
                 <label for="email" class="ltitle">Trạng thái </label>
                 <label class="radio-inline"><input type="radio" {{ old('status')  == 1 || !old('status') ? "checked" : "" }} name="status" value="1">Active</label>
                 <label class="radio-inline"><input type="radio" {{ old('status') == 2 ? "checked" : "" }} name="status" value="2">Pending</label>              
               </div>
-              <div class="form-group">
+              <!--<div class="form-group">
                 <label for="email" class="ltitle">Control </label>
                 <label class="radio-inline"><input type="radio" {{ old('top') || !old('top')== 1 ? "checked" : "" }} name="top" value="1">New</label>
                 <label class="radio-inline"><input type="radio" {{ old('top') == 2 ? "checked" : "" }} name="top" value="2">Hot</label>
@@ -214,6 +214,8 @@
               </div>
                <div class="form-group">
                 <label for="email" class="ltitle">Chất lượng </label>
+                
+                <label class="radio-inline"><input type="radio" {{ !old('quality') || old('quality') == 5 ? "checked" : "" }} name="quality" value="5">1080P</label>
                 <label class="radio-inline"><input type="radio" {{ !old('quality') || old('quality') == 1 ? "checked" : "" }} name="quality" value="1">Full HD</label>
                 <label class="radio-inline"><input type="radio" {{ old('quality') == 2 ? "checked" : "" }} name="quality" value="2">HD</label>
                 <label class="radio-inline"><input type="radio" {{ old('quality') == 3 ? "checked" : "" }} name="quality" value="3">SD</label>

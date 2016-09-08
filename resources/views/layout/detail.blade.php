@@ -397,14 +397,14 @@
         $('body').addClass('off-cookie');
     }
 </script>
-<script src="http://vjs.zencdn.net/5.10.8/video.js"></script>
+<script src="{{ URL::asset('assets/js/video.js') }}"></script>
 
 <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js?v=0.1') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap-select.js?v=0.1') }}"></script>
 <!-- Go to www.addthis.com/dashboard to customize your tools 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5181dc394703fed7"
         async="async"></script>-->
-
+@yield('javascript_page')
 <script type="text/javascript">
     /*
     $(document).ready(function () {
@@ -427,7 +427,7 @@
     */
 </script>
 <script type="text/javascript">
-$(document).ready(function(){
+$(document).ready(function(){        
     if (!jQuery.browser.mobile) {
         $('.jt').qtip({
             content: {

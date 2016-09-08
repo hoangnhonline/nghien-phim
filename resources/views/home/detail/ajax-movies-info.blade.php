@@ -1,4 +1,16 @@
-<div class="jtip-quality">{{ $detail->quality == 1 ? "HD" : ( $detail->quality == 2 ? "SD" : "CAM" ) }}</div>
+<div class="jtip-quality">
+@if ($detail->quality == 1)
+Full HD
+@elseif ($detail->quality == 2)
+HD
+@elseif ($detail->quality == 3)
+SD
+@elseif ($detail->quality == 4)
+CAM
+@elseif ($detail->quality == 5)
+1080P
+@endif
+</div>
 <div class="jtip-top">
     <div class="jt-info jt-imdb">IMDb: {{ $detail->imdb }}</div>
     <div class="jt-info">{{ $detail->release_year }}</div>
