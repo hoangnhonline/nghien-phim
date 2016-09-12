@@ -13,14 +13,8 @@
         </div>
     </div>-->
 
-    <div class="wrapper">
-        <video id="my-video" autoplay class="video-js vjs-16-9 vjs-big-play-centered" controls preload="auto" width="100%" height="100%" poster="{{ Helper::showImage( $detail->poster_url ) }}" data-setup="{'fluid': true}">
-        <source src="{{ $episodeActive ? route('streaming', Helper::encodeLink($episodeActive->source)) : "" }}" type='video/mp4'>                       
-        <p class="vjs-no-js">
-          To view this video please enable JavaScript, and consider upgrading to a web browser that
-          <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-        </p>
-      </video>
+    <div class="wrapper" id="play-video">
+       
     </div>   
     <!-- Load player -->
 
@@ -215,3 +209,31 @@
 }
 
 </style>
+@section('javascript_page')
+<script type="text/javascript" src="{{ URL::asset('assets/plugins/jwplayer/jwplayer.js') }}" ></script>
+<script>jwplayer.key = "dWwDdbLI0ul1clbtlw+4/UHPxlYmLoE9Ii9QEw==";</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var url = '';
+        $.ajax({
+            url : "{{ route('get-video-streaming') }}",
+            type : "GET",
+            data :{
+                encodeLink : '{{ $episodeActive ? Helper::encodeLink($episodeActive->source) : "" }}',
+            },
+            success : function(data){
+                console.log(data);
+                url = data;
+                console.log(url);
+                    var playerInstance = jwplayer("play-video");
+                    playerInstance.setup({
+                    sources: url,
+                    width: "100%",
+                    aspectratio: "16:9"
+                    });
+            }
+        })
+
+    });
+</script>
+@endsection

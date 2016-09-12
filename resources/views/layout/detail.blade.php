@@ -39,10 +39,7 @@
 <script type="text/javascript" src="{{ URL::asset('assets/js/psbar.jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/star-rating.js') }}"></script>
 
-    <link href="http://vjs.zencdn.net/5.10.8/video-js.css" rel="stylesheet">
-
-  <!-- If you'd like to support IE8 -->
-  <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+  
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
@@ -380,10 +377,10 @@
         $('body').addClass('off-cookie');
     }
 </script>
-<script src="{{ URL::asset('assets/js/video.js') }}"></script>
-
 <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js?v=0.1') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap-select.js?v=0.1') }}"></script>
+
+<!-- end header - start body (đoạn này chèn ỡ chỗ muốn show player ra)-->
 <!-- Go to www.addthis.com/dashboard to customize your tools 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5181dc394703fed7"
         async="async"></script>-->

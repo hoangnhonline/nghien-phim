@@ -272,7 +272,7 @@ class DetailController extends Controller
             }        
         }
 
-        return redirect( $originalUrl );
+        return $originalUrl;
     }
     public function getLink(Request $request){
 
