@@ -117,8 +117,7 @@ class DetailController extends Controller
                         ->select('id', 'title', 'slug', 'image_url', 'quality')
                         ->orderBy('id', 'desc')
                         ->limit(12)
-                        ->get();
-
+                        ->get();            
             //tags
             $tmpArr = TagObjects::where( ['tag_objects.type' => 1, 'object_id' => $id] )
                         ->join('tag', 'tag.id', '=', 'tag_objects.tag_id')
@@ -132,9 +131,9 @@ class DetailController extends Controller
             }
             $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
             $title = $slugEpisode ? $episodeActive->name . ' - '.$title : $title;
-            if ( $detail->type == 1){
-                $title = "Xem phim ".$title;
-            }
+            
+            $title = "Xem phim ".$title;
+            
             return view('home.detail', compact(
                 'settingArr',
                 'title',
@@ -214,8 +213,10 @@ class DetailController extends Controller
             $relatedArr = Film::where('id', '<>', $id)
                         ->join('film_category', 'film_category.film_id', '=', 'film.id')
                         ->where('category_id', $category_id)
+                        ->where('film.status', 1)
                         ->select('id', 'title', 'slug', 'image_url', 'quality')
                         ->orderBy('id', 'desc')
+
                         ->limit(12)
                         ->get();
 
