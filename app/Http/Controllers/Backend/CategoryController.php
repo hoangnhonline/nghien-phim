@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Helper, File, Session;
+use Helper, File, Session, Auth;
 
 class CategoryController extends Controller
 {
@@ -121,7 +121,7 @@ class CategoryController extends Controller
         
         $this->validate($request,[
             'name' => 'required',
-            'slug' => 'required',
+            'slug' => 'required|unique:category,slug,'.$dataArr['id'],
         ],
         [
             'name.required' => 'Bạn chưa nhập tên danh mục',

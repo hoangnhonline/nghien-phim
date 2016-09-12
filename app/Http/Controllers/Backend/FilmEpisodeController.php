@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Film;
 use App\Models\FilmEpisode;
 use App\Models\SystemMetadata;
-use Helper, File, Session;
+use Helper, File, Session, Auth;
 
 class FilmEpisodeController extends Controller
 {

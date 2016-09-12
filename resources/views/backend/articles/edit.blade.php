@@ -99,7 +99,7 @@
                   <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
                     @if( $tagArr->count() > 0)
                       @foreach( $tagArr as $value )
-                      <option value="{{ $value->id }}" >{{ $value->tag }}</option>
+                      <option value="{{ $value->id }}" {{ in_array($value->id, $tagSelected) ? "selected" : "" }} >{{ $value->name }}</option>
                       @endforeach
                     @endif
                   </select>

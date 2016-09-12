@@ -23,7 +23,7 @@ class Country extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['name', 'description', 'slug', 'keywords', 'created_user', 'updated_user', 'status', 'is_hot'];
+    protected $fillable = ['name', 'description', 'slug', 'keywords', 'created_user', 'updated_user', 'status', 'is_hot', 'meta_title', 'meta_description', 'meta_keywords', 'custom_text'];
     
     public static function getListOrderByKey(){
         $arr = [];

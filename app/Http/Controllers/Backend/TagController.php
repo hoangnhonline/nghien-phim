@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use App\Models\SystemMetadata;
-use Helper, File, Session;
+use Helper, File, Session, Auth;
 
 class TagController extends Controller
 {

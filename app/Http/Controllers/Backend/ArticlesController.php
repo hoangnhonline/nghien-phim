@@ -10,7 +10,7 @@ use App\Models\Backend\ArticlesCate;
 use App\Models\Backend\Tag;
 use App\Models\Backend\TagObjects;
 use App\Models\Backend\Articles;
-use Helper, File, Session;
+use Helper, File, Session, Auth;
 
 class ArticlesController extends Controller
 {
@@ -105,8 +105,14 @@ class ArticlesController extends Controller
 
         // xu ly tags
         if( !empty( $dataArr['tags'] ) && $object_id ){
+            
+
             foreach ($dataArr['tags'] as $tag_id) {
-                TagObjects::create(['object_id' => $object_id, 'tag_id' => $tag_id, 'object_type' => 2]);
+                $model = new TagObjects;
+                $model->object_id = $object_id;
+                $model->tag_id  = $tag_id;
+                $model->type = 2;
+                $model->save();
             }
         }
 
@@ -140,7 +146,7 @@ class ArticlesController extends Controller
         
         $cateArr = ArticlesCate::all();        
 
-        $tmpArr = TagObjects::where(['object_type' => 1, 'object_id' => $id])->get();
+        $tmpArr = TagObjects::where(['type' => 2, 'object_id' => $id])->get();
         
         if( $tmpArr->count() > 0 ){
             foreach ($tmpArr as $value) {
@@ -199,11 +205,16 @@ class ArticlesController extends Controller
 
         $model->update($dataArr);
 
-        TagObjects::where(['object_id' => $dataArr['id'], 'object_type' => 2])->delete();
+        TagObjects::where(['object_id' => $dataArr['id'], 'type' => 2])->delete();
         // xu ly tags
         if( !empty( $dataArr['tags'] ) ){
+                       
             foreach ($dataArr['tags'] as $tag_id) {
-                TagObjects::create(['object_id' => $dataArr['id'], 'tag_id' => $tag_id, 'object_type' => 2]);
+                $modelTagObject = new TagObjects; 
+                $modelTagObject->object_id = $dataArr['id'];
+                $modelTagObject->tag_id  = $tag_id;
+                $modelTagObject->type = 2;
+                $modelTagObject->save();
             }
         }
         Session::flash('message', 'Cập nhật tin tức thành công');        

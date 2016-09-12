@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Banner;
-use Helper, File, Session;
+use Helper, File, Session, Auth;
 
 class BannerController extends Controller
 {

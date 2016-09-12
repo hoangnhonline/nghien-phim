@@ -9,7 +9,7 @@ use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-use Helper, File, Session;
+use Helper, File, Session, Auth;
 
 class AccountController extends Controller
 {

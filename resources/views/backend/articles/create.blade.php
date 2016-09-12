@@ -99,7 +99,7 @@
                   <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
                     @if( $tagArr->count() > 0)
                       @foreach( $tagArr as $value )
-                      <option value="{{ $value->id }}" {{ old('tags') && in_array($value->id, old('tags') ) ? "selected" : "" }}>{{ $value->tag }}</option>
+                      <option value="{{ $value->id }}" {{ old('tags') && in_array($value->id, old('tags') ) ? "selected" : "" }}>{{ $value->name }}</option>
                       @endforeach
                     @endif
                   </select>
@@ -160,7 +160,6 @@
   <!-- /.content -->
 </div>
 <input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
-<input type="hidden" id="route_get_movies_external" value="{{ route('general.get-movies-external') }}">
 
 @stop
 @section('javascript_page')

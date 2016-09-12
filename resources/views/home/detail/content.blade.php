@@ -204,3 +204,14 @@
 </style>
 <input type="hidden" id="video_url" value="{{ $detail->url }}">
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+<div class="content-kus" style="text-align: center; margin: 20px 0; padding: 15px; background-color: #FFF">
+    <div class="fb-comments" data-href="{{ url()->current() }}" data-numposts="5"></div>
+    <div class="clearfix"></div>
+</div>
+<style type="text/css">
+.fb-comments, .fb-comments iframe[style], .fb-like-box, .fb-like-box iframe[style], .fb-comments span, .fb-comments iframe span[style], .fb-like-box span, .fb-like-box iframe span[style] 
+{
+       width: 100% !important;
+}
+
+</style>
