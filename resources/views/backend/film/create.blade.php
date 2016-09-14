@@ -148,7 +148,7 @@
                   </div>
                   <div style="clear:both"></div>
                 </div>
-                <div class="form-group"> 
+         <div class="input-group">
                   <label>Tags</label>
                   <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
                     @if( $tagArr->count() > 0)
@@ -157,12 +157,13 @@
                       @endforeach
                     @endif
                   </select>
-                  <!--<span class="input-group-btn">
+                  <span class="input-group-btn">
                     <button style="margin-top:24px" class="btn btn-primary" id="btnAddTag" type="button" data-value="3">
-                      <span class="glyphicon glyphicon-plus"></span>
+                      Tạo mới
                     </button>
-                  </span>-->
+                  </span>
                 </div>
+                <div class="clearfix" style="margin-bottom:10px"></div> 
                 <div class="form-group">
                   <label>Nội dung phim</label>
                   <textarea class="form-control" rows="4" name="content" id="content">{{ old('content') }}</textarea>
@@ -502,9 +503,58 @@
             });
          }
       });     
-     
+      
       
     });
-    
+   $(document).on('click', '#btnSaveTagAjax', function(){
+      $.ajax({
+        url : $('#formAjaxTag').attr('action'),
+        data: $('#formAjaxTag').serialize(),
+        type : "post", 
+        success : function(id){          
+          $('#btnCloseModalTag').click();
+          $.ajax({
+            url : "{{ route('tag.ajax-list') }}",
+            data: { 
+              type : 1 ,
+              tagSelected : $('#tags').val(),
+              id : id
+            },
+            type : "get", 
+            success : function(data){
+                $('#tags').html(data);
+                $('#tags').select2('refresh');
+                
+            }
+          });
+        }
+      });
+   }); 
+   $('#contentTag #name').change(function(){
+         var name = $.trim( $(this).val() );
+         if( name != '' && $('#contentTag #slug').val() == ''){
+            $.ajax({
+              url: $('#route_get_slug').val(),
+              type: "POST",
+              async: false,      
+              data: {
+                str : name
+              },              
+              success: function (response) {
+                if( response.str ){                  
+                  $('#contentTag #slug').val( response.str );
+                }                
+              },
+              error: function(response){                             
+                  var errors = response.responseJSON;
+                  for (var key in errors) {
+                    
+                  }
+                  //$('#btnLoading').hide();
+                  //$('#btnSave').show();
+              }
+            });
+         }
+      });
 </script>
 @stop

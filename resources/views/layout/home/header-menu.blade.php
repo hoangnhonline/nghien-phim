@@ -10,7 +10,7 @@
       </li>
      
          <li>
-            <a href="/phim-theo-the-loai" title="QUỐC GIA">THỂ LOẠI</a>
+            <a href="javascript:void(0)" title="QUỐC GIA">THỂ LOẠI</a>
             @if( !empty($parentCate) )
             <div class="sub-container" style="display: none">
                <ul class="sub-menu">
@@ -25,7 +25,7 @@
             @endif
          </li>
          <li class="">
-            <a href="/phim-theo-quoc-gia" title="QUỐC GIA">QUỐC GIA</a>
+            <a href="javascript:void(0)" title="QUỐC GIA">QUỐC GIA</a>
             @if( !empty($countryArr) )
             <div class="sub-container" style="display: none">
                <ul class="sub-menu">

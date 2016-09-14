@@ -137,7 +137,7 @@
                   </div>
                   <div style="clear:both"></div>
                 </div>             
-                <div class="form-group">
+                <div class="input-group">
                   <label>Tags</label>
                   <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
                     @if( $tagArr->count() > 0)
@@ -146,7 +146,13 @@
                       @endforeach
                     @endif
                   </select>
+                  <span class="input-group-btn">
+                    <button style="margin-top:24px" class="btn btn-primary" id="btnAddTag" type="button" data-value="3">
+                      Tạo mới
+                    </button>
+                  </span>
                 </div>
+                <div class="clearfix" style="margin-bottom:10px"></div> 
                 <div class="form-group">
                   <label>Nội dung phim</label>
                   <textarea class="form-control" rows="4" name="content" id="content">{{ $detail->content }}</textarea>
@@ -264,6 +270,7 @@
   </section>
   <!-- /.content -->
 </div>
+@include('backend.film.modal')
 <input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
 <input type="hidden" id="route_get_film_external" value="{{ route('general.get-film-external') }}">
 
@@ -271,6 +278,57 @@
 @section('javascript_page')
 <script src="{{ URL::asset('be/dist/js/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript">
+   $(document).on('click', '#btnSaveTagAjax', function(){
+      $.ajax({
+        url : $('#formAjaxTag').attr('action'),
+        data: $('#formAjaxTag').serialize(),
+        type : "post", 
+        success : function(id){          
+          $('#btnCloseModalTag').click();
+          $.ajax({
+            url : "{{ route('tag.ajax-list') }}",
+            data: { 
+              type : 1 ,
+              tagSelected : $('#tags').val(),
+              id : id
+            },
+            type : "get", 
+            success : function(data){
+                
+                $('#tags').html(data);
+                $('#tags').select2('refresh');
+                
+            }
+          });
+        }
+      });
+   }); 
+   $('#contentTag #name').change(function(){
+         var name = $.trim( $(this).val() );
+         if( name != '' && $('#contentTag #slug').val() == ''){
+            $.ajax({
+              url: $('#route_get_slug').val(),
+              type: "POST",
+              async: false,      
+              data: {
+                str : name
+              },              
+              success: function (response) {
+                if( response.str ){                  
+                  $('#contentTag #slug').val( response.str );
+                }                
+              },
+              error: function(response){                             
+                  var errors = response.responseJSON;
+                  for (var key in errors) {
+                    
+                  }
+                  //$('#btnLoading').hide();
+                  //$('#btnSave').show();
+              }
+            });
+         }
+      });
     $(document).ready(function(){
       if( $('#slide_1').prop('checked') == true ){
         $('#div_anh_slide').show();
@@ -298,6 +356,9 @@
         
         $('#btnSave').hide();
         $('#btnLoading').show();
+      });
+      $('#btnAddTag').click(function(){
+          $('#tagModal').modal('show');
       });
       var editor = CKEDITOR.replace( 'content',{
           language : 'vi',

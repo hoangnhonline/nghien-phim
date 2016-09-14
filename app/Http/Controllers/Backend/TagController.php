@@ -32,7 +32,20 @@ class TagController extends Controller
 
         return view('backend.tag.index', compact( 'items', 'type', 'name'));
     }
+    public function ajaxList(Request $request){
 
+        $tagSelected = $request->tagSelected;
+        $id = $request->id;
+        $tagSelected[] = $id;
+
+        $type = isset($request->type) ? $request->type : 1;
+
+        $query = Tag::where('type', $type);
+        
+        $tagArr = $query->orderBy('id', 'desc')->get();
+
+        return view('backend.tag.ajax-list', compact( 'tagArr', 'type', 'tagSelected'));
+    }
     /**
     * Show the form for creating a new resource.
     *
@@ -87,6 +100,45 @@ class TagController extends Controller
         Session::flash('message', 'Tạo mới tag thành công');
 
         return redirect()->route('tag.index', [ 'type' => $dataArr['type'] ]);
+    }
+
+    public function ajaxSave(Request $request)
+    {
+        $dataArr = $request->all();
+        
+        $this->validate($request,[
+            'name' => 'required',
+            'slug' => 'required|unique:tag,slug,NULL,id,type,'.$dataArr['type'],
+        ],
+        [
+            'name.required' => 'Bạn chưa nhập tag',
+            'slug.required' => 'Bạn chưa nhập slug',
+            'slug.unique' => 'Slug đã được sử dụng.',
+        ]);
+
+        $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
+        
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
+        $rs = Tag::create($dataArr);
+        
+        $object_id = $rs->id;
+
+        $metaArr['meta_title'] = $dataArr['meta_title'];
+        $metaArr['meta_description'] = $dataArr['meta_description'];
+        $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
+        $metaArr['custom_text'] = $dataArr['custom_text'];
+        
+        $rsMeta = SystemMetadata::create( $metaArr );
+
+        if( $rsMeta->id ){
+            $modelTag = Tag::find($object_id);
+            $modelTag->update(['meta_id' => $rsMeta->id]);
+        }
+        return $object_id;
+
     }
 
     /**

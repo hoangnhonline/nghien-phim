@@ -25,11 +25,12 @@
 
     <!-- Modal content-->
     <div class="modal-content">
+    <form method="POST" action="{{ route('tag.ajax-save') }}" id="formAjaxTag">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Tạo mới tag</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="contentTag">
           <input type="hidden" name="type" value="1">
            <!-- text input -->
           <div class="col-md-6">
@@ -71,9 +72,10 @@
           <div style="clear:both"></div>
       </div>
       <div class="modal-footer" style="text-align:center">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnSaveTagAjax"> Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCloseModalTag">Close</button>
       </div>
+      </form>
     </div>
 
   </div>
