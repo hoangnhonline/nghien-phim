@@ -511,14 +511,14 @@
         url : $('#formAjaxTag').attr('action'),
         data: $('#formAjaxTag').serialize(),
         type : "post", 
-        success : function(id){          
+        success : function(str_id){          
           $('#btnCloseModalTag').click();
           $.ajax({
             url : "{{ route('tag.ajax-list') }}",
             data: { 
               type : 1 ,
               tagSelected : $('#tags').val(),
-              id : id
+              str_id : str_id
             },
             type : "get", 
             success : function(data){

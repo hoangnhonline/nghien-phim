@@ -34,9 +34,11 @@ class TagController extends Controller
     }
     public function ajaxList(Request $request){
 
-        $tagSelected = $request->tagSelected;
-        $id = $request->id;
-        $tagSelected[] = $id;
+        $tagSelected = (array) $request->tagSelected;
+        
+        $str_id = $request->str_id;
+        $tmpArr = explode(",", $str_id);
+        $tagSelected = array_merge($tagSelected, $tmpArr);
 
         $type = isset($request->type) ? $request->type : 1;
 
@@ -106,38 +108,29 @@ class TagController extends Controller
     {
         $dataArr = $request->all();
         
-        $this->validate($request,[
-            'name' => 'required',
-            'slug' => 'required|unique:tag,slug,NULL,id,type,'.$dataArr['type'],
-        ],
-        [
-            'name.required' => 'Bạn chưa nhập tag',
-            'slug.required' => 'Bạn chưa nhập slug',
-            'slug.unique' => 'Slug đã được sử dụng.',
-        ]);
+        $str_tag = $request->str_tag;
 
-        $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
-        
-        $dataArr['created_user'] = Auth::user()->id;
+        $tmpArr = explode(';', $str_tag);
 
-        $dataArr['updated_user'] = Auth::user()->id;
+        if( !empty($tmpArr) ){
+            foreach ($tmpArr as $tag) {
+                
+            $tag = trim($tag);
+            if( $tag != ""){
+                // check xem co chua
+                $arr = Tag::where('name', '=', $tag)->where('type', 1)->first();
+                if( !empty( (array) $arr)) {
+                    $arrId[] = $arr->id;
+                }else{
+                    $rs = Tag::create(['name'=> $tag, 'type' => 1, 'slug' => str_slug($tag), 'created_user' => Auth::user()->id, 'updated_user' => Auth::user()->id]);
+                    $arrId[] = $rs->id;
+                }
 
-        $rs = Tag::create($dataArr);
-        
-        $object_id = $rs->id;
-
-        $metaArr['meta_title'] = $dataArr['meta_title'];
-        $metaArr['meta_description'] = $dataArr['meta_description'];
-        $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
-        $metaArr['custom_text'] = $dataArr['custom_text'];
-        
-        $rsMeta = SystemMetadata::create( $metaArr );
-
-        if( $rsMeta->id ){
-            $modelTag = Tag::find($object_id);
-            $modelTag->update(['meta_id' => $rsMeta->id]);
+            }
+            }   
         }
-        return $object_id;
+
+        return implode(',', $arrId);
 
     }
 
@@ -160,9 +153,11 @@ class TagController extends Controller
     */
     public function edit($id)
     {
+        $metadata = (object) [];
         $detail = Tag::find($id);
-        
-        $metadata = SystemMetadata::find( $detail->meta_id );
+        if( $detail->meta_id > 0){
+            $metadata = SystemMetadata::find( $detail->meta_id );
+        }
 
         return view('backend.tag.edit', compact( 'detail', 'metadata'));
     }
