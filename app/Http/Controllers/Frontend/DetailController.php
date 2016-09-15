@@ -233,7 +233,9 @@ class DetailController extends Controller
                     $tagSelected[] = $value;
                 }
             }
+            
             $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
+
             return view('home.landing', compact(
                 'settingArr',
                 'title',
