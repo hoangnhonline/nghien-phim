@@ -134,6 +134,7 @@ class DetailController extends Controller
             
             $title = "Xem phim ".$title;
             
+            $urlVideo = $this->getLink($episodeActive->source);
             return view('home.detail', compact(
                 'settingArr',
                 'title',
@@ -143,7 +144,8 @@ class DetailController extends Controller
                 'cateDetail',
                 'episode',
                 'episodeActive',
-                'is_landing'
+                'is_landing',
+                'urlVideo'
                 ));    
         }else{
             return view('errors.404');
@@ -274,15 +276,30 @@ class DetailController extends Controller
 
         return $originalUrl;
     }
-    public function getLink(Request $request){
 
-        $detailExternal = [];
-        if( $request->ajax() ){
-            $url = $request->url;
-            
-            $detailExternal = Helper::getDetailVideoFromExternalSite( $url );
+    public function getLink($decodeLink){
+
+        $originalUrl = '';
+       
+
+        if( $decodeLink ){            
+
+            if( strpos($decodeLink, 'zing.vn') > 0){
+
+                $tmp = Helper::getVideoZing( $decodeLink );
+
+                $originalUrl = $tmp['f480'] != '' ? $tmp['f480'] : $tmp['f360'];
+
+            }
+            if( strpos($decodeLink, 'google') > 0){   
+
+                $tmp = Helper::getPhotoGoogle( $decodeLink);
+                
+                $originalUrl = $tmp['720p'] != '' ? $tmp['720p'] : $tmp['360p'];
+            }        
         }
-        return response()->json($detailExternal);
+
+        return $originalUrl;
 
     }
 

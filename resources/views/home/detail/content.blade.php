@@ -213,27 +213,19 @@
 <script type="text/javascript" src="{{ URL::asset('assets/plugins/jwplayer/jwplayer.js') }}" ></script>
 <script>jwplayer.key = "dWwDdbLI0ul1clbtlw+4/UHPxlYmLoE9Ii9QEw==";</script>
 <script type="text/javascript">
-    $(document).ready(function(){
-        var url = '';
-        $.ajax({
-            url : "{{ route('get-video-streaming') }}",
-            type : "GET",
-            data :{
-                encodeLink : '{{ $episodeActive ? Helper::encodeLink($episodeActive->source) : "" }}',
-            },
-            success : function(data){
-                console.log(data);
-                url = data;
-                console.log(url);
-                    var playerInstance = jwplayer("play-video");
+ var sources = [{file: "{{ $urlVideo }}",
+                type:'mp4',
+                label: '360p',
+                default: true}];
+    var playerInstance = jwplayer("play-video");
                     playerInstance.setup({
-                    sources: url,
+                   sources: sources,
                     width: "100%",
-                    aspectratio: "16:9"
+                    autostart: true,
+                    aspectratio: "16:9",
+                    primary: "html5",
+        controls: true,
                     });
-            }
-        })
 
-    });
 </script>
 @endsection
