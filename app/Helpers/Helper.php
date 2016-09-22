@@ -115,7 +115,7 @@ class Helper
         return $arrReturn;    
     }
     public static function curl($url) {
-         $ch = curl_init();
+         $ch = @curl_init();
          curl_setopt($ch, CURLOPT_URL, $url);
          $head[] = "Connection: keep-alive";
          $head[] = "Keep-Alive: 300";
@@ -137,8 +137,8 @@ class Helper
     public static function getPhotoGoogle($link){
         $get = self::curl($link);
         $data = explode('url\u003d', $get);
-        $url = explode('%3Dm', $data[1]);
-        $decode = urldecode($url[0]);
+        $url = isset($data[1]) ? explode('%3Dm', $data[1]) : "";
+        $decode = isset($url[0]) ? urldecode($url[0]) : "";
         $count = count($data);
         $linkDownload = array();
         if($count > 4) {

@@ -272,7 +272,7 @@ class DetailController extends Controller
 
                 $tmp = Helper::getPhotoGoogle( $decodeLink);
                 
-                $originalUrl = $tmp['720p'] != '' ? $tmp['720p'] : $tmp['360p'];
+                $originalUrl = (isset($tmp['720p']) && $tmp['720p'] != '' ) ? $tmp['720p'] : $tmp['360p'];
             }        
         }
 
@@ -297,7 +297,7 @@ class DetailController extends Controller
 
                 $tmp = Helper::getPhotoGoogle( $decodeLink);
                 
-                $originalUrl = $tmp['720p'] != '' ? $tmp['720p'] : $tmp['360p'];
+                $originalUrl = (isset($tmp['720p']) && $tmp['720p'] != '' ) ? $tmp['720p'] : (isset($tmp['360p']) ? $tmp['360p'] : "");
             }        
         }
 
