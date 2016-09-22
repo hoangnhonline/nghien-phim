@@ -338,12 +338,12 @@
       });
       var editor = CKEDITOR.replace( 'content',{
           language : 'vi',
-          filebrowserBrowseUrl: '../dist/js/kcfinder/browse.php?type=files',
-          filebrowserImageBrowseUrl: '../dist/js/kcfinder/browse.php?type=images',
+          filebrowserBrowseUrl: "{{ URL::asset('/be/dist/js/kcfinder/browse.php?type=files') }}",
+          filebrowserImageBrowseUrl: "{{ URL::asset('/be/dist/js/kcfinder/browse.php?type=images') }}",
           filebrowserFlashBrowseUrl: '../dist/js/kcfinder/browse.php?type=flash',
-          filebrowserUploadUrl: '../dist/js/kcfinder/upload.php?type=files',
-          filebrowserImageUploadUrl: '../dist/js/kcfinder/upload.php?type=images',
-          filebrowserFlashUploadUrl: '../dist/js/kcfinder/upload.php?type=flash'
+          filebrowserUploadUrl: "{{ URL::asset('/be/dist/js/kcfinder/upload.php?type=files') }}",
+          filebrowserImageUploadUrl: "{{ URL::asset('/be/dist/js/kcfinder/upload.php?type=images') }}",
+          filebrowserFlashUploadUrl: "{{ URL::asset('/be/dist/js/kcfinder/upload.php?type=flash') }}"
       });
       $('#btnUploadImage').click(function(){        
         $('#file-image').click();

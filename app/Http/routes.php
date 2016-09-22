@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/*
 Route::group(['namespace' => 'Frontend'], function()
 {
 
@@ -35,7 +36,7 @@ Route::group(['namespace' => 'Frontend'], function()
     Route::get('/download', ['as' => 'download', 'uses' => 'DetailController@download']);
     Route::get('/tim-kiem.html', ['as' => 'search', 'uses' => 'HomeController@search']);
 });
-
+*/
 
 // Authentication routes...
 Route::get('backend/login', ['as' => 'backend.login-form', 'uses' => 'Backend\UserController@loginForm']);
