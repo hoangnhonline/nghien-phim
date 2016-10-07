@@ -300,11 +300,7 @@ class DetailController extends Controller
             $categoryArr = Category::getListOrderByKey();
             
             $countryFilm = $detail->filmCountry( $id );
-<<<<<<< HEAD
-            $categoryFilm = $detail->filmCountry( $id );           
-=======
             $categoryFilm = $detail->filmCountry( $id );
->>>>>>> 2c19ebbf3b504717164fdfa4b415924f6c081e51
 
             return view('home.detail.ajax-movies-info', compact( 'detail', 'countryArr', 'countryFilm', 'categoryArr', 'categoryFilm'));
         }
