@@ -1,7 +1,7 @@
 <?php
 
 use App\Helpers\simple_html_dom;
-
+use Goutte\Client;
 namespace App\Helpers;
 
 class Helper
@@ -115,6 +115,7 @@ class Helper
         return $arrReturn;    
     }
     public static function curl($url) {
+         $url = trim($url);
          $ch = @curl_init();
          curl_setopt($ch, CURLOPT_URL, $url);
          $head[] = "Connection: keep-alive";

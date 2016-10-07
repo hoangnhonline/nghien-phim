@@ -76,7 +76,7 @@ class FilmController extends Controller
 
         $crewArr = Film::filmCrew();
         
-        $tagArr = Tag::where('type', 1)->orderBy('id', 'desc')->get();
+        $tagArr = Tag::where('type', 1)->get();
 
         return view('backend.film.create', compact( 'tagArr', 'crewArr'));
     }
@@ -201,7 +201,7 @@ class FilmController extends Controller
 
         $crewArr = Film::filmCrew();
         
-        $tagArr = Tag::where('type', 1)->orderBy('id', 'desc')->get();
+        $tagArr = Tag::where('type', 1)->get();
 
         $filmCategory = Film::filmCategory( $id );         
 

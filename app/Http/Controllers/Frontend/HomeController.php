@@ -51,7 +51,7 @@ class HomeController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {       
+    {
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
 
         $layout_name = $page_name = "";

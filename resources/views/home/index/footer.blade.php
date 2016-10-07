@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <p><img border="0" src="http://nghien.biz/themes/123movies/resources/images/logo.png" class="mv-ft-logo"></p>
+                    <p><img border="0" src="../assets/images/logo.png" class="mv-ft-logo"></p>
                     <p>Copyright © phim1p.com. All Rights Reserved</p>
                     <p style="font-size: 11px; line-height: 14px; color: rgba(255,255,255,0.4)">Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.</p>
                 </div>

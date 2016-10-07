@@ -26,8 +26,7 @@ CAM
             @foreach ( $countryFilm as $country_id )                
                 <?php $i++; ?>
                 @if( isset($countryArr[$country_id] ))   
-                <a href="/{{ $countryArr[$country_id]['slug'] }}" title="{{ $countryArr[$country_id]['name'] }}">{{ $countryArr[$country_id]['name'] }}</a>
-                {{ $i < $countCountry ? ", " : "" }}
+                <a href="/{{ $countryArr[$country_id]['slug'] }}" title="{{ $countryArr[$country_id]['name'] }}">{{ $countryArr[$country_id]['name'] }}</a>{{ $i < $countCountry ? ", " : "" }}
                 @endif
             @endforeach
         @endif
@@ -39,8 +38,7 @@ CAM
             @foreach ( $categoryFilm as $category_id )  
                 <?php $i++; ?>                
                 @if( isset($categoryArr[$category_id] ))                              
-                <a href="/{{ $categoryArr[$category_id]['slug'] }}" title="{{ $categoryArr[$category_id]['name'] }}">{{ $categoryArr[$category_id]['name'] }}</a>
-                {{ $i < $countCategory ? ", " : "" }}
+                <a href="/{{ $categoryArr[$category_id]['slug'] }}" title="{{ $categoryArr[$category_id]['name'] }}">{{ $categoryArr[$category_id]['name'] }}</a>{{ $i < $countCategory ? ", " : "" }}
                 @endif
             @endforeach
         @endif

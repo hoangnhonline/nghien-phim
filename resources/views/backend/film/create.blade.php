@@ -195,8 +195,8 @@
             <div class="box-body">
               <div class="form-group">
                 <label for="email" class="ltitle">Trạng thái </label>
-                <label class="radio-inline"><input type="radio" {{ old('status')  == 1 || !old('status') ? "checked" : "" }} name="status" value="1">Active</label>
-                <label class="radio-inline"><input type="radio" {{ old('status') == 2 ? "checked" : "" }} name="status" value="2">Pending</label>              
+                <label class="radio-inline"><input type="radio" {{ old('status')  == 1  ? "checked" : "" }} name="status" value="1">Active</label>
+                <label class="radio-inline"><input type="radio" {{ old('status') == 2 || !old('status') ? "checked" : "" }} name="status" value="2">Pending</label>              
               </div>
               <!--<div class="form-group">
                 <label for="email" class="ltitle">Control </label>

@@ -171,7 +171,7 @@
           language : 'vi',
           filebrowserBrowseUrl: "{{ URL::asset('/be/dist/js/kcfinder/browse.php?type=files') }}",
           filebrowserImageBrowseUrl: "{{ URL::asset('/be/dist/js/kcfinder/browse.php?type=images') }}",
-          filebrowserFlashBrowseUrl: "{{ URL::asset('/be/dist/js/kcfinder/browse.php?type=flash') }}",
+          filebrowserFlashBrowseUrl: '../dist/js/kcfinder/browse.php?type=flash',
           filebrowserUploadUrl: "{{ URL::asset('/be/dist/js/kcfinder/upload.php?type=files') }}",
           filebrowserImageUploadUrl: "{{ URL::asset('/be/dist/js/kcfinder/upload.php?type=images') }}",
           filebrowserFlashUploadUrl: "{{ URL::asset('/be/dist/js/kcfinder/upload.php?type=flash') }}"

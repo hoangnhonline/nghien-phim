@@ -13,6 +13,7 @@ use App\Models\TagObjects;
 use App\Models\Film;
 use App\Models\FilmEpisode;
 use App\Models\Settings;
+use App\Models\SystemMetadata;
 
 use Helper, File, Session, DB;
 
@@ -68,7 +69,7 @@ class DetailController extends Controller
 
         $id = $tmp ? $tmp->id : -1;
         $detail = Film::where( 'id', $id )
-                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type')                
+                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id')                
                 ->first();
        
         //https://lh3.googleusercontent.com/awv1HTJFUE5N-OuanegrmSr4EtPHYt1HqyBa1abaE6hj3S7utZyTk4k_eL-CF63QTTle4q4BHXo=m22
@@ -114,7 +115,7 @@ class DetailController extends Controller
                         ->join('film_category', 'film_category.film_id', '=', 'film.id')
                         ->where('category_id', $category_id)
                         ->where('film.status', 1)
-                        ->select('id', 'title', 'slug', 'image_url', 'quality')
+                        ->select('id', 'title', 'slug', 'image_url', 'quality', 'meta_id')
                         ->orderBy('id', 'desc')
                         ->limit(12)
                         ->get();            
@@ -129,7 +130,9 @@ class DetailController extends Controller
                     $tagSelected[] = $value;
                 }
             }
-            $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
+            $metadata = SystemMetadata::find( $detail->meta_id ); 
+
+            $title = trim($metadata->meta_title) ? $metadata->meta_title : $detail->title;
             $title = $slugEpisode ? $episodeActive->name . ' - '.$title : $title;
             
             $title = "Xem phim ".$title;
@@ -170,7 +173,7 @@ class DetailController extends Controller
 
         $id = $tmp ? $tmp->id : -1;
         $detail = Film::where( 'id', $id )
-                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type')                
+                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id')                
                 ->first();
        
         //https://lh3.googleusercontent.com/awv1HTJFUE5N-OuanegrmSr4EtPHYt1HqyBa1abaE6hj3S7utZyTk4k_eL-CF63QTTle4q4BHXo=m22
@@ -184,29 +187,7 @@ class DetailController extends Controller
             }else{
                 $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('id', 'asc')->firstOrFail();
             }
-            /*
-            if( $episode ){
-                $i = 0;
-                foreach ($episode as $key => $value) {
-                    $i ++;          
-                    if($i == 1){ 
-                        $episodeActive = $value;
-                        if( strpos($episodeActive->source, 'zing.vn') > 0){
-                            $tmp = Helper::getVideoZing( $episodeActive->source);
-                            $episodeActive->source = $tmp['f480'] != '' ? $tmp['f480'] : $tmp['f360'];
-                        }
-                        if( strpos($episodeActive->source, 'google') > 0){   
-
-                            $tmp = Helper::getPhotoGoogle( $episodeActive->source);
-                            //var_dump($episodeActive->source);die;
-                            $episodeActive->source = $tmp['720p'] != '' ? $tmp['720p'] : $tmp['360p'];
-                        }
-                        break;
-                    }
-
-                }              
-            }
-            */
+            
             $cate = $detail->filmCategory($id);
             $category_id = $cate[0]; 
             
@@ -234,7 +215,9 @@ class DetailController extends Controller
                 }
             }
             
-            $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
+            $metadata = SystemMetadata::find( $detail->meta_id ); 
+
+            $title = trim($metadata->meta_title) ? $metadata->meta_title : $detail->title;
 
             return view('home.landing', compact(
                 'settingArr',
@@ -317,7 +300,7 @@ class DetailController extends Controller
             $categoryArr = Category::getListOrderByKey();
             
             $countryFilm = $detail->filmCountry( $id );
-            $categoryFilm = $detail->filmCountry( $id );           
+            $categoryFilm = $detail->filmCountry( $id );
 
             return view('home.detail.ajax-movies-info', compact( 'detail', 'countryArr', 'countryFilm', 'categoryArr', 'categoryFilm'));
         }
