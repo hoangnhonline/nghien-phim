@@ -1,5 +1,5 @@
 <?php 
-$url = 'http://nghienphim.dev';
+$url = 'http://phim1p.com';
 return [    
     'paging' => 100, // number rows for paging
     'uploads' => [
