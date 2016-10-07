@@ -10,15 +10,32 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::group(['namespace' => 'Frontend'], function()
+{
 
-Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-Route::get('/tin-tuc', ['as' => 'news-list', 'uses' => 'HomeController@newsList']);
-Route::post('/get-link', ['as' => 'get-link', 'uses' => 'DetailController@getLink']);
-Route::get('{slug}-{id}.html', ['as' => 'detail', 'uses' => 'DetailController@index']);
-Route::get('/tin-tuc/{slug}-{id}.html', ['as' => 'news-detail', 'uses' => 'HomeController@newsDetail']);
-Route::get('{slug}', ['as' => 'cate', 'uses' => 'HomeController@cate']);
-Route::get('/download', ['as' => 'download', 'uses' => 'DetailController@download']);
-Route::get('/tim-kiem.html', ['as' => 'search', 'uses' => 'HomeController@search']);
+    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+    //Route::get('/phim-le', ['as' => 'phim-le', 'uses' => 'HomeController@cate']);
+    //::get('/phim-bo', ['as' => 'phim-bo', 'uses' => 'HomeController@cate']);
+    Route::get('/tin-tuc', ['as' => 'news-list', 'uses' => 'HomeController@newsList']);
+    Route::post('/get-link', ['as' => 'get-link', 'uses' => 'DetailController@getLink']);
+    Route::get('/streaming/', ['as' => 'get-video-streaming', 'uses' => 'DetailController@streaming']);
+
+    Route::get('/load-tab', ['as' => 'ajax-tab', 'uses' => 'HomeController@ajaxTab']);
+    Route::get('phim/{slugName}/xem-phim.html', ['as' => 'detail', 'uses' => 'DetailController@index']);
+    Route::get('tags/{tagName}/', ['as' => 'tags', 'uses' => 'HomeController@tags']);
+    Route::get('dao-dien/{name}/', ['as' => 'dao-dien', 'uses' => 'HomeController@daoDien']);
+    Route::get('dien-vien/{name}/', ['as' => 'dien-vien', 'uses' => 'HomeController@dienVien']);
+    Route::get('phim/{slugName}/', ['as' => 'landing', 'uses' => 'DetailController@landing']);
+    Route::get('/tin-tuc/{slug}-{id}.html', ['as' => 'news-detail', 'uses' => 'HomeController@newsDetail']);
+    Route::get('{slugName}/{slugEpisode}.html', ['as' => 'detail-tap-phim', 'uses' => 'DetailController@index']);
+
+    Route::get('{slug}', ['as' => 'cate', 'uses' => 'HomeController@cate']);
+    Route::get('/movies-info/{movies_id}', ['as' => 'movies-info', 'uses' => 'DetailController@ajaxMoviesInfo']);
+
+    Route::get('/download', ['as' => 'download', 'uses' => 'DetailController@download']);
+    Route::get('/tim-kiem.html', ['as' => 'search', 'uses' => 'HomeController@search']);
+});
+
 
 // Authentication routes...
 Route::get('backend/login', ['as' => 'backend.login-form', 'uses' => 'Backend\UserController@loginForm']);
@@ -32,12 +49,12 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
     Route::get('/', ['as' => 'film.index', 'uses' => 'FilmController@index']);
    
     Route::group(['prefix' => 'articles-cate'], function () {
-        Route::get('/', ['as' => 'articles-cate.index', 'uses' => 'ArticlesCategoryController@index']);
-        Route::get('/create', ['as' => 'articles-cate.create', 'uses' => 'ArticlesCategoryController@create']);
-        Route::post('/store', ['as' => 'articles-cate.store', 'uses' => 'ArticlesCategoryController@store']);
-        Route::get('{id}/edit',   ['as' => 'articles-cate.edit', 'uses' => 'ArticlesCategoryController@edit']);
-        Route::post('/update', ['as' => 'articles-cate.update', 'uses' => 'ArticlesCategoryController@update']);
-        Route::get('{id}/destroy', ['as' => 'articles-cate.destroy', 'uses' => 'ArticlesCategoryController@destroy']);
+        Route::get('/', ['as' => 'articles-cate.index', 'uses' => 'ArticlesCateController@index']);
+        Route::get('/create', ['as' => 'articles-cate.create', 'uses' => 'ArticlesCateController@create']);
+        Route::post('/store', ['as' => 'articles-cate.store', 'uses' => 'ArticlesCateController@store']);
+        Route::get('{id}/edit',   ['as' => 'articles-cate.edit', 'uses' => 'ArticlesCateController@edit']);
+        Route::post('/update', ['as' => 'articles-cate.update', 'uses' => 'ArticlesCateController@update']);
+        Route::get('{id}/destroy', ['as' => 'articles-cate.destroy', 'uses' => 'ArticlesCateController@destroy']);
     }); 
     Route::group(['prefix' => 'tag'], function () {
         Route::get('/', ['as' => 'tag.index', 'uses' => 'TagController@index']);
@@ -46,6 +63,15 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::get('{id}/edit',   ['as' => 'tag.edit', 'uses' => 'TagController@edit']);
         Route::post('/update', ['as' => 'tag.update', 'uses' => 'TagController@update']);
         Route::get('{id}/destroy', ['as' => 'tag.destroy', 'uses' => 'TagController@destroy']);
+    });
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('/', ['as' => 'account.index', 'uses' => 'AccountController@index']);
+        Route::get('/update-status/{status}/{id}', ['as' => 'account.update-status', 'uses' => 'AccountController@updateStatus']);
+        Route::get('/create', ['as' => 'account.create', 'uses' => 'AccountController@create']);
+        Route::post('/store', ['as' => 'account.store', 'uses' => 'AccountController@store']);
+        Route::get('{id}/edit',   ['as' => 'account.edit', 'uses' => 'AccountController@edit']);
+        Route::post('/update', ['as' => 'account.update', 'uses' => 'AccountController@update']);
+        Route::get('{id}/destroy', ['as' => 'account.destroy', 'uses' => 'AccountController@destroy']);
     });
     Route::group(['prefix' => 'film'], function () {
         Route::get('/', ['as' => 'film.index', 'uses' => 'FilmController@index']);
@@ -110,7 +136,9 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
     Route::group(['prefix' => 'tag'], function () {
         Route::get('/', ['as' => 'tag.index', 'uses' => 'TagController@index']);
         Route::get('/create', ['as' => 'tag.create', 'uses' => 'TagController@create']);
-        Route::post('/store', ['as' => 'tag.store', 'uses' => 'TagController@store']);       
+        Route::post('/store', ['as' => 'tag.store', 'uses' => 'TagController@store']);
+        Route::post('/ajaxSave', ['as' => 'tag.ajax-save', 'uses' => 'TagController@ajaxSave']);  
+        Route::get('/ajax-list', ['as' => 'tag.ajax-list', 'uses' => 'TagController@ajaxList']);       
         
         Route::get('{id}/edit',   ['as' => 'tag.edit', 'uses' => 'TagController@edit']);
         Route::post('/update', ['as' => 'tag.update', 'uses' => 'TagController@update']);

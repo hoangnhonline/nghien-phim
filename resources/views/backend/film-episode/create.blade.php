@@ -16,7 +16,7 @@
   <!-- Main content -->
   <section class="content">
     <a class="btn btn-default btn-sm" href="{{ route('film-episode.index') }}" style="margin-bottom:5px">Quay lại</a>
-    <form role="form" method="POST" action="{{ route('film-episode.store') }}">
+    <form role="form" method="POST" action="{{ $id > 0 ? route('film-episode.update') : route('film-episode.create')  }}">
     <div class="row">
       <!-- left column -->
 

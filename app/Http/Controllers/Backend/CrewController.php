@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
@@ -7,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Crew;
-use App\Models\SystemMetadata;
-use Helper, File, Session;
+
+use Helper, File, Session, Auth;
 
 class CrewController extends Controller
 {
@@ -18,19 +17,24 @@ class CrewController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {     
-        
-        $type = isset($request->type) ? $request->type : 1;
+    {      
+        $type = isset($request->type) ? $request->type : 0;
 
         $name = isset($request->name) && $request->name != '' ? $request->name : '';
+        
+        $query = Crew::whereRaw('1');
 
-        $query = Crew::where('type', $type);
-        if( $name !='' ){
+        if( $type > 0){
+            $query->where('type', $type);
+        }
+        
+        if( $name != ''){
             $query->where('name', 'LIKE', '%'.$name.'%');
         }
-        $items = $query->orderBy('id', 'desc')->paginate(50);
-
-        return view('backend.tag.index', compact( 'items', 'type', 'name'));
+        $items = $query->orderBy('id', 'desc')->paginate(50);       
+        
+        
+        return view('backend.crew.index', compact( 'items' , 'name', 'type' ));
     }
 
     /**
@@ -38,9 +42,9 @@ class CrewController extends Controller
     *
     * @return Response
     */
-    public function create()
+    public function create(Request $request)
     {
-        return view('backend.tag.create');
+        return view('backend.crew.create');
     }
 
     /**
@@ -53,18 +57,20 @@ class CrewController extends Controller
     {
         $dataArr = $request->all();
         
-        $this->validate($request,[
-            'name' => 'required',
-            'slug' => 'required|unique:tag,slug,NULL,id,type,'.$dataArr['type'],
+        $this->validate($request,[            
+           
+            'name' => 'required',            
+            'slug' => 'required|unique:crew,slug',
         ],
-        [
-            'name.required' => 'Bạn chưa nhập tag',
+        [           
+           
+            'name.required' => 'Bạn chưa nhập tiêu đề',
             'slug.required' => 'Bạn chưa nhập slug',
-            'slug.unique' => 'Slug đã được sử dụng.',
-        ]);
-
+            'slug.unique' => 'Slug đã được sử dụng.'
+        ]);       
+        
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
-
+        
         if($dataArr['image_url'] && $dataArr['image_name']){
             
             $tmp = explode('/', $dataArr['image_url']);
@@ -78,25 +84,17 @@ class CrewController extends Controller
             File::move(config('nghien.upload_path').$dataArr['image_url'], config('nghien.upload_path').$destionation);
             
             $dataArr['image_url'] = $destionation;
-        }
-        $rs = Crew::create($dataArr);
-        
-        $object_id = $rs->id;
+        }        
 
-        $metaArr['meta_title'] = $dataArr['meta_title'];
-        $metaArr['meta_description'] = $dataArr['meta_description'];
-        $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
-        $metaArr['custom_text'] = $dataArr['custom_text'];
-        
-        $rsMeta = SystemMetadata::create( $metaArr );
+        $dataArr['created_user'] = Auth::user()->id;
 
-        if( $rsMeta->id ){
-            $modelTag = Crew::find($object_id);
-            $modelTag->update(['meta_id' => $rsMeta->id]);
-        }
-        Session::flash('message', 'Tạo mới tag thành công');
+        $dataArr['updated_user'] = Auth::user()->id;
 
-        return redirect()->route('tag.index', [ 'type' => $dataArr['type'] ]);
+        Crew::create($dataArr);        
+
+        Session::flash('message', 'Tạo mới crew thành công');
+
+        return redirect()->route('crew.index',['type' => $dataArr['type']]);
     }
 
     /**
@@ -117,12 +115,11 @@ class CrewController extends Controller
     * @return Response
     */
     public function edit($id)
-    {
-        $detail = Crew::find($id);
-        
-        $metadata = SystemMetadata::find( $detail->meta_id );
+    {        
 
-        return view('backend.tag.edit', compact( 'detail', 'metadata'));
+        $detail = Crew::find($id);
+
+        return view('backend.crew.edit', compact('detail'));
     }
 
     /**
@@ -136,15 +133,17 @@ class CrewController extends Controller
     {
         $dataArr = $request->all();
         
-         $this->validate($request,[
-            'name' => 'required',
-            'slug' => 'required|unique:tag,slug,'.$dataArr['id'].',id,type,'.$dataArr['type'],
+        $this->validate($request,[   
+            'name' => 'required',            
+            'slug' => 'required|unique:crew,slug,'.$dataArr['id'],
         ],
-        [
-            'name.required' => 'Bạn chưa nhập tag',
+        [           
+            
+            'name.required' => 'Bạn chưa nhập tiêu đề',
             'slug.required' => 'Bạn chưa nhập slug',
-            'slug.unique' => 'Slug đã được sử dụng.',
-        ]);
+            'slug.unique' => 'Slug đã được sử dụng.'
+        ]);       
+        
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
         if($dataArr['image_url'] && $dataArr['image_name']){
@@ -161,25 +160,17 @@ class CrewController extends Controller
             
             $dataArr['image_url'] = $destionation;
         }
-        
-        $model = Crew::find($dataArr['id']);
+      
+
+        $model = Crew::find($dataArr['id']);        
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $model->update($dataArr);
 
-        if( $dataArr['meta_id'] ){
+        Session::flash('message', 'Cập nhật crew thành công');        
 
-            $metaArr['meta_title'] = $dataArr['meta_title'];
-            $metaArr['meta_description'] = $dataArr['meta_description'];
-            $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
-            $metaArr['custom_text'] = $dataArr['custom_text'];
-            $metaArr['id'] = $dataArr['meta_id'];
-            $modelMetadata = SystemMetadata::find( $dataArr['meta_id'] );
-            $modelMetadata->update( $metaArr );
-        }
-
-        Session::flash('message', 'Cập nhật tag thành công');
-
-        return redirect()->route('tag.index', [ 'type' => $dataArr['type'] ]);
+        return redirect()->route('crew.index', ['type' => $dataArr['type']]);
     }
 
     /**
@@ -195,7 +186,7 @@ class CrewController extends Controller
         $model->delete();
 
         // redirect
-        Session::flash('message', 'Xóa tag thành công');
-        return redirect()->route('tag.index');
+        Session::flash('message', 'Xóa crew thành công');
+        return redirect()->route('crew.index');
     }
 }

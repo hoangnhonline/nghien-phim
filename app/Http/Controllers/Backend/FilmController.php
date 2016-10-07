@@ -39,20 +39,17 @@ class FilmController extends Controller
 
     }
     public function index(Request $request)
-    {       
-        /*
-        $film = Film::all();
-        foreach($film as $a){
-            $id = $a->id;
-            $created_at = $a->title;
-            $alias = Helper::stripUnicode($title);
-            $arr['alias'] = $alias;
-            $model = Film::find($a->id);
-            var_dump($model->update($arr));
+    {  
+        /*$tmp = Film::all();
+        foreach ($tmp as $key => $value) {
+            $id = $value->id;
+            $content = html_entity_decode($value->content);
+            $model = Film::find($id);
+            $model->content = $content;
+            $model->save();
+
         }
-        die('123');
         */
-       
         $status = isset($request->status) ? $request->status : 1;
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
         
@@ -63,7 +60,7 @@ class FilmController extends Controller
         }
         $query->join('users', 'users.id', '=', 'film.created_user');
         $items = $query->orderBy('film.id', 'desc')
-        ->select(['film.id as film_id', 'title', 'original_title', 'image_url', 'film.created_at as time_created', 'description', 'users.full_name'])
+        ->select(['film.id as film_id', 'title', 'image_url', 'film.created_at as time_created', 'description', 'users.full_name'])
         ->paginate(20);
         
         return view('backend.film.index', compact('items', 'title', 'status'));
@@ -96,17 +93,12 @@ class FilmController extends Controller
         
         $this->validate($request,[
             'title' => 'required',
-            'slug' => 'required|unique:film,slug',
-            'original_title' => 'required',
-            'original_slug' => 'required|unique:film,original_slug',            
+            'slug' => 'required|unique:film,slug'                       
         ],
-        [                      
-            'title.required' => 'Bạn chưa nhập tiêu đề',
-            'slug.required' => 'Bạn chưa nhập slug',
-            'original_title.required' => 'Bạn chưa nhập tiêu đề gốc',
-            'original_slug.required' => 'Bạn chưa nhập slug gốc',            
-            'slug.unique' => 'Slug đã tồn tại',
-            'original_slug.unique' => 'Slug gốc đã tồn tại',
+        [           
+            'title.required' => 'Bạn chưa nhập tên phim',
+            'slug.required' => 'Bạn chưa nhập slug',                    
+            'slug.unique' => 'Slug đã tồn tại'           
         ]);
 
         $dataArr['created_user'] = Auth::user()->id;
@@ -143,6 +135,21 @@ class FilmController extends Controller
             File::move(config('nghien.upload_path').$dataArr['poster_url'], config('nghien.upload_path').$destionation);
             
             $dataArr['poster_url'] = $destionation;
+        }  
+
+        if($dataArr['slide_url'] && $dataArr['slide_name']){
+            
+            $tmp = explode('/', $dataArr['slide_url']);
+
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('nghien.upload_path').$dataArr['slide_url'], config('nghien.upload_path').$destionation);
+            
+            $dataArr['slide_url'] = $destionation;
         }     
 
         $rs = Film::create($dataArr);
@@ -265,20 +272,16 @@ class FilmController extends Controller
     {
         $dataArr = $request->all();
         $id = $dataArr['id'];
-    
+        
         $this->validate($request,[
             'title' => 'required',
-            'slug' => 'required|unique:film,slug,'.$dataArr['id'],
-            'original_title' => 'required',
-            'original_slug' => 'required|unique:film,original_slug,'.$dataArr['id'],            
+            'slug' => 'required|unique:film,slug,'.$dataArr['id']                     
         ],
         [                      
-            'title.required' => 'Bạn chưa nhập tiêu đề',
-            'slug.required' => 'Bạn chưa nhập slug',
-            'original_title.required' => 'Bạn chưa nhập tiêu đề gốc',
-            'original_slug.required' => 'Bạn chưa nhập slug gốc',            
+            'title.required' => 'Bạn chưa nhập tên phim',
+            'slug.required' => 'Bạn chưa nhập slug',                    
             'slug.unique' => 'Slug đã tồn tại',
-            'original_slug.unique' => 'Slug gốc đã tồn tại',
+            
         ]);       
         
         $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
@@ -313,6 +316,21 @@ class FilmController extends Controller
             File::move(config('nghien.upload_path').$dataArr['poster_url'], config('nghien.upload_path').$destionation);
             
             $dataArr['poster_url'] = $destionation;
+        }
+
+        if($dataArr['slide_url'] && $dataArr['slide_name']){
+            
+            $tmp = explode('/', $dataArr['slide_url']);
+
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('nghien.upload_path').$dataArr['slide_url'], config('nghien.upload_path').$destionation);
+            
+            $dataArr['slide_url'] = $destionation;
         }
 
         $model = Film::find( $id );

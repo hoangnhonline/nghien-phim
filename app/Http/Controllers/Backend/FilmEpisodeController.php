@@ -8,7 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Film;
 use App\Models\FilmEpisode;
-use Helper, File, Session;
+use App\Models\SystemMetadata;
+use Helper, File, Session, Auth;
 
 class FilmEpisodeController extends Controller
 {
@@ -19,22 +20,33 @@ class FilmEpisodeController extends Controller
     */
     public function index(Request $request)
     {  
+        $title = "";
         $film_id = $request->film_id;
-        $detail = [];
+        $detail = $metadata = [];
         $detailFilm = Film::find($film_id);
 
         $id = isset($request->id) ? $request->id : 0;
         if($id > 0){
             $detail = FilmEpisode::find( $id );
+
+            if( $detail->meta_id > 0 ){
+                $metadata = SystemMetadata::find( $detail->meta_id ); 
+            }
+        }      
+        
+        $title = isset($request->title) && $request->title != '' ? $request->title : '';
+        
+        $query = FilmEpisode::where('film_id', $film_id);
+        
+        if( $title != ''){
+            $query->where('name', 'LIKE', '%'.$title.'%');
         }
-        $items = FilmEpisode::where('film_id', $film_id)->orderBy('id')->paginate(50);        
-        
-        //$parentCate = Category::where('parent_id', 0)->where('type', 1)->orderBy('display_order')->get();
-        
-        return view('backend.film-episode.index', compact( 'items', 'film_id', 'id', 'detailFilm', 'detail'));
+        $items = $query->orderBy('display_order')->orderBy('id')->paginate(50);
+
+        return view('backend.film-episode.index', compact('title', 'metadata', 'items', 'film_id', 'id', 'detailFilm', 'detail'));
     }
     public function create()
-    {         
+    {
         //$parentCate = Category::where('parent_id', 0)->where('type', 1)->orderBy('display_order')->get();
 
         return view('backend.film-episode.create');
@@ -43,23 +55,54 @@ class FilmEpisodeController extends Controller
     {
        
         $dataArr = $request->all();
-         
+        // var_dump("<pre>", $dataArr);die;
         $this->validate($request,[
             'name' => 'required',
-            'slug' => 'required|unique:film_episode,slug,'.$dataArr['film_id'].',film_id',
+            'slug' => 'required|unique:film_episode,slug,0,id,film_id,' . $dataArr['film_id']
         ],
         [
             'name.required' => 'Bạn chưa nhập tên tập phim',
             'slug.required' => 'Bạn chưa nhập slug',
             'slug.unique' => 'Slug đã được sử dụng.'
-        ]);       
-         
- 
-        FilmEpisode::create($dataArr);
+        ]);         
+        
+        if($dataArr['poster_url'] && $dataArr['poster_name']){
+            
+            $tmp = explode('/', $dataArr['poster_url']);
 
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('nghien.upload_path').$dataArr['poster_url'], config('nghien.upload_path').$destionation);
+            
+            $dataArr['poster_url'] = $destionation;
+        } 
+
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
+        $rs = FilmEpisode::create($dataArr);
+
+        $object_id = $rs->id;
+
+        $metaArr['meta_title'] = $dataArr['meta_title'];
+        $metaArr['meta_description'] = $dataArr['meta_description'];
+        $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
+        $metaArr['custom_text'] = $dataArr['custom_text'];
+        
+        $rsMeta = SystemMetadata::create( $metaArr );
+
+        if( $rsMeta->id ){
+            $modelFilmEpisode = FilmEpisode::find($object_id);
+            $modelFilmEpisode->update(['meta_id' => $rsMeta->id]);
+        }
         Session::flash('message', 'Thêm mới tập phim thành công');
 
-        return redirect()->route('film-episode.index');
+        return redirect()->route('film-episode.index', ['film_id' => $dataArr['film_id']]);
     }
     public function destroy($id)
     {
@@ -90,13 +133,55 @@ class FilmEpisodeController extends Controller
             'name.required' => 'Bạn chưa nhập tên tập phim',
             'slug.required' => 'Bạn chưa nhập slug',
         ]);       
+        
+        if($dataArr['poster_url'] && $dataArr['poster_name']){
+            
+            $tmp = explode('/', $dataArr['poster_url']);
 
-        $model = FilmEpisode::find($dataArr['id']);
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('nghien.upload_path').$dataArr['poster_url'], config('nghien.upload_path').$destionation);
+            
+            $dataArr['poster_url'] = $destionation;
+        } 
+
+        $model = FilmEpisode::find($dataArr['id']);       
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $model->update($dataArr);
+        
+        if( $dataArr['meta_id'] > 0){
 
+            $metaArr['meta_title'] = $dataArr['meta_title'];
+            $metaArr['meta_description'] = $dataArr['meta_description'];
+            $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
+            $metaArr['custom_text'] = $dataArr['custom_text'];
+            $metaArr['id'] = $dataArr['meta_id'];
+            $modelMetadata = SystemMetadata::find( $dataArr['meta_id'] );
+            $modelMetadata->update( $metaArr );
+
+        }else{
+            $metaArr['meta_title'] = $dataArr['meta_title'];
+            $metaArr['meta_description'] = $dataArr['meta_description'];
+            $metaArr['meta_keywords'] = $dataArr['meta_keywords'];
+            $metaArr['custom_text'] = $dataArr['custom_text'];
+            
+            $rsMeta = SystemMetadata::create( $metaArr );
+
+            if( $rsMeta->id ){
+
+                $modelFilmEpisode = FilmEpisode::find( $dataArr['id'] );
+                $modelFilmEpisode->update(['meta_id' => $rsMeta->id]);
+
+            }
+        }
         Session::flash('message', 'Cập nhật tập phim thành công');
 
-        return redirect()->route('film-episode.index');
+        return redirect()->route('film-episode.index', ['film_id' => $dataArr['film_id']]);
     }
 }

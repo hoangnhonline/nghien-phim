@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
-use Helper, File, Session;
+use Helper, File, Session, Auth;
 
 class CountryController extends Controller
 {
@@ -46,7 +46,11 @@ class CountryController extends Controller
             'slug.unique' => 'Slug đã được sử dụng.'
         ]);       
          
- 
+        
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
         Country::create($dataArr);
 
         Session::flash('message', 'Tạo mới quốc gia thành công');
@@ -83,7 +87,9 @@ class CountryController extends Controller
             'slug.required' => 'Bạn chưa nhập slug',
         ]);       
 
-        $model = Country::find($dataArr['id']);
+        $model = Country::find($dataArr['id']);        
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $model->update($dataArr);
 

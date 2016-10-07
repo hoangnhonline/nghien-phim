@@ -65,7 +65,7 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Thumbnail </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_image" src="{{ $detail->image_url ? Helper::showImage($detail->image_url ) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="145" height="85">
+                    <img id="thumbnail_image" src="{{ $detail->image_url ? Helper::showImage($detail->image_url ) : URL::asset('be/dist/img/img.png') }}" class="img-thumbnail" width="145" height="85">
                     
                     <input type="file" id="file-image" style="display:none" />
                  
@@ -99,7 +99,7 @@
                   <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
                     @if( $tagArr->count() > 0)
                       @foreach( $tagArr as $value )
-                      <option value="{{ $value->id }}" >{{ $value->tag }}</option>
+                      <option value="{{ $value->id }}" {{ in_array($value->id, $tagSelected) ? "selected" : "" }} >{{ $value->name }}</option>
                       @endforeach
                     @endif
                   </select>
@@ -163,18 +163,18 @@
 
 @stop
 @section('javascript_page')
-<script src="{{ URL::asset('backend/dist/js/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ URL::asset('be/dist/js/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
       $(".select2").select2();
       var editor = CKEDITOR.replace( 'content',{
           language : 'vi',
-          filebrowserBrowseUrl: '../dist/js/kcfinder/browse.php?type=files',
-          filebrowserImageBrowseUrl: '../dist/js/kcfinder/browse.php?type=images',
+          filebrowserBrowseUrl: "{{ URL::asset('/be/dist/js/kcfinder/browse.php?type=files') }}",
+          filebrowserImageBrowseUrl: "{{ URL::asset('/be/dist/js/kcfinder/browse.php?type=images') }}",
           filebrowserFlashBrowseUrl: '../dist/js/kcfinder/browse.php?type=flash',
-          filebrowserUploadUrl: '../dist/js/kcfinder/upload.php?type=files',
-          filebrowserImageUploadUrl: '../dist/js/kcfinder/upload.php?type=images',
-          filebrowserFlashUploadUrl: '../dist/js/kcfinder/upload.php?type=flash'
+          filebrowserUploadUrl: "{{ URL::asset('/be/dist/js/kcfinder/upload.php?type=files') }}",
+          filebrowserImageUploadUrl: "{{ URL::asset('/be/dist/js/kcfinder/upload.php?type=images') }}",
+          filebrowserFlashUploadUrl: "{{ URL::asset('/be/dist/js/kcfinder/upload.php?type=flash') }}"
       });
       $('#btnUploadImage').click(function(){        
         $('#file-image').click();

@@ -7,7 +7,10 @@
       @if( $relatedArr->count() > 0)
          @foreach( $relatedArr as $movies)
          <div class="ml-item">
-            <a href="{{ $movies->slug }}-{{ $movies->id }}.html" class="ml-mask">
+            <a href="{{ route('landing', $movies->slug) }}" class="ml-mask jt"
+               data-url="{{ route('movies-info', [ $movies->id ]) }}"
+               title="{{ $movies->title }}"
+               >
                <span class="mli-quality">{{ $movies->quality == 1 ? "HD" : ( $movies->quality == 2 ? "SD" : "CAM" ) }}</span>
                <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                   alt="{{ $movies->title }}">

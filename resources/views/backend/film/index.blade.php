@@ -78,10 +78,7 @@
             <tbody>
             @if( $items->count() > 0 )
               <?php $i = 0; ?>
-              @foreach( $items as $item )
-              <?php 
-              //var_dump("<pre>", $item);die;
-              ?>
+              @foreach( $items as $item )             
                 <?php $i ++; ?>
               <tr id="row-{{ $item->film_id }}">
                 <td><span class="order">{{ $i }}</span></td>       
@@ -96,7 +93,7 @@
                 </td>
                 <td>
                   <a href="{{ route('film-episode.index', ['film_id' => $item->film_id])}}" class="btn btn-info btn-sm">
-                   <span class="badge">{{ $item->episodes->count() }}</span> Episode
+                    Episode
                   </a>     
                 </td>
                 <td>{{ $item->full_name }}</td>

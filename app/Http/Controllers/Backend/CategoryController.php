@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Helper, File, Session;
+use Helper, File, Session, Auth;
 
 class CategoryController extends Controller
 {
@@ -70,7 +70,11 @@ class CategoryController extends Controller
         ]);       
        
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);  
- 
+        
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
         Category::create($dataArr);
 
         Session::flash('message', 'Tạo mới danh mục thành công');
@@ -117,7 +121,7 @@ class CategoryController extends Controller
         
         $this->validate($request,[
             'name' => 'required',
-            'slug' => 'required',
+            'slug' => 'required|unique:category,slug,'.$dataArr['id'],
         ],
         [
             'name.required' => 'Bạn chưa nhập tên danh mục',
@@ -127,6 +131,8 @@ class CategoryController extends Controller
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
 
         $model = Category::find($dataArr['id']);
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $model->update($dataArr);
 

@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use App\Models\SystemMetadata;
-use Helper, File, Session;
+use Helper, File, Session, Auth;
 
 class TagController extends Controller
 {
@@ -32,7 +32,22 @@ class TagController extends Controller
 
         return view('backend.tag.index', compact( 'items', 'type', 'name'));
     }
+    public function ajaxList(Request $request){
 
+        $tagSelected = (array) $request->tagSelected;
+        
+        $str_id = $request->str_id;
+        $tmpArr = explode(",", $str_id);
+        $tagSelected = array_merge($tagSelected, $tmpArr);
+
+        $type = isset($request->type) ? $request->type : 1;
+
+        $query = Tag::where('type', $type);
+        
+        $tagArr = $query->orderBy('id', 'desc')->get();
+
+        return view('backend.tag.ajax-list', compact( 'tagArr', 'type', 'tagSelected'));
+    }
     /**
     * Show the form for creating a new resource.
     *
@@ -65,6 +80,10 @@ class TagController extends Controller
 
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
+        $dataArr['created_user'] = Auth::user()->id;
+
+        $dataArr['updated_user'] = Auth::user()->id;
+
         $rs = Tag::create($dataArr);
         
         $object_id = $rs->id;
@@ -83,6 +102,36 @@ class TagController extends Controller
         Session::flash('message', 'Tạo mới tag thành công');
 
         return redirect()->route('tag.index', [ 'type' => $dataArr['type'] ]);
+    }
+
+    public function ajaxSave(Request $request)
+    {
+        $dataArr = $request->all();
+        
+        $str_tag = $request->str_tag;
+
+        $tmpArr = explode(';', $str_tag);
+
+        if( !empty($tmpArr) ){
+            foreach ($tmpArr as $tag) {
+                
+            $tag = trim($tag);
+            if( $tag != ""){
+                // check xem co chua
+                $arr = Tag::where('name', '=', $tag)->where('type', 1)->first();
+                if( !empty( (array) $arr)) {
+                    $arrId[] = $arr->id;
+                }else{
+                    $rs = Tag::create(['name'=> $tag, 'type' => 1, 'slug' => str_slug($tag), 'created_user' => Auth::user()->id, 'updated_user' => Auth::user()->id]);
+                    $arrId[] = $rs->id;
+                }
+
+            }
+            }   
+        }
+
+        return implode(',', $arrId);
+
     }
 
     /**
@@ -104,9 +153,11 @@ class TagController extends Controller
     */
     public function edit($id)
     {
+        $metadata = (object) [];
         $detail = Tag::find($id);
-        
-        $metadata = SystemMetadata::find( $detail->meta_id );
+        if( $detail->meta_id > 0){
+            $metadata = SystemMetadata::find( $detail->meta_id );
+        }
 
         return view('backend.tag.edit', compact( 'detail', 'metadata'));
     }
@@ -133,7 +184,9 @@ class TagController extends Controller
         ]);
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         
-        $model = Tag::find($dataArr['id']);
+        $model = Tag::find($dataArr['id']);        
+
+        $dataArr['updated_user'] = Auth::user()->id;
 
         $model->update($dataArr);
 

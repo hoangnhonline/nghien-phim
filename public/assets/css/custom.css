@@ -13,7 +13,7 @@
 .jtip-quality{top:-30px;right:12px;}
 #media-player{position:relative;}
 .loading-film{position:absolute;top:0;right:0;bottom:0;left:50%;color:#fff;width:200px;text-align:center;height:180px;margin-left:-100px;top:50%;margin-top:-90px;}
-.content-kus{ overflow: hidden;}
+.content-kus{ overflow: hidden; padding: 10px; text-align: justify;}
 .content-kus div{ margin: 0 auto !important;}
 .cssload-center{ position: relative; text-align: center; width: 100%; min-height: 70px; background: transparent;}
 .cssload-2x{ min-height: 100px;}
