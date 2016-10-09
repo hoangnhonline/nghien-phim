@@ -213,18 +213,23 @@
 <script type="text/javascript" src="{{ URL::asset('assets/plugins/jwplayer/jwplayer.js') }}" ></script>
 <script>jwplayer.key = "dWwDdbLI0ul1clbtlw+4/UHPxlYmLoE9Ii9QEw==";</script>
 <script type="text/javascript">
- var sources = [{file: "{{ $urlVideo }}",
+ var sources = [
+                @foreach($urlVideo as $label => $video)
+                {file: "{{ $video }}",
                 type:'mp4',
-                label: '360p',
-                default: true}];
+                label: '{{ $label }}'
+                },
+                @endforeach
+                ];
     var playerInstance = jwplayer("play-video");
                     playerInstance.setup({
                    sources: sources,
+                   // playlist: "http://phimnhanh.com/play/3d9ea47650c774a91ab1eb4574d7c48fc8f553bd0f60079dbec714a646502d3b/13294/634810",
                     width: "100%",
                     autostart: true,
                     aspectratio: "16:9",
                     primary: "html5",
-        controls: true,
+                    controls: true,
                     });
 
 </script>

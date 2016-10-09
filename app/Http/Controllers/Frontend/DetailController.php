@@ -138,6 +138,7 @@ class DetailController extends Controller
             $title = "Xem phim ".$title;
             
             $urlVideo = $this->getLink($episodeActive->source);
+            //var_dump("<pre>", $urlVideo);die;
             return view('home.detail', compact(
                 'settingArr',
                 'title',
@@ -273,18 +274,16 @@ class DetailController extends Controller
 
                 $tmp = Helper::getVideoZing( $decodeLink );
 
-                $originalUrl = $tmp['f480'] != '' ? $tmp['f480'] : $tmp['f360'];
+                //$originalUrl = $tmp['f480'] != '' ? $tmp['f480'] : $tmp['f360'];
 
             }
             if( strpos($decodeLink, 'google') > 0){   
 
-                $tmp = Helper::getPhotoGoogle( $decodeLink);
-                
-                $originalUrl = (isset($tmp['720p']) && $tmp['720p'] != '' ) ? $tmp['720p'] : (isset($tmp['360p']) ? $tmp['360p'] : "");
+                $tmp = Helper::getPhotoGoogle( $decodeLink);                
             }        
         }
 
-        return $originalUrl;
+        return $tmp;
 
     }
 
