@@ -138,28 +138,22 @@ class Helper
     public static function getPhotoGoogle($link){
         $get = self::curl($link);
         $data = explode('url\u003d', $get);
-        $url = isset($data[1]) ? explode('%3Dm', $data[1]) : "";
-        $decode = isset($url[0]) ? urldecode($url[0]) : "";
-        $count = count($data);
-        $linkDownload = array();
-        if($count > 4) {
-            $v1080p = $decode.'=m37';
-            $v720p = $decode.'=m22';
-            $v360p = $decode.'=m18';
-            $linkDownload['1080p'] = $v1080p;
-            $linkDownload['720p'] = $v720p;
-            $linkDownload['360p'] = $v360p;
-        }
-        if($count > 3) {
-            $v720p = $decode.'=m22';
-            $v360p = $decode.'=m18';
-            $linkDownload['720p'] = $v720p;
-            $linkDownload['360p'] = $v360p;
-        }
-        if($count > 2) {
-            $v360p = $decode.'=m18';
-            $linkDownload['360p'] = $v360p;
-        }
+        unset($data[0]);
+        foreach($data as $d){            
+            if(strpos($d, 'video%2Fmp4')){
+                $tmpUrl = urldecode($d);
+                $tmpArr = explode("\u0026itag", $tmpUrl);
+                if(strpos($tmpArr[0], 'm37')){
+                    $linkDownload['1080p'] = $tmpArr[0];
+           
+                }elseif(strpos($tmpArr[0], 'm22')){
+                    $linkDownload['720p'] = $tmpArr[0];
+            
+                }elseif(strpos($tmpArr[0], 'm18')){
+                    $linkDownload['360p'] = $tmpArr[0];
+                }
+            }
+        }       
         return $linkDownload;
     }
 

@@ -136,9 +136,9 @@ class DetailController extends Controller
             $title = $slugEpisode ? $episodeActive->name . ' - '.$title : $title;
             
             $title = "Xem phim ".$title;
-            
+           
             $urlVideo = $this->getLink($episodeActive->source);
-            //var_dump("<pre>", $urlVideo);die;
+            
             return view('home.detail', compact(
                 'settingArr',
                 'title',
