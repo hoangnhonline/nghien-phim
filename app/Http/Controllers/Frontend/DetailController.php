@@ -138,8 +138,10 @@ class DetailController extends Controller
             $title = "Xem phim ".$title;
            
             $urlVideo = $this->getLink($episodeActive->source);
-            
-            return view('home.detail', compact(
+            if(empty($urlVideo)){
+                return view('errors.404');
+            }else{
+                return view('home.detail', compact(
                 'settingArr',
                 'title',
                 'tagSelected', 
@@ -150,7 +152,9 @@ class DetailController extends Controller
                 'episodeActive',
                 'is_landing',
                 'urlVideo'
-                ));    
+                )); 
+            }
+               
         }else{
             return view('errors.404');
         }
