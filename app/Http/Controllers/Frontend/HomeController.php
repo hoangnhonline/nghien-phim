@@ -136,6 +136,21 @@ class HomeController extends Controller
             $moviesArr = Film::where('status', 1)->where('type', $type)
                         ->orderBy('id', 'desc')->paginate(30);       
             $cateDetail->name = $slug == "phim-le" ? "Phim lẻ" : "Phim bộ";
+        }elseif($slug == 'phim-theo-the-loai' || $slug == 'phim-theo-quoc-gia'){
+            
+           if($slug == 'phim-theo-the-loai'){
+                 $moviesArr = Film::where('status', 1)
+                ->join('film_category', 'id', '=', 'film_category.film_id')                
+                ->groupBy('film_id')
+                ->orderBy('id', 'desc')->paginate(30); 
+           }else{
+                $moviesArr = Film::where('status', 1)
+                ->join('film_country', 'id', '=', 'film_country.film_id')                   
+                ->groupBy('film_id')
+                ->orderBy('id', 'desc')->paginate(30);       
+           }   
+            $cateDetail->name = $slug == "phim-theo-the-loai" ? "Phim theo thể loại" : "Phim theo quốc gia";
+            
         }else{
             $cateDetail = Category::where('slug', $slug)->first();
             if( !$cateDetail){

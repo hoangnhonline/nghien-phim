@@ -10,6 +10,25 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::group(['prefix' => 'social-auth'], function () {
+    Route::group(['prefix' => 'facebook'], function () {
+        Route::get('redirect/', ['as' => 'fb-auth', 'uses' => 'SocialAuthController@redirect']);
+        Route::get('callback/', ['as' => 'fb-callback', 'uses' => 'SocialAuthController@callback']);
+        Route::post('fb-login', ['as' => 'ajax-login-by-fb', 'uses' => 'SocialAuthController@fbLogin']);
+    });
+
+    Route::group(['prefix' => 'google'], function () {
+        Route::get('redirect/', ['as' => 'gg-auth', 'uses' => 'SocialAuthController@googleRedirect']);
+        Route::get('callback/', ['as' => 'gg-callback', 'uses' => 'SocialAuthController@googleCallback']);
+    });
+
+});
+
+Route::group(['prefix' => 'authentication'], function () {
+    Route::post('check_login', ['as' => 'auth-login', 'uses' => 'AuthenticationController@checkLogin']);
+    Route::post('login_ajax', ['as' =>  'auth-login-ajax', 'uses' => 'AuthenticationController@checkLoginAjax']);
+    Route::get('/user-logout', ['as' => 'user-logout', 'uses' => 'AuthenticationController@logout']);
+});
 Route::group(['namespace' => 'Frontend'], function()
 {
 
@@ -17,6 +36,7 @@ Route::group(['namespace' => 'Frontend'], function()
     //Route::get('/phim-le', ['as' => 'phim-le', 'uses' => 'HomeController@cate']);
     //::get('/phim-bo', ['as' => 'phim-bo', 'uses' => 'HomeController@cate']);
     Route::get('/tin-tuc', ['as' => 'news-list', 'uses' => 'HomeController@newsList']);
+
     Route::post('/get-link', ['as' => 'get-link', 'uses' => 'DetailController@getLink']);
     Route::get('/streaming/', ['as' => 'get-video-streaming', 'uses' => 'DetailController@streaming']);
 
@@ -47,7 +67,14 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
     
     // Controllers Within The "App\Http\Controllers\Backend" Namespace
     Route::get('/', ['as' => 'film.index', 'uses' => 'FilmController@index']);
-   
+    Route::group(['prefix' => 'info-seo'], function () {
+        Route::get('/', ['as' => 'info-seo.index', 'uses' => 'InfoSeoController@index']);
+        Route::get('/create', ['as' => 'info-seo.create', 'uses' => 'InfoSeoController@create']);
+        Route::post('/store', ['as' => 'info-seo.store', 'uses' => 'InfoSeoController@store']);
+        Route::get('{id}/edit',   ['as' => 'info-seo.edit', 'uses' => 'InfoSeoController@edit']);
+        Route::post('/update', ['as' => 'info-seo.update', 'uses' => 'InfoSeoController@update']);
+        Route::get('{id}/destroy', ['as' => 'info-seo.destroy', 'uses' => 'InfoSeoController@destroy']);
+    });
     Route::group(['prefix' => 'articles-cate'], function () {
         Route::get('/', ['as' => 'articles-cate.index', 'uses' => 'ArticlesCateController@index']);
         Route::get('/create', ['as' => 'articles-cate.create', 'uses' => 'ArticlesCateController@create']);

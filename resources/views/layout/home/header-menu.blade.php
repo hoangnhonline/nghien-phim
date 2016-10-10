@@ -10,13 +10,13 @@
       </li>
      
          <li>
-            <a href="javascript:void(0)" title="QUỐC GIA">THỂ LOẠI</a>
+            <a href="{{ route('cate', 'phim-theo-the-loai') }}" title="QUỐC GIA">THỂ LOẠI</a>
             @if( !empty($parentCate) )
             <div class="sub-container" style="display: none">
                <ul class="sub-menu">
                   @foreach( $parentCate as $cate )
                   <li>                    
-                     <a href="/{{ $cate->slug }}" title="{{ $cate->name }}">{{ $cate->name }}</a>
+                     <a href="{{ route('cate', $cate->slug) }}" title="{{ $cate->name }}">{{ $cate->name }}</a>
                   </li>                  
                   @endforeach
                </ul>
@@ -24,14 +24,14 @@
             </div>
             @endif
          </li>
-         <li class="">
-            <a href="javascript:void(0)" title="QUỐC GIA">QUỐC GIA</a>
+         <li>
+            <a href="{{ route('cate', 'phim-theo-quoc-gia') }}" title="QUỐC GIA">QUỐC GIA</a>
             @if( !empty($countryArr) )
             <div class="sub-container" style="display: none">
                <ul class="sub-menu">
                   @foreach( $countryArr as $country )
                   <li>                    
-                     <a href="/{{ $country->slug }}" title="{{ $country->name }}">{{ $country->name }}</a>
+                     <a href="{{ route('cate', $country->slug) }}" title="{{ $country->name }}">{{ $country->name }}</a>
                   </li>                  
                   @endforeach
                </ul>
@@ -40,7 +40,7 @@
             @endif
          </li> 
      
-      <li class="">
+      <li>
          <a href="{{ route('news-list') }}" title="Tin tức">Tin tức</a>
       </li>      
    </ul>

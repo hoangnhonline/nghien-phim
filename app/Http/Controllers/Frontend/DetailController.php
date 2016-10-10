@@ -267,7 +267,7 @@ class DetailController extends Controller
 
         $originalUrl = '';
        
-
+        $tmp = [];
         if( $decodeLink ){            
 
             if( strpos($decodeLink, 'zing.vn') > 0){

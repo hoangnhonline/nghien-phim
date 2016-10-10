@@ -18,6 +18,23 @@ class Helper
         return strpos($image_url, 'http') === false ? config('nghien.upload_url').$image_url : $image_url;        
 
     }
+    public static function seo(){
+        $seo = [];
+        $arrTmpSeo = DB::table('info_seo')->get();
+        $arrSeo = $arrUrl = [];
+        foreach($arrTmpSeo as $tmpSeo){
+          $arrSeo[$tmpSeo->url] = ['title' => $tmpSeo->title, 'description' => $tmpSeo->description, 'keywords' => $tmpSeo->keywords, 'image_url' => $tmpSeo->image_url];
+          $arrUrl[] = $tmpSeo->url;
+
+        }
+        if(in_array(url()->current(), $arrUrl)){
+          $seo = $arrSeo[url()->current()];
+        }
+        if(empty($seo)){
+          $seo['title'] = $seo['description'] = $seo['keywords'] = "Trang chủ iCho.vn";
+        }      
+        return $seo;
+    }
     public static function showQuality($quality){        
         switch ($quality) {
             case '1':
