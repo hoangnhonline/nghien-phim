@@ -230,7 +230,7 @@
      @if($count < 3)
      {file: "{{ $urlVideo['360p'] }}",
     type:'mp4',
-    label: 'Low quality',    
+    label: 'Auto',    
     }
      @endif];
     console.log(sources);
