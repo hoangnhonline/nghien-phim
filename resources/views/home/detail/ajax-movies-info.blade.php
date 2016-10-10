@@ -1,15 +1,5 @@
 <div class="jtip-quality">
-@if ($detail->quality == 1)
-Full HD
-@elseif ($detail->quality == 2)
-HD
-@elseif ($detail->quality == 3)
-SD
-@elseif ($detail->quality == 4)
-CAM
-@elseif ($detail->quality == 5)
-1080P
-@endif
+{{ Helper::showQuality($detail->quality) }}
 </div>
 <div class="jtip-top">
     <div class="jt-info jt-imdb">IMDb: {{ $detail->imdb }}</div>
@@ -20,28 +10,30 @@ CAM
 <p class="f-desc">{{ $detail->description }}...</p>
 
     <div class="block">Quốc gia:
-        <?php $countCountry = count($countryFilm); ?>
-        @if( $countryArr )
-            <?php $i = 0; ?>
-            @foreach ( $countryFilm as $country_id )                
-                <?php $i++; ?>
-                @if( isset($countryArr[$country_id] ))   
-                <a href="/{{ $countryArr[$country_id]['slug'] }}" title="{{ $countryArr[$country_id]['name'] }}">{{ $countryArr[$country_id]['name'] }}</a>{{ $i < $countCountry ? ", " : "" }}
-                @endif
-            @endforeach
-        @endif
+         <?php $i = 0; 
+                     $filmCountry = $detail->filmCountryName($detail->id);
+                      $countCountry = count($filmCountry);
+                     ?>
+                      @if( !empty( $filmCountry ) )
+                        @foreach ( $filmCountry as $country)  
+                        <?php $i++; 
+                        ?>                
+                        
+                        <a href="{{ route('cate', $country['slug']) }}" title="{{ $country['name'] }}">{{ $country['name'] }}</a>                         
+                        {{ $i < $countCountry ? ", " : "" }}
+                      
+                      @endforeach
+                    @endif
          </div>
     <div class="block">Thể loại:
-        <?php $countCategory = count($categoryFilm); ?>
-        @if( $categoryArr )
-            <?php $i = 0; ?>
-            @foreach ( $categoryFilm as $category_id )  
-                <?php $i++; ?>                
-                @if( isset($categoryArr[$category_id] ))                              
-                <a href="/{{ $categoryArr[$category_id]['slug'] }}" title="{{ $categoryArr[$category_id]['name'] }}">{{ $categoryArr[$category_id]['name'] }}</a>{{ $i < $countCategory ? ", " : "" }}
-                @endif
+        <?php $tmp = $detail->filmCategoryName($detail->id ); 
+        $countTmp = count($tmp);
+        $i = 0;
+        ?>
+            @foreach($detail->filmCategoryName($detail->id ) as $value)
+            <?php $i++; ?>
+            <a href="{{ route('cate', $value['slug']) }}" title="{{ $value['name'] }}">{{ $value['name'] }}</a><?php if($i < $countTmp) echo ", "; ?> 
             @endforeach
-        @endif
 
     </div>
 <div class="jtip-bottom">

@@ -136,12 +136,12 @@
                         <strong>Đạo diễn: </strong>
                         <?php $tmp = $detail->filmCrewShow($detail->id, 2); 
                         $countTmp = count($tmp);
-                        $i = 0;
+                        $j = 0;
                         ?>
                         @if($countTmp > 0)
                             @foreach($detail->filmCrewShow($detail->id, 2) as $value)
-                            <?php $i++; ?>
-                            <a href="{{ route('dao-dien', $value['slug']) }}" title="{{ $value['name'] }}">{{ $value['name'] }}</a><?php if($i < $countTmp && $i > 1) echo ", "; ?> 
+                            <?php $j++; ?>
+                            <a href="{{ route('dao-dien', $value['slug']) }}" title="{{ $value['name'] }}">{{ $value['name'] }}</a><?php if($j < $countTmp && $j > 1) echo ", "; ?> 
                             @endforeach
                         @endif
 
@@ -162,19 +162,7 @@
                 <div class="mvici-right">
                     <p><strong>Thời lượng:</strong> {{ $detail->duration  ? $detail->duration : "Đang cập nhật" }}</p>
 
-                    <p><strong>Chất lượng:</strong> <span class="quality">
-                        @if ($detail->quality == 1)
-                        Full HD
-                        @elseif ($detail->quality == 2)
-                        HD
-                        @elseif ($detail->quality == 3)
-                        SD
-                        @elseif ($detail->quality == 4)
-                        CAM
-                        @elseif ($detail->quality == 5)
-                        1080P
-                        @endif                        
-                    </span></p>
+                    <p><strong>Chất lượng:</strong> <span class="quality">{{ Helper::showQuality($detail->quality) }}</span></p>
 
                     <p><strong>Năm sản xuất:</strong> {{ $detail->year_release  ? $detail->year_release : "Đang cập nhật" }}</p>
 

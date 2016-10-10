@@ -18,7 +18,29 @@ class Helper
         return strpos($image_url, 'http') === false ? config('nghien.upload_url').$image_url : $image_url;        
 
     }
-
+    public static function showQuality($quality){        
+        switch ($quality) {
+            case '1':
+                $return = "Full HD";
+                break;
+            case '2':
+                $return = "HD";
+                break;
+            case '3':
+                $return = "SD";
+                break;
+            case '4':
+                $return = "CAM";
+                break;
+            case '5':
+                $return = "1080P";
+                break;
+            default:
+                $return = "";
+                break;
+        }
+        return $return;
+    }
     public static function getSiteOriginal($url){
         
         if(strpos($url, 'xvideos') > 0){

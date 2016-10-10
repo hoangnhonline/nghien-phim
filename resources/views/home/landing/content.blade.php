@@ -105,19 +105,7 @@
                 <div class="mvici-right">
                     <p><strong>Thời lượng:</strong> {{ $detail->duration  ? $detail->duration : "Đang cập nhật" }}</p>
 
-                    <p><strong>Chất lượng:</strong> <span class="quality">
-                        @if ($detail->quality == 1)
-                        Full HD
-                        @elseif ($detail->quality == 2)
-                        HD
-                        @elseif ($detail->quality == 3)
-                        SD
-                        @elseif ($detail->quality == 4)
-                        CAM
-                        @elseif ($detail->quality == 5)
-                        1080P
-                        @endif                        
-                    </span></p>
+                    <p><strong>Chất lượng:</strong> <span class="quality">{{ Helper::showQuality($detail->quality) }}</span></p>
 
                     <p><strong>Năm sản xuất:</strong> {{ $detail->year_release  ? $detail->year_release : "Đang cập nhật" }}</p>
 

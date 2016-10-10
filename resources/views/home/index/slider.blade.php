@@ -51,18 +51,7 @@
                 @if( $movies->duration )
                 <div class="block"><strong>Thời lượng:</strong> {{ $movies->duration }}</div>
                 @endif
-                <div class="block"><strong>Chất lượng:</strong>
-                   @if ($movies->quality == 1)
-                    Full HD
-                    @elseif ($movies->quality == 2)
-                    HD
-                    @elseif ($movies->quality == 3)
-                    SD
-                    @elseif ($movies->quality == 4)
-                    CAM
-                    @elseif ($movies->quality == 5)
-                    1080P
-                    @endif
+                <div class="block"><strong>Chất lượng:</strong>{{ Helper::showQuality($movies->quality) }}
                 </div>
                 @if(  $movies->release_year )
                 <div class="block"><strong>Release:</strong> {{ $movies->release_year }}</div>

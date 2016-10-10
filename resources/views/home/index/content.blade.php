@@ -23,18 +23,7 @@
                    class="ml-mask jt"
                    title="{{ $movies->title }}">
                       <span class="mli-quality">
-                        @if ($movies->quality == 1)
-                        Full HD
-                        @elseif ($movies->quality == 2)
-                        HD
-                        @elseif ($movies->quality == 3)
-                        SD
-                        @elseif ($movies->quality == 4)
-                        CAM
-                        @elseif ($movies->quality == 5)
-                        1080P
-                        @endif
-                        
+                        {{ Helper::showQuality($movies->quality) }}                        
                       </span>
                       <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                          alt="{{ $movies->title }}">

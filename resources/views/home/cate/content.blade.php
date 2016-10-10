@@ -173,7 +173,7 @@
                      class="ml-mask jt"
                      title="{{ $movies->title }}"
                      >
-               <span class="mli-quality">{{ $movies->quality == 1 ? "HD" : ( $movies->quality == 2 ? "SD" : "CAM" ) }}</span>
+               <span class="mli-quality">{{ Helper::showQuality($movies->quality) }}</span>
                <img data-original="{{ Helper::showImage( $movies->image_url ) }}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                   alt="{{ $movies->title }}">
                <span class="mli-info">

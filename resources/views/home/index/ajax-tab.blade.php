@@ -5,20 +5,7 @@
          data-url="{{ route('movies-info', [ $movies->id ]) }}"
          class="ml-mask jt"
          title="{{ $movies->title }}">
-            <span class="mli-quality">
-              @if ($detail->movies == 1)
-              Full HD
-              @elseif ($detail->movies == 2)
-              HD
-              @elseif ($detail->movies == 3)
-              SD
-              @elseif ($detail->movies == 4)
-              CAM
-              @elseif ($detail->movies == 5)
-              1080P
-              @endif
-              
-            </span>
+            <span class="mli-quality">{{ Helper::showQuality($movies->quality) }}</span>
             <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                alt="{{ $movies->title }}">
             <span class="mli-info">
