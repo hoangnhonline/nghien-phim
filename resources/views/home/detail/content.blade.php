@@ -61,7 +61,7 @@
             <i class="fa fa-check"></i> Cảm ơn bạn đã gửi báo cáo. Chúng tôi sẽ cố gắng chỉnh sửa sớm nhất.
         </div>
     </div>
-    @if( $episode )
+    @if( $episode && $detail->type == 2)
     <div id="list-eps">
         <div class="le-server">
             <div class="les-content">                
