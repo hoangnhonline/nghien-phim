@@ -1076,3 +1076,9 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     #filter ul.fc-main-list li{ width: 100% !important; margin-right: 0;}
     .modal-subc .modal-body{ padding: 20px 15px 30px !important;}
 }
+.btn-successful {
+    background: #79C143;
+    border: none;
+    border-bottom: 3px solid #73AD38;
+    color: #fff !important;
+}
