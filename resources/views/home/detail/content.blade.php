@@ -195,6 +195,7 @@
     .hero-unit video {
         width: 100%;
     }
+     .jwplayer.jw-state-idle .jw-controlbar {display: table !important;} 
 </style>
 <input type="hidden" id="video_url" value="{{ $detail->url }}">
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -221,16 +222,25 @@
                 },
                 @endforeach
                 ];
-    var playerInstance = jwplayer("play-video");
+                console.log(sources);
+                    var playerInstance = jwplayer("play-video");
                     playerInstance.setup({
-                   sources: sources,
-                   // playlist: "http://phimnhanh.com/play/3d9ea47650c774a91ab1eb4574d7c48fc8f553bd0f60079dbec714a646502d3b/13294/634810",
-                    width: "100%",
-                    autostart: true,
-                    aspectratio: "16:9",
-                    primary: "html5",
-                    controls: true,
+                       sources: sources,
+                       // playlist: "http://phimnhanh.com/play/3d9ea47650c774a91ab1eb4574d7c48fc8f553bd0f60079dbec714a646502d3b/13294/634810",
+                        width: "100%",
+                        autostart: true,
+                        aspectratio: "16:9",
+                        primary: "html5",
+                        controls: true,
                     });
+                    playerInstance.on('error', function() {
+                      playerInstance.load({
+                        file:sources[1].file,
+                        type:'mp4',
+                        label : sources[1].label,
+                      });
+                      playerInstance.play();
+                    });                    
 
 </script>
 @endsection
