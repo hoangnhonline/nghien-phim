@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Backend\Settings;
-use File, Session, DB;
+use File, Session, DB, Auth;
 
 class SettingsController  extends Controller
 {
