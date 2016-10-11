@@ -211,8 +211,7 @@
     <?php $i++; ?>
     {file: "{{ $video }}",
     type:'mp4',
-    label: '{{ $label }}',
-    default : true
+    label: '{{ $label }}',    
     },
      @endforeach
      @if($count < 3)
@@ -220,8 +219,7 @@
     type:'mp4',
     label: 'Auto',    
     }
-     @endif];
-    console.log(sources);
+     @endif];    
         var playerInstance = jwplayer("play-video");
         playerInstance.setup({
            sources: sources,                       
