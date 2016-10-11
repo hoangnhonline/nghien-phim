@@ -13,7 +13,20 @@
 @section('logo'){{ Helper::showImage($settingArr['logo']) }}@endsection
 <!--category-->
 <div class="movies-list-wrap mlw-related">
-   <div class="ml-title ml-title-page">
+@if(isset($crew) && $crew->description!='')  
+  <div class="col-md-12" style="border :1px solid #ccc; padding:10px;margin-bottom:15px;border-radius:5px">
+    
+      <div class="col-md-3" style="padding-left:0px">
+        <img class="img-responsive img-thumbnail" src="{{ Helper::showImage($crew->image_url) }}" />
+      </div>
+      <div class="col-md-9">
+          <h2 style="font-size: 22px;">{{ $crew->name }}</h2>
+          <p><?php echo $crew->description ?></p>
+      </div>
+      <div class="clearfix"></div>
+  </div>
+ @endif
+  <div class="ml-title ml-title-page">
       <span>{{ $is_search == 1 ? "Kết quả tìm kiếm theo từ khóa '".$tu_khoa."'" : $cateDetail->name }}</span>
       <!--<div class="filter-toggle"><i class="fa fa-sort mr5"></i>Filter</div>-->
       <div class="clearfix"></div>
@@ -205,6 +218,16 @@
 .pagination{
    margin: 0px !important;
    margin-bottom: 10px !important;
+}
+fieldset { 
+    display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 2px groove ;
 }
 </style>
 @section('javascript_page')

@@ -225,8 +225,8 @@ class HomeController extends Controller
         $cateDetail = (object) [];
         //var_dump($slug);die;
         
-        $cateDetail = Crew::where('slug', $name)->first();
-       
+        $crew = $cateDetail = Crew::where('slug', $name)->first();
+       // var_dump("<pre>", $crew);die;
          $moviesArr = Film::where('status', 1)
         ->join('film_crew', 'id', '=', 'film_crew.film_id')
         ->where('film_crew.crew_id', $cateDetail->id)
@@ -236,9 +236,9 @@ class HomeController extends Controller
        
         $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
         $cateDetail->name = "Phim của : ".'"'.$cateDetail->name.'"';
-        
+        $is_showDetail = 1;
 
-        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr'));
+        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr', 'is_showDetail', 'crew'));
     }
 
     public function dienVien(Request $request)
@@ -258,8 +258,8 @@ class HomeController extends Controller
         $cateDetail = (object) [];
         //var_dump($slug);die;
         
-        $cateDetail = Crew::where('slug', $name)->first();
-       
+         $cateDetail = Crew::where('slug', $name)->first();
+        $crew = Crew::where('slug', $name)->first();
          $moviesArr = Film::where('status', 1)
         ->join('film_crew', 'id', '=', 'film_crew.film_id')
         ->where('film_crew.crew_id', $cateDetail->id)
@@ -271,7 +271,7 @@ class HomeController extends Controller
         $cateDetail->name = "Phim của : ".'"'.$cateDetail->name.'"';
         
 
-        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr'));
+        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr', 'crew'));
     }
 
     public function newsList(Request $request)
