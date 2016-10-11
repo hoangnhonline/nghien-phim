@@ -1,7 +1,7 @@
-<!--<div id="top-user">    <div class="top-user-content guest">
-        <a href="#" class="btn btn-successful btn-login" title="Login" data-target="#pop-login" data-toggle="modal">LOGIN</a>
+<div id="top-user">    <div class="top-user-content guest">
+        <a href="#" class="btn btn-successful btn-login" title="Login" data-target="#pop-login" data-toggle="modal">Login with Facebook</a>
     </div>
-</div>-->
+</div>
 <div id="search">
    <div class="search-content">
    	  <form action="/tim-kiem.html" method="GET" id="searchForm">

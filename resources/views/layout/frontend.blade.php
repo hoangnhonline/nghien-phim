@@ -222,47 +222,13 @@
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
                      class="fa fa-close"></i>
-                  </button>
-                  <h4 class="modal-title" id="myModalLabel">MEMBER LOGIN AREA</h4>
+                  </button>                  
                </div>
                <div class="modal-body">
-                  <p class="desc">Watch HD Movies Online For Free and Download the latest movies. For everybody,
-                     everywhere, everydevice, and everything ;)
+                  <p style="text-align:center">
+                  <img src="{{ URL::asset('assets/images/fblogin.png') }}" width="350"  />                     
                   </p>
-                  <form id="login-form" method="POST" action="ajax/user_login">
-                     <div class="block">
-                        <input required type="text" class="form-control" name="username" id="username"
-                           placeholder="Username or Email">
-                     </div>
-                     <div class="block mt10">
-                        <input required type="password" class="form-control" name="password" id="password"
-                           placeholder="Password">
-                     </div>
-                     <div style="display: none;" id="error-message" class="alert alert-danger"></div>
-                     <div class="block mt10 small">
-                        <label><input type="checkbox" style="vertical-align: sub; margin-right: 3px;"> Remember
-                        me</label>
-                        <div class="pull-right">
-                           <a id="open-forgot" data-dismiss="modal" data-target="#pop-forgot"
-                              data-toggle="modal" title="Forgot password?">Forgot password?</a>
-                        </div>
-                     </div>
-                     <button id="login-submit" type="submit" class="btn btn-block btn-success btn-approve mt10">
-                     Login
-                     </button>
-                     <!--                        <button type="button" class="btn btn-block btn-facebook mt10"><i-->
-                     <!--                                class="fa fa-facebook mr10"></i>Login-->
-                     <!--                            via facebook-->
-                     <!--                        </button>-->
-                     <div style="display: none;" id="login-loading" class="cssload-center">
-                        <div class="cssload"><span></span></div>
-                     </div>
-                  </form>
-               </div>
-               <div class="modal-footer text-center">
-                  Not a member yet? <a id="open-register" data-dismiss="modal" data-target="#pop-register"
-                     data-toggle="modal" title="">Join now!</a>
-               </div>
+               </div>               
             </div>
          </div>
       </div>
