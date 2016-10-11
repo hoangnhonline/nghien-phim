@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
   <link rel="shortcut icon" href="@yield('favicon')" type="image/x-icon"/>
   <link rel="canonical" href=""/>
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta property="og:type" content="website"/>
   <meta property="og:image:width" content="650"/>
   <meta property="og:image:height" content="350"/>
