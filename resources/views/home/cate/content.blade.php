@@ -14,12 +14,12 @@
 <!--category-->
 <div class="movies-list-wrap mlw-related">
 @if(isset($crew) && $crew->description!='')  
-  <div class="col-md-12" style="border :1px solid #ccc; padding:10px;margin-bottom:15px;border-radius:5px">
+  <div class="col-md-12" style="border :1px solid #ccc; padding:10px;margin-bottom:15px;border-radius:5px;background-color:#FFF">
     
-      <div class="col-md-3" style="padding-left:0px">
-        <img class="img-responsive img-thumbnail" src="{{ Helper::showImage($crew->image_url) }}" />
+      <div class="col-md-2" style="padding-left:0px">
+        <img class="img-thumbnail" src="{{ Helper::showImage($crew->image_url) }}" width="214" />
       </div>
-      <div class="col-md-9">
+      <div class="col-md-10">
           <h2 style="font-size: 22px;">{{ $crew->name }}</h2>
           <p><?php echo $crew->description ?></p>
       </div>
