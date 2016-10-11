@@ -33,14 +33,14 @@
          <!--                            <script async src="//digitaladsmedia.eu/vipx/www/delivery/asyncjs.php"></script>-->
          <!--                        </div>-->
          {!! $detail->content !!}
-         <div class="tags" style="margin-top: 30px;">
+         <!--<div class="tags" style="margin-top: 30px;">
             <i class="fa fa-tags mr5"></i>TAGs:
             <a href="#" title="Ghostbusters">Ghostbusters</a>                        
          </div>
          <div class="block-social" style="padding-top: 15px; padding-bottom: 15px;">
-            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+         
             <div class="addthis_native_toolbox"></div>
-         </div>
+         </div>-->
       </div>
       <!--<div class="movies-embed content-padding">
          <h3 class="title">Movies in this articles</h3>
@@ -52,12 +52,10 @@
             </h4>
          </div>
       </div>-->
-      <div class="content-padding" style="border-top: 20px solid #e5e5e5;" id="comment">
-         <h3 class="title">Comments</h3>
-         <div class="fb-comments"
-            data-href="http://phim1p.com/articles/view/five-secrets-you-need-to-know-before-watching-ghostbusters/364"
-            data-width="100%" data-numposts="3"></div>
-      </div>
+      <div class="content-padding" style="border-top: 20px solid #e5e5e5;" id="comment">         
+          <div class="fb-comments" data-href="{{ url()->current() }}" data-numposts="5"></div>
+         
+      </div>      
    </div>
    <div class="news-sidebar">
       <!--<div class="box fanpage">

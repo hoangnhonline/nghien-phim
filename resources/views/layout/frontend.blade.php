@@ -44,6 +44,23 @@
     <script src="{{ URL::asset('assets/js/detectmobilebrowser.js') }}"></script>
    </head>
    <body>
+      @if( \Request::route()->getName() == "news-detail")
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.7&appId=1429139510434147";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+      <style type="text/css">
+          .fb-comments, .fb-comments iframe[style], .fb-like-box, .fb-like-box iframe[style], .fb-comments span, .fb-comments iframe span[style], .fb-like-box span, .fb-like-box iframe span[style] 
+{
+       width: 100% !important;
+}
+
+      </style>
+      @endif      
       <script>
          /*
              window.fbAsyncInit = function () {
