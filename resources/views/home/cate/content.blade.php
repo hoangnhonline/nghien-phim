@@ -27,7 +27,8 @@
   </div>
  @endif
   <div class="ml-title ml-title-page">
-      <span>{{ $is_search == 1 ? "Kết quả tìm kiếm theo từ khóa '".$tu_khoa."'" : $cateDetail->name }}</span>
+      <span>           
+      {{ $is_search == 1 ? "Kết quả tìm kiếm theo từ khóa '".$tu_khoa."'" : $cateDetail->name }}</span>
       <!--<div class="filter-toggle"><i class="fa fa-sort mr5"></i>Filter</div>-->
       <div class="clearfix"></div>
    </div>

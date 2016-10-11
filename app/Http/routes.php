@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Frontend'], function()
 {
 
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+    Route::get('/user/kho-phim', ['as' => 'kho-phim', 'uses' => 'CustomerController@khoPhim']);
     //Route::get('/phim-le', ['as' => 'phim-le', 'uses' => 'HomeController@cate']);
     //::get('/phim-bo', ['as' => 'phim-bo', 'uses' => 'HomeController@cate']);
     Route::get('/tin-tuc', ['as' => 'news-list', 'uses' => 'HomeController@newsList']);

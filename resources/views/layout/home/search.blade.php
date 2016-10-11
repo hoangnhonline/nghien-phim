@@ -13,7 +13,7 @@
 
       <div class="user-name-box">                
         <ul class="user-ajax-customer">                      
-          <li> <a href="{{route('user-logout')}}" title="Kho phim của tôi"> Kho phim của tôi </a> </li>
+          <li> <a href="{{route('kho-phim')}}" title="Kho phim của tôi"> Kho phim của tôi </a> </li>
           <li> <a href="{{route('user-logout')}}" title="Thoát tài khoản"> Thoát tài khoản </a> </li>          
         </ul>
       </div>
