@@ -61,13 +61,7 @@ class SocialAuthController extends Controller
             return redirect()->route('shipping-step-2');
             // return redirect()->back();
         }
-
-        // $data['id'] = $providerUser->getId();
-        // $data['nickname'] = $providerUser->getNickname();
-        // $data['name'] = $providerUser->getName();
-        // $data['email'] = $providerUser->getEmail();
-        // $data['avatar'] = $providerUser->getAvatar();
-        // dd($data);
+        
     }
 
     public function googleRedirect()
@@ -163,9 +157,6 @@ class SocialAuthController extends Controller
                 'sucess' => 0
             ]);
         }
-
-
-
 
         return response()->json(['fb_token' => $fb_token, 'fbUser' => $facebook]);
     }
