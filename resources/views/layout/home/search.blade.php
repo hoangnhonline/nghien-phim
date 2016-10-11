@@ -50,7 +50,7 @@
 .header-user .user-name .user-name-link:hover .user-name-box  { display: block; }
 
 .header-user .user-name .user-name-box ul li a { color: #333; cursor: pointer; display: block; font-weight: normal; line-height: 26px; }
-.header-user .user-name .user-name-box ul li a:hover { color: red; }
+.header-user .user-name .user-name-box ul li a:hover { color: #79C142; }
 
 
 </style>
