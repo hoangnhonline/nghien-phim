@@ -5,16 +5,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Country;
 use App\Models\Film;
-use App\Models\Crew;
-use App\Models\Tag;
-use App\Models\TagObjects;
 use App\Models\Settings;
-use App\Models\Articles;
-use App\Models\ArticlesCate;
-use App\Models\FilmEpisode;
+use App\Models\Country;
+use App\Models\Category;
+use App\Models\KhoPhim;
 use Helper, File, Session;
 
 class CustomerController  extends Controller
@@ -77,6 +72,17 @@ class CustomerController  extends Controller
         return view('home.cate', compact('settingArr', 'moviesArr', 'tu_khoa',  'kho_phim', 'layout_name', 'page_name', 'is_search', 'title', 'cateDetail'));
     }
 
-   
+    public function favorite(Request $request)
+    {
+        $film_id = $request->film_id;
+        $customer_id = Session::get('userId');
+        $status = $request->status;
+        if($status == 1){
+            KhoPhim::create(['film_id' => $film_id, 'customer_id' => $customer_id]);
+        }else{
+            KhoPhim::where('customer_id', $customer_id)->where('film_id', $film_id)->delete();
+        }
+        return json_encode(['message' => 'success']);
+    }
 
 }

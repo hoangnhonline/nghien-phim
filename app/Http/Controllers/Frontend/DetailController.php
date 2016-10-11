@@ -14,6 +14,7 @@ use App\Models\Film;
 use App\Models\FilmEpisode;
 use App\Models\Settings;
 use App\Models\SystemMetadata;
+use App\Models\KhoPhim;
 
 use Helper, File, Session, DB;
 
@@ -54,7 +55,7 @@ class DetailController extends Controller
     public function index(Request $request)
     {   
         $is_landing = 0;
-        //var_dump($request->slugName, $request->slugEpisode);die;
+        
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
 
         $tagSelected = $episodeActive = [];
@@ -66,13 +67,11 @@ class DetailController extends Controller
 
         $tmp = Film::where('slug', $slugName)->select('id')->first();
 
-
         $id = $tmp ? $tmp->id : -1;
         $detail = Film::where( 'id', $id )
                 ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id')                
-                ->first();
-       
-        //https://lh3.googleusercontent.com/awv1HTJFUE5N-OuanegrmSr4EtPHYt1HqyBa1abaE6hj3S7utZyTk4k_eL-CF63QTTle4q4BHXo=m22
+                ->first();       
+        
         if( $detail ){ 
             
             $episode = FilmEpisode::where('film_id', $id)->orderBy('id', 'asc')->get();
@@ -116,8 +115,10 @@ class DetailController extends Controller
             }else{
                  $title = $episodeActive->name ." ". $title;
             }
-            
-           
+            $arrKhoPhim = [];
+            if(Session::get('userId') > 0){
+                $arrKhoPhim = KhoPhim::where('customer_id', Session::get('userId'))->lists('film_id')->toArray();                
+            }
             $urlVideo = $this->getLink($episodeActive->source);
             if(empty($urlVideo)){
                 return view('errors.404');
@@ -132,7 +133,8 @@ class DetailController extends Controller
                 'episode',
                 'episodeActive',
                 'is_landing',
-                'urlVideo'
+                'urlVideo',
+                'arrKhoPhim'
                 )); 
             }
                

@@ -20,25 +20,19 @@
 
     <div id="bar-player">
         <a href="#mv-info" rel="nofollow" class="btn bp-btn-light"><i class="fa fa-lightbulb-o"></i> <span></span></a>
-
+        @if(Session::get('userId') > 0)
         <span id="button-favorite">
-                        <a rel="nofollow" onclick="favorite(15541,2)"
-                           class="btn bp-btn-like"><i class="fa fa-heart"></i>
-        Yêu thích</a>
-                        <div class="popover fade top in popover-like" style="display: none;">
-        <div class="arrow" style="left: 50%;"></div>
-        <div class="popover-content">
-            <p id="popover-notice"></p>
-            <p class="mt10">
-                <a href="javascript:void(0)" rel="nofollow" onclick="favorite(15541,2)" class="btn btn-success btn-sm"><i
-                        class="fa fa-heart"></i> Yêu thích</a><a href="javascript:void(0)"
-                                                                class="btn btn-sm btn-default toggle-popover-like">Bỏ yêu thích</a>
-            </p>
-        </div>
-    </div>
-                    </span>
-        <a href="#commentfb" rel="nofollow" class="btn bp-btn-review"><i class="fa fa-comments"></i>
-                        <span>Comment (<span id="comment-count">0</span>)</span></a>
+                        
+                        <a rel="nofollow" style="{{ in_array($detail->id, $arrKhoPhim) ? "display:none" : "" }}" data-value="{{ $detail->id }}" data-status="1"
+                           class="btn bp-btn-like addFavorite" id="addFavorite"><i class="fa fa-heart"></i>
+
+                Yêu thích</a>
+                
+                     <a rel="nofollow" style="{{ !in_array($detail->id, $arrKhoPhim) ? "display:none" : "" }}" data-value="{{ $detail->id }}" data-status="0"
+                           class="btn bp-btn-like addFavorite" id="removeFavorite">
+                Bỏ yêu thích</a>   
+        </span>
+        @endif
         <a class="btn bp-btn-report hidden" data-target="#pop-report" data-toggle="modal" style="color: #fff000; float: right"><i class="fa fa-warning"></i> Báo cáo</a>
 
         <div class="clearfix"></div>

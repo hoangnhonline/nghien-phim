@@ -410,7 +410,31 @@
     */
 </script>
 <script type="text/javascript">
-$(document).ready(function(){        
+function favorite(film_id, status){
+    $.ajax({
+        url: "{{ route('favorite') }}",
+        type: "POST",             
+        data: {
+            film_id : film_id,
+            status : status,
+            _token : '{{ csrf_token() }}'
+        }
+    });
+}
+$(document).ready(function(){ 
+    $('.addFavorite').click(function(){
+        var obj = $(this);
+        film_id = obj.attr('data-value');
+        status = obj.attr('data-status');
+        favorite(film_id, status);
+        if( status == 0){
+            $('#addFavorite').show();
+            $('#removeFavorite').hide();
+        }else{
+            $('#addFavorite').hide();
+            $('#removeFavorite').show();
+        }
+    });     
     if (!jQuery.browser.mobile) {
         $('.jt').qtip({
             content: {
