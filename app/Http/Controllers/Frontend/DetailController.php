@@ -82,30 +82,7 @@ class DetailController extends Controller
 
             }else{
                 $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('id', 'asc')->firstOrFail();
-            }
-            /*
-            if( $episode ){
-                $i = 0;
-                foreach ($episode as $key => $value) {
-                    $i ++;          
-                    if($i == 1){ 
-                        $episodeActive = $value;
-                        if( strpos($episodeActive->source, 'zing.vn') > 0){
-                            $tmp = Helper::getVideoZing( $episodeActive->source);
-                            $episodeActive->source = $tmp['f480'] != '' ? $tmp['f480'] : $tmp['f360'];
-                        }
-                        if( strpos($episodeActive->source, 'google') > 0){   
-
-                            $tmp = Helper::getPhotoGoogle( $episodeActive->source);
-                            //var_dump($episodeActive->source);die;
-                            $episodeActive->source = $tmp['720p'] != '' ? $tmp['720p'] : $tmp['360p'];
-                        }
-                        break;
-                    }
-
-                }              
-            }
-            */
+            }        
             $cate = $detail->filmCategory($id);
             $category_id = $cate[0]; 
             
@@ -133,9 +110,13 @@ class DetailController extends Controller
             $metadata = SystemMetadata::find( $detail->meta_id ); 
 
             $title = trim($metadata->meta_title) ? $metadata->meta_title : $detail->title;
-            $title = $slugEpisode ? $episodeActive->name . ' - '.$title : $title;
+           
+            if($detail->type == 1){
+                $title = "Xem phim ".$title;
+            }else{
+                 $title = $episodeActive->name ." ". $title;
+            }
             
-            $title = "Xem phim ".$title;
            
             $urlVideo = $this->getLink($episodeActive->source);
             if(empty($urlVideo)){
