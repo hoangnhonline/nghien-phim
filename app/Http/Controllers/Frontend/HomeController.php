@@ -67,7 +67,7 @@ class HomeController extends Controller
             foreach( $phimBoArr as $phim)
             {
                // var_dump($phim->id);die;
-                $tmp = FilmEpisode::where('film_id', $phim->id)->orderBy('id', 'desc')->select('name')->first();
+                $tmp = FilmEpisode::where('film_id', $phim->id)->orderBy('display_order', 'desc')->orderBy('id', 'desc')->select('name')->first();
                 if($tmp){
                     $arrEpisode[$phim->id] = $tmp->name;
                 }
