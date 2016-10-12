@@ -2,8 +2,9 @@
 
 use App\Helpers\simple_html_dom;
 use Goutte\Client;
-namespace App\Helpers;
 
+namespace App\Helpers;
+use DB;
 class Helper
 {
     public static $privateKey = 'enilnohngnaoh';
@@ -29,10 +30,7 @@ class Helper
         }
         if(in_array(url()->current(), $arrUrl)){
           $seo = $arrSeo[url()->current()];
-        }
-        if(empty($seo)){
-          $seo['title'] = $seo['description'] = $seo['keywords'] = "Trang chủ iCho.vn";
-        }      
+        }        
         return $seo;
     }
     public static function showQuality($quality){        

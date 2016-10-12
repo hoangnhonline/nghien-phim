@@ -46,12 +46,18 @@
         <a href="{{ route('tag.index') }}">
           <i class="fa fa-th"></i> <span>Tag</span>         
         </a>        
-      </li>  
+      </li> 
+     
        <li class="treeview">
         <a href="{{ route('crew.index') }}">
           <i class="fa fa-th"></i> <span>Crew</span>         
         </a>        
-      </li>   
+      </li> 
+       <li class="treeview">
+        <a href="{{ route('info-seo.index') }}">
+          <i class="fa fa-th"></i> <span>Thông tin SEO</span>         
+        </a>        
+      </li>    
       <li class="treeview">
         <a href="{{ route('settings.index') }}">
           <i class="fa fa-th"></i> <span>Cài đặt</span>         

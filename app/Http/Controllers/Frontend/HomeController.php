@@ -171,8 +171,9 @@ class HomeController extends Controller
             $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
         }
         
-
-        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr'));
+        $seo = Helper::seo();  
+        //var_dump($seo);die;  
+        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr', 'seo'));
     }
 
     public function tags(Request $request)

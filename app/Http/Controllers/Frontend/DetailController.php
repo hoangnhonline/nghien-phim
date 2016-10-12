@@ -68,6 +68,7 @@ class DetailController extends Controller
         $tmp = Film::where('slug', $slugName)->select('id')->first();
 
         $id = $tmp ? $tmp->id : -1;
+        
         $detail = Film::where( 'id', $id )
                 ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id')                
                 ->first();       
@@ -83,9 +84,10 @@ class DetailController extends Controller
                 $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('id', 'asc')->firstOrFail();
             }        
             $cate = $detail->filmCategory($id);
+           
             $category_id = $cate[0]; 
             
-            $cateDetail = Category::find( $category_id )->select('id', 'name', 'slug')->first();
+            $cateDetail = Category::where('id', $category_id )->select('id', 'name', 'slug')->first();
             
             $relatedArr = Film::where('id', '<>', $id)
                         ->join('film_category', 'film_category.film_id', '=', 'film.id')

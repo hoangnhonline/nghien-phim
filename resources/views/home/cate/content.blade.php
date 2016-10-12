@@ -1,11 +1,17 @@
-@if( $is_search == 1)
-@section('title'){{ "Kết quả tìm kiếm theo từ khóa '".$tu_khoa."'"  }}@endsection
-@else
-@section('title'){{ $title }}@endsection
-@endif
+@if(empty($seo))
+    @if( $is_search == 1)
+    @section('title'){{ "Kết quả tìm kiếm theo từ khóa '".$tu_khoa."'"  }}@endsection
+    @else
+    @section('title'){{ $title }}@endsection
+    @endif
 
-@section('site_description'){{ $cateDetail->meta_description or $settingArr['site_description'] }}@endsection
-@section('site_keywords'){{ $cateDetail->meta_keywords or $settingArr['site_keywords'] }}@endsection
+    @section('site_description'){{ $cateDetail->meta_description or $settingArr['site_description'] }}@endsection
+    @section('site_keywords'){{ $cateDetail->meta_keywords or $settingArr['site_keywords'] }}@endsection
+@else
+        @section('title'){{ $seo['title'] }}@endsection
+      @section('site_description'){{ $seo['description'] }}@endsection
+      @section('site_keywords'){{ $seo['keywords'] }}@endsection
+@endif
 @section('banner'){{ $settingArr['banner'] }}@endsection
 @section('facebook_appid'){{ $settingArr['facebook_appid'] }}@endsection
 @section('site_name'){{ $settingArr['site_name'] }}@endsection
