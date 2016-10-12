@@ -170,10 +170,22 @@ class HomeController extends Controller
             }
             $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
         }
-        
+        $arrEpisode = [];
+        if($moviesArr->count() > 0){
+            foreach( $moviesArr as $phim)
+            {
+                if($phim->type == 2){
+                        $tmp = FilmEpisode::where('film_id', $phim->id)->orderBy('display_order', 'desc')->orderBy('id', 'desc')->select('name')->first();
+                        if($tmp){
+                            $arrEpisode[$phim->id] = $tmp->name;
+                        }
+
+                }
+            }
+        }
         $seo = Helper::seo();  
         //var_dump($seo);die;  
-        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr', 'seo'));
+        return view('home.cate', compact('title', 'settingArr', 'is_search', 'moviesArr', 'cateDetail', 'layout_name', 'page_name', 'cateActiveArr', 'moviesActiveArr', 'seo', 'arrEpisode'));
     }
 
     public function tags(Request $request)

@@ -10,7 +10,7 @@
 <div class="movies-list-wrap mlw-latestmovie">
     <div class="ml-title">
         <span class="pull-left">Phim lẻ mới nhất <i class="fa fa-chevron-right ml10"></i></span>
-        <a href="/phim-le" class="pull-right cat-more">Xem thêm »</a>
+        <a href="{{ route('cate', 'phim-le') }}" class="pull-right cat-more">Xem thêm »</a>
 
         <div class="clearfix"></div>
     </div>
@@ -40,7 +40,7 @@
 <div class="movies-list-wrap mlw-latestmovie">
     <div class="ml-title">
         <span class="pull-left">Phim bộ mới cập nhật <i class="fa fa-chevron-right ml10"></i></span>
-        <a href="/phim-bo" class="pull-right cat-more">Xem thêm »</a>
+        <a href="{{ route('cate', 'phim-bo') }}" class="pull-right cat-more">Xem thêm »</a>
 
         <div class="clearfix"></div>
     </div>

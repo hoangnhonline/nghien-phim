@@ -193,7 +193,19 @@
                      class="ml-mask jt"
                      title="{{ $movies->title }}"
                      >
+                @if($movies->type == 1)   
                <span class="mli-quality">{{ Helper::showQuality($movies->quality) }}</span>
+               @endif
+               @if($movies->type == 2)
+                  @if(isset($arrEpisode[$movies->id]))
+                      <?php 
+                      $tmp = explode(" ", $arrEpisode[$movies->id]);
+                      ?>
+                      <span class="mli-eps">
+                      {{ $tmp[0] }} <i>{{ isset($tmp[1]) ? $tmp[1] : "" }}{{ $movies->duration ? "/".$movies->duration : "" }}</i>
+                      </span>
+                      @endif
+               @endif
                <img data-original="{{ Helper::showImage( $movies->image_url ) }}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                   alt="{{ $movies->title }}">
                <span class="mli-info">
