@@ -29,7 +29,7 @@ a:active, a:focus{outline:none;}
 .btn-primary:hover,.btn-primary:active,.btn-primary:focus { background: #2D94D9; border-bottom: 3px solid #2486C8 !important;}
 .btn-danger{ background: #DF091E; border: none; border-bottom: 3px solid #CC091C !important;}
 .btn-danger:hover,.btn-danger:active,.btn-danger:focus { background: #D9091E; border-bottom: 3px solid #CC091C !important;}
-.btn-login{ height: 34px; line-height: 32px; padding: 0 15px;}
+.btn-login{ height: 34px; line-height: 32px; padding: 0 7px;}
 .btn-facebook{ background: #39569B; color: #fff !important; border: none; border-bottom: 3px solid #314A86 !important;}
 .btn-facebook:hover{ background: #314A86; border-bottom: 3px solid #2B4073;}
 .thumb{background-position: 50% 25%; background-size: cover; display: inline-block;}
@@ -790,7 +790,7 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     .mobile-menu i, .mobile-search i{ font-size: 18px; line-height: 32px;}
     .mobile-menu.active, .mobile-search.active{ background: #666;}
     .mobile-menu.active i, .mobile-search.active i{ color: #fff;}
-    .mobile-search{ left: auto; right: 95px;}
+    .mobile-search{ left: auto; right: 162px;}
     .logged .avatar img{ display: none;}
     .logged .avatar{ overflow: visible; margin: 0; padding: 5px 10px;}
     .logged .avatar .fa{ position: relative; top: auto; left: auto; font-size: 16px;}
