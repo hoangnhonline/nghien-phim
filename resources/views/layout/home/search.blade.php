@@ -1,7 +1,8 @@
 <div id="top-user" class="header-user">    
 @if(!Session::get('login'))
   <div class="top-user-content guest">
-        <a href="#" class="btn btn-successful btn-login login-by-facebook-popup" title="Login" >Login with Facebook</a>
+        <a href="#" class="visible-xs btn btn-successful btn-login login-by-facebook-popup" title="Login" >Login FB</a>
+        <a href="#" class="hidden-xs btn btn-successful btn-login login-by-facebook-popup" title="Login" >Login with Facebook</a>
   </div>
   @else
   <div class="user-name">            
