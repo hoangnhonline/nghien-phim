@@ -5,10 +5,137 @@ use Goutte\Client;
 
 namespace App\Helpers;
 use DB;
+use App\Models\CounterIps;
+use App\Models\CounterValues;
 class Helper
 {
     public static $privateKey = 'enilnohngnaoh';
 
+    public static function counter( $film_id ){
+        // ip-protection in seconds
+        $counter_expire = 1;
+
+        // ignore agent list
+        $counter_ignore_agents = array('bot', 'bot1', 'bot3');
+
+        // ignore ip list
+        $counter_ignore_ips = array('127.0.0.2', '127.0.0.3');
+
+        // get basic information
+        $counter_agent = $_SERVER['HTTP_USER_AGENT'];
+        $counter_ip = $_SERVER['REMOTE_ADDR']; 
+        $counter_time = time();
+
+        $ignore = false; 
+           
+        // get counter information
+        $sql = "SELECT * FROM counter_values WHERE film_id = $film_id LIMIT 1 ";
+        $rs1 = CounterValues::where('film_id', $film_id)->first();
+      //  var_dump($rs1);die;
+       // $res = mysql_query($sql);
+
+        // fill when empty
+        if (!$rs1)
+        {   
+            $tmpArr = [
+                'film_id' => $film_id,
+                'day_id' => date("z"),
+                'day_value' => 1,
+                'all_value' => 1
+            ];
+          CounterValues::create($tmpArr);
+          $rs1 = CounterValues::where('film_id', $film_id)->first();
+          
+          $ignore = true;
+        }   
+        //var_dump($rs1);die;
+        /*
+        $row = mysql_fetch_assoc($res);
+
+        $day_id = $row['day_id'];
+        $day_value = $row['day_value'];   
+        $all_value = $row['all_value'];   
+        */
+        $day_id = $rs1->day_id;
+        $day_value = $rs1->day_value;
+        $all_value = $rs1->all_value;
+        // check ignore lists
+        $length = sizeof($counter_ignore_agents);
+        for ($i = 0; $i < $length; $i++)
+        {
+          if (substr_count($counter_agent, strtolower($counter_ignore_agents[$i])))
+          {
+             $ignore = true;
+             break;
+          }
+        }
+
+        $length = sizeof($counter_ignore_ips);
+        for ($i = 0; $i < $length; $i++)
+        {
+          if ($counter_ip == $counter_ignore_ips[$i])
+          {
+             $ignore = true;
+             break;
+          }
+        }
+
+          
+        // delete free ips
+        if ($ignore == false)
+        {
+            $time = time();
+            CounterIps::where('film_id', $film_id)->whereRaw("$time-visit >= $counter_expire")->delete();   
+        }
+
+        // check for entry
+        if ($ignore == false)
+        {
+            $rs2 = CounterIps::where(['ip' => $counter_ip, 'film_id' => $film_id])->get();
+          
+          if ( $rs2->count() > 0)
+          {
+            $modelCouterIps = CounterIps::where('ip', $counter_ip)->where('film_id', $film_id);
+            $modelCouterIps->update(['visit' => time()]);   
+            $ignore = true;          
+          }
+          else
+          {
+             // insert ip
+             CounterIps::create(['ip' => $counter_ip, 'visit' => time(), 'film_id' => $film_id]);
+          }       
+        }
+           
+        // online?
+        $sql = "SELECT * FROM counter_ips";
+        $res = mysql_query($sql);
+        $online = mysql_num_rows($res);
+          
+        // add counter
+        if ($ignore == false)
+        {
+          // day
+          if ($day_id == date("z")) 
+          {
+             $day_value++; 
+          }
+          else 
+          {
+             $day_value = 1;
+             $day_id = date("z");
+          }
+          // all
+          $all_value++; 
+
+        $modelCouterValues = CounterValues::where('film_id', $film_id);
+        $modelCouterValues->update([
+                'day_id' => $day_id,
+                'day_value' => $day_value,
+                'all_value' => $all_value
+        ]);
+         
+        }
+    }
     public static function shout(string $string)
     {
         return strtoupper($string);

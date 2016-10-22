@@ -103,8 +103,10 @@ class FilmController extends Controller
 
         $dataArr['created_user'] = Auth::user()->id;
 
-        $dataArr['updated_user'] = Auth::user()->id;
-
+        $dataArr['updated_user'] = Auth::user()->id;       
+        
+        $dataArr['updated_episode_date'] = date('Y-m-d H:i:s');
+        
         $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
         
         if($dataArr['image_url'] && $dataArr['image_name']){

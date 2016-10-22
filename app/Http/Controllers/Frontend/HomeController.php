@@ -83,12 +83,24 @@ class HomeController extends Controller
     }
 
     public function ajaxTab(Request $request){
-        $table = $request->type ? $request->type : 'category';
-        $id = $request->id;
-
-        $arr = Film::getFilmHomeTab( $table, $id);
-
-        return view('home.index.ajax-tab', compact('arr'));
+        $arrEpisode = [];
+        $type = $request->type ? $request->type : 'most-view';
+       
+        $arr = Film::getFilmHomeTab( $type );
+        
+        if( $arr->count() > 0) {
+            foreach( $arr as $phim)
+            {
+                if($phim->type == 2){
+                    $tmp = FilmEpisode::where('film_id', $phim->id)->orderBy('display_order', 'desc')->orderBy('id', 'desc')->select('name')->first();
+                    if($tmp){
+                        $arrEpisode[$phim->id] = $tmp->name;
+                    }
+                }
+            }
+        }
+        
+        return view('home.index.ajax-tab', compact('arr', 'arrEpisode'));
     }
     /**
     * Show the form for creating a new resource.

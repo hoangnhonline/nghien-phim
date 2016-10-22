@@ -99,6 +99,10 @@ class FilmEpisodeController extends Controller
         if( $rsMeta->id ){
             $modelFilmEpisode = FilmEpisode::find($object_id);
             $modelFilmEpisode->update(['meta_id' => $rsMeta->id]);
+            
+            $modelFilm = Film::find($dataArr['film_id']);
+            $modelFilm->updated_episode_date = date('Y-m-d H:i:s');
+            $modelFilm->save();
         }
         Session::flash('message', 'Thêm mới tập phim thành công');
 
@@ -180,6 +184,9 @@ class FilmEpisodeController extends Controller
 
             }
         }
+        $modelFilm = Film::find($model->film_id);
+        $modelFilm->updated_episode_date = date('Y-m-d H:i:s');
+        $model->save();
         Session::flash('message', 'Cập nhật tập phim thành công');
 
         return redirect()->route('film-episode.index', ['film_id' => $dataArr['film_id']]);

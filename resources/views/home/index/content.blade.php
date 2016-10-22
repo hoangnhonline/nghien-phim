@@ -9,6 +9,40 @@
 <div class="pad"></div>
 <div class="movies-list-wrap mlw-latestmovie">
     <div class="ml-title">
+        <span class="pull-left">Suggestion <i class="fa fa-chevron-right ml10"></i></span>
+        <ul role="tablist" class="nav nav-tabs" id="ul_tab">
+            <li class="active"><a class="loadMovies" href="javascript:void(0)" data-value="most-view">Xem nhiều trong ngày</a></li>
+            <li><a class="loadMovies" href="javascript:void(0)" data-value="top-imdb">Top IMDb</a></li>
+            <li><a class="loadMovies" href="javascript:void(0)" data-value="lastest">Mới cập nhật</a></li>     
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="movies-list movies-list-full tab-pane in fade active" id="data-suggestion">
+         @if( $phimLeArr->count() > 0)
+             @foreach( $phimLeArr as $movies)
+             <div data-movie-id="{{ $movies->id }}" class="ml-item">
+                <a href="{{ route('landing', $movies->slug) }}"
+                   data-url="{{ route('movies-info', [ $movies->id ]) }}"
+                   class="ml-mask jt"
+                   title="{{ $movies->title }}">
+                      <span class="mli-quality">
+                        {{ Helper::showQuality($movies->quality) }}                        
+                      </span>
+                      <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
+                         alt="{{ $movies->title }}">
+                      <span class="mli-info">
+                         <h2>{{ $movies->title }}</h2>
+                      </span>
+                </a>
+            </div>
+           @endforeach
+          @endif
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="pad"></div>
+<div class="movies-list-wrap mlw-latestmovie">
+    <div class="ml-title">
         <span class="pull-left">Phim lẻ mới nhất <i class="fa fa-chevron-right ml10"></i></span>
         <a href="{{ route('cate', 'phim-le') }}" class="pull-right cat-more">Xem thêm »</a>
 
@@ -76,71 +110,25 @@
 </div>
 @section('javascript_page')
  <script type="text/javascript">
-
- function isCookieEnabled() {
-       var e = navigator.cookieEnabled ? !0 : !1;
-       return "undefined" != typeof navigator.cookieEnabled || e || (document.cookie = "testcookie", e = -1 != document.cookie.indexOf("testcookie") ? !0 : !1), e
-   }
-   if (!isCookieEnabled()) {
-       $('#alert-cookie').css('display', 'block');
-       $('body').addClass('off-cookie');
-   }
-    if (!jQuery.browser.mobile) {
-        $('.jt').qtip({
-            content: {
-                text: function (event, api) {
-                    $.ajax({
-                        url: api.elements.target.attr('data-url'),
-                        type: 'GET',
-                        success: function (data, status) {                           
-                            api.set('content.text', data);
-                        }
-                    });
-                }, // The text to use whilst the AJAX request is loading
-                title: function (event, api) {
-                    return $(this).attr('title');
-                }
-            },
-            position: {
-                my: 'top left',  // Position my top left...
-                at: 'top right', // at the bottom right of...
-                viewport: $(window),
-                effect: false,
-                target: 'mouse',
-                adjust: {
-                    mouse: false  // Can be omitted (e.g. default behaviour),
-                },
-                show: {
-                    effect: false
-                }
-            },
-            hide: {
-                fixed: true
-            },
-            style: {
-                classes: 'qtip-light qtip-bootstrap',
-                width: 320
-            }
-        });
-    }
-       
-    $(document).ready(function(){      
-      $('.load-lastest').click(function(){
+$(document).ready(function(){      
+      $('.loadMovies').click(function(){        
         var obj = $(this);
         $.ajax({
             url: "{{ route('ajax-tab') }}",
             type: "GET",
             async: false,      
             data: {
-              type : obj.attr('data-type'),
-              id : obj.attr('data-value')
+              type : obj.attr('data-value'),        
             },
             beforeSend: function() {
+                $('#ul_tab li').removeClass('active');
+                obj.parent().addClass('active');
                 // setting a timeout
-                $('#' + obj.attr('data-parent')).html('<p style="text-align:center; padding-top:30px;"><img src="{{ URL::asset("assets/images/loading.gif") }}" alt="loading"></p>');
+                $('#data-suggestion').html('<p style="text-align:center; padding-top:30px;"><img src="{{ URL::asset("assets/images/loading.gif") }}" alt="loading"></p>');
             },      
             success: function (response) {
-              $('#' + obj.attr('data-parent')).html( response );
+              
+              $('#data-suggestion').html( response );
               $("img.lazy").lazyload({
                   effect: "fadeIn"
               }); 
@@ -196,5 +184,53 @@
           });
       });
     });
+ function isCookieEnabled() {
+       var e = navigator.cookieEnabled ? !0 : !1;
+       return "undefined" != typeof navigator.cookieEnabled || e || (document.cookie = "testcookie", e = -1 != document.cookie.indexOf("testcookie") ? !0 : !1), e
+   }
+   if (!isCookieEnabled()) {
+       $('#alert-cookie').css('display', 'block');
+       $('body').addClass('off-cookie');
+   }
+    if (!jQuery.browser.mobile) {
+        $('.jt').qtip({
+            content: {
+                text: function (event, api) {
+                    $.ajax({
+                        url: api.elements.target.attr('data-url'),
+                        type: 'GET',
+                        success: function (data, status) {                           
+                            api.set('content.text', data);
+                        }
+                    });
+                }, // The text to use whilst the AJAX request is loading
+                title: function (event, api) {
+                    return $(this).attr('title');
+                }
+            },
+            position: {
+                my: 'top left',  // Position my top left...
+                at: 'top right', // at the bottom right of...
+                viewport: $(window),
+                effect: false,
+                target: 'mouse',
+                adjust: {
+                    mouse: false  // Can be omitted (e.g. default behaviour),
+                },
+                show: {
+                    effect: false
+                }
+            },
+            hide: {
+                fixed: true
+            },
+            style: {
+                classes: 'qtip-light qtip-bootstrap',
+                width: 320
+            }
+        });
+    }
+       
+    
 </script>
 @endsection

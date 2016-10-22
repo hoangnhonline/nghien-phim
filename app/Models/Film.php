@@ -111,28 +111,18 @@ class Film extends Model  {
         return $this->hasMany('App\Models\FilmEpisode', 'film_id');
     }
 
-    public static function getFilmHomeTab($table, $id){
+    public static function getFilmHomeTab($type){
 
         $arr = [];
 
-        if( $table == "category"){
-            $query = Film::where('status', 1)
-                        ->join('film_category', 'id', '=', 'film_category.film_id');
-                        if( $id > 0 ){
-                            $query->where('film_category.category_id' , $id);
-                        }
-                        
-            $arr = $query->groupBy('film_id')
-                   ->orderBy('id', 'desc')->limit(16)->get();
-        }else{
-            $query = Film::where('status', 1)
-                        ->join('film_country', 'id', '=', 'film_country.film_id');
-                    if( $id > 0 ){
-                        $query->where('film_country.country_id' , $id);
-                    }    
-                        
-            $arr = $query->groupBy('film_id')
-                    ->orderBy('id', 'desc')->limit(16)->get();
+        if($type == "most-view"){
+
+        }elseif($type == "top-imdb"){
+            $arr = Film::where('status', 1)                                    
+                            ->orderBy('imdb', 'desc')->limit(16)->get();
+        }else{ // phim moi cap nhat
+            $arr = Film::where('status', 1)                                    
+                            ->orderBy('updated_episode_date', 'desc')->limit(16)->get();
         }
 
         return $arr;

@@ -54,6 +54,7 @@ class DetailController extends Controller
     */
     public function index(Request $request)
     {   
+
         $is_landing = 0;
         
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
@@ -69,6 +70,8 @@ class DetailController extends Controller
 
         $id = $tmp ? $tmp->id : -1;
         
+        //Helper::counter($id);
+
         $detail = Film::where( 'id', $id )
                 ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id')                
                 ->first();       
