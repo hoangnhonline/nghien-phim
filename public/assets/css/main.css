@@ -968,6 +968,13 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     .donate-content .donate-block-ul .donate-block .donate-logo img{ max-width: 50%;}
     .modal-subc .modal-body{ padding: 20px 30px 30px;}
 }
+@media screen and (max-width: 360px){
+	#logo{ width: 60px !important; height: 27px;}
+	header .header-logo{ left: 119px !important; top: 10px; margin: 0;}
+	.mobile-search{
+		right: 87px !important;
+	}
+}
 @media screen and (max-width: 520px){
     .movies-list .ml-item{ height: 250px; margin: 1%; width: 31.3%;}
     #pop-login .modal-dialog, #pop-register .modal-dialog, #pop-forgot .modal-dialog{ margin: 2% auto; width: 96%;}
