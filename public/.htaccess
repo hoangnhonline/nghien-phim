@@ -17,4 +17,6 @@
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+	RewriteCond %{HTTP_HOST} ^www.phim1p.com
+	RewriteRule ^.*$ http://phim1p.com%{REQUEST_URI} [R=301,L]
 </IfModule>
