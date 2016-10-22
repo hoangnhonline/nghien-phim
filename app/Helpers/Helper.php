@@ -313,7 +313,7 @@ class Helper
                 }
             }
         }       
-        return array('360p'=> "http://google.com"); //$linkDownload;
+        return $linkDownload;
     }
 
     public static function uploadPhoto($file, $base_folder = '', $date_dir=false){

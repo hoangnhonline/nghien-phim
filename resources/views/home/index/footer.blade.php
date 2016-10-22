@@ -30,10 +30,10 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="col-lg-3">
-                    {{ $settingArr['w_footer_1'] }}
+                    <?php echo $settingArr['w_footer_1']; ?>
                 </div>
                 <div class="col-lg-4">
-                   {{ $settingArr['w_footer_2'] }}
+                   <?php echo $settingArr['w_footer_2']; ?>
                 </div>
                 <div class="clearfix"></div>
             </div>
