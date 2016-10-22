@@ -13,7 +13,7 @@ class Helper
 
     public static function counter( $film_id ){
         // ip-protection in seconds
-        $counter_expire = 1;
+        $counter_expire = 600;
 
         // ignore agent list
         $counter_ignore_agents = array('bot', 'bot1', 'bot3');
@@ -37,6 +37,7 @@ class Helper
         // fill when empty
         if (!$rs1)
         {   
+
             $tmpArr = [
                 'film_id' => $film_id,
                 'day_id' => date("z"),
@@ -80,14 +81,14 @@ class Helper
           }
         }
 
-          
+        
         // delete free ips
         if ($ignore == false)
-        {
+        {           
             $time = time();
-            CounterIps::where('film_id', $film_id)->whereRaw("$time-visit >= $counter_expire")->delete();   
+            CounterIps::where(['film_id' =>$film_id, 'ip' => $counter_ip])->whereRaw("$time-visit >= $counter_expire")->delete();
         }
-
+ 
         // check for entry
         if ($ignore == false)
         {
@@ -105,12 +106,6 @@ class Helper
              CounterIps::create(['ip' => $counter_ip, 'visit' => time(), 'film_id' => $film_id]);
           }       
         }
-           
-        // online?
-        $sql = "SELECT * FROM counter_ips";
-        $res = mysql_query($sql);
-        $online = mysql_num_rows($res);
-          
         // add counter
         if ($ignore == false)
         {
@@ -318,7 +313,7 @@ class Helper
                 }
             }
         }       
-        return $linkDownload;
+        return array('360p'=> "http://google.com"); //$linkDownload;
     }
 
     public static function uploadPhoto($file, $base_folder = '', $date_dir=false){

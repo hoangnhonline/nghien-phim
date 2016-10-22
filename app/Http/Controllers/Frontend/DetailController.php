@@ -70,7 +70,7 @@ class DetailController extends Controller
 
         $id = $tmp ? $tmp->id : -1;
         
-        //Helper::counter($id);
+        Helper::counter($id);
 
         $detail = Film::where( 'id', $id )
                 ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id')                

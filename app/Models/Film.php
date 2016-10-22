@@ -5,6 +5,7 @@ use App\Models\FilmCountry;
 use App\Models\FilmCategory;
 use App\Models\FilmEpisode;
 use App\Models\TagObjects;
+use App\Models\CounterValues;
 
 class Film extends Model  {
 
@@ -116,7 +117,9 @@ class Film extends Model  {
         $arr = [];
 
         if($type == "most-view"){
-
+            $arr = CounterValues::where('day_value','>', 0)
+                ->join('film', 'film.id' , '=', 'film_id')
+                ->orderBy('day_value', 'desc')->limit(16)->get();
         }elseif($type == "top-imdb"){
             $arr = Film::where('status', 1)                                    
                             ->orderBy('imdb', 'desc')->limit(16)->get();

@@ -21,25 +21,7 @@
         <div class="clearfix"></div>
     </div>
     <div class="movies-list movies-list-full tab-pane in fade active" id="data-suggestion">
-         @if( $phimLeArr->count() > 0)
-             @foreach( $phimLeArr as $movies)
-             <div data-movie-id="{{ $movies->id }}" class="ml-item">
-                <a href="{{ route('landing', $movies->slug) }}"
-                   data-url="{{ route('movies-info', [ $movies->id ]) }}"
-                   class="ml-mask jt"
-                   title="{{ $movies->title }}">
-                      <span class="mli-quality">
-                        {{ Helper::showQuality($movies->quality) }}                        
-                      </span>
-                      <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
-                         alt="{{ $movies->title }}">
-                      <span class="mli-info">
-                         <h2>{{ $movies->title }}</h2>
-                      </span>
-                </a>
-            </div>
-           @endforeach
-          @endif
+         
         <div class="clearfix"></div>
     </div>
 </div>
@@ -113,7 +95,73 @@
 </div>
 @section('javascript_page')
  <script type="text/javascript">
-$(document).ready(function(){      
+$(document).ready(function(){ 
+$.ajax({
+    url: "{{ route('ajax-tab') }}",
+    type: "GET",
+    async: false,      
+    data: {
+      type : 'most-view',        
+    },
+    beforeSend: function() {       
+        $('#data-suggestion').html('<p style="text-align:center; padding-top:30px;"><img src="{{ URL::asset("assets/images/loading.gif") }}" alt="loading"></p>');
+    },      
+    success: function (response) {
+      
+      $('#data-suggestion').html( response );
+      $("img.lazy").lazyload({
+          effect: "fadeIn"
+      }); 
+     
+      if (!jQuery.browser.mobile) {
+      $('.jt').qtip({
+          content: {
+              text: function (event, api) {
+                  $.ajax({
+                      url: api.elements.target.attr('data-url'),
+                      type: 'GET',
+                      success: function (data, status) {
+                          // Process the data
+
+                          // Set the content manually (required!)
+                          api.set('content.text', data);
+                      }
+                  });
+              }, // The text to use whilst the AJAX request is loading
+              title: function (event, api) {
+                  return $(this).attr('title');
+              }
+          },
+          position: {
+              my: 'top left',  // Position my top left...
+              at: 'top right', // at the bottom right of...
+              viewport: $(window),
+              effect: false,
+              target: 'mouse',
+              adjust: {
+                  mouse: false  // Can be omitted (e.g. default behaviour),
+              },
+              show: {
+                  effect: false
+              }
+          },
+          hide: {
+              fixed: true
+          },
+          style: {
+              classes: 'qtip-light qtip-bootstrap',
+              width: 320
+          }
+      });
+  }
+    },
+    error: function(response){                             
+        var errors = response.responseJSON;
+        for (var key in errors) {
+          
+        }             
+    }
+  });     
       $('.loadMovies').click(function(){        
         var obj = $(this);
         $.ajax({

@@ -102,6 +102,22 @@
                   </div>
                   <div style="clear:both"></div>
                 </div>
+                <div class="form-group">
+                  <label>Widget footer 1 <span class="red-star">*</span></label>
+                  <textarea name="w_footer_1"  class="form-control" rows="7">{{ $settingArr['w_footer_1'] }}</textarea>
+                </div>
+                <div class="form-group">
+                  <label>Widget footer 2 <span class="red-star">*</span></label>
+                  <textarea name="w_footer_2"  class="form-control" rows="7">{{ $settingArr['w_footer_2'] }}</textarea>                  
+                </div>
+                <div class="form-group">
+                  <label>Widget quảng cáo 1<span class="red-star">*</span></label>
+                  <textarea name="w_ads_1"  class="form-control" rows="10">{{ $settingArr['w_ads_1'] }}</textarea>  
+                </div>
+                <div class="form-group">
+                  <label>Widget quảng cáo 2<span class="red-star">*</span></label>
+                  <textarea name="w_ads_2"  class="form-control" rows="10">{{ $settingArr['w_ads_2'] }}</textarea>  
+                </div>
                 <div style="clear:both"></div>            
                  
             </div>                        

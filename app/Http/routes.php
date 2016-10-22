@@ -77,6 +77,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'info-seo.update', 'uses' => 'InfoSeoController@update']);
         Route::get('{id}/destroy', ['as' => 'info-seo.destroy', 'uses' => 'InfoSeoController@destroy']);
     });
+    
     Route::group(['prefix' => 'articles-cate'], function () {
         Route::get('/', ['as' => 'articles-cate.index', 'uses' => 'ArticlesCateController@index']);
         Route::get('/create', ['as' => 'articles-cate.create', 'uses' => 'ArticlesCateController@create']);

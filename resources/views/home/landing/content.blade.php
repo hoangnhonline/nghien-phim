@@ -20,6 +20,11 @@
         </div>
     </div>
     @endif
+    @if($settingArr['w_ads_1'])
+    <div class="content-kus" style="text-align: center; margin: 20px 0; padding: 15px; background-color: #FFF">
+        {{ $settingArr['w_ads_1'] }}
+    </div>
+    @endif
     <div class="mvi-content">
         <!--<div class="mvic-btn">
             <div class="mv-rating">
@@ -34,8 +39,8 @@
            
 
         </div> -->
-        <div class="thumb mvic-thumb" style="background-image: url({{ Helper::showImage( $detail->image_url ) }});"></div>
-        <div class="mvic-desc">
+        <div class="thumb mvic-thumb col-md-2" style="background-image: url({{ Helper::showImage( $detail->image_url ) }});"></div>
+        <div class="mvic-desc col-md-7">
             <h3>{{ $detail->title }}</h3>
             @if( $detail->trailer != '')
             <div class="block-trailer">
@@ -115,9 +120,13 @@
             </div>
             <div class="clearfix"></div>
         </div>
+        <div class="col-md-3">
+        {{ $settingArr['w_ads_2'] }}
+        </div>
         <div class="clearfix"></div>
     </div> 
 </div>
+
 <style type="text/css">
     .hero-unit {
         margin: 0 auto 0 auto;

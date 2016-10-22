@@ -30,15 +30,10 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="footer-link">
-                        <h3 class="footer-link-head">Partner</h3>
-                        <img border="0" src="http://nghien.biz/themes/123movies/resources/images/partner.png">
-                    </div>
+                    {{ $settingArr['w_footer_1'] }}
                 </div>
                 <div class="col-lg-4">
-                    <p><img border="0" src="../assets/images/logo.png" class="mv-ft-logo"></p>
-                    <p>Copyright © phim1p.com. All Rights Reserved</p>
-                    <p style="font-size: 11px; line-height: 14px; color: rgba(255,255,255,0.4)">Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.</p>
+                   {{ $settingArr['w_footer_2'] }}
                 </div>
                 <div class="clearfix"></div>
             </div>
