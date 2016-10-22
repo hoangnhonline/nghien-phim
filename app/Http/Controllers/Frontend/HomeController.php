@@ -85,8 +85,17 @@ class HomeController extends Controller
     public function ajaxTab(Request $request){
         $arrEpisode = [];
         $type = $request->type ? $request->type : 'most-view';
-       
-        $arr = Film::getFilmHomeTab( $type );
+        if($type == "kho-phim"){
+            $customer_id = Session::get('userId');        
+            
+            $arr = Film::where('status', 1)
+                    ->join('kho_phim', 'film.id', '=', 'kho_phim.film_id') 
+                    ->where('customer_id', $customer_id)
+                    ->orderBy('kho_phim.created_at', 'desc')->limit(16)->get(); 
+        }else{
+            $arr = Film::getFilmHomeTab( $type );
+        }
+        
         
         if( $arr->count() > 0) {
             foreach( $arr as $phim)

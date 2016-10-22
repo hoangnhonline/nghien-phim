@@ -13,7 +13,10 @@
         <ul role="tablist" class="nav nav-tabs" id="ul_tab">
             <li class="active"><a class="loadMovies" href="javascript:void(0)" data-value="most-view">Xem nhiều trong ngày</a></li>
             <li><a class="loadMovies" href="javascript:void(0)" data-value="top-imdb">Top IMDb</a></li>
-            <li><a class="loadMovies" href="javascript:void(0)" data-value="lastest">Mới cập nhật</a></li>     
+            <li><a class="loadMovies" href="javascript:void(0)" data-value="lastest">Mới cập nhật</a></li>   
+            @if(Session::get('login'))
+            <li><a class="loadMovies" href="javascript:void(0)" data-value="kho-phim">Kho phim của tôi</a></li>
+            @endif  
         </ul>
         <div class="clearfix"></div>
     </div>
