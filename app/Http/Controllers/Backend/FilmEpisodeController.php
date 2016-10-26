@@ -111,12 +111,15 @@ class FilmEpisodeController extends Controller
     public function destroy($id)
     {
         // delete
-        $model = FilmEpisode::find($id);
-        $model->delete();
+//var_dump($id);die;
+	$model = FilmEpisode::find($id);
+$film_id = $model->film_id;
+        $model = FilmEpisode::where('id',$id)->delete();
+//        $model->delete();
 
         // redirect
         Session::flash('message', 'Xóa tập phim thành công');
-        return redirect()->route('film-episode.index');
+        return redirect()->route('film-episode.index', $film_id);
     }
     public function edit($id)
     {

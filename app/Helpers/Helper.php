@@ -298,6 +298,7 @@ class Helper
         $get = self::curl($link);
         $data = explode('url\u003d', $get);
         unset($data[0]);
+	$linkDownload = [];
         foreach($data as $d){            
             if(strpos($d, 'video%2Fmp4')){
                 $tmpUrl = urldecode($d);

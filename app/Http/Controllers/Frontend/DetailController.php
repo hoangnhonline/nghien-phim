@@ -78,7 +78,7 @@ class DetailController extends Controller
         
         if( $detail ){ 
             
-            $episode = FilmEpisode::where('film_id', $id)->orderBy('id', 'asc')->get();
+            $episode = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->get();
 
             if( $slugEpisode ){
                 $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->firstOrFail();                
@@ -172,7 +172,7 @@ class DetailController extends Controller
         //https://lh3.googleusercontent.com/awv1HTJFUE5N-OuanegrmSr4EtPHYt1HqyBa1abaE6hj3S7utZyTk4k_eL-CF63QTTle4q4BHXo=m22
         if( $detail ){ 
             
-            $episode = FilmEpisode::where('film_id', $id)->orderBy('id', 'asc')->get();
+            $episode = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->get();
 
             if( $slugEpisode ){
                 $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->firstOrFail();                

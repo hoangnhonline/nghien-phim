@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi" lang="vi">
 <head>
     <title>@yield('title')</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="robots" content="index,follow"/>
-  <meta http-equiv="content-language" content="en"/>
+  <meta http-equiv="content-language" content="vi"/>
   <meta name="description" content="@yield('site_description')"/>
   <meta name="keywords" content="@yield('site_keywords')"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
   <link rel="shortcut icon" href="@yield('favicon')" type="image/x-icon"/>
-  <link rel="canonical" href=""/>
+  <link rel="canonical" href="{{ url()->current() }}"/>
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta property="og:type" content="website"/>
   <meta property="og:image:width" content="650"/>
   <meta property="og:image:height" content="350"/>
   <meta property="og:image:type" content="image/jpeg"/>
-  <meta property="og:image" content="@yield('banner')"/>
+  <meta property="og:image" content="{{ $detail->poster_url ? Helper::showImage($detail->poster_url) : Helper::showImage($detail->image_url) }}"/>
   <meta property="article:publisher" content="@yield('google_fanpage')"/>
-  <meta property="og:url" content=""/>
+  <meta property="og:url" content="{{ url()->current() }}"/>
   <meta property="og:title" content="@yield('title')"/>
   <meta property="og:description" content="@yield('site_description')"/>
   <meta property="og:site_name" content="@yield('site_name')"/>
@@ -40,10 +40,6 @@
 <script type="text/javascript" src="{{ URL::asset('assets/js/psbar.jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/star-rating.js') }}"></script>
 
-    <link href="http://vjs.zencdn.net/5.10.8/video-js.css" rel="stylesheet">
-
-  <!-- If you'd like to support IE8 -->
-  <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
