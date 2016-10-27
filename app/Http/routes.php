@@ -49,7 +49,7 @@ Route::group(['namespace' => 'Frontend'], function()
     Route::get('dien-vien/{name}/', ['as' => 'dien-vien', 'uses' => 'HomeController@dienVien']);
     Route::get('phim/{slugName}/', ['as' => 'landing', 'uses' => 'DetailController@landing']);
     Route::get('/tin-tuc/{slug}-{id}.html', ['as' => 'news-detail', 'uses' => 'HomeController@newsDetail']);
-    Route::get('{slugName}/{slugEpisode}.html', ['as' => 'detail-tap-phim', 'uses' => 'DetailController@index']);
+    Route::get('/phim/{slugName}/{slugEpisode}.html', ['as' => 'detail-tap-phim', 'uses' => 'DetailController@index']);
 
     Route::get('{slug}', ['as' => 'cate', 'uses' => 'HomeController@cate']);
     Route::get('/movies-info/{movies_id}', ['as' => 'movies-info', 'uses' => 'DetailController@ajaxMoviesInfo']);
