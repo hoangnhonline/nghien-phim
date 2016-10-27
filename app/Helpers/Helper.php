@@ -136,6 +136,23 @@ class Helper
         return strtoupper($string);
     }
 
+    public static function getDisplayOrder($table, $params = []){
+        $query = DB::table($table)->whereRaw('1');
+        if(!empty($params)){
+            foreach ($params as $column => $value) {
+                $query->where($column, $value);
+            }
+        }
+        $rs = $query->select('display_order')->orderBy('display_order', 'desc')->first();
+        if($rs){
+            $order = $rs->display_order + 1;
+        }else{
+            $order = 1;
+        }  
+       // var_dump($order);die;
+        return $order;
+    }
+
     public static function showImage($image_url){
 
         return strpos($image_url, 'http') === false ? config('nghien.upload_url').$image_url : $image_url;        
@@ -177,31 +194,7 @@ class Helper
                 break;
         }
         return $return;
-    }
-    public static function getSiteOriginal($url){
-        
-        if(strpos($url, 'xvideos') > 0){
-           
-            return 1;            
-
-        }elseif(strpos($url, 'hihi.com') > 0 ){
-            
-            return 2;
-
-        }elseif(strpos($url, 'redtube.com') > 0){
-           
-            return 3;
-
-        }elseif(strpos($url, 'youporn.com') > 0){
-            
-            return 4;
-
-        }else{            
-            
-            return 5;
-
-        } 
-    }
+    }    
     public static function encodeLink($string){
         $returnString = "";
         $charsArray = str_split("e7NjchMCEGgTpsx3mKXbVPiAqn8DLzWo_6.tvwJQ-R0OUrSak954fd2FYyuH~1lIBZ");

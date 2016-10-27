@@ -84,7 +84,7 @@ class FilmEpisodeController extends Controller
         $dataArr['created_user'] = Auth::user()->id;
 
         $dataArr['updated_user'] = Auth::user()->id;
-
+        $dataArr['display_order'] = Helper::getDisplayOrder('film_episode', ['film_id' => $dataArr['film_id']]);
         $rs = FilmEpisode::create($dataArr);
 
         $object_id = $rs->id;

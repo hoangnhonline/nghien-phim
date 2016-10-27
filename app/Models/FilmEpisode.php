@@ -24,6 +24,6 @@ class FilmEpisode extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'server_id', 'source', 'streaming_url', 'sub_url', 'created_user', 'updated_user', 'meta_id', 'film_id', 'poster_url'];    
+    protected $fillable = ['name', 'slug', 'server_id', 'source', 'streaming_url', 'sub_url', 'created_user', 'updated_user', 'meta_id', 'film_id', 'poster_url', 'display_order'];    
     
 }
