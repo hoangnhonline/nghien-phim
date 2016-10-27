@@ -155,6 +155,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
     });
     Route::group(['prefix' => 'film-episode'], function () {
         Route::get('/{film_id}', ['as' => 'film-episode.index', 'uses' => 'FilmEpisodeController@index']);
+        Route::post('/update-order', ['as' => 'update-order-episode', 'uses' => 'FilmEpisodeController@updateOrder']);        
         Route::get('/create', ['as' => 'film-episode.create', 'uses' => 'FilmEpisodeController@create']);
         Route::post('/store', ['as' => 'film-episode.store', 'uses' => 'FilmEpisodeController@store']);
         Route::post('/ajax-list-by-parent', ['as' => 'film-episode.ajax-list-by-parent', 'uses' => 'FilmEpisodeController@ajaxListByParent']);

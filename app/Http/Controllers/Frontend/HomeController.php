@@ -52,8 +52,6 @@ class HomeController extends Controller
     */
     public function index(Request $request)
     {
-        var_dump(Helper::getDisplayOrder('film_episode', ['film_id' => 23]));die;
-
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
 
         $layout_name = $page_name = "";

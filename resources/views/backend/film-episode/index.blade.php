@@ -45,28 +45,37 @@
         
         <!-- /.box-header -->
         <div class="box-body">
+          <form method="post" action="{{ route('update-order-episode')}}" name="form-list">
+          <input type="hidden" name="film_id" value="{{ $film_id }}">
+          {!! csrf_field() !!}
+          @if( $items->count() > 0 )
+          <div style="text-align:right;margin-bottom:10px"><button type="submit" class="btn btn-primary">Lưu thứ tự</button></div>
+          @endif
           <table class="table table-bordered" id="table-list-data">
             <tr>
               <th style="width: 1%">#</th>
-              <th style="width: 1%;white-space:nowrap">Thứ tự</th> 
+              <th style="width: 1%;white-space:nowrap">Thứ tự</th>
+              <th width="100px">Thứ tự</th> 
               <th>Name</th>          
-              <th>Source</th>          
+              <th style="width: 60%; white-space:nowrap">Source</th>          
               <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
             <tbody>
+            
             @if( $items->count() > 0 )
               <?php $i = 0; ?>
               @foreach( $items as $item )
                 <?php $i ++; ?>
               <tr id="row-{{ $item->id }}">
                 <td><span class="order">{{ $i }}</span></td>
-                <td style="vertical-align:middle;text-align:center">
+                <td style="vertical-align:middle;text-align:center;width:1%">
                   <img src="{{ URL::asset('be/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                 </td>
+                <td><input style="width:80px" type="text" class="form-control" name="display_order[{{$item->id}}]" value="{{ $item->display_order }}"></td>
                 <td>                  
                   <a href="{{ route( 'film-episode.index', [ 'film_id' => $film_id ]) }}?id={{ $item->id }}#dataForm">{{ $item->name }}</a>                 
                 </td>
-                <td>
+                <td style="word-break: break-all;">
                   {{ $item->source }}
                 </td>
                 <td style="white-space:nowrap">                  
@@ -77,6 +86,7 @@
                 </td>
               </tr> 
               @endforeach
+              
             @else
             <tr>
               <td colspan="9">Không có dữ liệu.</td>
@@ -84,7 +94,12 @@
             @endif
 
           </tbody>
+          
           </table>
+          @if( $items->count() > 0 )
+          <div style="text-align:right;margin-bottom:10px"><button type="submit" class="btn btn-primary">Lưu thứ tự</button></div>
+          @endif
+          </form>
         </div>        
       </div>
       <!-- /.box -->     

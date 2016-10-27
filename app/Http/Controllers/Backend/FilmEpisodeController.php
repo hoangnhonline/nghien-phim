@@ -45,6 +45,19 @@ class FilmEpisodeController extends Controller
 
         return view('backend.film-episode.index', compact('title', 'metadata', 'items', 'film_id', 'id', 'detailFilm', 'detail'));
     }
+    public function updateOrder(Request $request){
+        $display_orderArr = $request->display_order;
+        $film_id = $request->film_id;
+        if(!empty($display_orderArr)){
+            foreach ($display_orderArr as $id => $display_order) {
+                $model = FilmEpisode::find($id);
+                $model->display_order = (int) $display_order;
+                $model->save();
+            }
+        }
+        Session::flash('message', 'Cập nhật thứ tự thành công');
+        return redirect()->route('film-episode.index', $film_id);
+    }
     public function create()
     {
         //$parentCate = Category::where('parent_id', 0)->where('type', 1)->orderBy('display_order')->get();
