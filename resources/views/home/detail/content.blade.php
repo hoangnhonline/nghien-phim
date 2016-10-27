@@ -60,7 +60,7 @@
         <div class="le-server">
             <div class="les-content">                
                 @foreach( $episode as $ep )
-                <a class="btn-eps {{ $ep->id == $episodeActive->id ? "active" : "" }} " id="eps-{{ $ep->id }}" href="<?php if($detail->type==2) { ?>/{{ $detail->slug }}/{{ $ep->slug }}.html <?php } ?>">{{ $ep->name }}</a>
+                <a class="btn-eps {{ $ep->id == $episodeActive->id ? "active" : "" }} " id="eps-{{ $ep->id }}" href="{{ route('detail-tap-phim', ['slugName' => $detail->slug, 'slugEpisode' => $ep->slug]) }}">{{ $ep->name }}</a>
                 @endforeach
             </div>
             <div class="clearfix"></div>
