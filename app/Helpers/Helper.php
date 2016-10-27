@@ -11,6 +11,37 @@ class Helper
 {
     public static $privateKey = 'enilnohngnaoh';
 
+    public static function crop_str($text, $limit = 155)
+    {
+        $len = strlen($text);
+        
+        if ($len < $limit) {
+            return $text;
+        }
+        
+        return str_limit($text, $limit);
+    }
+    public static function cropWord($text = '', $numWord = 0)
+    {
+        $wordCount = str_word_count(str_slug($text, ' '));
+        if ($wordCount <= $numWord)
+        {
+            return $text;
+        }
+        else
+        {
+            $arrWord = explode(' ', $text);
+            foreach ($arrWord as $word)
+            {
+                if ($word)
+                {
+                    $tmp[] = $word;
+                }
+            }
+            $str = implode(' ', array_slice($tmp, 0, $numWord));
+            return $str . '...';
+        }
+    }
     public static function counter( $film_id ){
         // ip-protection in seconds
         $counter_expire = 600;

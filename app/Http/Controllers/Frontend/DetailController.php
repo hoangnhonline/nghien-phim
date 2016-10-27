@@ -120,6 +120,10 @@ class DetailController extends Controller
             }else{
                  $title = $episodeActive->name ." ". $title;
             }
+            $tmp = Helper::crop_str(strip_tags($detail->content), 155);
+            
+            $description = trim($metadata->meta_description) ? $metadata->meta_description : "Xem phim ".$title ." ".$tmp;
+
             $arrKhoPhim = [];
             if(Session::get('userId') > 0){
                 $arrKhoPhim = KhoPhim::where('customer_id', Session::get('userId'))->lists('film_id')->toArray();                
@@ -139,7 +143,8 @@ class DetailController extends Controller
                 'episodeActive',
                 'is_landing',
                 'urlVideo',
-                'arrKhoPhim'
+                'arrKhoPhim',
+                'description'
                 )); 
             }
                
@@ -211,6 +216,7 @@ class DetailController extends Controller
             $metadata = SystemMetadata::find( $detail->meta_id ); 
 
             $title = trim($metadata->meta_title) ? $metadata->meta_title : $detail->title;
+            $description = trim($metadata->meta_description) ? $metadata->meta_description : Helper::crop_str($detail->content, 155);
 
             return view('home.landing', compact(
                 'settingArr',
@@ -221,7 +227,8 @@ class DetailController extends Controller
                 'cateDetail',
                 'episode',
                 'episodeActive',
-                'is_landing'
+                'is_landing',
+                'description'
                 ));    
         }else{
             return view('errors.404');
