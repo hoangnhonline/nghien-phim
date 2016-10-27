@@ -81,10 +81,10 @@ class DetailController extends Controller
             $episode = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->get();
 
             if( $slugEpisode ){
-                $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->firstOrFail();                
+                $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->orderBy('display_order', 'asc')->firstOrFail();                
 
             }else{
-                $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('id', 'asc')->firstOrFail();
+                $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->firstOrFail();
             }        
             $cate = $detail->filmCategory($id);
            
@@ -175,10 +175,10 @@ class DetailController extends Controller
             $episode = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->get();
 
             if( $slugEpisode ){
-                $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->firstOrFail();                
+                $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->orderBy('display_order', 'asc')->firstOrFail();                
 
             }else{
-                $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('id', 'asc')->firstOrFail();
+                $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->firstOrFail();
             }
             
             $cate = $detail->filmCategory($id);
