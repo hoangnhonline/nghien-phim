@@ -114,14 +114,18 @@ class DetailController extends Controller
             $metadata = SystemMetadata::find( $detail->meta_id ); 
 
             $title = trim($metadata->meta_title) ? $metadata->meta_title : $detail->title;
-           
+            $next_link = "";
             if($detail->type == 1){
                 $title = "Xem phim ".$title;
             }else{
                  $title = $episodeActive->name ." ". $title;
+                 $next_link = $this->getNextLink($detail, $episodeActive);
             }
+
             $tmp = Helper::crop_str(strip_tags($detail->content), 155);
             
+
+
             $description = trim($metadata->meta_description) ? $metadata->meta_description : "Xem phim ".$title ." ".$tmp;
 
             $arrKhoPhim = [];
@@ -144,7 +148,8 @@ class DetailController extends Controller
                 'is_landing',
                 'urlVideo',
                 'arrKhoPhim',
-                'description'
+                'description',
+                'next_link'
                 )); 
             }
                
@@ -152,6 +157,14 @@ class DetailController extends Controller
             return view('errors.404');
         }
         
+    }
+    public function getNextLink($detail, $episodeActive){
+        $next_link = "";        
+        $rs = FilmEpisode::where(['film_id' => $detail->id, 'display_order' => $episodeActive->display_order + 1])->first();
+        if($rs){
+            $next_link = route('detail-tap-phim', ['slugName' => $detail->slug, 'slugEpisode' => $rs->slug]);   
+        }       
+        return $next_link;    
     }
     public function landing(Request $request)
     {   

@@ -190,6 +190,7 @@
 </style>
 <input type="hidden" id="video_url" value="{{ $detail->url }}">
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+<input type="hidden" id="next_link" value="{{ $next_link }}">
 <div class="content-kus" style="text-align: center; margin: 20px 0; padding: 15px; background-color: #FFF">
     <div class="fb-comments" data-href="{{ url()->current() }}" data-numposts="5"></div>
     <div class="clearfix"></div>
@@ -199,13 +200,50 @@
 {
        width: 100% !important;
 }
+.modal-sm{
+    width: 350px !important;
+}
+</style>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Thông báo</h4>
+      </div>
+      <div class="modal-body">
+       <p style="white-space:nowrap">Tự động chuyển sang tập kế tiếp sau <span id="countdown2"><span id="countdown" style="font-weight:bold;color:#70b63d">10</span> giây</span>.</p> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="btnHuyChuyen">Tắt tự động chuyển</button>
+        <button type="button" class="btn" style="background-color:#70b63d; border-color:#70b63d;color:#FFF" id="btnChuyen">Chuyển ngay</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<style type="text/css">
+    
 
 </style>
 @section('javascript_page')
 <script type="text/javascript" src="{{ URL::asset('assets/plugins/jwplayer/jwplayer.js') }}" ></script>
 <script>jwplayer.key = "dWwDdbLI0ul1clbtlw+4/UHPxlYmLoE9Ii9QEw==";</script>
 <script type="text/javascript">
- var sources = [
+$(document).ready(function(){
+    $('#btnHuyChuyen').click(function(){
+        $('#next_link').val('');
+        $('#myModal').modal('hide');
+    });
+    $('#btnChuyen').click(function(){
+        location.href=$('#next_link').val();
+    });
+});
+var time_left = 10;
+            var cinterval;
+var sources = [
     <?php $count = count($urlVideo); ?>
      
     
@@ -231,7 +269,25 @@
             aspectratio: "16:9",
             primary: "html5",
             controls: true,
-        });                
 
+        }); 
+        playerInstance.onComplete(function(){
+            if($('#next_link').val() != ""){
+                $('#myModal').modal('show');             
+                cinterval = setInterval('time_dec()', 1000);            
+            }
+        });
+ function time_dec(){
+    time_left--;
+    document.getElementById('countdown').innerHTML = time_left;
+    if(time_left == 1){
+        var originalstring = document.getElementById('countdown2').innerHTML;
+        var newstring = originalstring.replace('seconds','second');
+        document.getElementById('countdown2').innerHTML = newstring;
+        //window.location.replace("http://mydomainhere.com");
+        clearInterval(cinterval);
+        location.href=$('#next_link').val();
+    }
+}
 </script>
 @endsection
