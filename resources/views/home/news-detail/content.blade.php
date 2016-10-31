@@ -1,5 +1,5 @@
-@section('title'){{ $title }}@endsection
-@section('site_description'){{ $cateDetail->meta_description or $settingArr['site_description'] }}@endsection
+@section('title')<?php echo $title ?>@endsection
+@section('site_description')<?php echo $description ? $description : $settingArr['site_description']; ?>@endsection
 @section('site_keywords'){{ $cateDetail->meta_keywords or $settingArr['site_keywords'] }}@endsection
 @section('banner'){{ Helper::showImage($settingArr['banner']) }}@endsection
 @section('favicon'){{ Helper::showImage($settingArr['favicon']) }}@endsection

@@ -345,8 +345,10 @@ class HomeController extends Controller
             $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
 
             $hotArr = Articles::where( ['cate_id' => 1, 'is_hot' => 1] )->where('id', '<>', $id)->orderBy('id', 'desc')->limit(5)->get();
+            $content = strip_tags($detail->content);
+            $description = trim($detail->meta_description) ? $detail->meta_description : Helper::crop_str($content, 155);
 
-            return view('home.news-detail', compact('title', 'settingArr', 'hotArr', 'layout_name', 'page_name', 'detail'));
+            return view('home.news-detail', compact('title', 'settingArr', 'hotArr', 'layout_name', 'page_name', 'detail', 'description'));
         }else{
             return view('erros.404');
         }     
