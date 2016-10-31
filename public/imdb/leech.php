@@ -2,9 +2,9 @@
 ini_set('max_execution_time', 1000000);
 //CONFIG DATA BASE LEECH IMDB==========================================================================================
 	$db_host='localhost';
-	$db_user='root';
-	$db_pass='1234567';
-	$db_data='getcontent';
+	$db_user='admin_1pphim';
+	$db_pass='1pphimphanngoc';
+	$db_data='admin_1pphim';
 	 
 	mysql_connect($db_host,$db_user,$db_pass) or die("Not connected to database");
 	mysql_select_db($db_data) or die ("Not found database");
@@ -81,9 +81,9 @@ function curl_get_contents($url,  $javascript_loop = 0, $timeout = 5)
 	
 //---------------------------------------------------------------------------------------------------------------------------------
 	$n_loop= count($n_loop);
-		for ($n=2099926; $n<2100000; $n++)
+		for ($n=300000; $n<500000; $n++)
 			{
-			$url='www.imdb.com/name/nm'.$n;
+			$url='www.imdb.com/name/nm0'.$n;
 			$front_name="meta property='og:title' content=".'"';
 			$rear_name= '" />';
 			$front_pic='img id="name-poster"';
