@@ -136,6 +136,10 @@
                   </div>
                 @endif
                 <div class="form-group">
+                  <label>Thứ tự</label>
+                  <input type="text" class="form-control" name="display_order" id="display_order" value="{{ $detail ? $detail->display_order : old('display_order') }}">
+                </div>
+                <div class="form-group">
                   <label>Source URL</label>
                   <textarea class="form-control" rows="2" name="source" id="source">{{ $detail ? $detail->source : old('source') }}</textarea>
                 </div>
