@@ -771,6 +771,9 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     .mlnh-4{ display: none;}
 }
 @media screen and (min-width: 991px) and (max-width:1199px){
+	.title-mod {	    
+	    font-size: 20px !important;	    
+	}
     /*header .header-logo{ float: none; margin-bottom: 10px; margin-top: 0;}
     #menu{ position: absolute !important;}*/
     #menu{ border-top: none; float: left; position: relative; top: auto; left: auto; margin-left: 20px;}
@@ -786,6 +789,9 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
 	.mobile-search{ left: auto; right: 92px !important;}
 }
 @media screen and (max-width: 991px){
+	.title-mod {	    
+	    font-size: 20px !important;	    
+	}
     #menu ul.top-menu li a{ height: 40px; line-height: 40px; padding: 0 15px; margin: 0 5px; font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; }
     .container{ width: 100%;}
     .btn-login{ border-bottom: none !important;}
@@ -1107,4 +1113,6 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5972a5', end
     position: absolute;
     bottom: -10px;
     background: rgba(0,0,0,0.7);
+    display: block;
+    width: 100%
 }
