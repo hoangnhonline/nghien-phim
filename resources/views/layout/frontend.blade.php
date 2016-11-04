@@ -330,14 +330,7 @@
                </div>
             </div>
          </div>
-      </div>
-      
-      <div id="alert-cookie" role="alert" class="alert alert-warning alert-cookie" style="display: none;">
-         <button type="button" class="close ml10" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-         </button>
-         <i class="fa fa-warning mr5" style="color:#C30;"></i> You need to enable browser's cookie to stream. <a
-            href="how-to-enable-browser-cookie" title="">Click here for instruction.</a>
-      </div>
+      </div>    
      
       <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js?v=0.1') }}"></script>
       <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap-select.js?v=0.1') }}"></script>
