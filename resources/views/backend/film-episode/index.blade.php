@@ -45,9 +45,13 @@
         
         <!-- /.box-header -->
         <div class="box-body">
+          <div style="text-align:center">
+           {{ $items->appends( ['title' => $title] )->links() }}
+          </div> 
           <form method="post" action="{{ route('update-order-episode')}}" name="form-list">
           <input type="hidden" name="film_id" value="{{ $film_id }}">
           {!! csrf_field() !!}
+
           @if( $items->count() > 0 )
           <div style="text-align:right;margin-bottom:10px"><button type="submit" class="btn btn-primary">Lưu thứ tự</button></div>
           @endif
@@ -100,6 +104,9 @@
           <div style="text-align:right;margin-bottom:10px"><button type="submit" class="btn btn-primary">Lưu thứ tự</button></div>
           @endif
           </form>
+          <div style="text-align:center">
+           {{ $items->appends( ['title' => $title] )->links() }}
+          </div> 
         </div>        
       </div>
       <!-- /.box -->     

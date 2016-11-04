@@ -41,7 +41,7 @@ class FilmEpisodeController extends Controller
         if( $title != ''){
             $query->where('name', 'LIKE', '%'.$title.'%');
         }
-        $items = $query->orderBy('display_order')->orderBy('id')->paginate(1000);
+        $items = $query->orderBy('display_order')->orderBy('id')->paginate(20);
 
         return view('backend.film-episode.index', compact('title', 'metadata', 'items', 'film_id', 'id', 'detailFilm', 'detail'));
     }
