@@ -1038,7 +1038,7 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     #footer .col-lg-4 img{width: 80%;}
     #footer .col-lg-4 p{ font-size: 12px;}
     #menu ul.top-menu li a{ padding: 0 8px;}
-    #menu .sub-container ul.sub-menu li{ border-bottom: none; margin: 0; width: 33.33%;}
+    #menu .sub-container ul.sub-menu li{ border-bottom: none; margin: 0; width: 50%;}
     #menu .sub-container ul.sub-menu li a{ margin:0; padding: 0; background: none !important; padding-left: 8px; }
     #menu .sub-container ul.sub-menu{ padding: 5px;}
     .movies-list-wrap .ml-title .nav-tabs li a{ min-width: 50px;}
@@ -1099,4 +1099,12 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5972a5', end
   border: none;
   color: #fff;
     color: #fff !important;
+}
+.title-mod {
+    color: #79C142;
+    font-size: 12px;
+    padding: 5px 5px;
+    position: absolute;
+    bottom: -10px;
+    background: rgba(0,0,0,0.7);
 }

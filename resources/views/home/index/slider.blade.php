@@ -1,7 +1,10 @@
 <div id="slider">
   <div class="swiper-wrapper">
     @if( $hotArr->count() > 0)
+    
       @foreach( $hotArr as $movies)
+      
+      
        <div class="swiper-slide" style="background-image: url({{ Helper::showImage( $movies->poster_url ) }});">
           <a href="{{ route('landing', $movies->slug) }}"
              class="slide-link"
@@ -64,7 +67,8 @@
                 <a onclick="location.href='{{ route("landing", $movies->slug) }}'" title=""class="btn btn-success mt20">Xem phim</a>
              
           </span>
-       </div>
+          <h2 class="hidden-md title-mod">{{ $movies->title }}</h2>
+       </div>       
       @endforeach    
      @endif
   </div>
