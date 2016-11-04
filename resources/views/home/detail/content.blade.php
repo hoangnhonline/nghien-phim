@@ -41,14 +41,7 @@
         <a class="btn btn-block btn-lg btn-success btn-01" target="_blank" href="http://players.123movies.to/stream.php"><i class="fa fa-play mr10"></i>Stream in HD</a>
         <a class="btn btn-block btn-lg btn-success btn-02" target="_blank" href="http://players.123movies.to/download.php"><i class="fa fa-download mr10"></i>Download in HD</a>
         <div class="clearfix"></div>
-    </div>-->
-    <div id="favorite-alert" style="display: none;">
-        <div class="alert alert-success" role="alert">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-            <i class="fa fa-check"></i> <span id="favorite-message"></span>
-            <a target="_blank" href="user/movies/favorite" title="Your favorite" class="alert-link">Yêu thích của bạn.</a>
-        </div>
-    </div>
+    </div>--> 
     <div id="report-alert" style="display: none;">
         <div class="alert alert-success" role="alert">
             <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">×</a>
