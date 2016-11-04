@@ -200,9 +200,10 @@ class DetailController extends Controller
             }
             
             $cate = $detail->filmCategory($id);
+           
             $category_id = $cate[0]; 
             
-            $cateDetail = Category::find( $category_id )->select('id', 'name', 'slug')->first();
+            $cateDetail = Category::where('id', $category_id )->select('id', 'name', 'slug')->first();
             
             $relatedArr = Film::where('id', '<>', $id)
                         ->join('film_category', 'film_category.film_id', '=', 'film.id')
