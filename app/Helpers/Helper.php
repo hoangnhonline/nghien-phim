@@ -7,6 +7,7 @@ namespace App\Helpers;
 use DB;
 use App\Models\CounterIps;
 use App\Models\CounterValues;
+use App\Models\Report;
 class Helper
 {
     public static $privateKey = 'enilnohngnaoh';
@@ -166,7 +167,11 @@ class Helper
     {
         return strtoupper($string);
     }
-
+    public static function checkHasReport($film_id, $episode_id){
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+        $rs = Report::where(['ip_address' => $ip_address, 'film_id' => $film_id, 'episode_id' => $episode_id])->first();
+        return $rs ? true : false;
+    }
     public static function getDisplayOrder($table, $params = []){
         $query = DB::table($table)->whereRaw('1');
         if(!empty($params)){

@@ -35,6 +35,7 @@ Route::group(['namespace' => 'Frontend'], function()
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);    
     Route::get('/user/kho-phim', ['as' => 'kho-phim', 'uses' => 'CustomerController@khoPhim']);
     Route::post('/user/favorite', ['as' => 'favorite', 'uses' => 'CustomerController@favorite']);
+    Route::post('/sys/bao-cao-link-hong', ['as' => 'report', 'uses' => 'ReportController@report']);
     //Route::get('/phim-le', ['as' => 'phim-le', 'uses' => 'HomeController@cate']);
     //::get('/phim-bo', ['as' => 'phim-bo', 'uses' => 'HomeController@cate']);
     Route::get('/tin-tuc', ['as' => 'news-list', 'uses' => 'HomeController@newsList']);

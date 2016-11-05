@@ -81,7 +81,7 @@ class HomeController extends Controller
 
         return view('home.index', compact( 'settingArr', 'page_name', 'layout_name', 'hotArr', 'articlesArr', 'settingArr', 'phimLeArr', 'phimBoArr', 'arrEpisode'));
     }
-
+    
     public function ajaxTab(Request $request){
         $arrEpisode = [];
         $type = $request->type ? $request->type : 'most-view';

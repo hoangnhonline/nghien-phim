@@ -71,7 +71,7 @@ class DetailController extends Controller
         $id = $tmp ? $tmp->id : -1;
         
         Helper::counter($id);
-
+        $has_report = true;
         $detail = Film::where( 'id', $id )
                 ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id')                
                 ->first();       
@@ -81,10 +81,10 @@ class DetailController extends Controller
             $episode = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->get();
 
             if( $slugEpisode ){
-                $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->orderBy('display_order', 'asc')->firstOrFail();                
+                $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->orderBy('display_order', 'asc')->first();                
 
             }else{
-                $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->firstOrFail();
+                $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->first();
             }        
             $cate = $detail->filmCategory($id);
            
@@ -132,26 +132,32 @@ class DetailController extends Controller
             if(Session::get('userId') > 0){
                 $arrKhoPhim = KhoPhim::where('customer_id', Session::get('userId'))->lists('film_id')->toArray();                
             }
-            $urlVideo = $this->getLink($episodeActive->source);
-            if(empty($urlVideo)){
-                return view('errors.404');
+            $urlVideo = [];
+            if($episodeActive){
+                $urlVideo = $this->getLink($episodeActive->source);
+                $urlVideo = !empty($urlVideo) ? $urlVideo : ['360p' =>'', '480p' => '', '720p' => '' , 'hd' => ''];                
+                $has_report = Helper::checkHasReport($id, $episodeActive->id);
             }else{
-                return view('home.detail', compact(
-                'settingArr',
-                'title',
-                'tagSelected', 
-                'relatedArr', 
-                'detail',               
-                'cateDetail',
-                'episode',
-                'episodeActive',
-                'is_landing',
-                'urlVideo',
-                'arrKhoPhim',
-                'description',
-                'next_link'
-                )); 
+                $urlVideo = ['360p' =>'', '480p' => '', '720p' => '' , 'hd' => ''];
             }
+            
+            return view('home.detail', compact(
+            'settingArr',
+            'title',
+            'tagSelected', 
+            'relatedArr', 
+            'detail',               
+            'cateDetail',
+            'episode',
+            'episodeActive',
+            'is_landing',
+            'urlVideo',
+            'arrKhoPhim',
+            'description',
+            'next_link',
+            'has_report'
+            )); 
+            
                
         }else{
             return view('errors.404');

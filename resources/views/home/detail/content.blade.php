@@ -33,8 +33,9 @@
                 Bỏ yêu thích</a>   
         </span>
         @endif
-        <a class="btn bp-btn-report hidden" data-target="#pop-report" data-toggle="modal" style="color: #fff000; float: right"><i class="fa fa-warning"></i> Báo cáo</a>
-
+        @if(!$has_report)
+        <a class="btn bp-btn-report" id="btnReport" data-ep="{{ $episodeActive->id }}" data-value="{{ $detail->id }}"><i class="fa fa-warning"></i> Báo link hỏng</a>
+        @endif
         <div class="clearfix"></div>
     </div>
     <!--<div class="mobile-btn">
@@ -42,7 +43,7 @@
         <a class="btn btn-block btn-lg btn-success btn-02" target="_blank" href="http://players.123movies.to/download.php"><i class="fa fa-download mr10"></i>Download in HD</a>
         <div class="clearfix"></div>
     </div>--> 
-    <div id="report-alert" style="display: none;">
+    <div id="report-alert" style="display:none">
         <div class="alert alert-success" role="alert">
             <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">×</a>
             <i class="fa fa-check"></i> Cảm ơn bạn đã gửi báo cáo. Chúng tôi sẽ cố gắng chỉnh sửa sớm nhất.
@@ -197,6 +198,25 @@
     width: 350px !important;
 }
 </style>
+<div id="errorModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Thông báo</h4>
+      </div>
+      <div class="modal-body">
+       <p style="white-space:nowrap">Phim chưa được cập nhật</p> 
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='{{ route('home') }}'">Đóng</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
 
@@ -270,6 +290,10 @@ var sources = [
                 cinterval = setInterval('time_dec()', 1000);            
             }
         });
+        playerInstance.onSetupError(function(){
+            $('#errorModal').modal('show');
+        });
+       
  function time_dec(){
     time_left--;
     document.getElementById('countdown').innerHTML = time_left;
