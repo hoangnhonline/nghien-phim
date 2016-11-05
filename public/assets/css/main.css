@@ -770,6 +770,11 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     .alert-bottom .ab-btn .btn-domain{ font-size: 14px;}
     .mlnh-4{ display: none;}
 }
+@media screen and (min-width: 700px){
+	.title-mod{
+		display: none !important;
+	}
+}
 @media screen and (min-width: 991px) and (max-width:1199px){
 	.title-mod {	    
 	    font-size: 20px !important;	    
@@ -918,6 +923,7 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     .movies-letter a.btn-letter{ width: 6.64%;}
 }
 @media screen and (max-width: 640px){
+
     #slider .slide-caption{ display: none;}
     #slider{ height: 180px;}
     .movies-list .ml-item{ height: 200px;}
