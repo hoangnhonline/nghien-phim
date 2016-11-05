@@ -60,7 +60,7 @@ class FilmController extends Controller
         }
         $query->join('users', 'users.id', '=', 'film.created_user');
         $items = $query->orderBy('film.id', 'desc')
-        ->select(['film.id as film_id', 'title', 'image_url', 'film.created_at as time_created', 'description', 'users.full_name'])
+        ->select(['film.id as film_id', 'title', 'image_url', 'film.created_at as time_created', 'description', 'users.full_name', 'film.status as status', 'sitemap'])
         ->paginate(20);
         
         return view('backend.film.index', compact('items', 'title', 'status'));
@@ -217,7 +217,7 @@ class FilmController extends Controller
     }
 
     private function processRelation($dataArr, $object_id, $type = 'add'){
-
+    
         if( $type == 'edit'){
 
             FilmCrew::deleteFilmCrew( $object_id );

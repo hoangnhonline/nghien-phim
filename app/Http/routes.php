@@ -77,6 +77,17 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'info-seo.update', 'uses' => 'InfoSeoController@update']);
         Route::get('{id}/destroy', ['as' => 'info-seo.destroy', 'uses' => 'InfoSeoController@destroy']);
     });
+    Route::group(['prefix' => 'sitemap'], function () {
+        Route::get('/', ['as' => 'sitemap.index', 'uses' => 'SiteMapController@index']); 
+        Route::get('/add-new', ['as' => 'sitemap.add-new', 'uses' => 'SiteMapController@addNew']); 
+        Route::get('/crew', ['as' => 'sitemap.crew', 'uses' => 'SiteMapController@crew']);
+        Route::get('/category', ['as' => 'sitemap.category', 'uses' => 'SiteMapController@category']);
+        Route::get('/country', ['as' => 'sitemap.country', 'uses' => 'SiteMapController@country']);
+        Route::get('/articles', ['as' => 'sitemap.articles', 'uses' => 'SiteMapController@articles']); 
+        Route::get('/tag', ['as' => 'sitemap.tag', 'uses' => 'SiteMapController@tag']);
+        Route::get('/default', ['as' => 'sitemap.default', 'uses' => 'SiteMapController@default']); 
+        Route::get('/movies', ['as' => 'sitemap.movies', 'uses' => 'SiteMapController@movies']);            
+    });
     
     Route::group(['prefix' => 'articles-cate'], function () {
         Route::get('/', ['as' => 'articles-cate.index', 'uses' => 'ArticlesCateController@index']);
