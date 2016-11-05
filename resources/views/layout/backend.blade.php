@@ -118,6 +118,24 @@ $(document).ready(function(){
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
   });
+  $('.tao-sitemap').click(function(){
+    var obj = $(this);
+    var id = obj.data('value');
+    $.ajax({
+      url : "{{ route('sitemap.movies') }}",
+      type : "GET",
+      data : {
+        id : id
+      },
+      beforeSend : function(){
+        obj.html('<i class="fa fa-spin fa-spinner"></i>');
+      },
+      success : function(data){
+        obj.hide();
+        alert('Tạo sitemap thành công.');
+      }
+    });
+  });
 });
   
 </script>

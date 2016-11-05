@@ -98,8 +98,10 @@
                 </td>
                 <td>{{ $item->full_name }}</td>
                 <td style="white-space:nowrap">{{ date('d-m-Y H:i', strtotime($item->time_created)) }}</td>       
-                <td style="white-space:nowrap">
-
+                <td style="white-space:nowrap">                
+                @if($item->status == 1 && $item->sitemap == 0)
+                <button class="btn btn-success btn-sm tao-sitemap" data-value="{{ $item->film_id}}">Tạo sitemap</button>
+                @endif
                   <a href="{{ route( 'film.edit', [ 'id' => $item->film_id ]) }}" class="btn-sm  btn btn-warning">Chỉnh sửa</a>                 
                   
                   <a onclick="return callDelete('{{ $item->title }}','{{ route( 'film.destroy', [ 'id' => $item->film_id ]) }}');" class="btn-sm btn btn-danger">Xóa</a>

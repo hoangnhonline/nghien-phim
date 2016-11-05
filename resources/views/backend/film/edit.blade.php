@@ -16,6 +16,12 @@
   <!-- Main content -->
   <section class="content">
     <a class="btn btn-default btn-sm" href="{{ route('film.index') }}" style="margin-bottom:5px">Quay lại</a>
+    @if($detail->status == 1 && $detail->sitemap == 0)
+    <button class="btn btn-success btn-sm tao-sitemap" data-value="{{ $detail->id }}">Tạo sitemap</button>
+    @endif
+    <a href="{{ route('film-episode.index', ['film_id' => $detail->id])}}" class="btn btn-info btn-sm">
+      Episode
+    </a> 
     <form role="form" method="POST" action="{{ route('film.update') }}" id="dataForm">
     <div class="row">
       <!-- left column -->
