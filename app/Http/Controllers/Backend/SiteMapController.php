@@ -30,7 +30,7 @@ class SiteMapController extends Controller
     */
     public function index(Request $request)
     {   
-       $this->default();
+       $this->defaultLink();
        $this->category();
        $this->country();
        $this->tag();
@@ -138,7 +138,7 @@ class SiteMapController extends Controller
         }
         $this->writeSitemap($url, $priority);
     }
-    public function default(){
+    public function defaultLink(){
         $url = [
             'http://phim1p.com/',
             'http://phim1p.com/phim-theo-the-loai',
