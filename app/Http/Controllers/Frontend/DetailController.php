@@ -199,10 +199,10 @@ class DetailController extends Controller
             $episode = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->get();
 
             if( $slugEpisode ){
-                $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->orderBy('display_order', 'asc')->firstOrFail();                
+                $episodeActive = FilmEpisode::where('film_id', $id)->where('slug', $slugEpisode)->orderBy('display_order', 'asc')->first();                
 
             }else{
-                $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->firstOrFail();
+                $episodeActive = FilmEpisode::where('film_id', $id)->orderBy('display_order', 'asc')->first();
             }
             
             $cate = $detail->filmCategory($id);
