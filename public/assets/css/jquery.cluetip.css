@@ -4,27 +4,27 @@ div.ui-cluetip{font-size:1em;}
 .ui-cluetip-header{font-size:1em;margin:0;overflow:hidden;}
 .cluetip-title .cluetip-close{float:right;position:relative;}
 .cluetip-close img{border:0;}
-#cluetip-waitimage{width:43px;height:11px;position:absolute;background-image:url(../images/wait.png);}
+#cluetip-waitimage{width:43px;height:11px;position:absolute;}
 .cluetip-arrows{display:none;position:absolute;top:6px !important;left:-11px;width:11px;height:22px;background-repeat:no-repeat;background-position:0 0;border-width:0;}
 .cluetip-extra{display:none;}
 .cluetip-default,
 .cluetip-default .cluetip-outer{background-color:#fff;}
 .cluetip-default .ui-cluetip-header{background-color:#fff;color:#79C142;font-size:16px;padding:10px 12px;}
 div.cluetip-default .cluetip-arrows{border-width:0;background:transparent none;}
-div.clue-right-default .cluetip-arrows{background-image:url(../images/arrow-left.png);}
-div.clue-left-default .cluetip-arrows{background-image:url(../images/arrow-right.png);left:100%;margin-right:-11px;}
-div.clue-top-default .cluetip-arrows{background-image:url(../images/darrowdown.png);top:100%;left:50%;margin-left:-11px;width:22px;height:11px;}
-div.clue-bottom-default .cluetip-arrows{background-image:url(../images/darrowup.png);top:-11px;left:50%;margin-left:-11px;width:22px;height:11px;}
+div.clue-right-default .cluetip-arrows{}
+div.clue-left-default .cluetip-arrows{left:100%;margin-right:-11px;}
+div.clue-top-default .cluetip-arrows{top:100%;left:50%;margin-left:-11px;width:22px;height:11px;}
+div.clue-bottom-default .cluetip-arrows{top:-11px;left:50%;margin-left:-11px;width:22px;height:11px;}
 .cluetip-jtip{background-color:#fff;}
 .cluetip-jtip .cluetip-outer{border:2px solid #ccc;position:relative;}
 .cluetip-jtip .cluetip-inner{padding:5px;display:inline-block;}
 .cluetip-jtip div.cluetip-close{text-align:right;margin:0 5px 0;color:#900;}
 .cluetip-jtip .ui-cluetip-header{background-color:#ccc;padding:6px;}
 div.cluetip-jtip .cluetip-arrows{border-width:0;background:transparent none;}
-div.clue-right-jtip .cluetip-arrows{background-image:url(../images/arrow-left.png);}
-div.clue-left-jtip .cluetip-arrows{background-image:url(../images/arrow-right.png);left:100%;margin-right:-11px;}
-div.clue-top-jtip .cluetip-arrows{background-image:url(../images/arrowdown.png);top:100%;left:50%;width:22px;height:11px;margin-left:-11px;}
-div.clue-bottom-jtip .cluetip-arrows{background-image:url(../images/arrowup.png);top:-11px;left:50%;width:22px;height:11px;margin-left:-11px;}
+div.clue-right-jtip .cluetip-arrows{}
+div.clue-left-jtip .cluetip-arrows{left:100%;margin-right:-11px;}
+div.clue-top-jtip .cluetip-arrows{top:100%;left:50%;width:22px;height:11px;margin-left:-11px;}
+div.clue-bottom-jtip .cluetip-arrows{top:-11px;left:50%;width:22px;height:11px;margin-left:-11px;}
 .cluetip-rounded{-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;background-color:#fff;border:1px solid #ccc;}
 .cluetip-rounded .cluetip-outer{-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;background-color:#fff;}
 .cluetip-rounded .cluetip-arrows{border-color:#ccc;}

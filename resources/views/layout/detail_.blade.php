@@ -209,98 +209,7 @@
             </div>
         </div>
     </div>
-    @include('home.detail.report-modal')
-    <!--/ modal -->
-    <script type="text/javascript">
-        var movie = {
-            id: "14452",
-            name: "Zombie Massacre",
-            total_episode: "1",
-            quality: "HD",
-            trailer: "https://www.youtube.com/embed/E52sMpCZbnk",
-            link: "film/zombie-massacre-14452/watching.html"
-        };
-        $(document).ready(function() {
-            $('.bp-btn-light, .bp-btn-review').smoothScroll();
-            $('#comment-area #comment .content').perfectScrollbar();
-            getCommentCount();
-            $("#toggle-schedule").click(function(e) {
-                $("#toggle-schedule").toggleClass("active");
-                $(".se-list").toggle();
-            });
-            /*$.get(base_url + 'ajax/movie_check_favorite/' + movie.id, function(data) {
-                $('#button-favorite').html(data);
-                if (!$.cookie('notice-favorite-' + movie.id)) {
-                    if ($('.popover-like').length > 0) {
-                        if (parseInt(movie.total_episode) > 1 || movie.quality !== "HD") {
-                            $.cookie('notice-favorite-' + movie.id, true, {
-                                expires: 3,
-                                path: '/'
-                            });
-                            $('.popover-like').show();
-                            var notice_message = parseInt(movie.total_episode) > 1 ? 'Get updated once new episode is available. Favorite this now.' : 'Get updated once this movie is available in HD. Favorite this now.';
-                            $('#popover-notice').text(notice_message);
-                            $('.toggle-popover-like').click(function() {
-                                $('.popover-like').hide();
-                            });
-                        }
-                    }
-                }
-            });
-            */
-            
-        });
-
-        function getCommentCount() {
-            $.ajax({
-                url: 'http://graph.facebook.com/?id=' + movie.link,
-                dataType: 'jsonp',
-                success: function(data) {
-                    if (data.comments) {
-                        $("#comment-count").text(data.comments);
-                    }
-                }
-            });
-        }
-        $("#report-form").submit(function(e) {
-            if (validate_report() && !$.cookie('report-' + movie.id)) {
-                $("#report-submit").prop("disabled", true);
-                $("#report-loading").show();
-                var postData = $(this).serializeArray();
-                var formURL = $(this).attr("action");
-                $.ajax({
-                    url: formURL,
-                    type: "POST",
-                    data: postData,
-                    dataType: "json",
-                    success: function(data) {
-                        $('#report-alert').show();
-                        setTimeout(function() {
-                            $('#report-alert').hide();
-                        }, 5000);
-                        $("#report-submit").removeAttr("disabled");
-                        $("#report-loading").hide();
-                        $(".bp-btn-report").remove();
-                        $.cookie('report-' + movie.id, true, {
-                            path: '/'
-                        });
-                    }
-                });
-            }
-            document.getElementById("report-form").reset();
-            $('#pop-report').modal('hide');
-            e.preventDefault();
-        });
-
-        function validate_report() {
-            if (($("#report-form input[name*='issue']:checked").length) <= 0) {
-                alert("Please select any issue.");
-                return false;
-            }
-            return true;
-        }
-    </script>
-
+    @include('home.detail.report-modal')   
 
     @include('home.index.footer')
     <script>
@@ -313,8 +222,6 @@
 
     <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js?v=0.1') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap-select.js?v=0.1') }}"></script>
-    <!--<script type="text/javascript" src="{{ URL::asset('assets/js/auth.min.js?v=0.4') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('assets/js/player.123film.v4.3.min.js?v=578b6e6e6d0f6') }}"></script>-->
     @yield('javascript_page')
 
     <script type="text/javascript">

@@ -1,7 +1,7 @@
 <div id="top-news">
    <div class="top-news">
       <ul class="nav nav-tabs" role="tablist">
-         <li class="active"><a href="#tn-news" role="tab" data-toggle="tab">Bài viết mới</a></li>         
+         <li class="active"><a href="#tn-news" role="tab" data-toggle="tab" rel="nofollow">Bài viết mới</a></li>         
       </ul>
       <div class="top-news-content">
          <div class="tab-content">

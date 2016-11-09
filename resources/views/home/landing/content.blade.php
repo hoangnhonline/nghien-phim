@@ -7,7 +7,7 @@
 @section('favicon'){{ Helper::showImage($settingArr['favicon']) }}@endsection
 @section('logo'){{ Helper::showImage($settingArr['logo']) }}@endsection
 <div id="mv-info">
-    <a href="{{ route('detail', $detail->slug) }}" title="Compadres" class="thumb mvi-cover" style="background-image: url({{ Helper::showImage( $detail->poster_url ) }})"></a>   
+    <a href="{{ route('detail', $detail->slug) }}" title="{{ $detail->title }}" class="thumb mvi-cover" style="background-image: url({{ Helper::showImage( $detail->poster_url ) }})"></a>   
     @if( $episode && $detail->type == 2)
     <div id="list-eps">
         <div class="le-server">
@@ -27,22 +27,10 @@
     </div>
     @endif
     <div class="mvi-content">
-        <!--<div class="mvic-btn">
-            <div class="mv-rating">
-
-            </div>
-            <div class="clearfix"></div>          
-            <a href="http://players.123movies.to/stream.php" target="_blank" class="btn btn-block btn-lg btn-success btn-01"><i
-                class="fa fa-play mr10"></i>
-            Stream in HD</a>
-            <a href="http://players.123movies.to/download.php" target="_blank" class="btn btn-block btn-lg btn-success btn-02"><i class="fa fa-download mr10"></i>
-            Download in HD</a>
-           
-
-        </div> -->
+     
         <div class="thumb mvic-thumb col-md-2" style="background-image: url({{ Helper::showImage( $detail->image_url ) }});"></div>
         <div class="mvic-desc col-md-7">
-            <h3>{{ $detail->title }}</h3>
+            <h1 class="title">{{ $detail->title }}</h1>
             @if( $detail->trailer != '')
             <div class="block-trailer">
                 <a data-target="#pop-trailer" data-toggle="modal" class="btn btn-primary">
@@ -52,7 +40,6 @@
             @endif
             <div class="block-social">
 
-                <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <div class="addthis_native_toolbox"></div>
 
             </div>            
@@ -113,7 +100,7 @@
 
                     <p><strong>Chất lượng:</strong> <span class="quality">{{ Helper::showQuality($detail->quality) }}</span></p>
 
-                    <p><strong>Năm sản xuất:</strong> {{ $detail->year_release  ? $detail->year_release : "Đang cập nhật" }}</p>
+                    <p><strong>Năm sản xuất:</strong> {{ $detail->release_year  ? $detail->release_year : "Đang cập nhật" }}</p>
 
                     <p><strong>IMDb:</strong> {{ $detail->imdb }}</p>
                 </div>

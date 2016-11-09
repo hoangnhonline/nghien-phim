@@ -131,7 +131,10 @@ header .header-logo h1{ font-size: 0; margin: 0;}
 .movies-list-wrap{ display: block; overflow:hidden; margin: 0 0 40px;}
 .movies-list-wrap .ml-title{ display: block; margin-bottom: 10px;}
 .movies-list-wrap .ml-title span{font-size: 18px; font-family: 'Montserrat'; font-weight: 400; display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; background: #79C142; color: #fff; border-radius: 3px 3px 0 0; text-transform: uppercase;}
+.movies-list-wrap .ml-title h2.name, .movies-list-wrap .ml-title h3.name{font-size: 18px; font-family: 'Montserrat'; font-weight: 400; display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; background: #79C142; color: #fff; border-radius: 3px 3px 0 0; text-transform: uppercase;}
+.movies-list-wrap .ml-title h1.name{font-size: 18px; font-family: 'Montserrat'; font-weight: 400; display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; background: #79C142; color: #fff; border-radius: 3px 3px 0 0; text-transform: uppercase;}
 .movies-list-wrap .ml-title span i{ font-size: 14px;}
+.movies-list-wrap .ml-title h2.name i, .movies-list-wrap .ml-title h3.name i,{ font-size: 14px;}
 .movies-list-wrap .ml-title .nav-tabs{ display: inline-block; margin-left: 15px; border-bottom: none;}
 .movies-list-wrap .ml-title .nav-tabs li.active a{ border-radius: 3px;}
 .movies-list-wrap .ml-title .nav-tabs li a{ border: none; height: 40px; line-height: 40px; padding: 0 15px; text-align: center; min-width: 80px; color: #333;}
@@ -142,6 +145,7 @@ header .header-logo h1{ font-size: 0; margin: 0;}
 img.thumb.mli-thumb{ width: 100% !important; height: auto !important; min-height: 100% !important;}
 .movies-list .ml-item .mli-info{ position: absolute; bottom: 0; left: 0; width: 100%; height: auto; padding: 10px; background: url(../images/mask-title.png) top repeat-x; z-index: 5;}
 .movies-list .ml-item .mli-info h2{ font-size: 14px; margin: 0; font-weight: normal; text-align: center; color: #fff; text-shadow: 0 0 2px rgba(0,0,0,0.6);}
+.movies-list .ml-item .mli-info p.title{ font-size: 14px; margin: 0; font-weight: normal; text-align: center; color: #fff; text-shadow: 0 0 2px rgba(0,0,0,0.6);}
 .movies-list .ml-item .mli-eps{ position: absolute; top: 10px; right: 10px; width: 40px; padding-top: 8px; text-align: center; height: 40px; border-radius: 50%; background: rgba(136,198,76,0.9); color: #fff; font-size: 10px; text-transform: uppercase; line-height: 1em; text-shadow: 0 0 2px rgba(0,0,0,0.3);}
 .movies-list .ml-item .mli-eps i{ display: block; font-weight: bold; font-size: 13px; font-style: normal; margin-top: 3px;}
 .movies-list .ml-item .ml-mask{ display: inline-block; overflow: hidden; position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
@@ -165,6 +169,7 @@ img.thumb.mli-thumb{ width: 100% !important; height: auto !important; min-height
 #mv-info .mvi-view{ position: absolute; color: #fff; bottom: 20px; right: 25px; font-size: 18px; font-weight: bold; font-style: italic; z-index: 9; text-shadow: 0 1px 1px rgba(0,0,0,0.5);}
 #mv-info .mvi-content{ background: #fff; padding: 20px;  font-size: 12px; position: relative; width: 100%; margin-top: -5px;}
 #mv-info .mvi-content h3{ font-size: 20px; line-height: 28px; margin: 0; margin-bottom: 10px; display: initial; margin-right: 10px;}
+#mv-info .mvi-content h1.title{ font-size: 20px; line-height: 28px; margin: 0; margin-bottom: 10px; display: initial; margin-right: 10px;}
 #mv-info .mvi-content .block-trailer{ display: inline-block; vertical-align: middle; margin-bottom: 10px;}
 #mv-info .mvi-content .block-trailer a{ border-radius: 15px; padding: 4px 15px; font-size: 12px; cursor: pointer;}
 #mv-info .mvi-content .mvic-desc{ }
@@ -287,7 +292,7 @@ img.thumb.mli-thumb{ width: 100% !important; height: auto !important; min-height
 .block-padding{ background: #fff; padding: 20px; border: 1px solid #ddd; box-shadow: 0 3px 0 rgba(0,0,0,.1); border-radius: 5px;}
 .block-padding:hover{ border: 1px solid #ccc; box-shadow: 0 3px 0 rgba(0,0,0,.2)}
 .apps-content{ position: relative;}
-.apps-content:before{ content: ""; width: 100%; height: 205px; position: absolute; top: 0; left: 0; background-size: cover; background-position: 50% 25%; background-image: url(../images/app-bg.jpg);}
+.apps-content:before{ content: ""; width: 100%; height: 205px; position: absolute; top: 0; left: 0; background-size: cover; background-position: 50% 25%;}
 .apps-content .btn{ padding: 8px 30px;}
 .apps-content .ac-block-ul{ margin: 20px -1%; overflow: hidden; position: relative; z-index: 2;}
 .apps-content .ac-block{ float: left; width: 31.33%; margin: 1%;}
@@ -499,7 +504,7 @@ footer a{ color: #ccc;}
 .faq-div p{ padding-left: 42px;}
 .faq-div ul{ list-style: none; padding: 0;}
 .faq-div ul li{ padding: 10px 0; box-shadow: none; border-bottom: 1px solid #eee; margin-top: 0 !important; position: relative; min-height: 54px;}
-.page-404{ background: #fff url(../images/404.jpg) bottom center no-repeat; margin-bottom: -30px; width: 100%; height: 315px; position: absolute;}
+.page-404{ margin-bottom: -30px; width: 100%; height: 315px; position: absolute;}
 .not-found{ text-align: center;}
 .not-found h1{ font-size: 140px; font-family: 'Open Sans',sans-serif; margin-top:100px;}
 /* area multi modal */
@@ -510,7 +515,7 @@ body{ overflow:visible !important; padding-right: 0 !important;}
 
 .ppm-donate .ppmh-title{ background: #1d2247 !important;}
 .ppm-donate .ppmh-title i{ margin-left: 1%;}
-.donate-content{ background: #090f26 url(../images/donate.jpg) top right no-repeat; color: #fff;}
+.donate-content{ color: #fff;}
 .donate-content .donate-desc{ margin-bottom: 20px; padding: 0 1%;}
 .donate-content .donate-desc .desc{ padding-right: 400px;}
 .donate-content .donate-desc .dd-list{ list-style: none; margin-top: 20px; padding: 0;}
@@ -562,21 +567,21 @@ body{ overflow:visible !important; padding-right: 0 !important;}
 .modal-subc .modal-body .subc-input{ position: relative; text-align: center;}
 .modal-subc .modal-body .subc-input .form-control{ text-align: center; border-radius: 0; border-color: #333; box-shadow: none !important; padding-left: 50px; padding-right: 50px;}
 
-i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-email.png); background-position: 50% 25%; background-size: cover; position: absolute; left: 20px; top: 12px;}
+i.subc-email{ width: 20px; height: 14px; background-position: 50% 25%; background-size: cover; position: absolute; left: 20px; top: 12px;}
 .modal-subc .modal-body .btn{ border-radius: 0 !important; font-size: 15px; font-weight: 600;}
 .modal-subc .modal-body .subc-not-show{ color: #555; text-decoration: underline !important; margin-top: 10px; display: block;}
 .modal-subc .modal-content{ border-radius: 0;}
-.modal-subc .modal-content:before{ content:""; width: 100%; height: 10px; position: absolute; top: 0; left: 0; background: url(../images/subc-pattern.png) repeat-x;}
+.modal-subc .modal-content:before{ content:""; width: 100%; height: 10px; position: absolute; top: 0; left: 0;}
 .modal-subc .modal-header{ z-index: 5;}
 .modal-subc .modal-header .close{ top: 20px; right: 20px;}
 .mt30{ margin-top: 30px;}
 
 .subs-block{ max-width: 1000px; margin: 30px auto; background: #fff; padding: 25px 20px; position: relative;}
-.subs-block:before, .subs-block:after{ content: ""; width: 100%; height: 5px; position: absolute; top: 0; left: 0; background: url(../images/letter-pattern.png) top repeat-x;}
+.subs-block:before, .subs-block:after{ content: ""; width: 100%; height: 5px; position: absolute; top: 0; left: 0; }
 .subs-block:after{ top: auto; bottom: 0;}
 .subs-block h4{ margin-top: 0; margin-bottom: 10px;  font-family: 'Open Sans',sans-serif; font-weight: 400; font-size: 28px;}
 .subs-block .sbk-left{ width: 500px; float: left; padding-left: 70px;}
-.subs-block .subs-icon{ width: 110px; height: 110px; background-size: cover; background-position: 50% 25%; background-image: url(../images/subs-icon.png); position: absolute; left:-35px; top: -10px; z-index: 3;}
+.subs-block .subs-icon{ width: 110px; height: 110px; background-size: cover; background-position: 50% 25%; position: absolute; left:-35px; top: -10px; z-index: 3;}
 .subs-block .sbk-left p{ margin-bottom: 0;}
 .subs-block .sbk-right{ padding-left: 520px;}
 .subs-block .sbk-right .col-sm-9{ padding-right: 0;}
@@ -839,11 +844,13 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     #top-news .top-news-content ul.tn-news li{ padding: 14px 12px;}
     #cluetip-1, #cluetip{ display: none !important;}
     .movies-list-wrap .ml-title span{ height: 30px; line-height: 30px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;}
+    .movies-list-wrap .ml-title h2.name, .movies-list-wrap .ml-title h3.name{ height: 30px; line-height: 30px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;}
     .filter-toggle{ height: 30px; line-height: 30px;}
     .cat-more{ margin-top: 5px;}
     .movies-list-wrap{ margin-bottom: 20px;}
     footer{ margin-top: 20px;}
     .movies-list-wrap .ml-title span{ background: none; padding: 0; color: #333; font-weight: bold; font-size: 16px;}
+    .movies-list-wrap .ml-title h2.name, .movies-list-wrap .ml-title h3.name{ background: none; padding: 0; color: #333; font-weight: bold; font-size: 16px;}
     #mv-info .mvi-cover{ height: 350px;}
     #mv-info .mvi-content .mvic-btn{ position: relative; left: auto; top: auto; right: auto; bottom: auto; margin: 0 -1% 20px;}
     #mv-info .mvi-content .mvic-btn .btn-block{ width: 48%; margin: 0 1% 0; float: left; display: none}
@@ -884,6 +891,7 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     #mv-info .mvi-content .mvic-desc{ padding-left: 120px; padding-right: 145px;}
     .mv-rating{ width: 130px; padding: 10px 0 20px;}
     #mv-info .mvi-content h3{ font-size: 18px;}
+    #mv-info .mvi-content h1.title{ font-size: 18px;}
     #mv-info .mvi-content .mvic-info .mvici-left{ width: 100%; float: none; margin-right: 0;}
     #mv-info .mvi-content .mvic-info .mvici-left{ width: 100%; float: none;}
     .mlw-related .movies-list .ml-item{ width: 23%; height: 240px;}
@@ -1062,6 +1070,7 @@ i.subc-email{ width: 20px; height: 14px; background-image: url(../images/subc-em
     #mv-info .mvi-content .block-trailer{ display: block; overflow: hidden;}
     #mv-info .mvi-content .block-trailer a{padding: 6px 10px; width: 100%;}
     #mv-info .mvi-content h3{line-height: 1.3em; margin-right: 0; padding-right: 0; margin-bottom: 10px; display: block;}
+    #mv-info .mvi-content h1.title{line-height: 1.3em; margin-right: 0; padding-right: 0; margin-bottom: 10px; display: block;}
     #mv-info .mvi-cover{ height: 180px;}
     .modal-trailer .modal-dialog .modal-body .modal-body-trailer iframe{ height: 180px !important;}
     .jwplayer,#123movies-player iframe{ height: 200px !important;}

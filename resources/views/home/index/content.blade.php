@@ -9,13 +9,13 @@
 <div class="pad"></div>
 <div class="movies-list-wrap mlw-latestmovie">
     <div class="ml-title">
-        <span class="pull-left">Suggestion <i class="fa fa-chevron-right ml10"></i></span>
+        <h2 class="pull-left name">Suggestion <i class="fa fa-chevron-right ml10"></i></h2>
         <ul role="tablist" class="nav nav-tabs" id="ul_tab">
-            <li class="active"><a class="loadMovies" href="javascript:void(0)" data-value="most-view">Xem nhiều trong ngày</a></li>
-            <li><a class="loadMovies" href="javascript:void(0)" data-value="top-imdb">Top IMDb</a></li>
-            <li><a class="loadMovies" href="javascript:void(0)" data-value="lastest">Mới cập nhật</a></li>   
+            <li class="active"><a class="loadMovies" href="javascript:void(0)" data-value="most-view" rel="nofollow">Xem nhiều trong ngày</a></li>
+            <li><a class="loadMovies" href="javascript:void(0)" data-value="top-imdb" rel="nofollow">Top IMDb</a></li>
+            <li><a class="loadMovies" href="javascript:void(0)" data-value="lastest" rel="nofollow">Mới cập nhật</a></li>   
             @if(Session::get('login'))
-            <li><a class="loadMovies" href="javascript:void(0)" data-value="kho-phim">Kho phim của tôi</a></li>
+            <li><a class="loadMovies" href="javascript:void(0)" data-value="kho-phim" rel="nofollow">Kho phim của tôi</a></li>
             @endif  
         </ul>
         <div class="clearfix"></div>
@@ -28,7 +28,7 @@
 <div class="pad"></div>
 <div class="movies-list-wrap mlw-latestmovie">
     <div class="ml-title">
-        <span class="pull-left">Phim lẻ mới nhất <i class="fa fa-chevron-right ml10"></i></span>
+        <h2 class="pull-left name">Phim lẻ mới nhất <i class="fa fa-chevron-right ml10"></i></h2>
         <a href="{{ route('cate', 'phim-le') }}" class="pull-right cat-more">Xem thêm »</a>
 
         <div class="clearfix"></div>
@@ -47,7 +47,7 @@
                       <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                          alt="{{ $movies->title }}">
                       <span class="mli-info">
-                         <h2>{{ $movies->title }}</h2>
+                         <p class="title">{{ $movies->title }}</p>
                       </span>
                 </a>
             </div>
@@ -58,7 +58,7 @@
 </div>
 <div class="movies-list-wrap mlw-latestmovie">
     <div class="ml-title">
-        <span class="pull-left">Phim bộ mới cập nhật <i class="fa fa-chevron-right ml10"></i></span>
+        <h2 class="pull-left name">Phim bộ mới cập nhật <i class="fa fa-chevron-right ml10"></i></h2>
         <a href="{{ route('cate', 'phim-bo') }}" class="pull-right cat-more">Xem thêm »</a>
 
         <div class="clearfix"></div>
@@ -71,19 +71,19 @@
                    data-url="{{ route('movies-info', [ $movies->id ]) }}"
                    class="ml-mask jt"
                    title="{{ $movies->title }}">
-                      @if(isset($arrEpisode[$movies->id]))
-                      <?php 
-                      $tmp = explode(" ", $arrEpisode[$movies->id]);
-                      ?>
-                      <span class="mli-eps">
-                      {{ $tmp[0] }} <i>{{ isset($tmp[1]) ? $tmp[1] : "" }}{{ $movies->duration ? "/".$movies->duration : "" }}</i>
-                      </span>
-                      @endif
-                      <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
-                         alt="{{ $movies->title }}">
-                      <span class="mli-info">
-                         <h2>{{ $movies->title }}</h2>
-                      </span>
+                  @if(isset($arrEpisode[$movies->id]))
+                  <?php 
+                  $tmp = explode(" ", $arrEpisode[$movies->id]);
+                  ?>
+                  <span class="mli-eps">
+                  {{ $tmp[0] }} <i>{{ isset($tmp[1]) ? $tmp[1] : "" }}{{ $movies->duration ? "/".$movies->duration : "" }}</i>
+                  </span>
+                  @endif
+                  <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
+                     alt="{{ $movies->title }}">
+                  <span class="mli-info">
+                     <p class="title">{{ $movies->title }}</p>
+                  </span>
                 </a>
             </div>
            @endforeach

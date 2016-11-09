@@ -82,7 +82,7 @@
         </div> -->
         <div class="thumb mvic-thumb col-md-2" style="background-image: url({{ Helper::showImage( $detail->image_url ) }});"></div>
         <div class="mvic-desc col-md-7">
-            <h3>{{ $detail->title }}</h3>
+            <h1 class="title">{{ $detail->title }}</h1>
             @if( $detail->trailer != '')
             <div class="block-trailer">
                 <a data-target="#pop-trailer" data-toggle="modal" class="btn btn-primary">
@@ -157,7 +157,7 @@
 
                     <p><strong>Chất lượng:</strong> <span class="quality">{{ Helper::showQuality($detail->quality) }}</span></p>
 
-                    <p><strong>Năm sản xuất:</strong> {{ $detail->year_release  ? $detail->year_release : "Đang cập nhật" }}</p>
+                    <p><strong>Năm sản xuất:</strong> {{ $detail->release_year  ? $detail->release_year : "Đang cập nhật" }}</p>
 
                     <p><strong>IMDb:</strong> {{ $detail->imdb }}</p>
                 </div>

@@ -23,50 +23,24 @@
   <meta property="og:site_name" content="@yield('site_name')"/>
   <meta property="og:updated_time" content="1468757347"/>
   <meta property="fb:app_id" content="@yield('facebook_appid')"/>
-
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css') }}" type="text/css" />
-<link rel="stylesheet" href="{{ URL::asset('assets/css/main.css?v=5') }}" type="text/css" />
-<link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.cluetip.css') }}" type="text/css" />
-<link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.qtip.min.css') }}" type="text/css" />
-<link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css?v=1.1') }}" type="text/css" />
-<link rel="stylesheet" href="{{ URL::asset('assets/css/psbar.css') }}" type="text/css" />
-<link rel="stylesheet" href="{{ URL::asset('assets/css/star-rating.css') }}" type="text/css" />
-<script type="text/javascript" src="{{ URL::asset('assets/js/jquery-1.9.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.lazyload.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.qtip.min.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/md5.min.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.cookie.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/123movies.min.js?v=2.2') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/psbar.jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/star-rating.js') }}"></script>
-
-
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-
-    <script src="{{ URL::asset('assets/js/detectmobilebrowser.js') }}"></script>
-    <script>
-    /*
-        if (!jQuery.browser.mobile) {
-            window.$zopim || (function (d, s) {
-                var z = $zopim = function (c) {
-                    z._.push(c)
-                }, $ = z.s =
-                    d.createElement(s), e = d.getElementsByTagName(s)[0];
-                z.set = function (o) {
-                    z.set._.push(o)
-                };
-                z._ = [];
-                z.set._ = [];
-                $.async = !0;
-                $.setAttribute("charset", "utf-8");
-                $.src = "//v2.zopim.com/?30GMg3whoKPZ7SHisuQCa7Y09ZkvdYCm";
-                z.t = +new Date;
-                $.type = "text/javascript";
-                e.parentNode.insertBefore($, e)
-            })(document, "script");
-        }*/
-    </script>
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css') }}" type="text/css" />
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/main.css?v=5') }}" type="text/css" />
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.cluetip.css') }}" type="text/css" />
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery.qtip.min.css') }}" type="text/css" />
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css?v=1.1') }}" type="text/css" />
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/psbar.css') }}" type="text/css" />
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/star-rating.css') }}" type="text/css" />
+  <script type="text/javascript" src="{{ URL::asset('assets/js/jquery-1.9.1.min.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.lazyload.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.qtip.min.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('assets/js/md5.min.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.cookie.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('assets/js/123movies.min.js?v=2.2') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('assets/js/psbar.jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset('assets/js/star-rating.js') }}"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="{{ URL::asset('assets/js/detectmobilebrowser.js') }}"></script>
+     
 </head>
 <body>
 <div id="fb-root"></div>
@@ -118,42 +92,12 @@
             <div class="content-kus" style="background: #fff;">
                 <?php echo $detail->content ?>
             </div>
-            @endif
-            <!--<div id="commentfb">
-                <div class="fb-comments" data-href="film/zombie-massacre-14452/watching.html" data-width="100%" data-numposts="5"></div>
-            </div>-->
+            @endif        
             <div class="pad"></div>
             <!--related-->
             @include('home.detail.related')
-            <!--/related-->               
 
-            
-            <!--/related-->
         </div>
-
-<!--        <div class="content-kus" style="text-align: center; margin: 20px 0; padding: 15px;">-->
-
-
-            <!-- Begin js tags for 123movies.to_300x250_mobile - Do not Modify -->
-<!--            <div id="bidadx_tag_6328"></div>-->
-<!--            <script type="text/javascript">-->
-<!---->
-<!--                if (jQuery.browser.mobile) {-->
-<!--                    var s = document.createElement('script');-->
-<!--                    s.src = "//cdn.bidadx.com/bid/async.js";-->
-<!--                    document.write(s.outerHTML);-->
-<!--                    var bidadx_tags = window.bidadx_tags || [];-->
-<!--                    bidadx_tags.push({-->
-<!--                        tag_id: 6328,-->
-<!--                        width: 300,-->
-<!--                        height: 250-->
-<!--                    });-->
-<!--                }-->
-<!--            </script>-->
-            <!-- End Tags -->
-
-<!--        </div>-->
-
     </div>
 </div>
 </div>
@@ -164,11 +108,6 @@
     $('#pop-trailer').on('hide.bs.modal', function () {
         $('#iframe-trailer').attr('src', '');
     });
-    /*
-    setTimeout(function () {
-        updateMovieView(15476)
-    }, 5000);
-    */
 </script>
 
 
@@ -184,9 +123,7 @@
 
 <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js?v=0.1') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap-select.js?v=0.1') }}"></script>
-<!-- Go to www.addthis.com/dashboard to customize your tools 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5181dc394703fed7"
-        async="async"></script>-->
+
 @yield('javascript_page')
 <script type="text/javascript">
 function report(obj){
@@ -286,22 +223,6 @@ $(document).ready(function(){
     xfbml      : true,  // parse social plugins on this page
     version    : 'v2.7' // use graph api version 2.7
   });
-
-  // Now that we've initialized the JavaScript SDK, we call
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
-
-  // FB.getLoginStatus(function(response) {
-  //   statusChangeCallback(response);
-  // });
 };
 
 (function(d, s, id) {

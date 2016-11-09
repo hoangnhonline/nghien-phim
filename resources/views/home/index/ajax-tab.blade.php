@@ -12,7 +12,7 @@
               <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                  alt="{{ $movies->title }}">
               <span class="mli-info">
-                 <h2>{{ $movies->title }}</h2>
+                 <p class="title">{{ $movies->title }}</p>
               </span>
         </a>
     </div>
@@ -34,7 +34,7 @@
               <img data-original="{{ Helper::showImage( $movies->image_url )}}" title="{{ $movies->title }}" class="lazy thumb mli-thumb"
                  alt="{{ $movies->title }}">
               <span class="mli-info">
-                 <h2>{{ $movies->title }}</h2>
+                 <p class="title">{{ $movies->title }}</p>
               </span>
         </a>
     </div>

@@ -73,7 +73,7 @@ class DetailController extends Controller
         Helper::counter($id);
         $has_report = true;
         $detail = Film::where( 'id', $id )
-                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id')                
+                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id', 'release_year')                
                 ->first();       
         
         if( $detail ){ 
@@ -190,7 +190,7 @@ class DetailController extends Controller
 
         $id = $tmp ? $tmp->id : -1;
         $detail = Film::where( 'id', $id )
-                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id')                
+                ->select('id', 'title', 'slug', 'description', 'quality', 'duration', 'image_url', 'poster_url', 'content', 'imdb', 'type', 'meta_id', 'release_year')                
                 ->first();
        
         //https://lh3.googleusercontent.com/awv1HTJFUE5N-OuanegrmSr4EtPHYt1HqyBa1abaE6hj3S7utZyTk4k_eL-CF63QTTle4q4BHXo=m22

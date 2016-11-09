@@ -5,7 +5,3 @@
 	@include('home.cate.content')
 	
 @endsection
-
-@section('javascript_page')
-
-@endsection

@@ -61,31 +61,8 @@
 }
 
       </style>
-      @endif      
-      <script>
-         /*
-             window.fbAsyncInit = function () {
-                 FB.init({
-                     appId: '727243164041505',
-                     cookie: true,  // enable cookies to allow the server to access
-                                    // the session
-                     xfbml: true,  // parse social plugins on this page
-                     version: 'v2.6' // use graph api version 2.6
-                 });
-             };
-         
-             (function (d, s, id) {
-                 var js, fjs = d.getElementsByTagName(s)[0];
-                 if (d.getElementById(id)) {
-                     return;
-                 }
-                 js = d.createElement(s);
-                 js.id = id;
-                 js.src = "//connect.facebook.net/en_US/sdk.js";
-                 fjs.parentNode.insertBefore(js, fjs);
-             }(document, 'script', 'facebook-jssdk'));
-         */
-      </script>
+      @endif     
+      
       <!--header-->
       <header>
          <div class="container">
@@ -178,36 +155,7 @@
             </div>
             @else
             <div class="pad"></div>
-            @endif
-            <!--/social home-->
-            <!--        <div class="subs-block" id="subs-block-home" style="display: none;">-->
-            <!--            <div class="subs-content">-->
-            <!--                <div class="subs-icon"></div>-->
-            <!--                <div class="sbk-left">-->
-            <!--                    <p class="desc">We're going to switch to a brand new domain. Subscribe for up-to-date information on-->
-            <!--                        how to keep getting the movies and TV shows you love streamed to your device.</p>-->
-            <!--                </div>-->
-            <!--                <div class="sbk-right">-->
-            <!--                    <div class="form-subs row">-->
-            <!--                        <div class="col-sm-9 subc-input">-->
-            <!--                            <i class="subc-email"></i>-->
-            <!--                            <input type="email" placeholder="Enter your email" id="Email" name="email-home"-->
-            <!--                                   class="form-control">-->
-            <!---->
-            <!--                        </div>-->
-            <!--                        <div class="col-sm-3">-->
-            <!--                            <button id="subscribe-submit-home" class="btn btn-block btn-success btn-approve"-->
-            <!--                                    type="button" onclick="subscribe_home()">Subscribe-->
-            <!--                            </button>-->
-            <!--                        </div>-->
-            <!--                        <div class="clearfix"></div>-->
-            <!--                    </div>-->
-            <!--                    <div id="error-email-subs" class="alert alert-danger error-block"></div>-->
-            <!--                    <div id="success-subs" class="alert alert-success error-block"></div>-->
-            <!--                </div>-->
-            <!--                <div class="clearfix"></div>-->
-            <!--            </div>-->
-            <!--        </div>-->            
+            @endif                      
             <div class="main-content {{ $layout_name }}">
             	@yield('content')               
             </div><!--end main-content-->            
@@ -279,22 +227,7 @@
     xfbml      : true,  // parse social plugins on this page
     version    : 'v2.7' // use graph api version 2.7
   });
-
-  // Now that we've initialized the JavaScript SDK, we call
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
-
-  // FB.getLoginStatus(function(response) {
-  //   statusChangeCallback(response);
-  // });
+  
 };
 
 (function(d, s, id) {

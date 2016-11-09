@@ -174,9 +174,12 @@ class HomeController extends Controller
             
         }else{
             $cateDetail = Category::where('slug', $slug)->first();
+
             if( !$cateDetail){
                 $cateDetail = Country::where('slug', $slug)->first();
-
+                if(!$cateDetail){
+                    return redirect()->route('home');
+                }
                 $moviesArr = Film::where('status', 1)
                 ->join('film_country', 'id', '=', 'film_country.film_id')
                 ->where('film_country.country_id', $cateDetail->id)
@@ -318,11 +321,13 @@ class HomeController extends Controller
         $cateArr = $cateActiveArr = $moviesActiveArr = [];
        
         $cateDetail = ArticlesCate::where('slug' , 'tin-tuc')->first();
+        
         $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
-
+        $meta_description = trim($cateDetail->meta_description) ? $cateDetail->meta_description : $cateDetail->name;
+        $meta_keywords = trim($cateDetail->meta_keywords) ? $cateDetail->meta_keywords : $cateDetail->name;
         $articlesArr = Articles::where('cate_id', 1)->orderBy('id', 'desc')->paginate(10);
         $hotArr = Articles::where( ['cate_id' => 1, 'is_hot' => 1] )->orderBy('id', 'desc')->limit(5)->get();
-        return view('home.news-list', compact('title','settingArr', 'hotArr', 'layout_name', 'page_name', 'articlesArr'));
+        return view('home.news-list', compact('title','settingArr', 'hotArr', 'layout_name', 'page_name', 'articlesArr', 'meta_description', 'meta_keywords'));
     }
 
     public function newsDetail(Request $request)
