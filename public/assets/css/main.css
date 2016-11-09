@@ -131,7 +131,7 @@ header .header-logo h1{ font-size: 0; margin: 0;}
 .movies-list-wrap{ display: block; overflow:hidden; margin: 0 0 40px;}
 .movies-list-wrap .ml-title{ display: block; margin-bottom: 10px;}
 .movies-list-wrap .ml-title span{font-size: 18px; font-family: 'Montserrat'; font-weight: 400; display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; background: #79C142; color: #fff; border-radius: 3px 3px 0 0; text-transform: uppercase;}
-.movies-list-wrap .ml-title h2.name, .movies-list-wrap .ml-title h3.name{font-size: 18px; font-family: 'Montserrat'; font-weight: 400; display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; background: #79C142; color: #fff; border-radius: 3px 3px 0 0; text-transform: uppercase;}
+.movies-list-wrap .ml-title h2.name, .movies-list-wrap .ml-title h3.name{font-size: 18px; font-family: 'Montserrat'; font-weight: 400; display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; background: #79C142; color: #fff; border-radius: 3px 3px 0 0; text-transform: uppercase;margin-top: 0px}
 .movies-list-wrap .ml-title h1.name{font-size: 18px; font-family: 'Montserrat'; font-weight: 400; display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; background: #79C142; color: #fff; border-radius: 3px 3px 0 0; text-transform: uppercase;}
 .movies-list-wrap .ml-title span i{ font-size: 14px;}
 .movies-list-wrap .ml-title h2.name i, .movies-list-wrap .ml-title h3.name i,{ font-size: 14px;}
@@ -844,13 +844,13 @@ i.subc-email{ width: 20px; height: 14px; background-position: 50% 25%; backgroun
     #top-news .top-news-content ul.tn-news li{ padding: 14px 12px;}
     #cluetip-1, #cluetip{ display: none !important;}
     .movies-list-wrap .ml-title span{ height: 30px; line-height: 30px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;}
-    .movies-list-wrap .ml-title h2.name, .movies-list-wrap .ml-title h3.name{ height: 30px; line-height: 30px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;}
+    .movies-list-wrap .ml-title h2.name, .movies-list-wrap .ml-title h3.name{ height: 30px; line-height: 30px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;margin-top: 0px}
     .filter-toggle{ height: 30px; line-height: 30px;}
     .cat-more{ margin-top: 5px;}
     .movies-list-wrap{ margin-bottom: 20px;}
     footer{ margin-top: 20px;}
     .movies-list-wrap .ml-title span{ background: none; padding: 0; color: #333; font-weight: bold; font-size: 16px;}
-    .movies-list-wrap .ml-title h2.name, .movies-list-wrap .ml-title h3.name{ background: none; padding: 0; color: #333; font-weight: bold; font-size: 16px;}
+    .movies-list-wrap .ml-title h2.name, .movies-list-wrap .ml-title h3.name{ background: none; padding: 0; color: #333; font-weight: bold; font-size: 16px;margin-top: 0px}
     #mv-info .mvi-cover{ height: 350px;}
     #mv-info .mvi-content .mvic-btn{ position: relative; left: auto; top: auto; right: auto; bottom: auto; margin: 0 -1% 20px;}
     #mv-info .mvi-content .mvic-btn .btn-block{ width: 48%; margin: 0 1% 0; float: left; display: none}
