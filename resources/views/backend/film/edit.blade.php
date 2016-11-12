@@ -204,9 +204,9 @@
                 <label for="email" class="ltitle">Kiểu phim </label>                
                 <label class="radio-inline"><input type="radio" {{ $detail->type == 1 ? 'checked' : '' }} name="type" value="1">Phim lẻ</label>
                 <label class="radio-inline"><input type="radio" {{ $detail->type == 2 ? 'checked' : '' }} name="type" value="2">Phim bộ</label>
-                <label class="radio-inline"><input type="radio" {{ $detail->type == 3 ? 'checked' : '' }} name="type" value="3">Phim chiếu rạp</label>
+                <!--<label class="radio-inline"><input type="radio" {{ $detail->type == 3 ? 'checked' : '' }} name="type" value="3">Phim chiếu rạp</label>
                 <label class="radio-inline"><input type="radio" {{ $detail->type == 4 ? 'checked' : '' }} name="type" value="4">Games show</label>
-                <label class="radio-inline"><input type="radio" {{ $detail->type == 5 ? 'checked' : '' }} name="type" value="5">Trailer</label>
+                <label class="radio-inline"><input type="radio" {{ $detail->type == 5 ? 'checked' : '' }} name="type" value="5">Trailer</label>-->
               </div>
               <div class="form-group">
                 <label for="email" class="ltitle">Chất lượng </label>
