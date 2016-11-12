@@ -215,6 +215,7 @@
                 <label class="radio-inline"><input type="radio" {{ $detail->quality == 2 ? 'checked' : '' }} name="quality" value="2">HD</label>
                 <label class="radio-inline"><input type="radio" {{ $detail->quality == 3 ? 'checked' : '' }} name="quality" value="3">SD</label>
                 <label class="radio-inline"><input type="radio" {{ $detail->quality == 4 ? 'checked' : '' }} name="quality" value="4">CAM</label>   
+                <label class="radio-inline"><input type="radio" {{ $detail->quality == 6 ? 'checked' : '' }} name="quality" value="6">Trailer</label>  
               </div>
               <div class="form-group" >                  
                 <label>Điểm IMDB</label>

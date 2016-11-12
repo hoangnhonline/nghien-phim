@@ -209,9 +209,8 @@
                 <label for="email" class="ltitle">Kiểu phim </label>
                 <label class="radio-inline"><input type="radio" {{ !old('type') || old('type') == 1 ? "checked" : "" }} name="type" value="1">Phim lẻ</label>
                 <label class="radio-inline"><input type="radio" {{ old('type') == 2 ? "checked" : "" }} name="type" value="2">Phim bộ</label>
-                <label class="radio-inline"><input type="radio" {{ old('type') == 3 ? "checked" : "" }} name="type" value="3">Phim chiếu rạp</label>
-                <label class="radio-inline"><input type="radio" {{ old('type') == 4 ? "checked" : "" }} name="type" value="4">Games show</label>
-                <label class="radio-inline"><input type="radio" {{ old('type') == 5 ? "checked" : "" }} name="type" value="5">Trailer</label>
+                <!--<label class="radio-inline"><input type="radio" {{ old('type') == 3 ? "checked" : "" }} name="type" value="3">Phim chiếu rạp</label>
+                <label class="radio-inline"><input type="radio" {{ old('type') == 4 ? "checked" : "" }} name="type" value="4">Games show</label>                -->
               </div>
                <div class="form-group">
                 <label for="email" class="ltitle">Chất lượng </label>
@@ -220,7 +219,8 @@
                 <label class="radio-inline"><input type="radio" {{ !old('quality') || old('quality') == 1 ? "checked" : "" }} name="quality" value="1">Full HD</label>
                 <label class="radio-inline"><input type="radio" {{ old('quality') == 2 ? "checked" : "" }} name="quality" value="2">HD</label>
                 <label class="radio-inline"><input type="radio" {{ old('quality') == 3 ? "checked" : "" }} name="quality" value="3">SD</label>
-                <label class="radio-inline"><input type="radio" {{ old('quality') == 4 ? "checked" : "" }} name="quality" value="4">CAM</label>                
+                <label class="radio-inline"><input type="radio" {{ old('quality') == 4 ? "checked" : "" }} name="quality" value="4">CAM</label>     
+                <label class="radio-inline"><input type="radio" {{ old('quality') == 6 ? "checked" : "" }} name="quality" value="6">Trailer</label>            
               </div>
               <!--<div class="form-group">
                 <label for="email" class="ltitle">Cinema </label>

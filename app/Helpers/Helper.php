@@ -225,6 +225,9 @@ class Helper
             case '5':
                 $return = "1080P";
                 break;
+            case '6':
+                $return = "Trailer";
+                break;
             default:
                 $return = "";
                 break;
