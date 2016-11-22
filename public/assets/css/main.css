@@ -1131,3 +1131,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5972a5', end
     display: block;
     width: 100%
 }
+.sc-desc{
+	height: 100px;
+	overflow-y:hidden;
+}
