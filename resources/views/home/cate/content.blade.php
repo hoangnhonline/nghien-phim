@@ -8,7 +8,7 @@
     @section('site_keywords'){{ $cateDetail->meta_keywords or $settingArr['site_keywords'] }}@endsection
 @else
     @section('title'){{ $seo['title'] }}@endsection
-    @section('site_description'){{ $seo['description'] }}@endsection
+    @section('site_description'){{ strip_tags($seo['description']) }}@endsection
     @section('site_keywords'){{ $seo['keywords'] }}@endsection
 @endif
 @section('banner'){{ $settingArr['banner'] }}@endsection
