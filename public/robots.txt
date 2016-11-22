@@ -3,3 +3,4 @@ Crawl-delay: 5
 Disallow: /
 
 User-agent: *
+Disallow: /test/
