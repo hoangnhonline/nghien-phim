@@ -1,5 +1,5 @@
 @section('title'){{ $title }}@endsection
-@section('site_description'){{ strip_tags($description) or strip_tags($settingArr['site_description']) }}@endsection
+@section('site_description')<?php $description ? strip_tags($description) : strip_tags($settingArr['site_description']); ?>@endsection
 @section('site_keywords'){{ $detail->meta_keywords or $settingArr['site_keywords'] }}@endsection
 @section('banner'){{ $settingArr['banner'] }}@endsection
 @section('facebook_appid'){{ $settingArr['facebook_appid'] }}@endsection
