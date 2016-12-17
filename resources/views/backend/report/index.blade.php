@@ -53,7 +53,7 @@
                 <td>{{ $item->total_report }}</td>
                 <td>{{ $item->created_at }}</td>           
                 <td style="white-space:nowrap">
-                  <a class="btn btn-danger" href="{{ route('report.fix', $item->episode_id) }}">Đã fix</a>                 
+                  <a class="btn btn-danger" href="{{ route('report.fix', $item->episode_id) }}">Đánh dấu đã fix</a>                 
                 </td>
               </tr> 
               @endforeach
