@@ -69,7 +69,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
 {
     
     // Controllers Within The "App\Http\Controllers\Backend" Namespace
-    Route::get('/', ['as' => 'film.index', 'uses' => 'FilmController@index']);
+    Route::get('/', ['as' => 'film.index', 'uses' => 'FilmController@index']);    
     Route::group(['prefix' => 'info-seo'], function () {
         Route::get('/', ['as' => 'info-seo.index', 'uses' => 'InfoSeoController@index']);
         Route::get('/create', ['as' => 'info-seo.create', 'uses' => 'InfoSeoController@create']);
@@ -88,6 +88,11 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::get('/tag', ['as' => 'sitemap.tag', 'uses' => 'SiteMapController@tag']);
         Route::get('/default', ['as' => 'sitemap.default', 'uses' => 'SiteMapController@default']); 
         Route::get('/movies', ['as' => 'sitemap.movies', 'uses' => 'SiteMapController@movies']);            
+    });
+
+    Route::group(['prefix' => 'report'], function () {
+        Route::get('/', ['as' => 'report.index', 'uses' => 'ReportController@index']);
+        Route::get('/fix/{episode_id}', ['as' => 'report.fix', 'uses' => 'ReportController@fix']);
     });
     
     Route::group(['prefix' => 'articles-cate'], function () {

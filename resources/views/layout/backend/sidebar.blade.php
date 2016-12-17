@@ -57,6 +57,11 @@
         <a href="{{ route('info-seo.index') }}">
           <i class="fa fa-th"></i> <span>Thông tin SEO</span>         
         </a>        
+      </li>
+      <li class="treeview">
+        <a href="{{ route('report.index') }}">
+          <i class="fa fa-th"></i> <span>Report link hỏng</span>         
+        </a>        
       </li>    
       <li class="treeview">
         <a href="{{ route('settings.index') }}">
