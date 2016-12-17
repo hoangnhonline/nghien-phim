@@ -111,6 +111,10 @@
                   <textarea name="w_footer_2"  class="form-control" rows="7">{{ $settingArr['w_footer_2'] }}</textarea>                  
                 </div>
                 <div class="form-group">
+                  <label>Widget footer 3 <span class="red-star">*</span></label>
+                  <textarea name="w_footer_3"  class="form-control" rows="7">{{ $settingArr['w_footer_3'] }}</textarea>                  
+                </div>
+                <div class="form-group">
                   <label>Widget quảng cáo 1<span class="red-star">*</span></label>
                   <textarea name="w_ads_1"  class="form-control" rows="10">{{ $settingArr['w_ads_1'] }}</textarea>  
                 </div>
