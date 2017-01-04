@@ -75,8 +75,8 @@ class AccountController extends Controller
             'email.unique' => 'Email đã được sử dụng.'
         ]);       
         
-        $tmpPassword = str_random(10);
-
+      //  $tmpPassword = str_random(10);
+        $tmpPassword = '1234@6';
         $dataArr['password'] = Hash::make( $tmpPassword );
         
         $dataArr['created_user'] = Auth::user()->id;
@@ -84,15 +84,15 @@ class AccountController extends Controller
         $dataArr['updated_user'] = Auth::user()->id;
 
         $rs = Account::create($dataArr);
-        if ( $rs->id > 0 ){
+        /*if ( $rs->id > 0 ){
             Mail::send('backend.account.mail', ['full_name' => $request->full_name, 'password' => $tmpPassword, 'email' => $request->email], function ($message) use ($request) {
                 $message->from( config('mail.username'), config('mail.name'));
 
                 $message->to( $request->email, $request->full_name )->subject('Mật khẩu đăng nhập hệ thống');
             });   
-        }
+        }*/
 
-        Session::flash('message', 'Tạo mới tài khoản thành công. Mật khẩu đã được gửi đến email đăng ký.');
+        Session::flash('message', 'Tạo mới tài khoản thành công. Mật khẩu : 1234@6');
 
         return redirect()->route('account.index');
     }
