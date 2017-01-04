@@ -57,7 +57,12 @@
         <a href="{{ route('info-seo.index') }}">
           <i class="fa fa-th"></i> <span>Thông tin SEO</span>         
         </a>        
-      </li>    
+      </li>   
+      <li class="treeview">
+        <a href="{{ route('account.index') }}">
+          <i class="fa fa-th"></i> <span>Tài khoản</span>         
+        </a>        
+      </li>  
       <li class="treeview">
         <a href="{{ route('settings.index') }}">
           <i class="fa fa-th"></i> <span>Cài đặt</span>         
