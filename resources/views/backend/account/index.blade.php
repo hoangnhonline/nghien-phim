@@ -55,7 +55,7 @@
                     <a href="{{ route( 'account.edit', [ 'id' => $item->id ]) }}">{{ $item->full_name }}</a>                                
                   </td>
                   <td>{{ $item->email }}</td>
-                  <td>{{ $item->role == 1 ? "Mod"  : "Admin" }}</td>
+                  <td>{{ $item->role == 1 ? "Editor"  : "Admin" }}</td>
                   <td>{{ $item->status == 1 ? "Mở"  : "Khóa" }}</td>
                   <td style="white-space:nowrap">  
                     <a href="{{ route( 'account.update-status', ['status' => $item->status == 1 ? 2 : 1 , 'id' => $item->id ])}}" class="btn btn-sm {{ $item->status == 1 ? "btn-warning" : "btn-info" }}" 
@@ -67,7 +67,7 @@
                     >{{ $item->status == 1 ? "Khóa TK" : "Mở khóa TK" }}</a>                
                     <a href="{{ route( 'account.edit', [ 'id' => $item->id ]) }}" class="btn-sm btn btn-primary">Chỉnh sửa</a>                 
                     
-                    <a onclick="return callDelete('{{ $item->name }}','{{ route( 'account.destroy', [ 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger">Xóa</a>
+                   <!--<a onclick="return callDelete('{{ $item->name }}','{{ route( 'account.destroy', [ 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger">Xóa</a>-->
                     
                   </td>
                 </tr> 

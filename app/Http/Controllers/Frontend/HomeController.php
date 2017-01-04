@@ -15,6 +15,8 @@ use App\Models\Settings;
 use App\Models\Articles;
 use App\Models\ArticlesCate;
 use App\Models\FilmEpisode;
+use App\Models\Privilege;
+use App\Models\RolePrivilege;
 use Helper, File, Session;
 
 class HomeController extends Controller
@@ -51,7 +53,7 @@ class HomeController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {
+    {       
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
 
         $layout_name = $page_name = "";
