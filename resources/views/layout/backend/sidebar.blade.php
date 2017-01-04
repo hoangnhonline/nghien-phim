@@ -57,12 +57,21 @@
         <a href="{{ route('info-seo.index') }}">
           <i class="fa fa-th"></i> <span>Thông tin SEO</span>         
         </a>        
+<<<<<<< HEAD
       </li>   
       <li class="treeview">
         <a href="{{ route('account.index') }}">
           <i class="fa fa-th"></i> <span>Tài khoản</span>         
         </a>        
       </li>  
+=======
+      </li>
+      <li class="treeview">
+        <a href="{{ route('report.index') }}">
+          <i class="fa fa-th"></i> <span>Report link hỏng</span>         
+        </a>        
+      </li>    
+>>>>>>> 832f78fd6b9c8c36c0f87c81789c8f2cb63356ea
       <li class="treeview">
         <a href="{{ route('settings.index') }}">
           <i class="fa fa-th"></i> <span>Cài đặt</span>         
