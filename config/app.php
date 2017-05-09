@@ -155,7 +155,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
+       SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
     ],
 
     /*
